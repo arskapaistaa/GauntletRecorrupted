@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cherg0ys2j7vb"]
+
+[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_rgopf"]
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_yvelt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
+radius = 64.03124
+
+[node name="TestEnemy" type="CharacterBody2D" unique_id=1765397949]
+script = ExtResource("1_yvelt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1725848237]
+modulate = Color(1, 0, 0.28235295, 1)
+texture = ExtResource("1_rgopf")
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
+shape = SubResource("CircleShape2D_sopei")
