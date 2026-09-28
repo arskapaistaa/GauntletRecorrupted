@@ -55,9 +55,3 @@ position = Vector2(-0.004880772, 0.006275773)
 rotation = -1.5707964
 scale = Vector2(4.6873636, 4.6877813)
 texture = SubResource("GradientTexture2D_i2bdb")
-
-[node name="Icon" type="Sprite2D" parent="." unique_id=1939027836]
-visible = false
-position = Vector2(3307, 1299)
-scale = Vector2(62.906246, 30.828123)
-texture = ExtResource("2_2e7x2")
