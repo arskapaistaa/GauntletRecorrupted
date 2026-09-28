@@ -9,7 +9,6 @@ public partial class Brain : Node
 		_enemy = (Enemy)GetParent();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		MakeDecision();
@@ -17,7 +16,7 @@ public partial class Brain : Node
 
 	public void Check()
 	{
-		// TODO: If i want to do this before MakedDecision()
+		// TODO: If i want to do this before MakeDecision()
 	}
 	public void MakeDecision()
 	{
@@ -37,6 +36,6 @@ public partial class Brain : Node
 		// is player alive
 
 		_enemy.SetPlayerTarget();
-		_enemy.CurrentState = Enemy.State.Chase;
+		_enemy.CurrentState = Enemy.State.Chase; // In future this might be battlecry.
 	}
 }

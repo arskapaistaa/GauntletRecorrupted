@@ -62,6 +62,10 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	public State CurrentState = State.Idle;
+	public Vector2 PlayerPosition
+	{
+		get { return Player.GlobalPosition; }
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -130,11 +134,18 @@ public partial class Enemy : CharacterBody2D
 		Vector2 velocity = GlobalPosition.DirectionTo(nextPathPosition) * _maxSpeed;
 
 		_agent.Velocity = velocity;
+
+		LookAtPlayer();
+	}
+
+	public void LookAtPlayer()
+	{
+		LookAt(PlayerPosition);
 	}
 
 	public void SetPlayerTarget()
 	{
-		_agent.TargetPosition = Player.GlobalPosition;
+		_agent.TargetPosition = PlayerPosition;
 	}
 
 	public void UpdateAttack()
