@@ -3,13 +3,40 @@ using System;
 
 public partial class Brain : Node
 {
-	// Called when the node enters the scene tree for the first time.
+	private Enemy _enemy;
 	public override void _Ready()
 	{
+		_enemy = (Enemy)GetParent();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		MakeDecision();
+	}
+
+	public void Check()
+	{
+		// TODO: If i want to do this before MakedDecision()
+	}
+	public void MakeDecision()
+	{
+		switch(_enemy.CurrentState)
+		{
+			case Enemy.State.Chase:
+				if (_enemy.GlobalPosition.DistanceTo(_enemy.Player.GlobalPosition) < _enemy.AttackRange)
+				{
+					_enemy.CurrentState = Enemy.State.Attack;
+				}
+				break;
+		}
+	}
+
+	public void PlayerEntered()
+	{
+		// is player alive
+
+		_enemy.SetPlayerTarget();
+		_enemy.CurrentState = Enemy.State.Chase;
 	}
 }
