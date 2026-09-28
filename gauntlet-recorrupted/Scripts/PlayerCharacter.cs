@@ -3,39 +3,75 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-	// changes changes changes
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	
+	[Export] public float Speed = 300.0f;
+	[Export] public PackedScene BulletScene;
+	[Export] public Marker2D MuzzlePoint;
+	[Export] public float ShootCooldown = 0.5f;
+	[Export] public int MagSize = 6;
+	[Export] public float ReloadTime = 2.0f;
+
+	private float _shootTimer = 0;
 
 	public override void _PhysicsProcess(double delta)
 	{
+		LookAt(GetGlobalMousePosition());
 		Vector2 velocity = Velocity;
 
-		// Add the gravity.
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
-
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
-
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
 		if (direction != Vector2.Zero)
 		{
-			velocity.X = direction.X * Speed;
+			velocity = direction * Speed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity = velocity.MoveToward(Vector2.Zero, Speed);
 		}
-
 		Velocity = velocity;
 		MoveAndSlide();
+
+		if (_shootTimer > 0)
+		{
+			_shootTimer -= (float)delta;
+		}
+		HandleInputs();
+	}
+
+	public void HandleInputs()
+	{
+		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
+		{
+			Shoot();
+			MagSize--;
+			GD.Print($"MagSize: {MagSize}");
+			_shootTimer = ShootCooldown;
+			if (MagSize <= 0)
+			{
+				GD.Print("Reloading...");
+				_shootTimer = ReloadTime;
+				MagSize = 6;
+				GD.Print($"MagSize: {MagSize}");
+			}
+		}
+
+		if (Input.IsActionJustPressed("Dig"))
+		{
+			GD.Print("Dig");
+		}
+	}
+
+	private void Shoot()
+	{
+		if (BulletScene == null || MuzzlePoint == null)
+		{
+			return;
+		}
+
+		Bullet bullet = BulletScene.Instantiate<Bullet>();
+		GetTree().CurrentScene.AddChild(bullet);
+		bullet.GlobalPosition = MuzzlePoint.GlobalPosition;
+
+		Vector2 shootDirection = (GetGlobalMousePosition() - MuzzlePoint.GlobalPosition).Normalized();
+		bullet.Initialize(shootDirection);
 	}
 }

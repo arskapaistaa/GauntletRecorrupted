@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://r78dpllnlyu8"]
+
+[ext_resource type="Script" uid="uid://cuhex13vxsjoe" path="res://Scripts/Bullet.cs" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_xjght"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rk2iv"]
+points = PackedVector2Array(-19, -9, 5, -9, 12, -7, 17, -4, 20, 0, 17, 4, 12, 7, 5, 9, -19, 9)
+
+[node name="Bullet" type="Area2D" unique_id=873106433]
+collision_mask = 2
+script = ExtResource("1_oduel")
+Speed = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
+position = Vector2(2.1457672e-06, 0)
+scale = Vector2(0.31250003, 0.15624999)
+texture = ExtResource("1_xjght")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]
+shape = SubResource("ConvexPolygonShape2D_rk2iv")

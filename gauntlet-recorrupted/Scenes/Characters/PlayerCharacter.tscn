@@ -1,16 +1,63 @@
 [gd_scene format=3 uid="uid://bsdr5k6msb208"]
 
 [ext_resource type="Script" uid="uid://diiwj2ya03wkt" path="res://Scripts/PlayerCharacter.cs" id="1_nu4k2"]
+[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="2_2e7x2"]
+[ext_resource type="PackedScene" uid="uid://r78dpllnlyu8" path="res://Scenes/bullet.tscn" id="2_lp3jq"]
+[ext_resource type="Texture2D" uid="uid://b133q6jb0onj1" path="res://Art/ConeLightShape.png" id="4_ci7sc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c32ia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2e7x2")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ss8c6"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2o20b"]
+radius = 64.629715
 
-[node name="Player" type="CharacterBody2D" unique_id=1111194495]
+[sub_resource type="Gradient" id="Gradient_ci7sc"]
+offsets = PackedFloat32Array(0.428, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2bdb"]
+gradient = SubResource("Gradient_ci7sc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.20809248, 0.216763)
+
+[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint")]
 script = ExtResource("1_nu4k2")
+Speed = 1000.0
+BulletScene = ExtResource("2_lp3jq")
+MuzzlePoint = NodePath("Marker2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
+rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_c32ia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
-shape = SubResource("CapsuleShape2D_ss8c6")
+shape = SubResource("CircleShape2D_2o20b")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1117759917]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1341151636]
+position = Vector2(260, 1.1920929e-07)
+rotation = -1.5707964
+scale = Vector2(3.1250112, 3.1248736)
+texture = ExtResource("4_ci7sc")
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=805688956]
+position = Vector2(-0.004880772, 0.006275773)
+rotation = -1.5707964
+scale = Vector2(4.6873636, 4.6877813)
+texture = SubResource("GradientTexture2D_i2bdb")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1939027836]
+visible = false
+position = Vector2(3307, 1299)
+scale = Vector2(62.906246, 30.828123)
+texture = ExtResource("2_2e7x2")
