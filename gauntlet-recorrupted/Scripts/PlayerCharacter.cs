@@ -1,10 +1,9 @@
 using Godot;
 using System;
-using System.Collections;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-	
+
 	[Export] public float Speed = 300.0f;
 	[Export] public PackedScene BulletScene;
 	[Export] public Marker2D MuzzlePoint;
@@ -15,8 +14,10 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public int Health = 100;
 
 	[Export] public Marker2D SpawnPoint;
+	private float _reloadSpeedMultiplier = 1.0f;
 
 	private float _shootTimer = 0;
+	private bool _canShoot = true;
 
 	public override void _Ready()
 	{
@@ -27,15 +28,16 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		LookAt(GetGlobalMousePosition());
 		Vector2 velocity = Velocity;
+		float currentSpeed = Speed * _reloadSpeedMultiplier;
 
 		Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
 		if (direction != Vector2.Zero)
 		{
-			velocity = direction * Speed;
+			velocity = direction * currentSpeed;
 		}
 		else
 		{
-			velocity = velocity.MoveToward(Vector2.Zero, Speed);
+			velocity = velocity.MoveToward(Vector2.Zero, currentSpeed);
 		}
 		Velocity = velocity;
 		MoveAndSlide();
@@ -44,6 +46,11 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			_shootTimer -= (float)delta;
 		}
+		else 
+		{
+			_shootTimer = 0;
+			_reloadSpeedMultiplier = 1.0f;
+		}
 		HandleInputs();
 	}
 
@@ -51,18 +58,30 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
 		{
+			if (!_canShoot)
+			{
+				GD.Print("Out of ammo");
+				return;
+			}
 			Shoot();
 			MagSize--;
 			GD.Print($"MagSize: {MagSize}");
 			_shootTimer = ShootCooldown;
 			if (MagSize <= 0)
 			{
-				GD.Print("Reloading...");
-				_shootTimer = ReloadTime;
-				MagSize = 6;
-				GD.Print($"MagSize: {MagSize}");
+				_canShoot = false;
 			}
 		}
+
+		if (Input.IsActionJustPressed("Reload"))
+		{
+			_reloadSpeedMultiplier = 0.5f;
+			MagSize = 6;
+			_shootTimer = ReloadTime;
+			_canShoot = true;
+			GD.Print("Reloading");
+		}
+		
 
 		if (Input.IsActionJustPressed("Dig"))
 		{
