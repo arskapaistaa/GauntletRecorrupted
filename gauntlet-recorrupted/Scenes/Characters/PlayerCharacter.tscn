@@ -46,7 +46,7 @@ shape = SubResource("CircleShape2D_2o20b")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1117759917]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1341151636]
-position = Vector2(260, 1.1920929e-07)
+position = Vector2(802.99994, 1.1920929e-07)
 rotation = -1.5707964
 scale = Vector2(3.1250112, 3.1248736)
 texture = ExtResource("4_ci7sc")
@@ -56,3 +56,15 @@ position = Vector2(-0.004880772, 0.006275773)
 rotation = -1.5707964
 scale = Vector2(4.6873636, 4.6877813)
 texture = SubResource("GradientTexture2D_i2bdb")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=292159288]
+zoom = Vector2(0.2, 0.2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+editor_draw_limits = true
+editor_draw_drag_margin = true
