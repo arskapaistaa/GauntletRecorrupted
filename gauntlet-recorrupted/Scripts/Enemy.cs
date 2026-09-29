@@ -95,6 +95,8 @@ public partial class Enemy : CharacterBody2D
     }
 	public override void _PhysicsProcess(double delta)
 	{
+		StateMachine();
+		GD.Print(CurrentState);
 	}
 
 
@@ -126,16 +128,22 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Navigation();
+		LookAtPlayer();
 	}
 
 	public void Navigation()
 	{
+		SetPlayerTarget();
+
+		Vector2 currentPosition = GlobalPosition;
+
 		Vector2 nextPathPosition = _agent.GetNextPathPosition();
-		Vector2 velocity = GlobalPosition.DirectionTo(nextPathPosition) * _maxSpeed;
+		Vector2 direction = (nextPathPosition - currentPosition).Normalized();
 
-		_agent.Velocity = velocity;
+		Vector2 velocity = direction * _maxSpeed;
 
-		LookAtPlayer();
+		Velocity = velocity;
+		MoveAndSlide();
 	}
 
 	public void LookAtPlayer()

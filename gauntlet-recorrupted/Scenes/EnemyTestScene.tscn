@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dxuv4osiiwjkk"]
+
+[ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/TestEnemy.tscn" id="1_u71jl"]
+[ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
+vertices = PackedVector2Array(1911.9297, 1074.9609, 13.2109375, 1069.0313, 35.78125, 22.960938, 1905.0625, 17.03125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(26, 13, 1915, 7, 1922, 1085, 3, 1079)])
+
+[node name="Node2D" type="Node2D" unique_id=1074352428]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
+navigation_polygon = SubResource("NavigationPolygon_sopei")
+
+[node name="TestEnemy" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
+position = Vector2(1639, 695)
+
+[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("2_dm7xv")]
+position = Vector2(537, 400)
