@@ -16,5 +16,9 @@ navigation_polygon = SubResource("NavigationPolygon_sopei")
 [node name="TestEnemy" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
 position = Vector2(1639, 695)
 
-[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("2_dm7xv")]
-position = Vector2(537, 400)
+[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("SpawnPoint") instance=ExtResource("2_dm7xv")]
+position = Vector2(1023, 907)
+SpawnPoint = NodePath("../SpawnPoint")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1818454022]
+position = Vector2(237, 171)

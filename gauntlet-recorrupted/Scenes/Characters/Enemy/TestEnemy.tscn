@@ -128,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aehfi")
 }],
-"loop": 1,
+"loop": 2,
 "name": &"Defeat",
 "speed": 8.0
 }, {
@@ -230,9 +230,8 @@ script = ExtResource("2_ktwgf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"Attack"
+animation = &"Defeat"
 autoplay = "Idle"
-frame_progress = 0.049971197
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
 shape = SubResource("CircleShape2D_sopei")

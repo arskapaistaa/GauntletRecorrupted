@@ -11,9 +11,17 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public float ShootCooldown = 0.5f;
 	[Export] public int MagSize = 6;
 	[Export] public float ReloadTime = 2.0f;
-	[Export] public int Health = 10;
+	[Export] public int MaxHealth = 100;
+	[Export] public int Health = 100;
+
+	[Export] public Marker2D SpawnPoint;
 
 	private float _shootTimer = 0;
+
+	public override void _Ready()
+	{
+		GlobalPosition = SpawnPoint.GlobalPosition;
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -84,7 +92,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			GD.Print("Player is dead");
 			// TODO: Handle death
-			QueueFree();
 		}
 	}
 }

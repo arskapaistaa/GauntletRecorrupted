@@ -232,6 +232,7 @@ public partial class Enemy : CharacterBody2D
 
 			case State.Die:
 				_sprite.Play("Defeat");
+				QueueFree();
 				break;
 		}
 	}
