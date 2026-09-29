@@ -256,7 +256,7 @@ shape = SubResource("CircleShape2D_dxocv")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
 avoidance_enabled = true
-radius = 256.0
+radius = 128.0
 debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
