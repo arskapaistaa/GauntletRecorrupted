@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
@@ -10,6 +11,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public float ShootCooldown = 0.5f;
 	[Export] public int MagSize = 6;
 	[Export] public float ReloadTime = 2.0f;
+	[Export] public int Health = 10;
 
 	private float _shootTimer = 0;
 
@@ -73,5 +75,16 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		Vector2 shootDirection = (GetGlobalMousePosition() - MuzzlePoint.GlobalPosition).Normalized();
 		bullet.Initialize(shootDirection);
+	}
+
+	public void TakeDmg(int damage)
+	{
+		Health -= damage;
+		if (Health <= 0)
+		{
+			GD.Print("Player is dead");
+			// TODO: Handle death
+			QueueFree();
+		}
 	}
 }

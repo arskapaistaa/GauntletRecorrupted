@@ -128,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aehfi")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Defeat",
 "speed": 8.0
 }, {
@@ -176,9 +176,17 @@ animations = [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_cujht")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Notice",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhd2l")
+}],
+"loop": 0,
+"name": &"TakeDmg",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -215,6 +223,7 @@ script = ExtResource("1_yvelt")
 _health = 100.0
 _maxSpeed = 400.0
 _detectionRange = 400.0
+_dmg = 5
 _attackRange = 200.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
@@ -229,9 +238,10 @@ script = ExtResource("2_ktwgf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"Attack"
+animation = &"Defeat"
 autoplay = "Idle"
-frame_progress = 0.049971197
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
 shape = SubResource("CircleShape2D_sopei")
@@ -243,6 +253,7 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_dxocv")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+avoidance_enabled = true
 debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]

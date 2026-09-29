@@ -40,6 +40,11 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
+	public int Dmg
+	{
+		get { return _dmg; }
+	}
+
 	public float AttackRange
 	{
 		get { return _attackRange; }
@@ -74,6 +79,7 @@ public partial class Enemy : CharacterBody2D
 		Patrol,
 		Chase,
 		Attack,
+		Damaged,
 		Die
 	}
 
@@ -104,6 +110,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			_sprite.AnimationFinished += OnAnimationFinished;
 		}
+
+		if (_agent != null)
+		{
+			_agent.VelocityComputed += OnVelocityComputed;
+		}
 	}
 
     public override void _ExitTree()
@@ -117,6 +128,11 @@ public partial class Enemy : CharacterBody2D
 		if (_sprite != null)
 		{
 			_sprite.AnimationFinished -= OnAnimationFinished;
+		}
+
+		if (_agent != null)
+		{
+			_agent.VelocityComputed -= OnVelocityComputed;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -168,7 +184,15 @@ public partial class Enemy : CharacterBody2D
 
 		Vector2 velocity = direction * _maxSpeed;
 
-		Velocity = velocity;
+		if (_agent.AvoidanceEnabled)
+		{
+			Velocity = velocity;
+		}
+		else
+		{
+			OnVelocityComputed(velocity);
+		}
+
 		MoveAndSlide();
 	}
 
@@ -225,6 +249,10 @@ public partial class Enemy : CharacterBody2D
 				_sprite.Play("Attack");
 				break;
 
+			case State.Damaged:
+				_sprite.Play("TakeDmg");
+				break;
+
 			case State.Die:
 				_sprite.Play("Defeat");
 				break;
@@ -233,6 +261,8 @@ public partial class Enemy : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
+		CurrentState = State.Damaged;
+
 		if (IsAlive)
 		{
 			_health -= dmg;
@@ -266,7 +296,13 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnAnimationFinished()
     {
-        // Todo
+		_brain.AnimationFinished();
+    }
+
+	private void OnVelocityComputed(Vector2 safeVelocity)
+    {
+        Velocity = safeVelocity;
+		MoveAndSlide();
     }
 
 
