@@ -32,9 +32,32 @@ public partial class Brain : Node
 			case Enemy.State.Attack:
 				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.AttackRange)
 				{
-					_enemy.CurrentState = Enemy.State.Chase;
+					if (_enemy.Player != null)
+					{
+						_enemy.CurrentState = Enemy.State.Chase;
+					}
 				}
 				break;
+		}
+	}
+
+	public void AnimationFinished()
+	{
+		if (_enemy.Sprite.Animation == "Defeat")
+		{
+			_enemy.QueueFree();
+		}
+
+		if (_enemy.Sprite.Animation == "TakeDmg")
+		{
+			if (_enemy.Player != null)
+			{
+				_enemy.CurrentState = Enemy.State.Chase;
+			}
+			else
+			{
+				_enemy.CurrentState = Enemy.State.Idle;
+			}
 		}
 	}
 
