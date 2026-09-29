@@ -1,14 +1,24 @@
 [gd_scene format=3 uid="uid://cby3qn104tp5i"]
 
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="1_0ba56"]
-[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_vsvp5"]
+[ext_resource type="Texture2D" uid="uid://c3kvwt6v1v08w" path="res://Art/ArtGroundPlaceholder.png" id="1_vsvp5"]
+[ext_resource type="PackedScene" uid="uid://8twic57bwdhs" path="res://Scenes/Characters/EnemyRoach.tscn" id="3_8rbpu"]
 
 [node name="Node2D" type="Node2D" unique_id=249451679]
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1429359915]
 position = Vector2(1136.9999, 584)
-scale = Vector2(24.859375, 12.703125)
+scale = Vector2(1.957, 1)
 texture = ExtResource("1_vsvp5")
 
 [node name="Player" parent="." unique_id=1111194495 instance=ExtResource("1_0ba56")]
 position = Vector2(657, 349)
+
+[node name="EnemyRoach" parent="." unique_id=1331104816 instance=ExtResource("3_8rbpu")]
+position = Vector2(1317, 298)
+
+[node name="EnemyRoach2" parent="." unique_id=1881683156 instance=ExtResource("3_8rbpu")]
+position = Vector2(1569, 438)
+
+[node name="EnemyRoach3" parent="." unique_id=805332620 instance=ExtResource("3_8rbpu")]
+position = Vector2(1718, 229)
