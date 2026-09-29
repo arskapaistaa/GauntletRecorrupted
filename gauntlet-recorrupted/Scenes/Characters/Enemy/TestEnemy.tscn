@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cherg0ys2j7vb"]
+
+[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_rgopf"]
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_yvelt"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Brain.cs" id="2_ktwgf"]
+[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_26j5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
+radius = 65.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxocv"]
+radius = 200.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
+size = Vector2(200, 128)
+
+[node name="TestEnemy" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_detectionArea", "_detectionShape", "_agent")]
+collision_layer = 2
+collision_mask = 15
+motion_mode = 1
+script = ExtResource("1_yvelt")
+_health = 100.0
+_maxSpeed = 194.167
+_detectionRange = 400.0
+_brain = NodePath("Brain")
+_sprite = NodePath("Sprite2D")
+_detectionArea = NodePath("DetectionArea")
+_detectionShape = NodePath("DetectionArea/DetectionShape")
+_agent = NodePath("NavigationAgent2D")
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378]
+script = ExtResource("2_ktwgf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1725848237]
+modulate = Color(1, 0, 0.28235295, 1)
+texture = ExtResource("1_rgopf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
+shape = SubResource("CircleShape2D_sopei")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
+collision_layer = 2
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
+shape = SubResource("CircleShape2D_dxocv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+debug_enabled = true
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
+collision_layer = 0
+script = ExtResource("4_26j5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=134463378]
+position = Vector2(164, 0)
+shape = SubResource("RectangleShape2D_sopei")

@@ -30,6 +30,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.20809248, 0.216763)
 
 [node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint")]
+collision_mask = 6
 script = ExtResource("1_nu4k2")
 Speed = 1000.0
 BulletScene = ExtResource("2_lp3jq")
