@@ -79,6 +79,7 @@ public partial class Enemy : CharacterBody2D
 		Patrol,
 		Chase,
 		Attack,
+		Damaged,
 		Die
 	}
 
@@ -230,6 +231,10 @@ public partial class Enemy : CharacterBody2D
 				_sprite.Play("Attack");
 				break;
 
+			case State.Damaged:
+				_sprite.Play("TakeDmg");
+				break;
+
 			case State.Die:
 				_sprite.Play("Defeat");
 				break;
@@ -238,6 +243,8 @@ public partial class Enemy : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
+		CurrentState = State.Damaged;
+
 		if (IsAlive)
 		{
 			_health -= dmg;
