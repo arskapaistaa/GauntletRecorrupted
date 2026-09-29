@@ -23,9 +23,16 @@ public partial class Brain : Node
 		switch(_enemy.CurrentState)
 		{
 			case Enemy.State.Chase:
-				if (_enemy.GlobalPosition.DistanceTo(_enemy.Player.GlobalPosition) < _enemy.AttackRange)
+				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange)
 				{
 					_enemy.CurrentState = Enemy.State.Attack;
+				}
+				break;
+
+			case Enemy.State.Attack:
+				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.AttackRange)
+				{
+					_enemy.CurrentState = Enemy.State.Chase;
 				}
 				break;
 		}
@@ -33,8 +40,6 @@ public partial class Brain : Node
 
 	public void PlayerEntered()
 	{
-		// is player alive
-
 		_enemy.SetPlayerTarget();
 		_enemy.CurrentState = Enemy.State.Chase; // In future this might be battlecry.
 	}

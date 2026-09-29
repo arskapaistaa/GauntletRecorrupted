@@ -109,7 +109,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qx1rb")
 }],
 "loop": 1,
-"name": &"EnemyRoachAttack",
+"name": &"Attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -126,7 +126,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_aehfi")
 }],
 "loop": 1,
-"name": &"EnemyRoachDefeat",
+"name": &"Defeat",
 "speed": 8.0
 }, {
 "frames": [{
@@ -152,7 +152,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qdr6t")
 }],
 "loop": 1,
-"name": &"EnemyRoachEnterIdle",
+"name": &"EnterIdle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -163,7 +163,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_l55m1")
 }],
 "loop": 1,
-"name": &"EnemyRoachIdle",
+"name": &"Idle",
 "speed": 1.0
 }, {
 "frames": [{
@@ -174,7 +174,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_cujht")
 }],
 "loop": 1,
-"name": &"EnemyRoachNotice",
+"name": &"Notice",
 "speed": 4.0
 }, {
 "frames": [{
@@ -191,7 +191,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bxvcr")
 }],
 "loop": 1,
-"name": &"EnemyRoachWalk",
+"name": &"Walk",
 "speed": 8.0
 }]
 
@@ -203,9 +203,9 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
 sprite_frames = SubResource("SpriteFrames_kxvjs")
-animation = &"EnemyRoachAttack"
-autoplay = "EnemyRoachIdle"
-frame_progress = 0.5732468
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.51948
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")
