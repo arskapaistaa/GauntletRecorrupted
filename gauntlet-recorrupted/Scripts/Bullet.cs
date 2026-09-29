@@ -4,6 +4,7 @@ public partial class Bullet : Area2D
 {
 	[Export] public float Speed = 800.0f;
 	[Export] public float Lifetime = 2.0f;
+	[Export] public int Damage = 1;
 
 	private Vector2 _direction = Vector2.Right;
 
@@ -26,7 +27,12 @@ public partial class Bullet : Area2D
 
 	private void OnBodyEntered(Node2D body)
 	{
-		// tähän vielä damagen händläys
+		/*
+		if (body is Enemy enemy)
+		{
+			enemy.TakeDmg(Damage);
+		}
+		*/
 		QueueFree();
 	}
 }
