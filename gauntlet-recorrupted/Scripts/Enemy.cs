@@ -40,6 +40,11 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
+	public int Dmg
+	{
+		get { return _dmg; }
+	}
+
 	public float AttackRange
 	{
 		get { return _attackRange; }

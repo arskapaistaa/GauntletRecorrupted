@@ -22,6 +22,7 @@ public partial class DamageArea : Area2D
     {
         if (body is PlayerCharacter player)
 		{
+            player.TakeDmg(_enemy.Dmg);
             GD.Print("Damage done");
 		}
     }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
@@ -83,6 +84,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			GD.Print("Player is dead");
 			// TODO: Handle death
+			QueueFree();
 		}
 	}
 }

@@ -215,6 +215,7 @@ script = ExtResource("1_yvelt")
 _health = 100.0
 _maxSpeed = 400.0
 _detectionRange = 400.0
+_dmg = 5
 _attackRange = 200.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
