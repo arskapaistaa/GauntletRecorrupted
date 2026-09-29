@@ -17,16 +17,22 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "10, 200, 1")]
+	[Export(PropertyHint.Range, "100, 400, 10")]
 	private float _attackRange;
 	[Export] private EnemyType _enemyType = EnemyType.Stupid;
 
 	[ExportGroup("Nodes")]
 	[Export] private Brain _brain;
-	[Export] private Sprite2D _sprite;
+	[Export] private AnimatedSprite2D _sprite;
 	[Export] private Area2D _detectionArea;
+	[Export] private DamageArea _dmgArea;
 	[Export] private CollisionShape2D _detectionShape;
 	[Export] private NavigationAgent2D _agent;
+
+	[ExportGroup("Animations")]
+	[Export] private int _attackFrame;
+
+	private bool _isAlive = true;
 
 	public float Health
 	{
@@ -37,6 +43,16 @@ public partial class Enemy : CharacterBody2D
 	public float AttackRange
 	{
 		get { return _attackRange; }
+	}
+
+	public bool IsAlive
+	{
+		get { return _isAlive; }
+	}
+
+	public AnimatedSprite2D Sprite
+	{
+		get {return _sprite; }
 	}
 
 	public PlayerCharacter Player
@@ -54,7 +70,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		Spawning,
 		Idle,
-		Battlecry,
+		Notice,
 		Patrol,
 		Chase,
 		Attack,
@@ -83,20 +99,30 @@ public partial class Enemy : CharacterBody2D
 			_detectionArea.BodyEntered += OnBodyEntered;
 			_detectionArea.BodyExited += OnBodyExited;
 		}
+
+		if (_sprite != null)
+		{
+			_sprite.AnimationFinished += OnAnimationFinished;
+		}
 	}
 
-	public override void _ExitTree()
+    public override void _ExitTree()
     {
         if (_detectionArea != null)
 		{
 			_detectionArea.BodyEntered -= OnBodyEntered;
 			_detectionArea.BodyExited -= OnBodyExited;
 		}
+
+		if (_sprite != null)
+		{
+			_sprite.AnimationFinished -= OnAnimationFinished;
+		}
     }
 	public override void _PhysicsProcess(double delta)
 	{
 		StateMachine();
-		GD.Print(CurrentState);
+		UpdateAnimation();
 	}
 
 
@@ -158,9 +184,70 @@ public partial class Enemy : CharacterBody2D
 
 	public void UpdateAttack()
 	{
-		// Play animation.
+		if (_sprite.Animation == "Attack")
+        {
+            if (_sprite.Frame == _attackFrame)
+			{
+				if (_dmgArea != null)
+				{
+					_dmgArea.Monitoring = true;
+				}
+			}
+			else
+			{
+				_dmgArea.Monitoring = false;
+			}
+        }
 	}
 
+	private void UpdateAnimation()
+	{
+		if ( _sprite == null)
+		{
+			GD.PrintErr("Animation sprite cant be found");
+			return;
+		}
+		switch (CurrentState)
+		{
+			case State.Idle:
+				_sprite.Play("Idle");
+				break;
+
+			case State.Notice:
+				_sprite.Play("Notice");
+				break;
+
+			case State.Chase:
+				_sprite.Play("Walk");
+				break;
+
+			case State.Attack:
+				_sprite.Play("Attack");
+				break;
+
+			case State.Die:
+				_sprite.Play("Defeat");
+				break;
+		}
+	}
+
+	public void TakeDmg(int dmg)
+	{
+		if (IsAlive)
+		{
+			_health -= dmg;
+		}
+
+		if (Health <= 0)
+		{
+			Die();
+		}
+	}
+
+	public void Die()
+	{
+		CurrentState = State.Die;
+	}
 
 	private void OnBodyEntered(Node2D body)
     {
@@ -177,6 +264,11 @@ public partial class Enemy : CharacterBody2D
 		// Hmmm...
     }
 
+	private void OnAnimationFinished()
+    {
+        // Todo
+    }
+
 
 	public void Reset()
 	{
@@ -188,6 +280,11 @@ public partial class Enemy : CharacterBody2D
 		if (_detectionShape.Shape is CircleShape2D circle)
 		{
 			circle.Radius = _detectionRange;
+		}
+
+		if (_dmgArea != null)
+		{
+			_dmgArea.Monitoring = false;
 		}
 	}
 }
