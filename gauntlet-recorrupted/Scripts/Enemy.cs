@@ -33,6 +33,8 @@ public partial class Enemy : CharacterBody2D
 	[Export] private int _attackFrame;
 
 	private bool _isAlive = true;
+	private float _navTimer = 0;
+	private float _navInterval = 0.25f;
 
 	public float Health
 	{
@@ -137,17 +139,17 @@ public partial class Enemy : CharacterBody2D
     }
 	public override void _PhysicsProcess(double delta)
 	{
-		StateMachine();
+		StateMachine(delta);
 		UpdateAnimation();
 	}
 
 
-	public void StateMachine()
+	public void StateMachine(double delta)
 	{
 		switch(CurrentState)
 		{
 			case State.Chase:
-				UpdateChase();
+				UpdateChase(delta);
 				break;
 
 			case State.Attack:
@@ -156,7 +158,7 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-	public void UpdateChase()
+	public void UpdateChase(double delta)
 	{
 		if (_agent == null)
 		{
@@ -169,13 +171,13 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation();
+		Navigation(delta);
 		LookAtPlayer();
 	}
 
-	public void Navigation()
+	public void Navigation(double delta)
 	{
-		SetPlayerTarget();
+		NavUpdate(delta);
 
 		Vector2 currentPosition = GlobalPosition;
 
@@ -204,6 +206,20 @@ public partial class Enemy : CharacterBody2D
 	public void SetPlayerTarget()
 	{
 		_agent.TargetPosition = PlayerPosition;
+	}
+
+	public void NavUpdate(double delta)
+	{
+		if (_navTimer <= 0.0f)
+		{
+			SetPlayerTarget();
+			_navTimer = _navInterval;
+			return;
+		}
+		else
+		{
+			_navTimer -= (float)delta;
+		}
 	}
 
 	public void UpdateAttack()
@@ -322,5 +338,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			_dmgArea.Monitoring = false;
 		}
+
+		_navTimer = _navInterval;
 	}
 }

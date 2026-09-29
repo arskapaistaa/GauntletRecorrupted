@@ -2,11 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/TestEnemy.tscn" id="1_u71jl"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
+[ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/test_spawner.tscn" id="3_dm7xv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(1911.9297, 1074.9609, 13.2109375, 1069.0313, 35.78125, 22.960938, 1905.0625, 17.03125)
+vertices = PackedVector2Array(2113.1172, -484.0078, 2134.8672, 1293.9688, -1039, 1286.0234, -1039, -487.97656)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(26, 13, 1915, 7, 1922, 1085, 3, 1079)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 2123, -494, 2145, 1304, -1049, 1296)])
 
 [node name="Node2D" type="Node2D" unique_id=1074352428]
 
@@ -14,10 +15,13 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(26, 13, 1915, 7, 1922, 
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 
 [node name="Player" parent="." unique_id=1111194495 instance=ExtResource("2_dm7xv")]
-position = Vector2(537, 400)
+position = Vector2(-374, 400)
 
 [node name="TestEnemy" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
 position = Vector2(1437, 577)
 
 [node name="TestEnemy2" parent="." unique_id=1522330292 instance=ExtResource("1_u71jl")]
 position = Vector2(1450, 168)
+
+[node name="TestSpawner" parent="." unique_id=1779592 instance=ExtResource("3_dm7xv")]
+position = Vector2(1155, 430)
