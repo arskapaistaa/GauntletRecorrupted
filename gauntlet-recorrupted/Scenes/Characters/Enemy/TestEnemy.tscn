@@ -223,8 +223,8 @@ motion_mode = 1
 script = ExtResource("1_yvelt")
 _health = 100.0
 _maxSpeed = 400.0
-_detectionRange = 400.0
-_dmg = 5
+_detectionRange = 600.0
+_dmg = 2
 _attackRange = 200.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
@@ -240,9 +240,9 @@ script = ExtResource("2_ktwgf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 material = ExtResource("3_aqdf3")
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"Defeat"
+animation = &"Notice"
 autoplay = "Idle"
-frame = 3
+frame = 1
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]

@@ -62,11 +62,8 @@ public partial class Enemy : CharacterBody2D
 		get {return _sprite; }
 	}
 
-	public PlayerCharacter Player
-	{
-		private set;
-		get;
-	}
+	public PlayerCharacter Player;
+
 	public enum EnemyType
 	{
 		Patrol,
@@ -321,7 +318,13 @@ public partial class Enemy : CharacterBody2D
 		MoveAndSlide();
     }
 
-
+	public void SetDetectionRange(float range)
+	{
+		if (_detectionShape.Shape is CircleShape2D circle)
+		{
+			circle.Radius = range;
+		}
+	}
 	public void Reset()
 	{
 		if (_detectionShape == null)

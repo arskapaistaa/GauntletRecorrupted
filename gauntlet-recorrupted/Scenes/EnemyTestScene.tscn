@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://dxuv4osiiwjkk"]
 
+[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_dm7xv"]
 [ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/TestEnemy.tscn" id="1_u71jl"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
-[ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/test_spawner.tscn" id="3_dm7xv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(2113.1172, -484.0078, 2134.8672, 1293.9688, -1039, 1286.0234, -1039, -487.97656)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 2123, -494, 2145, 1304, -1049, 1296)])
 
-[node name="Node2D" type="Node2D" unique_id=1074352428]
+[node name="Node2D" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
+script = ExtResource("1_dm7xv")
+Player = NodePath("Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
 navigation_polygon = SubResource("NavigationPolygon_sopei")
@@ -22,6 +24,3 @@ position = Vector2(1437, 577)
 
 [node name="TestEnemy2" parent="." unique_id=1522330292 instance=ExtResource("1_u71jl")]
 position = Vector2(1450, 168)
-
-[node name="TestSpawner" parent="." unique_id=1779592 instance=ExtResource("3_dm7xv")]
-position = Vector2(1155, 430)
