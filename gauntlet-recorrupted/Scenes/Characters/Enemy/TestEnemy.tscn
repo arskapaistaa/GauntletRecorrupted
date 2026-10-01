@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_yvelt"]
 [ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Brain.cs" id="2_ktwgf"]
-[ext_resource type="Texture2D" uid="uid://cbjmc5403g3i5" path="res://Art/ArtEnemyRoach.png" id="3_26j5x"]
+[ext_resource type="Texture2D" uid="uid://cbjmc5403g3i5" path="res://Art/Enemies/ArtEnemyRoach.png" id="3_26j5x"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_aqdf3"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_26j5x"]
 
@@ -226,13 +226,13 @@ _maxSpeed = 400.0
 _detectionRange = 400.0
 _dmg = 5
 _attackRange = 200.0
+_attackFrame = 2
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
-_attackFrame = 2
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_ktwgf")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xhb7kewbet1d"
-path="res://.godot/imported/ArtEnemyWurm.png-da75fd2c00755e655ac82fe04ced49c7.ctex"
+uid="uid://bgdj3ogwqp23b"
+path="res://.godot/imported/ArtEnemyTick.png-91bc0319d38fe59cafadda7b578ebbe9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ArtEnemyWurm.png"
-dest_files=["res://.godot/imported/ArtEnemyWurm.png-da75fd2c00755e655ac82fe04ced49c7.ctex"]
+source_file="res://Art/Enemies/ArtEnemyTick.png"
+dest_files=["res://.godot/imported/ArtEnemyTick.png-91bc0319d38fe59cafadda7b578ebbe9.ctex"]
 
 [params]
 
