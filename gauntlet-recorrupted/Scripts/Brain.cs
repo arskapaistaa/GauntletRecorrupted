@@ -24,16 +24,6 @@ public partial class Brain : Node
 				_enemy.CurrentState = Enemy.State.Attack;
 			}
 			break;
-
-		case Enemy.State.Attack:
-			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.AttackRange)
-			{
-				if (_enemy.Player != null)
-				{
-					_enemy.CurrentState = Enemy.State.Chase;
-				}
-			}
-			break;
 		}
 	}
 	public void AfterDamaged()
@@ -66,6 +56,14 @@ public partial class Brain : Node
 		}
 	}
 
+	public void AfterAttack()
+	{
+		if (_enemy.Player != null)
+		{
+			_enemy.CurrentState = Enemy.State.Chase;
+		}
+	}
+
 	public void AnimationFinished()
 	{
 		if (_enemy.Sprite.Animation == "Defeat")
@@ -81,6 +79,11 @@ public partial class Brain : Node
 		if (_enemy.Sprite.Animation == "TakeDmg")
 		{
 			AfterDamaged();
+		}
+
+		if (_enemy.Sprite.Animation == "Attack")
+		{
+			AfterAttack();
 		}
 	}
 

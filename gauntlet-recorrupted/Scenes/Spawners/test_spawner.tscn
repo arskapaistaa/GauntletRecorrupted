@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_p13av"]
 [ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_q40p4"]
 [ext_resource type="Script" uid="uid://1qdc507ykkqu" path="res://Scripts/EnemySpawner.cs" id="2_p1ylh"]
-[ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/TestEnemy.tscn" id="3_p1ylh"]
+[ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/Roach.tscn" id="3_p1ylh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sopei"]
 animations = [{

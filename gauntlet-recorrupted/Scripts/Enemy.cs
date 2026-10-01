@@ -8,7 +8,7 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private float _health;
 
-	[Export(PropertyHint.Range, "10, 400, 10")]
+	[Export(PropertyHint.Range, "100, 800, 10")]
 	private float _maxSpeed;
 
 	[Export(PropertyHint.Range, "200, 1500, 100")]
@@ -24,6 +24,7 @@ public partial class Enemy : CharacterBody2D
 	[ExportGroup("Nodes")]
 	[Export] private Brain _brain;
 	[Export] private AnimatedSprite2D _sprite;
+	[Export] private AnimatedSprite2D _shadowSprite;
 	[Export] private Area2D _detectionArea;
 	[Export] private DamageArea _dmgArea;
 	[Export] private CollisionShape2D _detectionShape;
@@ -240,35 +241,48 @@ public partial class Enemy : CharacterBody2D
 
 	private void UpdateAnimation()
 	{
-		if ( _sprite == null)
+		if (_sprite == null)
 		{
 			GD.PrintErr("Animation sprite cant be found");
 			return;
 		}
+
+		if (_shadowSprite == null)
+		{
+			GD.PrintErr("Shadow animation sprite cant be found");
+			return;
+		}
+
 		switch (CurrentState)
 		{
 			case State.Idle:
 				_sprite.Play("Idle");
+				_shadowSprite.Play("Idle");
 				break;
 
 			case State.Notice:
 				_sprite.Play("Notice");
+				_shadowSprite.Play("Notice");
 				break;
 
 			case State.Chase:
 				_sprite.Play("Walk");
+				_shadowSprite.Play("Walk");
 				break;
 
 			case State.Attack:
 				_sprite.Play("Attack");
+				_shadowSprite.Play("Attack");
 				break;
 
 			case State.Damaged:
 				_sprite.Play("TakeDmg");
+				_shadowSprite.Play("TakeDmg");
 				break;
 
 			case State.Die:
 				_sprite.Play("Defeat");
+				_shadowSprite.Play("Defeat");
 				break;
 		}
 	}
