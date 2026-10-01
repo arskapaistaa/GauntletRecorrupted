@@ -83,6 +83,7 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	public State CurrentState = State.Idle;
+	public bool InCombat = false;
 	public Vector2 PlayerPosition
 	{
 		get { return Player.GlobalPosition; }

@@ -49,12 +49,16 @@ shape = SubResource("CircleShape2D_2o20b")
 position = Vector2(802.99994, 1.1920929e-07)
 rotation = -1.5707964
 scale = Vector2(3.1250112, 3.1248736)
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.5176471)
 texture = ExtResource("4_ci7sc")
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=805688956]
 position = Vector2(-0.004880772, 0.006275773)
 rotation = -1.5707964
 scale = Vector2(4.6873636, 4.6877813)
+blend_mode = 2
 texture = SubResource("GradientTexture2D_i2bdb")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292159288]

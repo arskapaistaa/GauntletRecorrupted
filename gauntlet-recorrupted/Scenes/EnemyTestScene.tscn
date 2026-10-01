@@ -13,6 +13,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 2123, -494
 script = ExtResource("1_dm7xv")
 Player = NodePath("Player")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
+visible = false
+color = Color(0.019925633, 0.019925632, 0.019925632, 1)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 

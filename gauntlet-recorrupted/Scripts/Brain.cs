@@ -54,6 +54,8 @@ public partial class Brain : Node
 
 	public void AfterNotice()
 	{
+		_enemy.InCombat = true;
+
 		if (_enemy.Player != null)
 		{
 			_enemy.CurrentState = Enemy.State.Chase;
@@ -84,7 +86,10 @@ public partial class Brain : Node
 
 	public void PlayerEntered()
 	{
-		_enemy.CurrentState = Enemy.State.Notice;
-		_enemy.SetPlayerTarget();
+		if (!_enemy.InCombat)
+		{
+			_enemy.CurrentState = Enemy.State.Notice;
+			_enemy.SetPlayerTarget();
+		}
 	}
 }
