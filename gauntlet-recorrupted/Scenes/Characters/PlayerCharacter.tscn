@@ -32,11 +32,12 @@ fill_to = Vector2(0.20809248, 0.216763)
 [node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint")]
 collision_mask = 6
 script = ExtResource("1_nu4k2")
-Speed = 1000.0
+Speed = 600.0
 BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Marker2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
+light_mask = 4
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_c32ia")
 
@@ -46,12 +47,17 @@ shape = SubResource("CircleShape2D_2o20b")
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1117759917]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1341151636]
-position = Vector2(802.99994, 1.1920929e-07)
+light_mask = 3
+visibility_layer = 3
 rotation = -1.5707964
-scale = Vector2(3.1250112, 3.1248736)
+blend_mode = 2
+range_item_cull_mask = 3
+shadow_filter = 1
+shadow_filter_smooth = 1.0
 texture = ExtResource("4_ci7sc")
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=805688956]
+light_mask = 3
 position = Vector2(-0.004880772, 0.006275773)
 rotation = -1.5707964
 scale = Vector2(4.6873636, 4.6877813)
@@ -59,12 +65,9 @@ texture = SubResource("GradientTexture2D_i2bdb")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292159288]
 zoom = Vector2(0.2, 0.2)
+process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_left_margin = 0.5
-drag_top_margin = 0.5
-drag_right_margin = 0.5
-drag_bottom_margin = 0.5
 editor_draw_limits = true
 editor_draw_drag_margin = true
