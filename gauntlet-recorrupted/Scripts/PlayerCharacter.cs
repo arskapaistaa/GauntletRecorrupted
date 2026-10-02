@@ -4,20 +4,23 @@ using System;
 public partial class PlayerCharacter : CharacterBody2D
 {
 
-	[Export] public float Speed = 300.0f;
+	[ExportCategory("Player Stats")]
+	[Export(PropertyHint.Range, "0,1000,10")] public float Speed = 300.0f;
+	[Export(PropertyHint.Range, "0,10,1")] public int MagSize = 6;
+	[Export(PropertyHint.Range, "0,100,1")] public int Health = 100;
+	[Export(PropertyHint.Range, "0,5,0.1")] public float ShootCooldown = 0.5f;
+	[Export(PropertyHint.Range, "0,10,0.1")] public float ReloadTime = 2.0f;
+
+	[ExportCategory("Node References")]
 	[Export] public PackedScene BulletScene;
 	[Export] public Marker2D MuzzlePoint;
-	[Export] public float ShootCooldown = 0.5f;
-	[Export] public int MagSize = 6;
-	[Export] public float ReloadTime = 2.0f;
-	[Export] public int MaxHealth = 100;
-	[Export] public int Health = 100;
 
 	[Export] public Marker2D SpawnPoint;
 	private float _reloadSpeedMultiplier = 1.0f;
 
 	private float _shootTimer = 0;
 	private bool _canShoot = true;
+	private int _maxHealth = 100;
 
 	public override void _Ready()
 	{

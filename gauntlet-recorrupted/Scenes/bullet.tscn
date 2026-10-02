@@ -9,8 +9,7 @@ points = PackedVector2Array(-19, -9, 5, -9, 12, -7, 17, -4, 20, 0, 17, 4, 12, 7,
 [node name="Bullet" type="Area2D" unique_id=873106433]
 collision_mask = 2
 script = ExtResource("1_oduel")
-Speed = 3000.0
-Damage = 25
+Speed = 5800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
 position = Vector2(-10.5058975, 0.21229038)

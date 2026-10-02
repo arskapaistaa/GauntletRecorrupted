@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="5_30isp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2070.9297, -1042.9766, 2040.0625, -1039.0078, -487.96875)
+vertices = PackedVector2Array(6433, 3499, -2849, 3499, -2849, -2197, 6433, -2197)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1053, 2050)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2859, -2207, 6443, -2207, 6443, 3509, -2859, 3509)])
 
 [node name="Node2D" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_dm7xv")
@@ -17,6 +17,8 @@ Player = NodePath("Player")
 
 [node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
 texture_repeat = 2
+position = Vector2(278, -141.00006)
+scale = Vector2(1.8167969, 2.2328124)
 texture = ExtResource("2_njp4a")
 region_enabled = true
 region_rect = Rect2(0, 0, 5120, 2560)
@@ -30,13 +32,15 @@ navigation_polygon = SubResource("NavigationPolygon_sopei")
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("SpawnPoint") instance=ExtResource("2_dm7xv")]
 position = Vector2(750, 879)
+Speed = 1000.0
 SpawnPoint = NodePath("../SpawnPoint")
 
 [node name="Roach" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
 position = Vector2(822, -444)
+_maxSpeed = 600.0
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1123840755]
-position = Vector2(237, 171)
+position = Vector2(-2315, -605)
 
 [node name="Roach2" parent="." unique_id=438489015 instance=ExtResource("1_u71jl")]
 position = Vector2(669, 479)
