@@ -11,33 +11,56 @@ public partial class Brain : Node
 
 	public override void _Process(double delta)
 	{
-		MakeDecision();
+		Check();
 	}
 
 	public void Check()
 	{
-		// TODO: If i want to do this before MakeDecision()
-	}
-	public void MakeDecision()
-	{
 		switch(_enemy.CurrentState)
 		{
-			case Enemy.State.Chase:
-				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange)
-				{
-					_enemy.CurrentState = Enemy.State.Attack;
-				}
-				break;
+		case Enemy.State.Chase:
+			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange)
+			{
+				_enemy.CurrentState = Enemy.State.Attack;
+			}
+			break;
+		}
+	}
+	public void AfterDamaged()
+	{
+		if (_enemy.Player == null)
+		{
+			_enemy.CurrentState = Enemy.State.Notice;
 
-			case Enemy.State.Attack:
-				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.AttackRange)
-				{
-					if (_enemy.Player != null)
-					{
-						_enemy.CurrentState = Enemy.State.Chase;
-					}
-				}
-				break;
+			// Maybe change this logic
+			_enemy.Player = Level.Current.Player;
+			_enemy.SetPlayerTarget();
+		}
+		else if (_enemy.Player != null)
+		{
+			_enemy.CurrentState = Enemy.State.Chase;
+		}
+	}
+
+	public void AfterNotice()
+	{
+		_enemy.InCombat = true;
+
+		if (_enemy.Player != null)
+		{
+			_enemy.CurrentState = Enemy.State.Chase;
+		}
+		else
+		{
+			_enemy.CurrentState = Enemy.State.Idle;
+		}
+	}
+
+	public void AfterAttack()
+	{
+		if (_enemy.Player != null)
+		{
+			_enemy.CurrentState = Enemy.State.Chase;
 		}
 	}
 
@@ -48,22 +71,28 @@ public partial class Brain : Node
 			_enemy.QueueFree();
 		}
 
+		if (_enemy.Sprite.Animation == "Notice")
+		{
+			AfterNotice();
+		}
+
 		if (_enemy.Sprite.Animation == "TakeDmg")
 		{
-			if (_enemy.Player != null)
-			{
-				_enemy.CurrentState = Enemy.State.Chase;
-			}
-			else
-			{
-				_enemy.CurrentState = Enemy.State.Idle;
-			}
+			AfterDamaged();
+		}
+
+		if (_enemy.Sprite.Animation == "Attack")
+		{
+			AfterAttack();
 		}
 	}
 
 	public void PlayerEntered()
 	{
-		_enemy.SetPlayerTarget();
-		_enemy.CurrentState = Enemy.State.Chase; // In future this might be battlecry.
+		if (!_enemy.InCombat)
+		{
+			_enemy.CurrentState = Enemy.State.Notice;
+			_enemy.SetPlayerTarget();
+		}
 	}
 }

@@ -1,27 +1,54 @@
 [gd_scene format=3 uid="uid://dxuv4osiiwjkk"]
 
-[ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/TestEnemy.tscn" id="1_u71jl"]
+[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_dm7xv"]
+[ext_resource type="PackedScene" uid="uid://cherg0ys2j7vb" path="res://Scenes/Characters/Enemy/Roach.tscn" id="1_u71jl"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
+[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_njp4a"]
+[ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="5_30isp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(1911.9297, 1074.9609, 13.2109375, 1069.0313, 35.78125, 22.960938, 1905.0625, 17.03125)
+vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2070.9297, -1042.9766, 2040.0625, -1039.0078, -487.96875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(26, 13, 1915, 7, 1922, 1085, 3, 1079)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1053, 2050)])
 
-[node name="Node2D" type="Node2D" unique_id=1074352428]
+[node name="Node2D" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
+script = ExtResource("1_dm7xv")
+Player = NodePath("Player")
+
+[node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
+texture_repeat = 2
+texture = ExtResource("2_njp4a")
+region_enabled = true
+region_rect = Rect2(0, 0, 5120, 2560)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
+color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
+position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("SpawnPoint") instance=ExtResource("2_dm7xv")]
 position = Vector2(750, 879)
 SpawnPoint = NodePath("../SpawnPoint")
 
-[node name="TestEnemy" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
-position = Vector2(1437, 577)
-
-[node name="TestEnemy2" parent="." unique_id=1522330292 instance=ExtResource("1_u71jl")]
-position = Vector2(1450, 168)
+[node name="Roach" parent="." unique_id=1765397949 instance=ExtResource("1_u71jl")]
+position = Vector2(822, -444)
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1123840755]
 position = Vector2(237, 171)
+
+[node name="Roach2" parent="." unique_id=438489015 instance=ExtResource("1_u71jl")]
+position = Vector2(669, 479)
+
+[node name="Roach3" parent="." unique_id=540759648 instance=ExtResource("5_30isp")]
+position = Vector2(1397, -133)
+
+[node name="Roach4" parent="." unique_id=738025925 instance=ExtResource("5_30isp")]
+position = Vector2(1538, 392)
+
+[node name="Roach5" parent="." unique_id=1816622208 instance=ExtResource("5_30isp")]
+position = Vector2(1889, 115)
+
+[node name="Roach6" parent="." unique_id=733298136 instance=ExtResource("5_30isp")]
+position = Vector2(1879, -490)
