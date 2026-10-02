@@ -241,19 +241,18 @@ _attackFrame = 2
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
-EntersDetectionArea = 3
-InCombat = 5
-OutOfCombat = 3
-AfterNoticePlayer = 5
-AfterAttackPlayer = 6
+EntersAreaState = 4
+InCombatState = 5
+OutOfCombatState = 4
+AfterNoticeState = 5
+AfterAttackState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 light_mask = 2
 material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"TakeDmg"
+animation = &"Attack"
 autoplay = "Idle"
-frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1745444926]
 modulate = Color(0, 0, 0, 0.34509805)
@@ -280,7 +279,6 @@ shape = SubResource("CircleShape2D_dxocv")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
 avoidance_enabled = true
 radius = 128.0
-debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0
