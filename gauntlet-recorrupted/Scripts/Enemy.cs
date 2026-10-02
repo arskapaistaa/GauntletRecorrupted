@@ -71,20 +71,7 @@ public partial class Enemy : CharacterBody2D
 		Stupid,
 		Worm
 	}
-	public enum State
-	{
-		Spawning,
-		Idle,
-		Notice,
-		Patrol,
-		Chase,
-		Attack,
-		Damaged,
-		Die
-	}
 
-	public State CurrentState = State.Idle;
-	public bool InCombat = false;
 	public Vector2 PlayerPosition
 	{
 		get { return Player.GlobalPosition; }
@@ -145,13 +132,13 @@ public partial class Enemy : CharacterBody2D
 
 	public void StateMachine(double delta)
 	{
-		switch(CurrentState)
+		switch(_brain.CurrentState)
 		{
-			case State.Chase:
+			case Brain.State.Chase:
 				UpdateChase(delta);
 				break;
 
-			case State.Attack:
+			case Brain.State.Attack:
 				UpdateAttack();
 				break;
 		}
@@ -253,34 +240,34 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		switch (CurrentState)
+		switch (_brain.CurrentState)
 		{
-			case State.Idle:
+			case Brain.State.Idle:
 				_sprite.Play("Idle");
 				_shadowSprite.Play("Idle");
 				break;
 
-			case State.Notice:
+			case Brain.State.Notice:
 				_sprite.Play("Notice");
 				_shadowSprite.Play("Notice");
 				break;
 
-			case State.Chase:
+			case Brain.State.Chase:
 				_sprite.Play("Walk");
 				_shadowSprite.Play("Walk");
 				break;
 
-			case State.Attack:
+			case Brain.State.Attack:
 				_sprite.Play("Attack");
 				_shadowSprite.Play("Attack");
 				break;
 
-			case State.Damaged:
+			case Brain.State.Damaged:
 				_sprite.Play("TakeDmg");
 				_shadowSprite.Play("TakeDmg");
 				break;
 
-			case State.Die:
+			case Brain.State.Defeat:
 				_sprite.Play("Defeat");
 				_shadowSprite.Play("Defeat");
 				break;
@@ -289,7 +276,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
-		CurrentState = State.Damaged;
+		_brain.Damaged();
 
 		if (IsAlive)
 		{
@@ -298,13 +285,8 @@ public partial class Enemy : CharacterBody2D
 
 		if (Health <= 0)
 		{
-			Die();
+			_brain.Defeat();
 		}
-	}
-
-	public void Die()
-	{
-		CurrentState = State.Die;
 	}
 
 	private void OnBodyEntered(Node2D body)
