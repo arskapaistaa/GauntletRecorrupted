@@ -3,10 +3,72 @@ using System;
 
 public partial class Brain : Node
 {
+	[Export] private EnemyType _enemyType = EnemyType.Stupid;
+	[Export] private AttackType _attackType = AttackType.Sting;
+
+	[ExportCategory("States")]
+	[Export] public State StartingState = State.Idle;
+
+	[ExportGroup("Interaction with Player")]
+	[Export] public State EntersAreaState = State.None;
+
+	[ExportGroup("After Damaged")]
+	[Export] public State InCombatState = State.None;
+	[Export] public State OutOfCombatState = State.None;
+
+	[ExportGroup("Notice")]
+	[Export] public State AfterNoticeState = State.None;
+
+	[ExportGroup("Attack")]
+	[Export] public State AfterAttackState = State.None;
+	[Export] public CombatState AfterAttackCombatState = CombatState.Combat;
+
+	[ExportGroup("Patrol")]
+	[Export] public State NavigationFinishedState = State.None;
+
+	[ExportGroup("Spawn")]
+	[Export] public State AfterSpawnState = State.None;
+
 	private Enemy _enemy;
+	public enum State
+	{
+		None,
+		Spawning,
+		Patrol,
+		Idle,
+		Notice,
+		Chase,
+		Attack,
+		Damaged,
+		Defeat
+	}
+	public enum CombatState
+	{
+		None,
+		Combat
+	}
+
+	public enum EnemyType
+	{
+		Patrol,
+		Stupid,
+		Worm
+	}
+
+	public enum AttackType
+	{
+		Sting,
+		Leech
+	}
+
+	public State CurrentState = State.Idle;
+	public CombatState CurrentCombatState = CombatState.None;
 	public override void _Ready()
 	{
 		_enemy = (Enemy)GetParent();
+
+		CurrentState = StartingState;
+
 	}
 
 	public override void _Process(double delta)
@@ -16,21 +78,34 @@ public partial class Brain : Node
 
 	public void Check()
 	{
-		switch(_enemy.CurrentState)
+		switch(CurrentState)
 		{
-		case Enemy.State.Chase:
+		case State.Chase:
 			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange)
 			{
-				_enemy.CurrentState = Enemy.State.Attack;
+				CurrentState = State.Attack;
 			}
 			break;
 		}
 	}
+
+	public void Damaged()
+	{
+		CurrentState = State.Damaged;
+	}
+
+	public void Defeat()
+	{
+		CurrentState = State.Defeat;
+
+		Level.Current.ChangeEnemyCount(-1);
+	}
+
 	public void AfterDamaged()
 	{
 		if (_enemy.Player == null)
 		{
-			_enemy.CurrentState = Enemy.State.Notice;
+			SetCurrentState(OutOfCombatState);
 
 			// Maybe change this logic
 			_enemy.Player = Level.Current.Player;
@@ -38,21 +113,21 @@ public partial class Brain : Node
 		}
 		else if (_enemy.Player != null)
 		{
-			_enemy.CurrentState = Enemy.State.Chase;
+			SetCurrentState(InCombatState);
 		}
 	}
 
 	public void AfterNotice()
 	{
-		_enemy.InCombat = true;
+		CurrentCombatState = CombatState.Combat;
 
 		if (_enemy.Player != null)
 		{
-			_enemy.CurrentState = Enemy.State.Chase;
+			SetCurrentState(AfterNoticeState);
 		}
 		else
 		{
-			_enemy.CurrentState = Enemy.State.Idle;
+			CurrentState = State.Idle;
 		}
 	}
 
@@ -60,12 +135,24 @@ public partial class Brain : Node
 	{
 		if (_enemy.Player != null)
 		{
-			_enemy.CurrentState = Enemy.State.Chase;
+			SetCurrentState(AfterAttackState);
+
+			CurrentCombatState = AfterAttackCombatState;
 		}
+	}
+
+	public void AfterSpawn()
+	{
+		SetCurrentState(AfterSpawnState);
 	}
 
 	public void AnimationFinished()
 	{
+		if (_enemy.Sprite.Animation == "Spawn")
+		{
+			AfterSpawn();
+		}
+
 		if (_enemy.Sprite.Animation == "Defeat")
 		{
 			_enemy.QueueFree();
@@ -87,11 +174,32 @@ public partial class Brain : Node
 		}
 	}
 
+	public void NavigationFinished()
+	{
+		if (CurrentState == State.Patrol)
+		{
+			SetCurrentState(NavigationFinishedState);
+			_enemy.HasRoute = false;
+		}
+	}
+
+	public void SetCurrentState(State state)
+	{
+		if (state != State.None)
+		{
+			CurrentState = state;
+		}
+	}
+
 	public void PlayerEntered()
 	{
-		if (!_enemy.InCombat)
+		if (CurrentCombatState == CombatState.None)
 		{
-			_enemy.CurrentState = Enemy.State.Notice;
+			if (EntersAreaState != State.None)
+			{
+				CurrentState = EntersAreaState;
+			}
+
 			_enemy.SetPlayerTarget();
 		}
 	}

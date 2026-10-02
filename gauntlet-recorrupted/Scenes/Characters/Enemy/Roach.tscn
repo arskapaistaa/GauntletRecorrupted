@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cherg0ys2j7vb"]
+[gd_scene format=3 uid="uid://c83l7ond8lwpl"]
 
 [ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_4m0ti"]
 [ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Brain.cs" id="2_yb4cs"]
@@ -241,6 +241,11 @@ _attackFrame = 2
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
+EntersAreaState = 4
+InCombatState = 5
+OutOfCombatState = 4
+AfterNoticeState = 5
+AfterAttackState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 light_mask = 2
@@ -274,7 +279,6 @@ shape = SubResource("CircleShape2D_dxocv")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
 avoidance_enabled = true
 radius = 128.0
-debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0

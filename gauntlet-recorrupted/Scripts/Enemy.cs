@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public partial class Enemy : CharacterBody2D
 {
 	[ExportGroup("Stats")]
@@ -19,9 +20,8 @@ public partial class Enemy : CharacterBody2D
 
 	[Export(PropertyHint.Range, "100, 400, 10")]
 	private float _attackRange;
-	[Export] private EnemyType _enemyType = EnemyType.Stupid;
 
-	[ExportGroup("Nodes")]
+	[ExportGroup("Node References")]
 	[Export] private Brain _brain;
 	[Export] private AnimatedSprite2D _sprite;
 	[Export] private AnimatedSprite2D _shadowSprite;
@@ -34,6 +34,8 @@ public partial class Enemy : CharacterBody2D
 	[Export] private int _attackFrame;
 
 	private bool _isAlive = true;
+
+	public bool HasRoute = false;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
 
@@ -65,32 +67,11 @@ public partial class Enemy : CharacterBody2D
 
 	public PlayerCharacter Player;
 
-	public enum EnemyType
-	{
-		Patrol,
-		Stupid,
-		Worm
-	}
-	public enum State
-	{
-		Spawning,
-		Idle,
-		Notice,
-		Patrol,
-		Chase,
-		Attack,
-		Damaged,
-		Die
-	}
-
-	public State CurrentState = State.Idle;
-	public bool InCombat = false;
 	public Vector2 PlayerPosition
 	{
 		get { return Player.GlobalPosition; }
 	}
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		if (_brain == null)
@@ -115,6 +96,7 @@ public partial class Enemy : CharacterBody2D
 		if (_agent != null)
 		{
 			_agent.VelocityComputed += OnVelocityComputed;
+			_agent.NavigationFinished += OnNavigationFinished;
 		}
 	}
 
@@ -134,6 +116,7 @@ public partial class Enemy : CharacterBody2D
 		if (_agent != null)
 		{
 			_agent.VelocityComputed -= OnVelocityComputed;
+			_agent.NavigationFinished -= OnNavigationFinished;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -145,19 +128,23 @@ public partial class Enemy : CharacterBody2D
 
 	public void StateMachine(double delta)
 	{
-		switch(CurrentState)
+		switch(_brain.CurrentState)
 		{
-			case State.Chase:
+			case Brain.State.Chase:
 				UpdateChase(delta);
 				break;
 
-			case State.Attack:
+			case Brain.State.Patrol:
+				UpdatePatrol(delta);
+				break;
+
+			case Brain.State.Attack:
 				UpdateAttack();
 				break;
 		}
 	}
 
-	public void UpdateChase(double delta)
+    public void UpdateChase(double delta)
 	{
 		if (_agent == null)
 		{
@@ -173,6 +160,28 @@ public partial class Enemy : CharacterBody2D
 		Navigation(delta);
 		LookAtPlayer();
 	}
+
+	private void UpdatePatrol(double delta)
+    {
+        if (_agent == null)
+		{
+			return;
+		}
+
+		if (!HasRoute)
+		{
+			SetPositionTarget();
+		}
+
+
+		if (_agent.IsNavigationFinished())
+		{
+			return;
+		}
+
+		Navigation(delta);
+		LookAtPosition();
+    }
 
 	public void Navigation(double delta)
 	{
@@ -207,17 +216,43 @@ public partial class Enemy : CharacterBody2D
 		_agent.TargetPosition = PlayerPosition;
 	}
 
+	public void SetPositionTarget()
+	{
+		// while (!isAllowed)
+		_agent.TargetPosition = GlobalPosition + RandomPosition(-1000.0f, 1000.0f);
+
+		HasRoute = true;
+	}
+
+	public void LookAtPosition()
+	{
+		LookAt(_agent.TargetPosition);
+	}
+
+	public Vector2 RandomPosition(float min, float max)
+	{
+		float x = (float)GD.RandRange(min, max);
+		float y = (float)GD.RandRange(min, max);
+
+		Vector2 position = new Vector2(x, y);
+
+		return position;
+	}
+
 	public void NavUpdate(double delta)
 	{
-		if (_navTimer <= 0.0f)
-		{
-			SetPlayerTarget();
-			_navTimer = _navInterval;
-			return;
-		}
-		else
-		{
-			_navTimer -= (float)delta;
+		if (_brain.CurrentState == Brain.State.Chase)
+			{
+				if (_navTimer <= 0.0f)
+			{
+				SetPlayerTarget();
+				_navTimer = _navInterval;
+				return;
+			}
+			else
+			{
+				_navTimer -= (float)delta;
+			}
 		}
 	}
 
@@ -253,34 +288,44 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		switch (CurrentState)
+		switch (_brain.CurrentState)
 		{
-			case State.Idle:
+			case Brain.State.Spawning:
+				_sprite.Play("Spawn");
+				_shadowSprite.Play("Spawn");
+				break;
+
+			case Brain.State.Idle:
 				_sprite.Play("Idle");
 				_shadowSprite.Play("Idle");
 				break;
 
-			case State.Notice:
-				_sprite.Play("Notice");
-				_shadowSprite.Play("Notice");
-				break;
-
-			case State.Chase:
+			case Brain.State.Chase:
 				_sprite.Play("Walk");
 				_shadowSprite.Play("Walk");
 				break;
 
-			case State.Attack:
+			case Brain.State.Patrol:
+				_sprite.Play("Walk");
+				_shadowSprite.Play("Walk");
+				break;
+
+			case Brain.State.Notice:
+				_sprite.Play("Notice");
+				_shadowSprite.Play("Notice");
+				break;
+
+			case Brain.State.Attack:
 				_sprite.Play("Attack");
 				_shadowSprite.Play("Attack");
 				break;
 
-			case State.Damaged:
+			case Brain.State.Damaged:
 				_sprite.Play("TakeDmg");
 				_shadowSprite.Play("TakeDmg");
 				break;
 
-			case State.Die:
+			case Brain.State.Defeat:
 				_sprite.Play("Defeat");
 				_shadowSprite.Play("Defeat");
 				break;
@@ -289,7 +334,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
-		CurrentState = State.Damaged;
+		_brain.Damaged();
 
 		if (IsAlive)
 		{
@@ -298,13 +343,8 @@ public partial class Enemy : CharacterBody2D
 
 		if (Health <= 0)
 		{
-			Die();
+			_brain.Defeat();
 		}
-	}
-
-	public void Die()
-	{
-		CurrentState = State.Die;
 	}
 
 	private void OnBodyEntered(Node2D body)
@@ -331,6 +371,11 @@ public partial class Enemy : CharacterBody2D
     {
         Velocity = safeVelocity;
 		MoveAndSlide();
+    }
+
+	private void OnNavigationFinished()
+    {
+        _brain.NavigationFinished();
     }
 
 	public void SetDetectionRange(float range)

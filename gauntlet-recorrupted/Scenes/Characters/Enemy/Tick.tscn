@@ -370,9 +370,9 @@ motion_mode = 1
 script = ExtResource("1_40av6")
 _health = 2.0
 _maxSpeed = 400.0
-_detectionRange = 600.0
+_detectionRange = 200.0
 _dmg = 4
-_attackRange = 200.0
+_attackRange = 180.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
@@ -385,9 +385,8 @@ _attackFrame = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
 material = ExtResource("2_bmxul")
 sprite_frames = SubResource("SpriteFrames_4fpts")
-animation = &"Walk"
+animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.8975686
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=829299990]
 modulate = Color(0, 0, 0, 0.34509805)
@@ -402,6 +401,17 @@ frame_progress = 0.936466
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_4fpts")
+_enemyType = 0
+_attackType = 1
+StartingState = 1
+EntersAreaState = 4
+InCombatState = 5
+OutOfCombatState = 4
+AfterNoticeState = 5
+AfterAttackState = 2
+AfterAttackCombatState = 0
+NavigationFinishedState = 3
+AfterSpawnState = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -417,7 +427,6 @@ shape = SubResource("CircleShape2D_tn2tk")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
 avoidance_enabled = true
 radius = 128.0
-debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0
