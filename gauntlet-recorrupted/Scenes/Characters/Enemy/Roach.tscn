@@ -245,7 +245,7 @@ EntersDetectionArea = 3
 InCombat = 5
 OutOfCombat = 3
 AfterNoticePlayer = 5
-AfterAttackPlayer = 3
+AfterAttackPlayer = 6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 light_mask = 2
