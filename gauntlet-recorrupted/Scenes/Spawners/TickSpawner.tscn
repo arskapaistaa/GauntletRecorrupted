@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b3rbnnkywu7gn"]
 
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_p13av"]
 [ext_resource type="Script" uid="uid://1qdc507ykkqu" path="res://Scripts/EnemySpawner.cs" id="2_p1ylh"]
 [ext_resource type="Texture2D" uid="uid://bkvnaxfh834ng" path="res://Art/Enemies/ArtEnemySpawnerTick.png" id="4_k810l"]
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="4_p13av"]
@@ -280,16 +279,17 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_p1ylh")
 _enemyScene = ExtResource("4_p13av")
-_spawningCooldown = 3.0
+_spawningCooldown = 6.0
 _timer = NodePath("Timer")
 _health = 10
 _sprite = NodePath("AnimatedSprite2D")
 _spawnPoint = NodePath("SpawnPoint")
+_spawnFrame = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2011952128]
-material = ExtResource("1_p13av")
 sprite_frames = SubResource("SpriteFrames_fgwj2")
-animation = &"Idle"
+animation = &"Spawn"
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1600586051]
 position = Vector2(0, -39.835)

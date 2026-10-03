@@ -15,6 +15,8 @@ public partial class EnemySpawner : StaticBody2D
 	/// </summary>
 	[Export] private Marker2D _spawnPoint;
 
+	[Export] private int _spawnFrame = 0;
+
 	public enum State
 	{
 		Idle,
@@ -45,8 +47,46 @@ public partial class EnemySpawner : StaticBody2D
 		if (_sprite != null)
 		{
 			_sprite.AnimationFinished += OnAnimationFinished;
+			_sprite.FrameChanged += OnFrameChanged;
 		}
 	}
+
+    public override void _ExitTree()
+    {
+        _timer.Timeout -= OnTimedOut;
+
+		if (!_timer.IsStopped())
+		{
+			_timer.Stop();
+		}
+
+		if (_sprite != null)
+		{
+			_sprite.AnimationFinished -= OnAnimationFinished;
+			_sprite.FrameChanged -= OnFrameChanged;
+		}
+    }
+
+    private void OnFrameChanged()
+    {
+		// Spawn only on one frame.
+		// If needed, spawning can be also checked in _Process.
+        if (_sprite.Animation == "Spawn")
+		{
+			if (_sprite.Frame == _spawnFrame)
+			{
+				Enemy enemy = _enemyScene.Instantiate<Enemy>();
+
+				GetParent().AddChild(enemy);
+				enemy.GlobalTransform = GlobalTransform;
+
+				if (_spawnPoint != null)
+				{
+					enemy.SpawnPoint = _spawnPoint.GlobalPosition;
+				}
+			}
+		}
+    }
 
     public override void _Process(double delta)
     {
@@ -72,16 +112,6 @@ public partial class EnemySpawner : StaticBody2D
 		}
 
 		CurrentState = State.Spawn;
-
-		Enemy enemy = _enemyScene.Instantiate<Enemy>();
-
-		GetParent().AddChild(enemy);
-		enemy.GlobalTransform = GlobalTransform;
-
-		if (_spawnPoint != null)
-		{
-			enemy.SpawnPoint = _spawnPoint.GlobalPosition;
-		}
 
 		Level.Current.ChangeEnemyCount(1);
 	}
