@@ -20,10 +20,13 @@ public partial class Level : Node2D
 		Current = this;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("Menu"))
+		{
+			GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/TestMenu.tscn");
+		}
+    }
 
 	public void ChangeEnemyCount(int amount)
 	{
