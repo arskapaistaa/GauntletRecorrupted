@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gauntlet Recorrupted"
-run/main_scene="uid://cby3qn104tp5i"
+run/main_scene="uid://cfmj0l8f6okh5"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
