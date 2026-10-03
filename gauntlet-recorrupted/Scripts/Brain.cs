@@ -3,7 +3,7 @@ using System;
 
 public partial class Brain : Node
 {
-	[Export] private EnemyType _enemyType = EnemyType.Stupid;
+	[Export] private EnemyType _enemyType = EnemyType.Roach;
 	[Export] private AttackType _attackType = AttackType.Sting;
 
 	[ExportCategory("States")]
@@ -29,6 +29,9 @@ public partial class Brain : Node
 	[ExportGroup("Spawn")]
 	[Export] public State AfterSpawnState = State.None;
 
+	[ExportGroup("Alarmed")]
+	[Export] public State AfterAlarmedState = State.None;
+
 	private Enemy _enemy;
 	public enum State
 	{
@@ -50,8 +53,8 @@ public partial class Brain : Node
 
 	public enum EnemyType
 	{
-		Patrol,
-		Stupid,
+		Roach,
+		Tick,
 		Worm
 	}
 
@@ -121,6 +124,8 @@ public partial class Brain : Node
 	{
 		CurrentCombatState = CombatState.Combat;
 
+		_enemy.AlarmBuddies();
+
 		if (_enemy.Player != null)
 		{
 			SetCurrentState(AfterNoticeState);
@@ -144,6 +149,18 @@ public partial class Brain : Node
 	public void AfterSpawn()
 	{
 		SetCurrentState(AfterSpawnState);
+	}
+
+	public void Alarmed()
+	{
+		if (CurrentCombatState == CombatState.None)
+		{
+			SetCurrentState(AfterAlarmedState);
+
+			// Maybe change this logic
+			_enemy.Player = Level.Current.Player;
+			_enemy.SetPlayerTarget();
+		}
 	}
 
 	public void AnimationFinished()

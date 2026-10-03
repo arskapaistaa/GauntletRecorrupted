@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Text.RegularExpressions;
 
 
 public partial class Enemy : CharacterBody2D
 {
 	[ExportGroup("Stats")]
 
-	[Export(PropertyHint.Range, "1, 100, 1")]
+	[Export(PropertyHint.Range, "1, 1000, 1")]
 	private float _health;
 
 	[Export(PropertyHint.Range, "100, 800, 10")]
@@ -20,6 +21,9 @@ public partial class Enemy : CharacterBody2D
 
 	[Export(PropertyHint.Range, "100, 400, 10")]
 	private float _attackRange;
+
+	[Export(PropertyHint.Range, "300, 10000, 100")]
+	private float _alarmRange;
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain;
@@ -71,6 +75,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		get { return Player.GlobalPosition; }
 	}
+
+	[Export] public Vector2 SpawnPoint;
 
 	public override void _Ready()
 	{
@@ -125,11 +131,14 @@ public partial class Enemy : CharacterBody2D
 		UpdateAnimation();
 	}
 
-
 	public void StateMachine(double delta)
 	{
 		switch(_brain.CurrentState)
 		{
+			case Brain.State.Spawning:
+				UpdateSpawn(delta);
+				break;
+
 			case Brain.State.Chase:
 				UpdateChase(delta);
 				break;
@@ -180,12 +189,33 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Navigation(delta);
-		LookAtPosition();
+		LookAtPosition(_agent.TargetPosition);
     }
+
+	private void UpdateSpawn(double delta)
+	{
+ 		if (_agent == null)
+		{
+			return;
+		}
+
+		_agent.TargetPosition = SpawnPoint;
+
+		if (_agent.IsNavigationFinished())
+		{
+			return;
+		}
+
+		Navigation(delta);
+		LookAtPosition(SpawnPoint);
+	}
 
 	public void Navigation(double delta)
 	{
-		NavUpdate(delta);
+		if (_brain.CurrentState == Brain.State.Chase)
+		{
+			NavUpdate(delta);
+		}
 
 		Vector2 currentPosition = GlobalPosition;
 
@@ -224,9 +254,9 @@ public partial class Enemy : CharacterBody2D
 		HasRoute = true;
 	}
 
-	public void LookAtPosition()
+	public void LookAtPosition(Vector2 position)
 	{
-		LookAt(_agent.TargetPosition);
+		LookAt(position);
 	}
 
 	public Vector2 RandomPosition(float min, float max)
@@ -241,18 +271,15 @@ public partial class Enemy : CharacterBody2D
 
 	public void NavUpdate(double delta)
 	{
-		if (_brain.CurrentState == Brain.State.Chase)
-			{
-				if (_navTimer <= 0.0f)
-			{
-				SetPlayerTarget();
-				_navTimer = _navInterval;
-				return;
-			}
-			else
-			{
-				_navTimer -= (float)delta;
-			}
+			if (_navTimer <= 0.0f)
+		{
+			SetPlayerTarget();
+			_navTimer = _navInterval;
+			return;
+		}
+		else
+		{
+			_navTimer -= (float)delta;
 		}
 	}
 
@@ -345,6 +372,27 @@ public partial class Enemy : CharacterBody2D
 		{
 			_brain.Defeat();
 		}
+	}
+
+	public void AlarmBuddies()
+	{
+		// THIS CAN BE CHANGED THAT IT ALARM EVERY ONE WITH SAME SPAWNER
+		// OR IN SAME "FACTION"
+		foreach (Node enemy in GetTree().GetNodesInGroup("Enemy"))
+		{
+			if (enemy is Enemy enemyNode && enemy != this)
+			{
+				if (GlobalPosition.DistanceTo(enemyNode.GlobalPosition) <= _alarmRange)
+				{
+					enemyNode.Alarmed();
+				}
+			}
+		}
+	}
+
+	private void Alarmed()
+	{
+		_brain.Alarmed();
 	}
 
 	private void OnBodyEntered(Node2D body)

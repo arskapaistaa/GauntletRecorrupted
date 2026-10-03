@@ -10,11 +10,17 @@ public partial class EnemySpawner : StaticBody2D
 	[Export] private Timer _timer;
 	[Export] private int _health;
 	[Export] private AnimatedSprite2D _sprite;
+	/// <summary>
+	/// Can be set 0,0. If you want enemy to go spawn position, then set this.
+	/// </summary>
+	[Export] private Marker2D _spawnPoint;
 
 	public enum State
 	{
 		Idle,
-		Spawn
+		Spawn,
+		Damaged,
+		Defeat
 	}
 
 	public State CurrentState = State.Idle;
@@ -42,7 +48,7 @@ public partial class EnemySpawner : StaticBody2D
 		}
 	}
 
-    public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
     {
         UpdateAnimation();
     }
@@ -72,6 +78,11 @@ public partial class EnemySpawner : StaticBody2D
 		GetParent().AddChild(enemy);
 		enemy.GlobalTransform = GlobalTransform;
 
+		if (_spawnPoint != null)
+		{
+			enemy.SpawnPoint = _spawnPoint.GlobalPosition;
+		}
+
 		Level.Current.ChangeEnemyCount(1);
 	}
 
@@ -81,6 +92,11 @@ public partial class EnemySpawner : StaticBody2D
 	/// <param name="dmg">Amount of damage</param>
 	public void TakeDmg(int dmg)
 	{
+		if (CurrentState != State.Spawn)
+		{
+			CurrentState = State.Damaged;
+		}
+
 		if (_health > 0)
 		{
 			_health -= dmg;
@@ -99,7 +115,7 @@ public partial class EnemySpawner : StaticBody2D
 
 	private void UpdateAnimation()
 	{
-		if (_sprite != null)
+		if (_sprite == null)
 		{
 			return;
 		}
@@ -113,6 +129,14 @@ public partial class EnemySpawner : StaticBody2D
 			case State.Spawn:
 				_sprite.Play("Spawn");
 				break;
+
+			case State.Damaged:
+				_sprite.Play("Damage");
+				break;
+
+			case State.Defeat:
+				_sprite.Play("Defeat");
+				break;
 		}
 	}
 
@@ -121,6 +145,16 @@ public partial class EnemySpawner : StaticBody2D
         if (_sprite.Animation == "Spawn")
 		{
 			CurrentState = State.Idle;
+		}
+
+		if (_sprite.Animation == "Damage")
+		{
+			CurrentState = State.Idle;
+		}
+
+		if (_sprite.Animation == "Defeat")
+		{
+			QueueFree();
 		}
     }
 }
