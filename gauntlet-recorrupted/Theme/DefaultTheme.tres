@@ -1,0 +1,44 @@
+[gd_resource type="Theme" format=3 uid="uid://ds6x7gmdv38w1"]
+
+[ext_resource type="Texture2D" uid="uid://c3kvwt6v1v08w" path="res://Art/ArtGroundPlaceholder.png" id="1_022cb"]
+[ext_resource type="FontFile" uid="uid://cdluctjkvwtqr" path="res://Art/Fonts/Mortified.ttf" id="2_g60mq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g60mq"]
+bg_color = Color(0.24313726, 0.2509804, 0.33333334, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5647059, 0.4862745, 0.45882353, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_udt0g"]
+texture = ExtResource("1_022cb")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_g60mq")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.36862746)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+MarginContainer/constants/margin_bottom = 40
+MarginContainer/constants/margin_left = 40
+MarginContainer/constants/margin_right = 40
+MarginContainer/constants/margin_top = 40
+Panel/styles/panel = SubResource("StyleBoxTexture_udt0g")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.30980393)
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 2
+RichTextLabel/font_sizes/normal_font_size = 40
+RichTextLabel/fonts/normal_font = ExtResource("2_g60mq")
+VBoxContainer/constants/separation = 32
