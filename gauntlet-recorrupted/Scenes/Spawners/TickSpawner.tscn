@@ -276,7 +276,6 @@ size = Vector2(200, 200)
 
 [node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_spawnPoint")]
 z_index = 2
-material = ExtResource("1_p13av")
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_p1ylh")
@@ -288,6 +287,7 @@ _sprite = NodePath("AnimatedSprite2D")
 _spawnPoint = NodePath("SpawnPoint")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2011952128]
+material = ExtResource("1_p13av")
 sprite_frames = SubResource("SpriteFrames_fgwj2")
 animation = &"Idle"
 
