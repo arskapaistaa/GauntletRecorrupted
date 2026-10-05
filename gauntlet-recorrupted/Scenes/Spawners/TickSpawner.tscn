@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b3rbnnkywu7gn"]
 
 [ext_resource type="Script" uid="uid://1qdc507ykkqu" path="res://Scripts/EnemySpawner.cs" id="2_p1ylh"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_omace"]
 [ext_resource type="Texture2D" uid="uid://bkvnaxfh834ng" path="res://Art/Enemies/ArtEnemySpawnerTick.png" id="4_k810l"]
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="4_p13av"]
 
@@ -287,6 +288,7 @@ _spawnPoint = NodePath("SpawnPoint")
 _spawnFrame = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2011952128]
+material = ExtResource("3_omace")
 sprite_frames = SubResource("SpriteFrames_fgwj2")
 animation = &"Spawn"
 frame = 5
