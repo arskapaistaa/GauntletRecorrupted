@@ -128,6 +128,7 @@ public partial class Brain : Node
 		else if (_enemy.Player != null)
 		{
 			SetCurrentState(InCombatState);
+			_enemy.SetPlayerTarget();
 		}
 	}
 
