@@ -14,7 +14,6 @@ public partial class EnemySpawner : StaticBody2D
 	/// Can be set 0,0. If you want enemy to go spawn position, then set this.
 	/// </summary>
 	[Export] private Marker2D _spawnPoint;
-
 	[Export] private int _spawnFrame = 0;
 
 	public enum State
@@ -26,6 +25,8 @@ public partial class EnemySpawner : StaticBody2D
 	}
 
 	public State CurrentState = State.Idle;
+
+	public bool IsAlive = true;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -106,6 +107,11 @@ public partial class EnemySpawner : StaticBody2D
 			return;
 		}
 
+		if (!IsAlive)
+		{
+			return;
+		}
+
 		if (Level.Current.CurrentTotalEnemyCount >= Level.Current.MaxTotalEnemyCount)
 		{
 			return;
@@ -122,25 +128,27 @@ public partial class EnemySpawner : StaticBody2D
 	/// <param name="dmg">Amount of damage</param>
 	public void TakeDmg(int dmg)
 	{
-		if (CurrentState != State.Spawn)
-		{
-			CurrentState = State.Damaged;
-		}
 
 		if (_health > 0)
 		{
 			_health -= dmg;
 		}
 
-		if (_health < 0)
+		if (_health <= 0)
 		{
 			Destroy();
+		}
+
+		if (CurrentState != State.Spawn && IsAlive)
+		{
+			CurrentState = State.Damaged;
 		}
 	}
 
     private void Destroy()
     {
-        QueueFree();
+		IsAlive = false;
+        CurrentState = State.Defeat;
     }
 
 	private void UpdateAnimation()
