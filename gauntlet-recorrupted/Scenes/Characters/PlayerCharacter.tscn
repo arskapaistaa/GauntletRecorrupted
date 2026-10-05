@@ -35,6 +35,7 @@ script = ExtResource("1_nu4k2")
 Speed = 600.0
 BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Marker2D")
+Health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4
