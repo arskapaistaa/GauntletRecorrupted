@@ -5,7 +5,6 @@ public partial class Bullet : Area2D
 	[Export] public float Speed = 800.0f;
 	[Export] public float Lifetime = 2.0f;
 	[Export] public int Damage = 1;
-
 	private Vector2 _direction = Vector2.Right;
 
 	public void Initialize(Vector2 direction)
