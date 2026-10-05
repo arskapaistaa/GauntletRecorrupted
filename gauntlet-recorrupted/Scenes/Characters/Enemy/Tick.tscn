@@ -371,6 +371,16 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40av6"]
 size = Vector2(162, 78)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4fpts"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bmxul"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5j7n6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mfaq7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hskhg"]
+
 [node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 15
@@ -378,9 +388,10 @@ motion_mode = 1
 script = ExtResource("1_40av6")
 _health = 50.0
 _maxSpeed = 400.0
+_attackSpeed = 800.0
 _detectionRange = 200.0
 _dmg = 20
-_attackRange = 180.0
+_attackRange = 600.0
 _alarmRange = 2000.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
@@ -389,15 +400,27 @@ _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
-_attackFrame = 3
+_attackFrames = PackedInt32Array(3, 4, 5, 6)
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
+script = ExtResource("2_4fpts")
+_attackType = 1
+StartingState = 1
+EntersAreaState = 5
+InCombatState = 5
+OutOfCombatState = 4
+AfterNoticeState = 5
+AfterAttackState = 2
+AfterAttackCombatState = 0
+NavigationFinishedState = 3
+AfterSpawnState = 2
+AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
 material = ExtResource("2_bmxul")
 sprite_frames = SubResource("SpriteFrames_4fpts")
-animation = &"Notice"
+animation = &"Attack"
 autoplay = "Idle"
-frame = 1
-frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=829299990]
 modulate = Color(0, 0, 0, 0.34509805)
@@ -409,20 +432,6 @@ sprite_frames = SubResource("SpriteFrames_4fpts")
 animation = &"Walk"
 autoplay = "Idle"
 frame_progress = 0.936466
-
-[node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
-script = ExtResource("2_4fpts")
-_attackType = 1
-StartingState = 1
-EntersAreaState = 4
-InCombatState = 5
-OutOfCombatState = 4
-AfterNoticeState = 5
-AfterAttackState = 2
-AfterAttackCombatState = 0
-NavigationFinishedState = 3
-AfterSpawnState = 2
-AfterAlarmedState = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -447,3 +456,25 @@ script = ExtResource("4_5j7n6")
 position = Vector2(145, 0)
 shape = SubResource("RectangleShape2D_40av6")
 debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
+
+[node name="Audios" type="Node" parent="." unique_id=351962028]
+
+[node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=406446165]
+stream = SubResource("AudioStreamRandomizer_4fpts")
+bus = &"SFX"
+
+[node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1636719790]
+stream = SubResource("AudioStreamRandomizer_bmxul")
+bus = &"SFX"
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1610055822]
+stream = SubResource("AudioStreamRandomizer_5j7n6")
+bus = &"SFX"
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=425719681]
+stream = SubResource("AudioStreamRandomizer_mfaq7")
+bus = &"SFX"
+
+[node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=861492917]
+stream = SubResource("AudioStreamRandomizer_hskhg")
+bus = &"SFX"

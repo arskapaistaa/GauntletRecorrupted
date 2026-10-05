@@ -64,6 +64,16 @@ public partial class Brain : Node
 		Leech
 	}
 
+	public EnemyType ThisEnemyType
+	{
+		get { return _enemyType; }
+	}
+
+	public AttackType ThisAttackState
+	{
+		get { return _attackType; }
+	}
+
 	public State CurrentState = State.Idle;
 	public CombatState CurrentCombatState = CombatState.None;
 	public override void _Ready()
@@ -88,6 +98,7 @@ public partial class Brain : Node
 			{
 				CurrentState = State.Attack;
 			}
+
 			break;
 		}
 	}
