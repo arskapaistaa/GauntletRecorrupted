@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://3ths6623lmpn"]
+
+[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_avrhf"]
+[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_b5qck"]
+[ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="3_d0wku"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="4_yrhhe"]
+[ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="5_avrhf"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
+vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2071, -1041.9766, 2073.9922, -1039.0078, -487.96875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1052, 2084)])
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2400, 1200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -360.0
+angle_max = 360.00003
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_max = 8.0
+color = Color(0.62384886, 0.5371237, 0.1692642, 1)
+turbulence_enabled = true
+turbulence_influence_max = 0.5
+
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
+script = ExtResource("1_avrhf")
+Player = NodePath("Player")
+_maxTotalEnemyCount = 10
+
+[node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
+texture_repeat = 2
+texture = ExtResource("2_b5qck")
+region_enabled = true
+region_rect = Rect2(0, 0, 5120, 2560)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
+color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
+visible = false
+position = Vector2(-1514, -792)
+navigation_polygon = SubResource("NavigationPolygon_sopei")
+
+[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("3_d0wku")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1300661250]
+material = ExtResource("4_yrhhe")
+amount = 150
+lifetime = 6.0
+visibility_rect = Rect2(-2400, -1200, 4800, 2400)
+process_material = SubResource("ParticleProcessMaterial_sopei")
+
+[node name="Roach" parent="." unique_id=1765397949 instance=ExtResource("5_avrhf")]
+position = Vector2(1636, -681)
+
+[node name="Roach2" parent="." unique_id=1675292361 instance=ExtResource("5_avrhf")]
+position = Vector2(1620, 65)
+
+[node name="Roach3" parent="." unique_id=1039016528 instance=ExtResource("5_avrhf")]
+position = Vector2(1074, 809)
+
+[node name="Roach4" parent="." unique_id=1355658511 instance=ExtResource("5_avrhf")]
+position = Vector2(-1789, -542)
+
+[node name="Roach5" parent="." unique_id=538904899 instance=ExtResource("5_avrhf")]
+position = Vector2(-1805, 405)

@@ -1,9 +1,10 @@
-[gd_scene format=3 uid="uid://dxuv4osiiwjkk"]
+[gd_scene format=3 uid="uid://kiaxd475sgd0"]
 
-[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_dm7xv"]
-[ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
-[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_njp4a"]
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_30isp"]
+[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_qc6ga"]
+[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_4akc0"]
+[ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="3_atvrt"]
+[ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="4_dxhaf"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2071, -1041.9766, 2073.9922, -1039.0078, -487.96875)
@@ -26,14 +27,14 @@ color = Color(0.62384886, 0.5371237, 0.1692642, 1)
 turbulence_enabled = true
 turbulence_influence_max = 0.5
 
-[node name="Node2D" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
-script = ExtResource("1_dm7xv")
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
+script = ExtResource("1_qc6ga")
 Player = NodePath("Player")
-_maxTotalEnemyCount = 5
+_maxTotalEnemyCount = 10
 
 [node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
 texture_repeat = 2
-texture = ExtResource("2_njp4a")
+texture = ExtResource("2_4akc0")
 region_enabled = true
 region_rect = Rect2(0, 0, 5120, 2560)
 
@@ -45,12 +46,18 @@ visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 
-[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("2_dm7xv")]
+[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("3_atvrt")]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1300661250]
-visible = false
-material = ExtResource("5_30isp")
-amount = 300
-lifetime = 3.0
+material = ExtResource("5_7uxbg")
+amount = 150
+lifetime = 6.0
 visibility_rect = Rect2(-2400, -1200, 4800, 2400)
 process_material = SubResource("ParticleProcessMaterial_sopei")
+
+[node name="TickSpawner" parent="." unique_id=1930281201 instance=ExtResource("4_dxhaf")]
+position = Vector2(1715, -690)
+
+[node name="TickSpawner2" parent="." unique_id=1034999544 instance=ExtResource("4_dxhaf")]
+position = Vector2(-1817, 219)
+rotation = -0.9477138
