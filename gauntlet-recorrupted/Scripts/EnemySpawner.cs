@@ -3,18 +3,23 @@ using System;
 
 public partial class EnemySpawner : StaticBody2D
 {
+	[ExportGroup("Stats")]
 	[Export] private PackedScene _enemyScene = null;
-
 	[Export(PropertyHint.Range, "1, 180.0, 1.0")]
 	private float _spawningCooldown = 1.0f;
-	[Export] private Timer _timer;
 	[Export] private int _health;
-	[Export] private AnimatedSprite2D _sprite;
-	/// <summary>
-	/// Can be set 0,0. If you want enemy to go spawn position, then set this.
-	/// </summary>
-	[Export] private Marker2D _spawnPoint;
+
+	[ExportGroup("Node references")]
+	[Export] private Timer _timer;
+	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private Marker2D _spawnPoint = null; // Can be left null. If you want enemy to go spawn position, then set this.
+
+	[ExportGroup("Animations")]
 	[Export] private int _spawnFrame = 0;
+
+	[ExportGroup("Enemy properties")]
+	[Export] private float _minPatrolDistance;
+	[Export] private float _maxPatrolDistance;
 
 	public enum State
 	{
@@ -85,6 +90,8 @@ public partial class EnemySpawner : StaticBody2D
 				{
 					enemy.SpawnPoint = _spawnPoint.GlobalPosition;
 				}
+
+				enemy.SetPatrolDistances(_minPatrolDistance, _maxPatrolDistance);
 			}
 		}
     }

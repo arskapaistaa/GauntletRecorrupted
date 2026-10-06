@@ -417,6 +417,7 @@ AfterSpawnState = 2
 AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
+material = ExtResource("2_bmxul")
 sprite_frames = SubResource("SpriteFrames_4fpts")
 animation = &"Attack"
 autoplay = "Idle"
@@ -444,6 +445,7 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_tn2tk")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
 avoidance_enabled = true
 radius = 128.0
 debug_enabled = true

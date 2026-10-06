@@ -29,36 +29,41 @@ public partial class StatsManager : Node
 	private int _deaths;
 	private int _shotsFired;
 
+	private string _statsString = "Stats";
+	private string _killsString = "Kills";
+	private string _deathString = "Deaths";
+	private string _shotsFiredString = "ShotsFired";
+
 	public void OnKillsChanged()
 	{
 		_kills++;
-		_statsConfig.SetValue("Stats", "Kills", _kills);
+		_statsConfig.SetValue(_statsString, _killsString, _kills);
 	}
 
 	public void OnDeathsChanged()
 	{
 		_deaths++;
-		_statsConfig.SetValue("Stats", "Deaths", _deaths);
+		_statsConfig.SetValue(_statsString, _deathString, _deaths);
 	}
 
 	public void OnShotsFiredChanged()
 	{
 		_shotsFired++;
-		_statsConfig.SetValue("Stats", "ShotsFired", _shotsFired);
+		_statsConfig.SetValue(_statsString, _shotsFiredString, _shotsFired);
 	}
 
 	public int GetKills()
 	{
-		return (int)_statsConfig.GetValue("Stats", "Kills", 0);
+		return (int)_statsConfig.GetValue(_statsString, _killsString, 0);
 	}
 
 	public int GetDeaths()
 	{
-		return (int)_statsConfig.GetValue("Stats", "Deaths", 0);
+		return (int)_statsConfig.GetValue(_statsString, _deathString, 0);
 	}
 
 	public int GetShotsFired()
 	{
-		return (int)_statsConfig.GetValue("Stats", "ShotsFired", 0);
+		return (int)_statsConfig.GetValue(_statsString, _shotsFiredString, 0);
 	}
 }

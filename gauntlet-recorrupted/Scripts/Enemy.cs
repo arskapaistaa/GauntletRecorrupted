@@ -47,11 +47,13 @@ public partial class Enemy : CharacterBody2D
 
 	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
+	private float _navTimer = 0;
+	private float _navInterval = 0.25f;
+	private float _minPatrolDistance;
+	private float _maxPatrolDistance;
 
 	// PUBLIC, NO EXPORT
 	public bool HasRoute = false;
-	private float _navTimer = 0;
-	private float _navInterval = 0.25f;
 
 	public float Health
 	{
@@ -209,7 +211,7 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Navigation(delta, _maxSpeed);
-		LookAtPosition(_agent.TargetPosition);
+		LookAtPosition();
     }
 
 	private void UpdateSpawn(double delta)
@@ -227,7 +229,7 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Navigation(delta, _maxSpeed);
-		LookAtPosition(SpawnPoint);
+		LookAtPosition();
 	}
 
 	public void Navigation(double delta, float speed)
@@ -269,12 +271,12 @@ public partial class Enemy : CharacterBody2D
 	public void SetPositionTarget()
 	{
 		// while (!isAllowed)
-		_agent.TargetPosition = GlobalPosition + RandomPosition(-1000.0f, 1000.0f);
+		_agent.TargetPosition = GlobalPosition + RandomPosition(_minPatrolDistance, _maxPatrolDistance);
 
 		HasRoute = true;
 	}
 
-	public void LookAtPosition(Vector2 position)
+	public void LookAtPosition()
 	{
 		LookAt(_agent.GetNextPathPosition());
 	}
@@ -487,6 +489,12 @@ public partial class Enemy : CharacterBody2D
     {
         _brain.NavigationFinished();
     }
+
+	public void SetPatrolDistances(float min, float max)
+	{
+		_minPatrolDistance = min;
+		_maxPatrolDistance = max;
+	}
 
 	// Helper method to change detecytion range.
 	public void SetDetectionRange(float range)

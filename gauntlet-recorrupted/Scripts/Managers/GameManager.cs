@@ -83,4 +83,16 @@ public partial class GameManager : Node
 	{
 		return _shotsFired;
 	}
+
+	/// <summary>
+	/// Call this method from main menu or restart button.
+	/// </summary>
+	public void ResetStats()
+	{
+		int resetToZero = 0;
+
+		_kills = resetToZero;
+		_deaths = resetToZero;
+		_shotsFired = resetToZero;
+	}
 }

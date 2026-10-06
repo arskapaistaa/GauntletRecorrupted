@@ -279,6 +279,7 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_dxocv")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
 avoidance_enabled = true
 radius = 128.0
 

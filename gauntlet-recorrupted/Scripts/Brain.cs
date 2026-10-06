@@ -113,6 +113,8 @@ public partial class Brain : Node
 		CurrentState = State.Defeat;
 
 		Level.Current.ChangeEnemyCount(-1);
+
+		GameManager.Instance.OnKillsChanged();
 	}
 
 	public void AfterDamaged()

@@ -8,8 +8,8 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(-139.96875, 955.7578, -345.60156, 808, 296, 808, -472, 1064, -472, 1061.9531, -303.35156, 1183.1484, 4037.039, 1320, 4038.7188, 1752, 1064, 1752, 3800, 1320, 1496, 40, 2776, 40, 2776, 1320, 1064, 472, 3624, 984, 3112, 984, 3112, 202.15625, 3369, 202.15625, 3369, -77.84375, 3112, -77.84375, 3112, -216, 3800, -216, 3624, 1320, 728, 472, 728, 1752, -728, 1752, -728, 1064, -1009.6328, 40, -808, 40, -808, 296, -1010.1328, 472, 296, 472, 296, 296, 296, -216, 1496, -216, -472, 938.0078, -472, 808, -378.5703, 808)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 8, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(17, 18, 21, 9, 14), PackedInt32Array(22, 14, 9), PackedInt32Array(22, 9, 8), PackedInt32Array(12, 22, 8), PackedInt32Array(23, 24, 25, 2), PackedInt32Array(25, 26, 3, 5), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(31, 30, 29, 32), PackedInt32Array(32, 33, 34, 10, 13, 23), PackedInt32Array(31, 32, 23), PackedInt32Array(2, 31, 23), PackedInt32Array(2, 25, 5), PackedInt32Array(2, 5, 0), PackedInt32Array(35, 36, 37)])
+vertices = PackedVector2Array(-362.77344, 820.28906, -492, 1000.1172, -492, 788, 276, 788, -167.88281, 960.3281, 3349, 182.15625, 3349, -57.84375, 3820, -236, 3820, 1300, 3604, 1004, 3092, -236, 3109, -57.84375, 3092, 1004, 3109, 182.15625, -492, 1044, -492, 1022.9531, -307.92188, 1155.2266, 3604, 1300, 4056.961, 1300, 4058.7969, 1772, 1044, 1772, 2796, 1300, 2796, 20, 1044, 492, 1516, 20, 748, 492, 748, 1772, -748, 1772, -748, 1044, -1029.6016, 20, -788, 20, -788, 276, -1030.1484, 492, 276, 492, 276, 276, 276, -236, 1516, -236)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 7, 6, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(14, 15, 16), PackedInt32Array(9, 12, 13, 5), PackedInt32Array(17, 9, 8), PackedInt32Array(18, 19, 20, 8), PackedInt32Array(17, 8, 20), PackedInt32Array(21, 17, 20), PackedInt32Array(22, 21, 20, 23, 24), PackedInt32Array(25, 26, 27, 16, 3), PackedInt32Array(27, 28, 14, 16), PackedInt32Array(29, 30, 31, 32), PackedInt32Array(33, 32, 31, 34), PackedInt32Array(34, 35, 36, 24, 23, 25), PackedInt32Array(33, 34, 25), PackedInt32Array(3, 33, 25), PackedInt32Array(3, 16, 4)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1052, 2084)])
 agent_radius = 40.0
 
@@ -44,7 +44,7 @@ turbulence_influence_max = 0.5
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_qc6ga")
 Player = NodePath("Player")
-_maxTotalEnemyCount = 10
+_maxTotalEnemyCount = 50
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
 

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
+[ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
 
@@ -80,6 +81,7 @@ script = ExtResource("2_ikpte")
 _pathToScene = "res://Scenes/PlayTestScene/RoachTestScene.tscn"
 
 [node name="Options" type="MarginContainer" parent="Panel" unique_id=1308395627]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,6 +94,57 @@ script = ExtResource("3_d61wr")
 layout_mode = 2
 theme = ExtResource("1_cg106")
 theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+
+[node name="Stats" type="MarginContainer" parent="Panel" unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+offset_right = 160.0
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+script = ExtResource("4_5ve7l")
+_killsLabel = NodePath("PanelContainer/HBoxContainer/Kills")
+_deathsLabel = NodePath("PanelContainer/HBoxContainer/Deaths")
+_shotsFiredLabel = NodePath("PanelContainer/HBoxContainer/ShotsFired")
+
+[node name="PanelContainer" type="Panel" parent="Panel/Stats" unique_id=144935517]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/PanelContainer" unique_id=2131987139]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.5
+offset_top = -11.5
+offset_right = 5.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kills" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=390686524]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
+
+[node name="Deaths" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=1560595271]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
+
+[node name="ShotsFired" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=907336537]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
