@@ -33,7 +33,7 @@ public partial class SettingsManager : Node
 	};
 
 	private const string SettingsFilePath = "user://settings.cfg";
-	private ConfigFile _config = new ConfigFile();
+	private ConfigFile _settingsConfig = new ConfigFile();
 
 	private int _masterBusIndex;
 	private int _sfxBusIndex;
@@ -70,7 +70,7 @@ public partial class SettingsManager : Node
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 				break;
 		}
-		_config.SetValue("Video", "WindowMode", index);
+		_settingsConfig.SetValue("Video", "WindowMode", index);
 		SaveSettings();
 	}
 
@@ -84,7 +84,7 @@ public partial class SettingsManager : Node
 		{
 			DisplayServer.WindowSetSize(_resolutions[index]);
 
-			_config.SetValue("Video", "Resolution", index);
+			_settingsConfig.SetValue("Video", "Resolution", index);
 			SaveSettings();
 		}
 	}
@@ -92,28 +92,28 @@ public partial class SettingsManager : Node
 	public void OnMasterVolumeChange(float linearVolume)
 	{
 		SetBusVolume(_masterBusIndex, linearVolume);
-		_config.SetValue("Audio", "Master", linearVolume);
+		_settingsConfig.SetValue("Audio", "Master", linearVolume);
 		SaveSettings();
 	}
 
 	public void OnSfxVolumeChange(float linearVolume)
 	{
 		SetBusVolume(_sfxBusIndex, linearVolume);
-		_config.SetValue("Audio", "Sfx", linearVolume);
+		_settingsConfig.SetValue("Audio", "Sfx", linearVolume);
 		SaveSettings();
 	}
 
 	public void OnMusicVolumeChange(float linearVolume)
 	{
 		SetBusVolume(_musicBusIndex, linearVolume);
-		_config.SetValue("Audio", "Music", linearVolume);
+		_settingsConfig.SetValue("Audio", "Music", linearVolume);
 		SaveSettings();
 	}
 
 	public void OnAmbienceVolumeChange(float linearVolume)
 	{
 		SetBusVolume(_ambienceBusIndex, linearVolume);
-		_config.SetValue("Audio", "Ambience", linearVolume);
+		_settingsConfig.SetValue("Audio", "Ambience", linearVolume);
 		SaveSettings();
 	}
 
@@ -128,64 +128,64 @@ public partial class SettingsManager : Node
 
     private void SaveSettings()
 	{
-		_config.Save(SettingsFilePath);
+		_settingsConfig.Save(SettingsFilePath);
 	}
 
 	private void LoadSettings()
 	{
 		// Check if there is save file, else use defaults.
-		Error err = _config.Load(SettingsFilePath);
+		Error err = _settingsConfig.Load(SettingsFilePath);
 		if (err != Error.Ok)
 		{
 			return;
 		}
 
-		int windowMode = (int)_config.GetValue("Video", "WindowMode", 1);
+		int windowMode = (int)_settingsConfig.GetValue("Video", "WindowMode", 1);
 		OnWindowsModeSelected(windowMode);
 
-		int resIndex = (int)_config.GetValue("Video", "Resolution", 1);
+		int resIndex = (int)_settingsConfig.GetValue("Video", "Resolution", 1);
 		OnResolutionSelected(resIndex);
 
-		float masterVol = (float)_config.GetValue("Audio", "Master", 1.0f);
+		float masterVol = (float)_settingsConfig.GetValue("Audio", "Master", 1.0f);
 		SetBusVolume(_masterBusIndex, masterVol);
 
-		float sfxVol = (float)_config.GetValue("Audio", "Sfx", 1.0f);
+		float sfxVol = (float)_settingsConfig.GetValue("Audio", "Sfx", 1.0f);
 		SetBusVolume(_sfxBusIndex, sfxVol);
 
-		float musicVol = (float)_config.GetValue("Audio", "Music", 1.0f);
+		float musicVol = (float)_settingsConfig.GetValue("Audio", "Music", 1.0f);
 		SetBusVolume(_musicBusIndex, musicVol);
 
-		float ambienceVol = (float)_config.GetValue("Audio", "Ambience", 1.0f);
+		float ambienceVol = (float)_settingsConfig.GetValue("Audio", "Ambience", 1.0f);
 		SetBusVolume(_ambienceBusIndex, ambienceVol);
 	}
 
 	public int GetResolutionIndex()
 	{
-		return (int)_config.GetValue("Video", "Resolution", 1);
+		return (int)_settingsConfig.GetValue("Video", "Resolution", 1);
 	}
 
 	public int GetWindowModeIndex()
 	{
-		return (int)_config.GetValue("Video", "WindowMode", 1);
+		return (int)_settingsConfig.GetValue("Video", "WindowMode", 1);
 	}
 
 	public float GetMasterVolume()
 	{
-		return (float)_config.GetValue("Audio", "Master", 1.0f);
+		return (float)_settingsConfig.GetValue("Audio", "Master", 1.0f);
 	}
 
 	public float GetSfxVolume()
 	{
-		return (float)_config.GetValue("Audio", "Sfx", 1.0f);
+		return (float)_settingsConfig.GetValue("Audio", "Sfx", 1.0f);
 	}
 
 	public float GetMusicVolume()
 	{
-		return (float)_config.GetValue("Audio", "Music", 1.0f);
+		return (float)_settingsConfig.GetValue("Audio", "Music", 1.0f);
 	}
 
 	public float GetAmbienceVolume()
 	{
-		return (float)_config.GetValue("Audio", "Ambience", 1.0f);
+		return (float)_settingsConfig.GetValue("Audio", "Ambience", 1.0f);
 	}
 }

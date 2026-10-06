@@ -29,31 +29,22 @@ public partial class StatsManager : Node
 	private int _deaths;
 	private int _shotsFired;
 
-	public void OnKillsChanged(int value)
+	public void OnKillsChanged()
 	{
-		if (value > 0)
-		{
-			_kills += value;
-			_statsConfig.SetValue("Stats", "Kills", _kills);
-		}
+		_kills++;
+		_statsConfig.SetValue("Stats", "Kills", _kills);
 	}
 
-	public void OnDeathsChanged(int value)
+	public void OnDeathsChanged()
 	{
-		if (value > 0)
-		{
-			_deaths += value;
-			_statsConfig.SetValue("Stats", "Deaths", _deaths);
-		}
+		_deaths++;
+		_statsConfig.SetValue("Stats", "Deaths", _deaths);
 	}
 
-	public void OnShotsFiredChanged(int value)
+	public void OnShotsFiredChanged()
 	{
-		if (value > 0)
-		{
-			_deaths += value;
-			_statsConfig.SetValue("Stats", "ShotsFired", _shotsFired);
-		}
+		_shotsFired++;
+		_statsConfig.SetValue("Stats", "ShotsFired", _shotsFired);
 	}
 
 	public int GetKills()
