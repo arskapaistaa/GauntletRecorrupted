@@ -201,7 +201,7 @@ animations = [{
 "speed": 2.0
 }, {
 "frames": [{
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_hvtma")
 }, {
 "duration": 1.0,
@@ -219,7 +219,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j6ev7")
 }, {
-"duration": 0.5,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_hvtma")
 }],
 "loop": 1,
@@ -275,10 +275,11 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1019985219]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
+position = Vector2(4, -7)
 sprite_frames = SubResource("SpriteFrames_kxvjs")
-animation = &"SpawnFast"
+animation = &"Defeat"
 autoplay = "Idle"
-frame_progress = 0.3450513
+frame_progress = 0.8654057
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")
