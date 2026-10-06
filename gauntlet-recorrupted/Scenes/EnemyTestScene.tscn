@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_dm7xv"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="2_dm7xv"]
-[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_njp4a"]
+[ext_resource type="Texture2D" uid="uid://dhnkpkov6k508" path="res://Art/Environment/TileTest.png" id="2_njp4a"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_30isp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
@@ -33,6 +33,7 @@ _maxTotalEnemyCount = 5
 
 [node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
 texture_repeat = 2
+position = Vector2(163, -207)
 texture = ExtResource("2_njp4a")
 region_enabled = true
 region_rect = Rect2(0, 0, 5120, 2560)
