@@ -1,16 +1,29 @@
-[gd_scene format=3 uid="uid://kiaxd475sgd0"]
+[gd_scene format=4 uid="uid://kiaxd475sgd0"]
 
 [ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_qc6ga"]
 [ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_4akc0"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="3_atvrt"]
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="4_dxhaf"]
+[ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="4_f2tac"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(-167.88281, 960.3281, 3109, 182.15625, 3349, 182.15625, -307.92188, 1155.2266, 3349, -57.84375, 4050.0703, -466.03906, 4059.9219, 2061.0078, -1029.0234, -477.95313, 3109, -57.84375, -1031.9688, 2063.9766, -362.77344, 820.28906, -502.8203, 1015.1797)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(7, 5, 4, 8), PackedInt32Array(2, 6, 9, 3), PackedInt32Array(7, 8, 1, 0, 10), PackedInt32Array(7, 10, 11), PackedInt32Array(9, 7, 11), PackedInt32Array(9, 11, 3)])
+vertices = PackedVector2Array(-139.96875, 955.7578, -345.60156, 808, 296, 808, -472, 1064, -472, 1061.9531, -303.35156, 1183.1484, 4037.039, 1320, 4038.7188, 1752, 1064, 1752, 3800, 1320, 1496, 40, 2776, 40, 2776, 1320, 1064, 472, 3624, 984, 3112, 984, 3112, 202.15625, 3369, 202.15625, 3369, -77.84375, 3112, -77.84375, 3112, -216, 3800, -216, 3624, 1320, 728, 472, 728, 1752, -728, 1752, -728, 1064, -1009.6328, 40, -808, 40, -808, 296, -1010.1328, 472, 296, 472, 296, 296, 296, -216, 1496, -216, -472, 938.0078, -472, 808, -378.5703, 808)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 8, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(17, 18, 21, 9, 14), PackedInt32Array(22, 14, 9), PackedInt32Array(22, 9, 8), PackedInt32Array(12, 22, 8), PackedInt32Array(23, 24, 25, 2), PackedInt32Array(25, 26, 3, 5), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(31, 30, 29, 32), PackedInt32Array(32, 33, 34, 10, 13, 23), PackedInt32Array(31, 32, 23), PackedInt32Array(2, 31, 23), PackedInt32Array(2, 25, 5), PackedInt32Array(2, 5, 0), PackedInt32Array(35, 36, 37)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1052, 2084)])
-agent_radius = 20.0
+agent_radius = 40.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0jcpq"]
+texture = ExtResource("4_f2tac")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+
+[sub_resource type="TileSet" id="TileSet_sopei"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 11
+sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
 particle_flag_disable_z = true
@@ -51,6 +64,10 @@ position = Vector2(3229, 102)
 [node name="TickSpawner2" parent="Environment/NavigationRegion2D" unique_id=1034999544 instance=ExtResource("4_dxhaf")]
 position = Vector2(-303, 1011)
 rotation = -0.9477138
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Environment/NavigationRegion2D" unique_id=733672253]
+tile_map_data = PackedByteArray("AAAAAP7/AAAAAAAAAAD///7/AAAAAAAAAAD+//7/AAAAAAAAAAD9//7/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD9////AAAAAAAAAAD+////AAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAAAAAAAAAAAAAAPAP//AAAAAAAAAAAPAAcAAAAAAAAAAAAOAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAADAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAYAAAAAAAAAAAADAAUAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD9/wcAAAAAAAAAAAD+/wcAAAAAAAAAAAD//wcAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAKAP7/AAAAAAAAAAALAP7/AAAAAAAAAAAMAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAPAP7/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_sopei")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

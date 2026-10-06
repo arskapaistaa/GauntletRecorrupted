@@ -362,8 +362,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_26j5x"]
-radius = 40.0
-height = 165.76
+radius = 31.0
+height = 104.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tn2tk"]
 radius = 200.0
@@ -417,7 +417,6 @@ AfterSpawnState = 2
 AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
-material = ExtResource("2_bmxul")
 sprite_frames = SubResource("SpriteFrames_4fpts")
 animation = &"Attack"
 autoplay = "Idle"
@@ -447,6 +446,7 @@ shape = SubResource("CircleShape2D_tn2tk")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
 avoidance_enabled = true
 radius = 128.0
+debug_enabled = true
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0

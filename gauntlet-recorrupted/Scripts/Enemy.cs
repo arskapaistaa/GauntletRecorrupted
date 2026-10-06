@@ -276,6 +276,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void LookAtPosition(Vector2 position)
 	{
+		// Fix this that they actually look the path or the movement direction.
 		LookAt(position);
 	}
 
