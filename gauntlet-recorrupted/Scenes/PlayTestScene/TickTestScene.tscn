@@ -7,9 +7,10 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2071, -1041.9766, 2073.9922, -1039.0078, -487.96875)
+vertices = PackedVector2Array(4050.0703, -466.03906, 4059.9219, 2061.0078, -1031.9688, 2063.9766, -1029.0234, -477.95313)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1052, 2084)])
+agent_radius = 20.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
 particle_flag_disable_z = true
@@ -42,7 +43,6 @@ region_rect = Rect2(0, 0, 5120, 2560)
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
-visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 
