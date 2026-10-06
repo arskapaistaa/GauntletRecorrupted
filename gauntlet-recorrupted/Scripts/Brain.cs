@@ -64,6 +64,16 @@ public partial class Brain : Node
 		Leech
 	}
 
+	public EnemyType ThisEnemyType
+	{
+		get { return _enemyType; }
+	}
+
+	public AttackType ThisAttackState
+	{
+		get { return _attackType; }
+	}
+
 	public State CurrentState = State.Idle;
 	public CombatState CurrentCombatState = CombatState.None;
 	public override void _Ready()
@@ -88,6 +98,7 @@ public partial class Brain : Node
 			{
 				CurrentState = State.Attack;
 			}
+
 			break;
 		}
 	}
@@ -102,6 +113,8 @@ public partial class Brain : Node
 		CurrentState = State.Defeat;
 
 		Level.Current.ChangeEnemyCount(-1);
+
+		GameManager.Instance.OnKillsChanged();
 	}
 
 	public void AfterDamaged()
@@ -117,6 +130,7 @@ public partial class Brain : Node
 		else if (_enemy.Player != null)
 		{
 			SetCurrentState(InCombatState);
+			_enemy.SetPlayerTarget();
 		}
 	}
 

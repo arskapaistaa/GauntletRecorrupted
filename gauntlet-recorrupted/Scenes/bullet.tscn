@@ -1,21 +1,22 @@
 [gd_scene format=3 uid="uid://r78dpllnlyu8"]
 
 [ext_resource type="Script" uid="uid://cuhex13vxsjoe" path="res://Scripts/Bullet.cs" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://7q5ngdxo2g3c" path="res://icon.svg" id="1_xjght"]
+[ext_resource type="Material" uid="uid://csi712uhvjryu" path="res://Materials/Particles/Bulletl.tres" id="2_oduel"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rk2iv"]
-points = PackedVector2Array(-19, -9, 5, -9, 12, -7, 17, -4, 20, 0, 17, 4, 12, 7, 5, 9, -19, 9)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycag2"]
 
 [node name="Bullet" type="Area2D" unique_id=873106433]
-collision_mask = 2
+collision_layer = 8
+collision_mask = 6
 script = ExtResource("1_oduel")
-Speed = 3000.0
+Speed = 6000.0
 Damage = 25
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
-position = Vector2(2.1457672e-06, 0)
-scale = Vector2(0.31250003, 0.15624999)
-texture = ExtResource("1_xjght")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]
-shape = SubResource("ConvexPolygonShape2D_rk2iv")
+shape = SubResource("CircleShape2D_ycag2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1139997155]
+amount = 64
+lifetime = 0.2
+speed_scale = 2.0
+process_material = ExtResource("2_oduel")

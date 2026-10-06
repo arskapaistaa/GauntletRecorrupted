@@ -42,7 +42,6 @@ region_rect = Rect2(0, 0, 5120, 2560)
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
-visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_sopei")
 
