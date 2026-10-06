@@ -7,8 +7,8 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
-vertices = PackedVector2Array(4050.0703, -466.03906, 4059.9219, 2061.0078, -1031.9688, 2063.9766, -1029.0234, -477.95313)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+vertices = PackedVector2Array(-167.88281, 960.3281, 3109, 182.15625, 3349, 182.15625, -307.92188, 1155.2266, 3349, -57.84375, 4050.0703, -466.03906, 4059.9219, 2061.0078, -1029.0234, -477.95313, 3109, -57.84375, -1031.9688, 2063.9766, -362.77344, 820.28906, -502.8203, 1015.1797)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(7, 5, 4, 8), PackedInt32Array(2, 6, 9, 3), PackedInt32Array(7, 8, 1, 0, 10), PackedInt32Array(7, 10, 11), PackedInt32Array(9, 7, 11), PackedInt32Array(9, 11, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1049, -498, 4070, -486, 4080, 2081, -1052, 2084)])
 agent_radius = 20.0
 
@@ -33,18 +33,27 @@ script = ExtResource("1_qc6ga")
 Player = NodePath("Player")
 _maxTotalEnemyCount = 10
 
-[node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
+[node name="Environment" type="Node2D" parent="." unique_id=1396569795]
+
+[node name="Ground" type="Sprite2D" parent="Environment" unique_id=389584147]
 texture_repeat = 2
 texture = ExtResource("2_4akc0")
 region_enabled = true
 region_rect = Rect2(0, 0, 5120, 2560)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
-color = Color(0.48178947, 0.48178947, 0.48178947, 1)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1034927120]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Environment" unique_id=1034927120]
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_sopei")
+
+[node name="TickSpawner" parent="Environment/NavigationRegion2D" unique_id=1930281201 instance=ExtResource("4_dxhaf")]
+position = Vector2(3229, 102)
+
+[node name="TickSpawner2" parent="Environment/NavigationRegion2D" unique_id=1034999544 instance=ExtResource("4_dxhaf")]
+position = Vector2(-303, 1011)
+rotation = -0.9477138
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
+color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="Player" parent="." unique_id=1111194495 instance=ExtResource("3_atvrt")]
 
@@ -54,10 +63,3 @@ amount = 150
 lifetime = 6.0
 visibility_rect = Rect2(-2400, -1200, 4800, 2400)
 process_material = SubResource("ParticleProcessMaterial_sopei")
-
-[node name="TickSpawner" parent="." unique_id=1930281201 instance=ExtResource("4_dxhaf")]
-position = Vector2(1715, -690)
-
-[node name="TickSpawner2" parent="." unique_id=1034999544 instance=ExtResource("4_dxhaf")]
-position = Vector2(-1817, 219)
-rotation = -0.9477138

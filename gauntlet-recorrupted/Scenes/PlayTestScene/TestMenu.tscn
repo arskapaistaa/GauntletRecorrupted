@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
+[ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
+[ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -95,3 +97,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
 
 [node name="SettingsManager" type="Node" parent="Managers" unique_id=1623565682]
 script = ExtResource("3_rth11")
+
+[node name="StatsManager" type="Node" parent="Managers" unique_id=201767045]
+script = ExtResource("5_ggxpc")
+
+[node name="GameManager" type="Node" parent="Managers" unique_id=472901907]
+script = ExtResource("6_q8jds")
