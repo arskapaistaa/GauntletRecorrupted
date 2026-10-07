@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="4_dxhaf"]
 [ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="4_f2tac"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
+[ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="7_0jcpq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(-362.77344, 820.28906, -492, 1000.1172, -492, 788, 276, 788, -167.88281, 960.3281, 3349, 182.15625, 3349, -57.84375, 3820, -236, 3820, 1300, 3604, 1004, 3092, -236, 3109, -57.84375, 3092, 1004, 3109, 182.15625, -492, 1044, -492, 1022.9531, -307.92188, 1155.2266, 3604, 1300, 4056.961, 1300, 4058.7969, 1772, 1044, 1772, 2796, 1300, 2796, 20, 1044, 492, 1516, 20, 748, 492, 748, 1772, -748, 1772, -748, 1044, -1029.6016, 20, -788, 20, -788, 276, -1030.1484, 492, 276, 492, 276, 276, 276, -236, 1516, -236)
@@ -41,6 +42,17 @@ color = Color(0.62384886, 0.5371237, 0.1692642, 1)
 turbulence_enabled = true
 turbulence_influence_max = 0.5
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xtta"]
+texture = ExtResource("7_0jcpq")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
+
+[sub_resource type="TileSet" id="TileSet_rk2iv"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 4
+sources/0 = SubResource("TileSetAtlasSource_7xtta")
+
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_qc6ga")
 Player = NodePath("Player")
@@ -72,7 +84,8 @@ tile_set = SubResource("TileSet_sopei")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
-[node name="Player" parent="." unique_id=1111194495 instance=ExtResource("3_atvrt")]
+[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles") instance=ExtResource("3_atvrt")]
+DiggableTiles = NodePath("../DiggableTiles")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1300661250]
 material = ExtResource("5_7uxbg")
@@ -80,3 +93,7 @@ amount = 150
 lifetime = 6.0
 visibility_rect = Rect2(-2400, -1200, 4800, 2400)
 process_material = SubResource("ParticleProcessMaterial_sopei")
+
+[node name="DiggableTiles" type="TileMapLayer" parent="." unique_id=1666934862]
+tile_map_data = PackedByteArray("AAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAP//AAAAAAAAAAADAP//AAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAADAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP3/AAAAAAAAAAADAP3/AAAAAAAAAAACAP3/AAAAAAAAAAABAP3/AAAAAAAAAAAAAP3/AAAAAAAAAAD///3/AAAAAAAAAAD+//3/AAAAAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD+////AAAAAAAAAAD8//3/AAAAAAAAAAD7//3/AAAAAAAAAAD7//7/AAAAAAAAAAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAD7/wEAAAAAAAAAAAD6//7/AAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_rk2iv")

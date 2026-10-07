@@ -16,7 +16,6 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public TileMapLayer DiggableTiles;
 	[Export] public Marker2D MuzzlePoint;
 
-	[Export] public Marker2D SpawnPoint;
 	private float _reloadSpeedMultiplier = 1.0f;
 
 	private float _shootTimer = 0;
@@ -30,11 +29,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		East,
 		South,
 		West
-	}
-
-	public override void _Ready()
-	{
-		GlobalPosition = SpawnPoint.GlobalPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
