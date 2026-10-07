@@ -33,5 +33,11 @@ public partial class Bullet : Area2D
 			enemy.TakeDmg(Damage);
 		}
 		QueueFree();
+
+		if (body is EnemySpawner spawner)
+		{
+			spawner.TakeDmg(Damage);
+		}
+		QueueFree();
 	}
 }

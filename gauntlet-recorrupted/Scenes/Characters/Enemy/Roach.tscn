@@ -238,7 +238,7 @@ _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
-_attackFrame = 2
+_attackFrames = PackedInt32Array(2)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
@@ -253,9 +253,8 @@ AfterAlarmedState = 4
 light_mask = 2
 material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"TakeDmg"
+animation = &"Attack"
 autoplay = "Idle"
-frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1745444926]
 modulate = Color(0, 0, 0, 0.34509805)
@@ -280,6 +279,7 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_dxocv")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
 avoidance_enabled = true
 radius = 128.0
 

@@ -36,6 +36,7 @@ Speed = 600.0
 ShootCooldown = 0.2
 BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Muzzle Point")
+Health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4

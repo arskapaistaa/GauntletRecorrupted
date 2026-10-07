@@ -3,19 +3,23 @@ using System;
 
 public partial class EnemySpawner : StaticBody2D
 {
+	[ExportGroup("Stats")]
 	[Export] private PackedScene _enemyScene = null;
-
 	[Export(PropertyHint.Range, "1, 180.0, 1.0")]
 	private float _spawningCooldown = 1.0f;
-	[Export] private Timer _timer;
 	[Export] private int _health;
-	[Export] private AnimatedSprite2D _sprite;
-	/// <summary>
-	/// Can be set 0,0. If you want enemy to go spawn position, then set this.
-	/// </summary>
-	[Export] private Marker2D _spawnPoint;
 
+	[ExportGroup("Node references")]
+	[Export] private Timer _timer;
+	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private Marker2D _spawnPoint = null; // Can be left null. If you want enemy to go spawn position, then set this.
+
+	[ExportGroup("Animations")]
 	[Export] private int _spawnFrame = 0;
+
+	[ExportGroup("Enemy properties")]
+	[Export] private float _minPatrolDistance;
+	[Export] private float _maxPatrolDistance;
 
 	public enum State
 	{
@@ -26,6 +30,8 @@ public partial class EnemySpawner : StaticBody2D
 	}
 
 	public State CurrentState = State.Idle;
+
+	public bool IsAlive = true;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -84,6 +90,8 @@ public partial class EnemySpawner : StaticBody2D
 				{
 					enemy.SpawnPoint = _spawnPoint.GlobalPosition;
 				}
+
+				enemy.SetPatrolDistances(_minPatrolDistance, _maxPatrolDistance);
 			}
 		}
     }
@@ -106,6 +114,11 @@ public partial class EnemySpawner : StaticBody2D
 			return;
 		}
 
+		if (!IsAlive)
+		{
+			return;
+		}
+
 		if (Level.Current.CurrentTotalEnemyCount >= Level.Current.MaxTotalEnemyCount)
 		{
 			return;
@@ -122,25 +135,27 @@ public partial class EnemySpawner : StaticBody2D
 	/// <param name="dmg">Amount of damage</param>
 	public void TakeDmg(int dmg)
 	{
-		if (CurrentState != State.Spawn)
-		{
-			CurrentState = State.Damaged;
-		}
 
 		if (_health > 0)
 		{
 			_health -= dmg;
 		}
 
-		if (_health < 0)
+		if (_health <= 0)
 		{
 			Destroy();
+		}
+
+		if (CurrentState != State.Spawn && IsAlive)
+		{
+			CurrentState = State.Damaged;
 		}
 	}
 
     private void Destroy()
     {
-        QueueFree();
+		IsAlive = false;
+        CurrentState = State.Defeat;
     }
 
 	private void UpdateAnimation()

@@ -195,7 +195,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_48aag")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Defeat",
 "speed": 5.0
 }, {
@@ -258,7 +258,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bftip")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"TakeDamage",
 "speed": 5.0
 }]
@@ -271,9 +271,8 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
 sprite_frames = SubResource("SpriteFrames_kxvjs")
-animation = &"Move"
+animation = &"TakeDamage"
 autoplay = "Idle"
-frame_progress = 0.58509785
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")

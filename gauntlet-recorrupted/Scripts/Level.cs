@@ -6,10 +6,16 @@ public partial class Level : Node2D
 	public static Level Current;
 	[Export] public PlayerCharacter Player;
 	[Export] private int _maxTotalEnemyCount;
+	[Export] private int _spawnerCount;
 
 	public int MaxTotalEnemyCount
 	{
 		get { return _maxTotalEnemyCount; }
+	}
+
+	public int SpawnerCount
+	{
+		get { return _spawnerCount; }
 	}
 	public int CurrentTotalEnemyCount = 0;
 
