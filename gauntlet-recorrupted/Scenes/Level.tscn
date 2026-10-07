@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="1_0ba56"]
 [ext_resource type="Texture2D" uid="uid://c3kvwt6v1v08w" path="res://Art/ArtGroundPlaceholder.png" id="1_vsvp5"]
-[ext_resource type="PackedScene" uid="uid://8twic57bwdhs" path="res://Scenes/Characters/EnemyRoach.tscn" id="3_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://8twic57bwdhs" path="res://Scenes/Characters/EnemyBaby.tscn" id="3_8rbpu"]
 
 [node name="Node2D" type="Node2D" unique_id=249451679]
 
