@@ -13,6 +13,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportCategory("Node References")]
 	[Export] public PackedScene BulletScene;
+	[Export] public TileMapLayer DiggableTiles;
 	[Export] public Marker2D MuzzlePoint;
 
 	[Export] public Marker2D SpawnPoint;
@@ -21,6 +22,15 @@ public partial class PlayerCharacter : CharacterBody2D
 	private float _shootTimer = 0;
 	private bool _canShoot = true;
 	private int _maxHealth = 100;
+	private Vector2I playerCell;
+
+	public enum FacingDirection
+	{
+		North,
+		East,
+		South,
+		West
+	}
 
 	public override void _Ready()
 	{
@@ -54,6 +64,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			_shootTimer = 0;
 			_reloadSpeedMultiplier = 1.0f;
 		}
+		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		HandleInputs();
 	}
 
@@ -88,7 +99,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Dig"))
 		{
-			GD.Print("Dig");
+			Dig();
 		}
 	}
 
@@ -107,6 +118,38 @@ public partial class PlayerCharacter : CharacterBody2D
 		bullet.Initialize(shootDirection);
 	}
 
+	private void Dig()
+	{
+		GD.Print($"Player's position in grid: {playerCell}");
+		GD.Print($"Player is facing: {GetFacingDirection()}");
+		Vector2I targetCell;
+		switch (GetFacingDirection())
+		{
+			case FacingDirection.North:
+				targetCell = playerCell + new Vector2I(0, -1);
+				break;
+			case FacingDirection.East:
+				targetCell = playerCell + new Vector2I(1, 0);
+				break;
+			case FacingDirection.South:
+				targetCell = playerCell + new Vector2I(0, 1);
+				break;
+			case FacingDirection.West:
+				targetCell = playerCell + new Vector2I(-1, 0);
+				break;
+			default:
+				return;
+		}
+		bool isEmpty = DiggableTiles.GetCellTileData(targetCell) == null;
+		if (isEmpty)
+		{
+			GD.Print("Cannot dig that tile.");
+			return;
+		}
+		DiggableTiles.EraseCell(targetCell);
+		GD.Print($"Dug tile at {targetCell}");
+	}
+
 	public void TakeDmg(int damage)
 	{
 		Health -= damage;
@@ -116,4 +159,26 @@ public partial class PlayerCharacter : CharacterBody2D
 			// TODO: Handle death
 		}
 	}
+
+	private FacingDirection GetFacingDirection()
+    {
+        Vector2 direction = GlobalTransform.X;
+
+        if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
+        {
+            // More horizontal than vertical
+            if (direction.X > 0)
+            {
+                return FacingDirection.East;
+            }
+            return FacingDirection.West;
+        }
+
+        // More vertical than horizontal
+        if (direction.Y > 0)
+        {
+            return FacingDirection.South;
+        }
+        return FacingDirection.North;
+    }
 }
