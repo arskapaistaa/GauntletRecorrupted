@@ -33,8 +33,10 @@ fill_to = Vector2(0.20809248, 0.216763)
 collision_mask = 6
 script = ExtResource("1_nu4k2")
 Speed = 600.0
+ShootCooldown = 0.2
 BulletScene = ExtResource("2_lp3jq")
-MuzzlePoint = NodePath("Marker2D")
+MuzzlePoint = NodePath("Muzzle Point")
+Health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4
@@ -44,7 +46,7 @@ sprite_frames = SubResource("SpriteFrames_c32ia")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
 shape = SubResource("CircleShape2D_2o20b")
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1117759917]
+[node name="Muzzle Point" type="Marker2D" parent="." unique_id=1117759917]
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1341151636]
 light_mask = 3

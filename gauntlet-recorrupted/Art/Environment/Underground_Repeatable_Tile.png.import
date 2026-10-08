@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pdhdns6e15xm"
-path="res://.godot/imported/TileTest.png-d7aef3686ad79864dca2b7cf3443ed6d.ctex"
+uid="uid://bh6qw36ltps2c"
+path="res://.godot/imported/Underground_Repeatable_Tile.png-adedb506ce67684ffe985fa04d14466b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Environment/TileTest.png"
-dest_files=["res://.godot/imported/TileTest.png-d7aef3686ad79864dca2b7cf3443ed6d.ctex"]
+source_file="res://Art/Environment/Underground_Repeatable_Tile.png"
+dest_files=["res://.godot/imported/Underground_Repeatable_Tile.png-adedb506ce67684ffe985fa04d14466b.ctex"]
 
 [params]
 

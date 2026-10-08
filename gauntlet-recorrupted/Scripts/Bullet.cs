@@ -2,9 +2,10 @@ using Godot;
 
 public partial class Bullet : Area2D
 {
-	[Export] public float Speed = 800.0f;
-	[Export] public float Lifetime = 2.0f;
-	[Export] public int Damage = 1;
+	[ExportCategory("Bullet Stats")]
+	[Export(PropertyHint.Range, "0,10000,100")] public float Speed = 800.0f;
+	[Export(PropertyHint.Range, "0,100,1")] public int Damage = 10;
+	[Export(PropertyHint.Range, "0,10,0.5")] public float Lifetime = 2.0f;
 
 	private Vector2 _direction = Vector2.Right;
 
@@ -30,6 +31,12 @@ public partial class Bullet : Area2D
 		if (body is Enemy enemy)
 		{
 			enemy.TakeDmg(Damage);
+		}
+		QueueFree();
+
+		if (body is EnemySpawner spawner)
+		{
+			spawner.TakeDmg(Damage);
 		}
 		QueueFree();
 	}

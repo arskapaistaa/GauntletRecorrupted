@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pdhdns6e15xm"
-path="res://.godot/imported/TileTest.png-d7aef3686ad79864dca2b7cf3443ed6d.ctex"
+uid="uid://bjpiht3wlkg7f"
+path="res://.godot/imported/ArtUiCursor.png-5caa3d0c4cfca6440407fdb5a9969d16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Environment/TileTest.png"
-dest_files=["res://.godot/imported/TileTest.png-d7aef3686ad79864dca2b7cf3443ed6d.ctex"]
+source_file="res://Art/UserInterface/ArtUiCursor.png"
+dest_files=["res://.godot/imported/ArtUiCursor.png-5caa3d0c4cfca6440407fdb5a9969d16.ctex"]
 
 [params]
 

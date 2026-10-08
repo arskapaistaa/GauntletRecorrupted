@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://fpolu3ovr3ti"]
+
+[ext_resource type="Script" uid="uid://l7wt5o3lscwv" path="res://Scripts/Environment/Exit.cs" id="1_cilr6"]
+[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_3cp03"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cp03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3cp03")
+}],
+"loop": 1,
+"name": &"Ready",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3cp03")
+}],
+"loop": 1,
+"name": &"UnReady",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
+size = Vector2(256, 256)
+
+[node name="Exit" type="Area2D" unique_id=930430844]
+script = ExtResource("1_cilr6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
+modulate = Color(1, 0.67045194, 0.71346325, 1)
+sprite_frames = SubResource("SpriteFrames_3cp03")
+animation = &"Ready"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
+shape = SubResource("RectangleShape2D_sopei")

@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Text.RegularExpressions;
-
 
 public partial class Enemy : CharacterBody2D
 {
@@ -13,40 +11,64 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "100, 800, 10")]
 	private float _maxSpeed;
 
+	[Export(PropertyHint.Range, "100, 1600, 10")]
+	private float _attackSpeed;
+
 	[Export(PropertyHint.Range, "200, 1500, 100")]
 	private float _detectionRange;
 
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "100, 400, 10")]
+	[Export(PropertyHint.Range, "100, 600, 10")]
 	private float _attackRange;
 
 	[Export(PropertyHint.Range, "300, 10000, 100")]
 	private float _alarmRange;
 
 	[ExportGroup("Node References")]
-	[Export] private Brain _brain;
-	[Export] private AnimatedSprite2D _sprite;
-	[Export] private AnimatedSprite2D _shadowSprite;
-	[Export] private Area2D _detectionArea;
-	[Export] private DamageArea _dmgArea;
-	[Export] private CollisionShape2D _detectionShape;
-	[Export] private NavigationAgent2D _agent;
+	[Export] private Brain _brain = null;
+	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private AnimatedSprite2D _shadowSprite = null;
+	[Export] private Area2D _detectionArea = null;
+	[Export] private DamageArea _dmgArea = null;
+	[Export] private CollisionShape2D _detectionShape = null;
+	[Export] private NavigationAgent2D _agent = null;
+
+	[ExportSubgroup("Audios")]
+	[Export] private AudioStreamPlayer2D _movementSfx = null;
+	[Export] private AudioStreamPlayer2D _noticeSfx = null;
+	[Export] private AudioStreamPlayer2D _attackSfx = null;
+	[Export] private AudioStreamPlayer2D _damagedSfx = null;
+	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
 	[ExportGroup("Animations")]
-	[Export] private int _attackFrame;
+	[Export] private int[] _attackFrames;
 
+	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
-
-	public bool HasRoute = false;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
+	private float _minPatrolDistance;
+	private float _maxPatrolDistance;
+
+	// PUBLIC, NO EXPORT
+	public bool HasRoute = false;
 
 	public float Health
 	{
 		get { return _health; }
 
+	}
+
+	public float MaxSpeed
+	{
+		get {return _maxSpeed; }
+	}
+
+	public float AttackSpeed
+	{
+		get {return _attackSpeed; }
 	}
 
 	public int Dmg
@@ -76,7 +98,7 @@ public partial class Enemy : CharacterBody2D
 		get { return Player.GlobalPosition; }
 	}
 
-	[Export] public Vector2 SpawnPoint;
+	public Vector2 SpawnPoint;
 
 	public override void _Ready()
 	{
@@ -148,7 +170,7 @@ public partial class Enemy : CharacterBody2D
 				break;
 
 			case Brain.State.Attack:
-				UpdateAttack();
+				UpdateAttack(delta);
 				break;
 		}
 	}
@@ -166,7 +188,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta);
+		Navigation(delta, _maxSpeed);
 		LookAtPlayer();
 	}
 
@@ -188,8 +210,8 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta);
-		LookAtPosition(_agent.TargetPosition);
+		Navigation(delta, _maxSpeed);
+		LookAtPosition();
     }
 
 	private void UpdateSpawn(double delta)
@@ -206,11 +228,11 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta);
-		LookAtPosition(SpawnPoint);
+		Navigation(delta, _maxSpeed);
+		LookAtPosition();
 	}
 
-	public void Navigation(double delta)
+	public void Navigation(double delta, float speed)
 	{
 		if (_brain.CurrentState == Brain.State.Chase)
 		{
@@ -222,7 +244,7 @@ public partial class Enemy : CharacterBody2D
 		Vector2 nextPathPosition = _agent.GetNextPathPosition();
 		Vector2 direction = (nextPathPosition - currentPosition).Normalized();
 
-		Vector2 velocity = direction * _maxSpeed;
+		Vector2 velocity = direction * speed;
 
 		if (_agent.AvoidanceEnabled)
 		{
@@ -249,14 +271,14 @@ public partial class Enemy : CharacterBody2D
 	public void SetPositionTarget()
 	{
 		// while (!isAllowed)
-		_agent.TargetPosition = GlobalPosition + RandomPosition(-1000.0f, 1000.0f);
+		_agent.TargetPosition = GlobalPosition + RandomPosition(_minPatrolDistance, _maxPatrolDistance);
 
 		HasRoute = true;
 	}
 
-	public void LookAtPosition(Vector2 position)
+	public void LookAtPosition()
 	{
-		LookAt(position);
+		LookAt(_agent.GetNextPathPosition());
 	}
 
 	public Vector2 RandomPosition(float min, float max)
@@ -271,7 +293,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void NavUpdate(double delta)
 	{
-			if (_navTimer <= 0.0f)
+		if (_navTimer <= 0.0f)
 		{
 			SetPlayerTarget();
 			_navTimer = _navInterval;
@@ -283,22 +305,64 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-	public void UpdateAttack()
+	public void UpdateAttack(double delta)
+	{
+		UpdateDamageArea();
+
+		if (_brain.ThisAttackState == Brain.AttackType.Leech)
+		{
+			if (CheckAttackAnimation())
+			{
+				Navigation(delta, _attackSpeed);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Method that checks if the Attack animation is currently on attack position.
+	/// </summary>
+	private void UpdateDamageArea()
 	{
 		if (_sprite.Animation == "Attack")
         {
-            if (_sprite.Frame == _attackFrame)
+			for (int x = 0; x < _attackFrames.Length; x++)
 			{
-				if (_dmgArea != null)
+				if (_sprite.Frame == _attackFrames[x])
 				{
-					_dmgArea.Monitoring = true;
+					if (_dmgArea != null)
+					{
+						_dmgArea.Monitoring = true;
+					}
+					else
+					{
+						_dmgArea.Monitoring = false;
+					}
 				}
-			}
-			else
-			{
-				_dmgArea.Monitoring = false;
+
 			}
         }
+	}
+
+	/// <summary>
+	/// Helper method to check if attack animation is "damage" state.
+	/// Good to use in attack navigation.
+	/// </summary>
+	/// <returns></returns>
+	private bool CheckAttackAnimation()
+	{
+		if (_sprite.Animation == "Attack")
+        {
+			for (int x = 0; x < _attackFrames.Length; x++)
+			{
+				if (_sprite.Frame == _attackFrames[x])
+				{
+					return true;
+				}
+			}
+			return false;
+        }
+		return false;
+
 	}
 
 	private void UpdateAnimation()
@@ -426,6 +490,13 @@ public partial class Enemy : CharacterBody2D
         _brain.NavigationFinished();
     }
 
+	public void SetPatrolDistances(float min, float max)
+	{
+		_minPatrolDistance = min;
+		_maxPatrolDistance = max;
+	}
+
+	// Helper method to change detecytion range.
 	public void SetDetectionRange(float range)
 	{
 		if (_detectionShape.Shape is CircleShape2D circle)
