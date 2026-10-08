@@ -53,7 +53,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			_shootTimer -= (float)delta;
 		}
-		else 
+		else
 		{
 			_shootTimer = 0;
 			_reloadSpeedMultiplier = 1.0f;
@@ -89,7 +89,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			_canShoot = true;
 			GD.Print("Reloading");
 		}
-		
+
 
 		if (Input.IsActionJustPressed("Dig"))
 		{
@@ -141,6 +141,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			return;
 		}
 		DiggableTiles.EraseCell(targetCell);
+		Level.Current.UpdateNavRegion();
 		GD.Print($"Dug tile at {targetCell}");
 	}
 
