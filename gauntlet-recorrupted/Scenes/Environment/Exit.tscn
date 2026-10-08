@@ -25,8 +25,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
-[node name="Exit" type="Area2D" unique_id=930430844]
+[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
+collision_layer = 16
 script = ExtResource("1_cilr6")
+_sprite = NodePath("AnimatedSprite2D")
+_nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
 modulate = Color(1, 0.67045194, 0.71346325, 1)

@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_7uxbg"]
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="7_0jcpq"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_fvt2s"]
+[ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_1ddx0"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="8_7xtta"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="9_qgjw0"]
 
@@ -126,6 +127,10 @@ position = Vector2(-1985, -759)
 
 [node name="Roach3" parent="Environment" unique_id=2049297512 instance=ExtResource("7_fvt2s")]
 position = Vector2(1561, 778)
+
+[node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_1ddx0")]
+position = Vector2(821, -817)
+_currentLevel = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
