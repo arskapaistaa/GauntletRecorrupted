@@ -220,7 +220,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(162, 78)
 
-[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent") groups=["Enemy"]]
+[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
@@ -238,6 +238,7 @@ _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
+_rayCast = NodePath("RayCast2D")
 _attackFrames = PackedInt32Array(2)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
@@ -289,3 +290,6 @@ script = ExtResource("4_4hohg")
 position = Vector2(145, 0)
 shape = SubResource("RectangleShape2D_sopei")
 debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=140824790]
+target_position = Vector2(50, 0)

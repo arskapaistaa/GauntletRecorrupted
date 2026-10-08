@@ -94,7 +94,8 @@ public partial class Brain : Node
 		switch(CurrentState)
 		{
 		case State.Chase:
-			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange)
+			// If enemy is in attack range and can see player, start Attacking.
+			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
 			{
 				CurrentState = State.Attack;
 			}

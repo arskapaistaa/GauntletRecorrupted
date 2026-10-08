@@ -34,6 +34,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] private DamageArea _dmgArea = null;
 	[Export] private CollisionShape2D _detectionShape = null;
 	[Export] private NavigationAgent2D _agent = null;
+	[Export] private RayCast2D _rayCast = null;
 
 	[ExportSubgroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSfx = null;
@@ -457,6 +458,38 @@ public partial class Enemy : CharacterBody2D
 	private void Alarmed()
 	{
 		_brain.Alarmed();
+	}
+
+	public bool HasLineOfSight()
+	{
+		if (_rayCast != null)
+		{
+			if (Player != null)
+			{
+				_rayCast.TargetPosition = _rayCast.ToLocal(PlayerPosition);
+			}
+
+			if (_rayCast.IsColliding())
+			{
+				GodotObject node = _rayCast.GetCollider();
+
+				if (node == Player)
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+		else
+		{
+			GD.PrintErr("Enemy is missing RayCast2D");
+		}
+
+		return false;
 	}
 
 	private void OnBodyEntered(Node2D body)
