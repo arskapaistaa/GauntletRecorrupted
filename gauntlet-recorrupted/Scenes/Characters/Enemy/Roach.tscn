@@ -250,7 +250,6 @@ AfterAttackState = 4
 AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
-light_mask = 2
 material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
 animation = &"Attack"
@@ -259,7 +258,6 @@ autoplay = "Idle"
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1745444926]
 modulate = Color(0, 0, 0, 0.34509805)
 show_behind_parent = true
-light_mask = 2
 material = SubResource("CanvasItemMaterial_vo6ly")
 position = Vector2(-10, 0)
 scale = Vector2(1.1, 1.1)
