@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="5_avrhf"]
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="6_d0wku"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="7_yrhhe"]
+[ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="8_yrhhe"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(4060.0313, -476.02344, 4069.961, 2071, -1041.9766, 2073.9922, -1039.0078, -487.96875)
@@ -104,3 +105,7 @@ tile_set = SubResource("TileSet_lxlpm")
 [node name="NonDiggableTiles" type="TileMapLayer" parent="TileMap" unique_id=1045782042]
 tile_map_data = PackedByteArray("AAD2/wQAAAAAAAAAAAD3/wQAAAAAAAAAAAD4/wQAAAAAAAAAAAD5/wQAAAAAAAAAAAD6/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAP//AAAAAAAAAAAJAP7/AAAAAAAAAAAJAP3/AAAAAAAAAAAJAPz/AAAAAAAAAAAJAPv/AAAAAAAAAAAIAPv/AAAAAAAAAAAHAPv/AAAAAAAAAAAGAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAEAPv/AAAAAAAAAAADAPv/AAAAAAAAAAACAPv/AAAAAAAAAAABAPv/AAAAAAAAAAAAAPv/AAAAAAAAAAD///v/AAAAAAAAAAD+//v/AAAAAAAAAAD9//v/AAAAAAAAAAD8//v/AAAAAAAAAAD7//v/AAAAAAAAAAD6//v/AAAAAAAAAAD5//v/AAAAAAAAAAD4//v/AAAAAAAAAAD3//v/AAAAAAAAAAD2//v/AAAAAAAAAAD2//z/AAAAAAAAAAD2//3/AAAAAAAAAAD2//7/AAAAAAAAAAD2////AAAAAAAAAAD2/wAAAAAAAAAAAAD2/wEAAAAAAAAAAAD2/wIAAAAAAAAAAAD2/wMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
+
+[node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("8_yrhhe")]
+position = Vector2(-752, 264)
+PlayerCharacter = NodePath("../Player")
