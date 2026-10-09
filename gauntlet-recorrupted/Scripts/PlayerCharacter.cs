@@ -268,7 +268,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (Health <= 0)
 		{
 			GD.Print("Player is dead");
-			// TODO: Handle death
+			QueueFree();
 		}
 	}
 
