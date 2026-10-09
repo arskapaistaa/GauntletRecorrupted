@@ -15,21 +15,26 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,70,1.0")] public float ShotgunSpreadAngle = 15.0f;
 	[Export(PropertyHint.Range, "0,50,1")] public int ShotgunPelletCount = 10;
 	[Export(PropertyHint.Range, "0,10,0.1")] public float ShotgunReloadTime = 1.0f;
+	[Export(PropertyHint.Range, "0,3000,10")] public float RecoilForce = 1000.0f;
+	[Export(PropertyHint.Range, "0,50000,100")] public float KnockbackDecay = 12500.0f;
 	[Export(PropertyHint.Enum, "Revolver,Shotgun")] public int WeaponType = 0;
 
 	[ExportCategory("Node References")]
 	[Export] public PackedScene BulletScene;
 	[Export] public TileMapLayer DiggableTiles;
 	[Export] public Marker2D MuzzlePoint;
+	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
+	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
+	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
+	[Signal] public delegate void ReloadEventHandler(int weaponType);
+	[Signal] public delegate void ShotCameraShakeEventHandler(int weaponType);
+	private Vector2 _knockback = Vector2.Zero;
+	private Vector2 _moveVelocity = Vector2.Zero;
 	private float ReloadTime;
 	private int _maxAmmoRevolver = 6;
 	private int _maxAmmoShotgun = 2;
 	private int _currentAmmoRevolver;
 	private int _currentAmmoShotgun;
-	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
-	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
-	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
-	[Signal] public delegate void ReloadEventHandler(int weaponType);
 
 	private float _reloadSpeedMultiplier = 1.0f;
 
@@ -37,6 +42,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool _canShoot = true;
 	private int _maxHealth = 100;
 	private Vector2I playerCell;
+	private bool isReloading = false;
 
 	public enum FacingDirection
 	{
@@ -68,7 +74,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		LookAt(GetGlobalMousePosition());
-		Vector2 velocity = Velocity;
+		Vector2 velocity = _moveVelocity;
 		float currentSpeed = Speed * _reloadSpeedMultiplier;
 		
 
@@ -81,7 +87,9 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			velocity = velocity.MoveToward(Vector2.Zero, currentSpeed);
 		}
-		Velocity = velocity;
+		_moveVelocity = velocity;
+		Velocity = _moveVelocity + _knockback;
+		_knockback = _knockback.MoveToward(Vector2.Zero, KnockbackDecay * (float)delta);
 		MoveAndSlide();
 
 		if (_shootTimer > 0)
@@ -92,6 +100,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			_shootTimer = 0;
 			_reloadSpeedMultiplier = 1.0f;
+			isReloading = false;
 		}
 		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		HandleInputs();
@@ -101,6 +110,11 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		if (Input.IsActionJustPressed("WeaponSwitch"))
 		{
+			if (isReloading)
+			{
+				GD.Print("Cannot switch weapons while reloading");
+				return;
+			}
 			if (WeaponType == 0)
 			{
 				WeaponType = 1;
@@ -133,6 +147,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 
 			Shoot();
+			EmitSignal(SignalName.ShotCameraShake, WeaponType);
 
 			if (WeaponType == 0)
 			{
@@ -173,6 +188,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			EmitSignal(SignalName.Reload, WeaponType);
 			_shootTimer = ReloadTime;
+			isReloading = true;
 		}
 
 
@@ -201,6 +217,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				Vector2 pelletDirection = aimDirection.Rotated(Mathf.DegToRad(angleOffset));
 				SpawnBullet(pelletDirection);
 			}
+			_knockback = -aimDirection * RecoilForce;
 		}
 	}
 
