@@ -40,6 +40,9 @@ ShotgunCooldown = 0.5
 ShotgunSpreadAngle = 40.0
 ShotgunPelletCount = 20
 ShotgunReloadTime = 2.0
+ShotgunSpreadAngle = 40.0
+ShotgunPelletCount = 20
+RecoilForce = 2000.0
 BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Muzzle Point")
 
