@@ -156,6 +156,7 @@ public partial class EnemySpawner : StaticBody2D
     {
 		IsAlive = false;
         CurrentState = State.Defeat;
+		Level.Current.ChangeSpawnerCount();
     }
 
 	private void UpdateAnimation()

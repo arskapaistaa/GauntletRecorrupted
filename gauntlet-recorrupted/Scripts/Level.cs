@@ -24,7 +24,7 @@ public partial class Level : Node2D
 	}
 	public int CurrentTotalEnemyCount = 0;
 
-	// Called when the node enters the scene tree for the first time.
+	[Signal] public delegate void OnZeroSpawnerLeftEventHandler();
 	public override void _Ready()
 	{
 		// Maybe change this logic
@@ -43,6 +43,20 @@ public partial class Level : Node2D
 	public void ChangeEnemyCount(int amount)
 	{
 		CurrentTotalEnemyCount += amount;
+	}
+
+	public void ChangeSpawnerCount()
+	{
+		if (_spawnerCount > 0)
+		{
+			_spawnerCount--;
+		}
+
+		if (_spawnerCount == 0)
+		{
+			EmitSignal(SignalName.OnZeroSpawnerLeft);
+		}
+
 	}
 
 	public void UpdateNavRegion()
