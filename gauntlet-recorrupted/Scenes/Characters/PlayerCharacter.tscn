@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://r78dpllnlyu8" path="res://Scenes/bullet.tscn" id="2_lp3jq"]
 [ext_resource type="Texture2D" uid="uid://bgsujgo8700n3" path="res://Art/ArtProtagonistIdle.png" id="3_ci7sc"]
 [ext_resource type="Texture2D" uid="uid://b133q6jb0onj1" path="res://Art/ConeLightShape.png" id="4_ci7sc"]
+[ext_resource type="Script" uid="uid://bhom7vtl6kd5b" path="res://Scripts/UI/Camera.cs" id="5_kkncw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c32ia"]
 animations = [{
@@ -36,6 +37,7 @@ Speed = 600.0
 RevolverCooldown = 0.2
 ShotgunSpreadAngle = 30.0
 ShotgunPelletCount = 15
+RecoilForce = 2000.0
 BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Muzzle Point")
 
@@ -66,7 +68,7 @@ rotation = -1.5707964
 scale = Vector2(4.6873636, 4.6877813)
 texture = SubResource("GradientTexture2D_i2bdb")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=292159288]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=292159288 node_paths=PackedStringArray("Player")]
 zoom = Vector2(0.2, 0.2)
 process_callback = 0
 position_smoothing_enabled = true
@@ -74,3 +76,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+script = ExtResource("5_kkncw")
+Player = NodePath("..")
+RevolverShakeIntensity = 1.0
+ShotgunShakeIntensity = 1.5

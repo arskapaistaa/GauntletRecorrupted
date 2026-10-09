@@ -17,7 +17,7 @@ color = Color(0.8006816, 0.07545183, 0.07397347, 1)
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_oduel")
-RevolverBulletSpeed = 5000.0
+RevolverBulletSpeed = 7000.0
 ShotgunBulletSpeed = 5000.0
 ShotgunBulletLifetime = 0.5
 
