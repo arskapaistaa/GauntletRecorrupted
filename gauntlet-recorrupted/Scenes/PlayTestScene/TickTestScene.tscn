@@ -147,6 +147,7 @@ process_material = SubResource("ParticleProcessMaterial_sopei")
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles") instance=ExtResource("3_atvrt")]
 z_index = 1
 position = Vector2(-3087, -1797)
+RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegion2D/TileMap/DiggableTiles")
 
 [node name="Camera2D" parent="Player" index="5" unique_id=292159288]
