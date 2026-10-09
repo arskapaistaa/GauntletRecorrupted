@@ -381,16 +381,16 @@ size = Vector2(162, 78)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hskhg"]
 
-[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent") groups=["Enemy"]]
+[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_40av6")
-_health = 50.0
+_health = 20.0
 _maxSpeed = 400.0
 _attackSpeed = 800.0
 _detectionRange = 200.0
-_dmg = 20
+_dmg = 19
 _attackRange = 600.0
 _alarmRange = 2000.0
 _brain = NodePath("Brain")
@@ -400,6 +400,7 @@ _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
+_rayCast = NodePath("RayCast2D")
 _attackFrames = PackedInt32Array(3, 4, 5, 6)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
@@ -449,6 +450,10 @@ target_desired_distance = 40.0
 avoidance_enabled = true
 radius = 128.0
 debug_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1242660766]
+target_position = Vector2(50, 0)
+collision_mask = 5
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0

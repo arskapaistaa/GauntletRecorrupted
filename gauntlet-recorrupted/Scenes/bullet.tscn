@@ -10,13 +10,15 @@
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_oduel")
-Speed = 5800.0
-Damage = 25
+RevolverBulletSpeed = 7000.0
+ShotgunBulletSpeed = 5000.0
+ShotgunBulletLifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
-position = Vector2(-10.5058975, 0.21229038)
+visible = false
+position = Vector2(-3.561017, 0.0030501464)
 rotation = 1.5707964
-scale = Vector2(0.37597343, 0.406474)
+scale = Vector2(0.16603668, 0.19878238)
 texture = ExtResource("3_sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]

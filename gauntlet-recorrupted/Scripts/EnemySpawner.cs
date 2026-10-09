@@ -141,7 +141,7 @@ public partial class EnemySpawner : StaticBody2D
 			_health -= dmg;
 		}
 
-		if (_health <= 0)
+		if (_health <= 0 && IsAlive)
 		{
 			Destroy();
 		}
@@ -156,6 +156,7 @@ public partial class EnemySpawner : StaticBody2D
     {
 		IsAlive = false;
         CurrentState = State.Defeat;
+		Level.Current.ChangeSpawnerCount();
     }
 
 	private void UpdateAnimation()
