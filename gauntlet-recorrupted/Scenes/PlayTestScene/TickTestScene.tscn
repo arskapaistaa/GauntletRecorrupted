@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_1ddx0"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="8_7xtta"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="9_qgjw0"]
+[ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="10_cursor"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(-574, 2800, -750, 2800, -750, 2624, -574, 2624, -830, 2544, -1262, 2544, -1262, 2368, -830, 2368, 3266, 2544, 3090, 2544, 3090, 2368, 3266, 2368, 450, 2288, 274, 2288, 274, 2112, 450, 2112, -1598, 2032, -1774, 2032, -1774, 1856, -1598, 1856, -1598, 1008, -1774, 1008, -1774, 832, -1598, 832, 4546, 752, 4370, 752, 4370, 576, 4546, 576, -1598, -272, -1774, -272, -1774, -448, -1598, -448, -1854, -528, -2030, -528, -2030, -704, -1854, -704, 2754, -704, 3266, -704, 3266, -528, 2322, -528, 2322, -704, 2578, -704, 2754, -960, 2578, -960, -1086, -1216, -1086, -1040, -1342, -1040, -1774, -1216, -1774, -784, -1342, -784, -62, -1040, -238, -1040, -238, -1216, -62, -1216, 962, -1040, 786, -1040, 786, -1216, 962, -1216, 3369, 202.15625, 3369, -77.84375, 3778, -192, 3778, 1776, 2834, -192, 3089, -77.84375, 2322, 1600, 2322, 1264, 2498, 1520, 2498, 1776, 1042, 1776, 1730, 1600, 2834, 752, 3089, 202.15625, 3346, 752, 3346, 1088, 2834, 1776, 2834, 1520, 2498, 1088, 1042, -192, 1730, 1008, 2498, -192, 2066, 1008, 2066, 1264, -139.96875, 955.7578, 706, -192, 706, 1776, -303.35156, 1183.1484, -750, 1776, -530.7422, 1019.75, -750, 576, -367.34375, 792.3828, 18, 576, 18, 240, -750, -192, -750, 240)
@@ -155,5 +156,9 @@ limit_right = 3571
 limit_bottom = 2267
 
 [node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("9_qgjw0")]
+
+[node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("10_cursor")]
+position = Vector2(-112, -184)
+PlayerCharacter = NodePath("../Player")
 
 [editable path="Player"]
