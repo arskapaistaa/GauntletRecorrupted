@@ -141,7 +141,7 @@ public partial class EnemySpawner : StaticBody2D
 			_health -= dmg;
 		}
 
-		if (_health <= 0)
+		if (_health <= 0 && IsAlive)
 		{
 			Destroy();
 		}
