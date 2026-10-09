@@ -32,6 +32,9 @@ public partial class Brain : Node
 	[ExportGroup("Alarmed")]
 	[Export] public State AfterAlarmedState = State.None;
 
+	[ExportGroup("Can't Reach the Target")]
+	[Export] public State CantReachTargetState = State.None;
+
 	private Enemy _enemy;
 	public enum State
 	{
@@ -211,8 +214,12 @@ public partial class Brain : Node
 		if (CurrentState == State.Patrol)
 		{
 			SetCurrentState(NavigationFinishedState);
-			_enemy.HasRoute = false;
 		}
+	}
+
+	public void TargetIsNotReachable()
+	{
+		CurrentState = CantReachTargetState;
 	}
 
 	public void SetCurrentState(State state)

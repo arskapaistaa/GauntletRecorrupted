@@ -202,7 +202,7 @@ public partial class Enemy : CharacterBody2D
 
 		if (!HasRoute)
 		{
-			SetPositionTarget();
+			SetPatrolTarget();
 		}
 
 
@@ -267,14 +267,25 @@ public partial class Enemy : CharacterBody2D
 	public void SetPlayerTarget()
 	{
 		_agent.TargetPosition = PlayerPosition;
+
+		if (!_agent.IsTargetReachable())
+		{
+			_brain.TargetIsNotReachable();
+		}
 	}
 
-	public void SetPositionTarget()
+	public void SetPatrolTarget()
 	{
 		// while (!isAllowed)
 		_agent.TargetPosition = GlobalPosition + RandomPosition(_minPatrolDistance, _maxPatrolDistance);
 
 		HasRoute = true;
+
+		if (!_agent.IsTargetReachable())
+		{
+			_brain.TargetIsNotReachable();
+			HasRoute = false;
+		}
 	}
 
 	public void LookAtPosition()
@@ -289,7 +300,10 @@ public partial class Enemy : CharacterBody2D
 
 		Vector2 position = new Vector2(x, y);
 
-		return position;
+		// If random position is not on baked region, find closest point.
+		Vector2 validPosition = NavigationServer2D.MapGetClosestPoint(_agent.GetNavigationMap(), position);
+
+		return validPosition;
 	}
 
 	public void NavUpdate(double delta)
@@ -437,6 +451,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			_brain.Defeat();
 		}
+
+		HasRoute = false;
 	}
 
 	public void AlarmBuddies()
@@ -521,6 +537,8 @@ public partial class Enemy : CharacterBody2D
 	private void OnNavigationFinished()
     {
         _brain.NavigationFinished();
+
+		HasRoute = false;
     }
 
 	public void SetPatrolDistances(float min, float max)

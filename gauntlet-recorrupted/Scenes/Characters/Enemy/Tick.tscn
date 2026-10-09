@@ -416,6 +416,7 @@ AfterAttackCombatState = 0
 NavigationFinishedState = 3
 AfterSpawnState = 2
 AfterAlarmedState = 4
+CantReachTargetState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
 material = ExtResource("2_bmxul")

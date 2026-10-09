@@ -249,6 +249,7 @@ OutOfCombatState = 4
 AfterNoticeState = 5
 AfterAttackState = 4
 AfterAlarmedState = 4
+CantReachTargetState = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 material = ExtResource("3_yb4cs")
