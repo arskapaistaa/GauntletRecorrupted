@@ -25,7 +25,7 @@ texture = ExtResource("3_sprite")
 shape = SubResource("CircleShape2D_ycag2")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1139997155]
-amount = 64
-lifetime = 0.2
+amount = 32
+lifetime = 0.09999999999999999
 speed_scale = 2.0
 process_material = ExtResource("2_oduel")
