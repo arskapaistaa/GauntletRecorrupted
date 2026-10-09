@@ -15,3 +15,7 @@
 ### Revolver
 
 ### Shotgun
+
+## Levels
+
+### Level 1
