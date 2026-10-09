@@ -43,6 +43,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private int _maxHealth = 100;
 	private Vector2I playerCell;
 	private bool isReloading = false;
+	private bool isLiving = true;
 
 	public enum FacingDirection
 	{
@@ -73,7 +74,10 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		LookAt(GetGlobalMousePosition());
+		if (isLiving)
+		{
+			LookAt(GetGlobalMousePosition());
+		}
 		Vector2 velocity = _moveVelocity;
 		float currentSpeed = Speed * _reloadSpeedMultiplier;
 		
@@ -90,7 +94,10 @@ public partial class PlayerCharacter : CharacterBody2D
 		_moveVelocity = velocity;
 		Velocity = _moveVelocity + _knockback;
 		_knockback = _knockback.MoveToward(Vector2.Zero, KnockbackDecay * (float)delta);
-		MoveAndSlide();
+		if (isLiving)
+		{
+			MoveAndSlide();
+		}
 
 		if (_shootTimer > 0)
 		{
@@ -110,6 +117,11 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		if (Input.IsActionJustPressed("WeaponSwitch"))
 		{
+			if (!isLiving)
+			{
+				GD.Print("Cannot switch weapons while dead");
+				return;
+			}
 			if (isReloading)
 			{
 				GD.Print("Cannot switch weapons while reloading");
@@ -133,6 +145,11 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
 		{
+			if (!isLiving)
+			{
+				GD.Print("Cannot shoot while dead");
+				return;
+			}
 			if ((WeaponType == 0 && _currentAmmoRevolver <= 0) || (WeaponType == 1 && _currentAmmoShotgun <= 0))
 			{
 				if (WeaponType == 0)
@@ -175,6 +192,11 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Reload"))
 		{
+			if (!isLiving)
+			{
+				GD.Print("Cannot reload while dead");
+				return;
+			}
 			_reloadSpeedMultiplier = 0.5f;
 			if (WeaponType == 0)
 			{
@@ -204,6 +226,11 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Dig"))
 		{
+			if (!isLiving)
+			{
+				GD.Print("Cannot dig while dead");
+				return;
+			}
 			Dig();
 		}
 	}
@@ -278,7 +305,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (Health <= 0)
 		{
 			GD.Print("Player is dead");
-			QueueFree();
+			isLiving = false;
 		}
 	}
 
@@ -317,5 +344,10 @@ public partial class PlayerCharacter : CharacterBody2D
 	public int getWeaponType()
 	{
 		return WeaponType;
+	}
+
+	public bool isAlive()
+	{
+		return isLiving;
 	}
 }
