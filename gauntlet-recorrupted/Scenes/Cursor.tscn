@@ -87,10 +87,6 @@ region = Rect2(1536, 256, 256, 256)
 atlas = ExtResource("2_6qa2i")
 region = Rect2(1280, 256, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4wv8m"]
-atlas = ExtResource("2_6qa2i")
-region = Rect2(0, 512, 256, 256)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggs4s"]
 atlas = ExtResource("2_6qa2i")
 region = Rect2(256, 512, 256, 256)
@@ -98,6 +94,10 @@ region = Rect2(256, 512, 256, 256)
 [sub_resource type="AtlasTexture" id="AtlasTexture_etq7y"]
 atlas = ExtResource("2_6qa2i")
 region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wv8m"]
+atlas = ExtResource("2_6qa2i")
+region = Rect2(0, 512, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0q5n"]
 atlas = ExtResource("2_6qa2i")
@@ -194,6 +194,33 @@ animations = [{
 "texture": SubResource("AtlasTexture_druyl")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8qhob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krjhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rs20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qhob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krjhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rs20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qhob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krjhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rs20")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d7tjt")
 }],
 "loop": 0,
@@ -216,10 +243,40 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ggs4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggs4s")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4wv8m")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ggs4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etq7y")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_etq7y")
@@ -257,7 +314,5 @@ _cursorSprite = NodePath("AnimatedSprite2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=744672006]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_rk2iv")
-animation = &"shotgunReload"
-frame = 9
-frame_progress = 1.0
+animation = &"shotgunAmmo"
 offset = Vector2(2, 2)
