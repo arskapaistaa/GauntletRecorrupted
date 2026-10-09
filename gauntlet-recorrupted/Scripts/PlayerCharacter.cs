@@ -178,11 +178,21 @@ public partial class PlayerCharacter : CharacterBody2D
 			_reloadSpeedMultiplier = 0.5f;
 			if (WeaponType == 0)
 			{
+				if (_currentAmmoRevolver == _maxAmmoRevolver)
+				{
+					GD.Print("Revolver already full");
+					return;
+				}
 				_currentAmmoRevolver = _maxAmmoRevolver;
 				GD.Print("Reloading Revolver");
 			}
 			else
 			{
+				if (_currentAmmoShotgun == _maxAmmoShotgun)
+				{
+					GD.Print("Shotgun already full");
+					return;
+				}
 				_currentAmmoShotgun = _maxAmmoShotgun;
 				GD.Print("Reloading Shotgun");
 			}
