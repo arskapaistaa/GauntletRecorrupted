@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://kiaxd475sgd0"]
 
 [ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_qc6ga"]
-[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_4akc0"]
+[ext_resource type="Texture2D" uid="uid://b0jfqm4m65g1w" path="res://Art/Environment/GroundTile_Repeating.png" id="2_ydgfw"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="3_atvrt"]
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="4_dxhaf"]
 [ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="4_f2tac"]
@@ -91,7 +91,7 @@ Player = NodePath("Player")
 
 [node name="Ground" type="Sprite2D" parent="Environment" unique_id=389584147]
 texture_repeat = 2
-texture = ExtResource("2_4akc0")
+texture = ExtResource("2_ydgfw")
 region_enabled = true
 region_rect = Rect2(0, 0, 8000, 5100)
 
