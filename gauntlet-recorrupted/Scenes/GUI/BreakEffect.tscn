@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dagm27ahkj75g"]
+
+[ext_resource type="Script" uid="uid://bj6mw6bimb762" path="res://Scripts/UI/BreakEffect.cs" id="1_f4s5h"]
+
+[node name="BreakEffect" type="CPUParticles2D" unique_id=704260430]
+emitting = false
+amount = 256
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.7
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 2500)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_f4s5h")

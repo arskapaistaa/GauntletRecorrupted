@@ -147,7 +147,6 @@ process_material = SubResource("ParticleProcessMaterial_sopei")
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles") instance=ExtResource("3_atvrt")]
 z_index = 1
 position = Vector2(-3087, -1797)
-RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegion2D/TileMap/DiggableTiles")
 
 [node name="Camera2D" parent="Player" index="5" unique_id=292159288]
@@ -158,8 +157,7 @@ limit_bottom = 2267
 
 [node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("9_qgjw0")]
 
-[node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("10_cursor")]
-position = Vector2(-112, -184)
+[node name="Cursor" parent="." unique_id=1467761183 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("10_cursor")]
 PlayerCharacter = NodePath("../Player")
 
 [editable path="Player"]

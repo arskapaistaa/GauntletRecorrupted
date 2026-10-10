@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Cursor : Node2D
+public partial class Cursor : CanvasLayer
 {
 	[Export] private AnimatedSprite2D _cursorSprite;
 	[Export] private PlayerCharacter PlayerCharacter;
@@ -28,7 +28,7 @@ public partial class Cursor : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		GlobalPosition = GetGlobalMousePosition();
+		_cursorSprite.GlobalPosition = GetViewport().GetMousePosition();
 	}
 
 	private void OnWeaponSwitched(int newWeaponType)

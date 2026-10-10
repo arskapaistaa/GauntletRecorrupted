@@ -15,7 +15,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,70,1.0")] public float ShotgunSpreadAngle = 15.0f;
 	[Export(PropertyHint.Range, "0,50,1")] public int ShotgunPelletCount = 10;
 	[Export(PropertyHint.Range, "0,10,0.1")] public float ShotgunReloadTime = 1.0f;
-	[Export(PropertyHint.Range, "0,3000,10")] public float RecoilForce = 1000.0f;
+	[Export(PropertyHint.Range, "0,50000,500")] public float RecoilForce = 1000.0f;
 	[Export(PropertyHint.Range, "0,50000,100")] public float KnockbackDecay = 12500.0f;
 	[Export(PropertyHint.Enum, "Revolver,Shotgun")] public int WeaponType = 0;
 
@@ -23,11 +23,14 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public PackedScene BulletScene;
 	[Export] public TileMapLayer DiggableTiles;
 	[Export] public Marker2D MuzzlePoint;
+	[Export] public PackedScene BreakEffectScene;
+	[Export] public AnimatedSprite2D PlayerSprite;
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
 	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void ReloadEventHandler(int weaponType);
 	[Signal] public delegate void ShotCameraShakeEventHandler(int weaponType);
+	[Signal] public delegate void PeekCameraMovementEventHandler(bool isPeeking);
 	private Vector2 _knockback = Vector2.Zero;
 	private Vector2 _moveVelocity = Vector2.Zero;
 	private float ReloadTime;
@@ -233,6 +236,15 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			Dig();
 		}
+
+		if (Input.IsActionJustPressed("Peek"))
+		{
+			EmitSignal(SignalName.PeekCameraMovement, true);
+		}
+		if (Input.IsActionJustReleased("Peek"))
+		{
+			EmitSignal(SignalName.PeekCameraMovement, false);
+		}
 	}
 
 	private void Shoot()
@@ -294,6 +306,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			GD.Print("Cannot dig that tile.");
 			return;
 		}
+		SpawnBreakEffect(targetCell);
 		DiggableTiles.EraseCell(targetCell);
 		Level.Current.UpdateNavRegion();
 		GD.Print($"Dug tile at {targetCell}");
@@ -307,6 +320,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			GD.Print("Player is dead");
 			isLiving = false;
 		}
+		FlashSprite();
 	}
 
 	private FacingDirection GetFacingDirection()
@@ -330,6 +344,29 @@ public partial class PlayerCharacter : CharacterBody2D
         }
         return FacingDirection.North;
     }
+
+	private void SpawnBreakEffect(Vector2I cell)
+	{
+		if (BreakEffectScene == null)
+		{
+			return;
+		}
+
+		Node2D effect = BreakEffectScene.Instantiate<Node2D>();
+		GetTree().CurrentScene.AddChild(effect);
+		effect.GlobalPosition = DiggableTiles.ToGlobal(DiggableTiles.MapToLocal(cell));
+	}
+	private void FlashSprite()
+	{
+		Tween tween = CreateTween();
+		for (int i = 0; i < 3; i++)
+		{
+			tween.TweenProperty(PlayerSprite, "visible", false, 0.0);
+			tween.TweenInterval(0.08);
+			tween.TweenProperty(PlayerSprite, "visible", true, 0.0);
+			tween.TweenInterval(0.08);
+		}
+	}
 
 	public int getRevolverAmmo()
 	{

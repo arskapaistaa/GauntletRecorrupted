@@ -307,12 +307,15 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Cursor" type="Node2D" unique_id=318096938 node_paths=PackedStringArray("_cursorSprite")]
+[node name="Cursor" type="CanvasLayer" unique_id=1467761183 node_paths=PackedStringArray("_cursorSprite")]
+layer = 100
 script = ExtResource("1_5vcpq")
 _cursorSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=744672006]
-scale = Vector2(3, 3)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_rk2iv")
-animation = &"shotgunAmmo"
+animation = &"revolverReload"
+frame = 28
+frame_progress = 1.0
 offset = Vector2(2, 2)
