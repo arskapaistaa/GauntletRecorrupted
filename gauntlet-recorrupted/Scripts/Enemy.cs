@@ -3,6 +3,9 @@ using System;
 
 public partial class Enemy : CharacterBody2D
 {
+	[Export] private EnemyType _enemyType = EnemyType.Roach;
+	[Export] private AttackType _attackType = AttackType.Sting;
+
 	[ExportGroup("Stats")]
 
 	[Export(PropertyHint.Range, "1, 1000, 1")]
@@ -52,9 +55,32 @@ public partial class Enemy : CharacterBody2D
 	private float _navInterval = 0.25f;
 	private float _minPatrolDistance;
 	private float _maxPatrolDistance;
+	private EnemySpawner _homeSpawner = null;
 
 	// PUBLIC, NO EXPORT
 	public bool HasRoute = false;
+	public enum EnemyType
+	{
+		Roach,
+		Tick,
+		Worm
+	}
+
+	public enum AttackType
+	{
+		Sting,
+		Leech
+	}
+
+	public EnemyType ThisEnemyType
+	{
+		get { return _enemyType; }
+	}
+
+	public AttackType ThisAttackState
+	{
+		get { return _attackType; }
+	}
 
 	public float Health
 	{
@@ -89,7 +115,12 @@ public partial class Enemy : CharacterBody2D
 
 	public AnimatedSprite2D Sprite
 	{
-		get {return _sprite; }
+		get { return _sprite; }
+	}
+
+	public Brain Brain
+	{
+		get { return _brain; }
 	}
 
 	public PlayerCharacter Player;
@@ -111,22 +142,7 @@ public partial class Enemy : CharacterBody2D
 
 		Reset();
 
-		if (_detectionArea != null)
-		{
-			_detectionArea.BodyEntered += OnBodyEntered;
-			_detectionArea.BodyExited += OnBodyExited;
-		}
-
-		if (_sprite != null)
-		{
-			_sprite.AnimationFinished += OnAnimationFinished;
-		}
-
-		if (_agent != null)
-		{
-			_agent.VelocityComputed += OnVelocityComputed;
-			_agent.NavigationFinished += OnNavigationFinished;
-		}
+		ConnectSignals();
 	}
 
     public override void _ExitTree()
@@ -146,6 +162,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			_agent.VelocityComputed -= OnVelocityComputed;
 			_agent.NavigationFinished -= OnNavigationFinished;
+		}
+
+		if (_homeSpawner != null)
+		{
+			_homeSpawner.SpawnerDamaged -= OnSpawnerDamaged;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -324,7 +345,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		UpdateDamageArea();
 
-		if (_brain.ThisAttackState == Brain.AttackType.Leech)
+		if (ThisAttackState == AttackType.Leech)
 		{
 			if (CheckAttackAnimation())
 			{
@@ -511,7 +532,18 @@ public partial class Enemy : CharacterBody2D
 		return false;
 	}
 
-	private void OnBodyEntered(Node2D body)
+	public void SetHomeSpawner(EnemySpawner spawner)
+	{
+		if (_homeSpawner == null)
+		{
+			_homeSpawner = spawner;
+			_homeSpawner.SpawnerDamaged += OnSpawnerDamaged;
+		}
+	}
+
+
+
+    private void OnBodyEntered(Node2D body)
     {
         if (body is PlayerCharacter player)
 		{
@@ -542,6 +574,11 @@ public partial class Enemy : CharacterBody2D
         _brain.NavigationFinished();
 
 		HasRoute = false;
+    }
+
+	private void OnSpawnerDamaged()
+    {
+        Alarmed();
     }
 
 	public void SetPatrolDistances(float min, float max)
@@ -576,5 +613,25 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		_navTimer = _navInterval;
+	}
+
+	private void ConnectSignals()
+	{
+		if (_detectionArea != null)
+		{
+			_detectionArea.BodyEntered += OnBodyEntered;
+			_detectionArea.BodyExited += OnBodyExited;
+		}
+
+		if (_sprite != null)
+		{
+			_sprite.AnimationFinished += OnAnimationFinished;
+		}
+
+		if (_agent != null)
+		{
+			_agent.VelocityComputed += OnVelocityComputed;
+			_agent.NavigationFinished += OnNavigationFinished;
+		}
 	}
 }
