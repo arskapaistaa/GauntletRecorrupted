@@ -387,6 +387,8 @@ collision_layer = 2
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_40av6")
+_enemyType = 1
+_attackType = 1
 _health = 20.0
 _maxSpeed = 400.0
 _attackSpeed = 1000.0
@@ -406,7 +408,6 @@ _attackFrames = PackedInt32Array(3, 4, 5)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_4fpts")
-_attackType = 1
 StartingState = 1
 EntersAreaState = 5
 InCombatState = 5
