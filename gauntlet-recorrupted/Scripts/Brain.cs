@@ -3,9 +3,6 @@ using System;
 
 public partial class Brain : Node
 {
-	[Export] private EnemyType _enemyType = EnemyType.Roach;
-	[Export] private AttackType _attackType = AttackType.Sting;
-
 	[ExportCategory("States")]
 	[Export] public State StartingState = State.Idle;
 
@@ -21,7 +18,7 @@ public partial class Brain : Node
 
 	[ExportGroup("Attack")]
 	[Export] public State AfterAttackState = State.None;
-	[Export] public CombatState AfterAttackCombatState = CombatState.Combat;
+	[Export] public CombatState AfterAttackCombatState = CombatState.InCombat;
 
 	[ExportGroup("Patrol")]
 	[Export] public State NavigationFinishedState = State.None;
@@ -31,6 +28,9 @@ public partial class Brain : Node
 
 	[ExportGroup("Alarmed")]
 	[Export] public State AfterAlarmedState = State.None;
+
+	[ExportGroup("Can't Reach the Target")]
+	[Export] public State CantReachTargetState = State.None;
 
 	private Enemy _enemy;
 	public enum State
@@ -47,35 +47,12 @@ public partial class Brain : Node
 	}
 	public enum CombatState
 	{
-		None,
-		Combat
-	}
-
-	public enum EnemyType
-	{
-		Roach,
-		Tick,
-		Worm
-	}
-
-	public enum AttackType
-	{
-		Sting,
-		Leech
-	}
-
-	public EnemyType ThisEnemyType
-	{
-		get { return _enemyType; }
-	}
-
-	public AttackType ThisAttackState
-	{
-		get { return _attackType; }
+		OutOfCombat,
+		InCombat
 	}
 
 	public State CurrentState = State.Idle;
-	public CombatState CurrentCombatState = CombatState.None;
+	public CombatState CurrentCombatState = CombatState.OutOfCombat;
 	public override void _Ready()
 	{
 		_enemy = (Enemy)GetParent();
@@ -93,7 +70,7 @@ public partial class Brain : Node
 	{
 		switch(CurrentState)
 		{
-		case State.Chase:
+			case State.Chase:
 			// If enemy is in attack range and can see player, start Attacking.
 			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
 			{
@@ -120,6 +97,8 @@ public partial class Brain : Node
 
 	public void AfterDamaged()
 	{
+		CurrentCombatState = CombatState.InCombat;
+
 		if (_enemy.Player == null)
 		{
 			SetCurrentState(OutOfCombatState);
@@ -137,7 +116,7 @@ public partial class Brain : Node
 
 	public void AfterNotice()
 	{
-		CurrentCombatState = CombatState.Combat;
+		CurrentCombatState = CombatState.InCombat;
 
 		_enemy.AlarmBuddies();
 
@@ -168,7 +147,7 @@ public partial class Brain : Node
 
 	public void Alarmed()
 	{
-		if (CurrentCombatState == CombatState.None)
+		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(AfterAlarmedState);
 
@@ -211,8 +190,12 @@ public partial class Brain : Node
 		if (CurrentState == State.Patrol)
 		{
 			SetCurrentState(NavigationFinishedState);
-			_enemy.HasRoute = false;
 		}
+	}
+
+	public void TargetIsNotReachable()
+	{
+		CurrentState = CantReachTargetState;
 	}
 
 	public void SetCurrentState(State state)
@@ -225,7 +208,7 @@ public partial class Brain : Node
 
 	public void PlayerEntered()
 	{
-		if (CurrentCombatState == CombatState.None)
+		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			if (EntersAreaState != State.None)
 			{

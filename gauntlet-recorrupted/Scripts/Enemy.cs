@@ -3,27 +3,30 @@ using System;
 
 public partial class Enemy : CharacterBody2D
 {
+	[Export] private EnemyType _enemyType = EnemyType.Roach;
+	[Export] private AttackType _attackType = AttackType.Sting;
+
 	[ExportGroup("Stats")]
 
 	[Export(PropertyHint.Range, "1, 1000, 1")]
 	private float _health;
 
-	[Export(PropertyHint.Range, "100, 800, 10")]
+	[Export(PropertyHint.Range, "100, 800, 10, suffix:Pixels/s")]
 	private float _maxSpeed;
 
-	[Export(PropertyHint.Range, "100, 1600, 10")]
+	[Export(PropertyHint.Range, "0, 1600, 10, suffix:Pixels/s")]
 	private float _attackSpeed;
 
-	[Export(PropertyHint.Range, "200, 1500, 100")]
+	[Export(PropertyHint.Range, "200, 1500, 100, suffix:Pixels")]
 	private float _detectionRange;
 
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "100, 600, 10")]
+	[Export(PropertyHint.Range, "100, 600, 10, suffix:Pixels")]
 	private float _attackRange;
 
-	[Export(PropertyHint.Range, "300, 10000, 100")]
+	[Export(PropertyHint.Range, "0, 10000, 100, suffix:Pixels")]
 	private float _alarmRange;
 
 	[ExportGroup("Node References")]
@@ -52,9 +55,32 @@ public partial class Enemy : CharacterBody2D
 	private float _navInterval = 0.25f;
 	private float _minPatrolDistance;
 	private float _maxPatrolDistance;
+	private EnemySpawner _homeSpawner = null;
 
 	// PUBLIC, NO EXPORT
 	public bool HasRoute = false;
+	public enum EnemyType
+	{
+		Roach,
+		Tick,
+		Worm
+	}
+
+	public enum AttackType
+	{
+		Sting,
+		Leech
+	}
+
+	public EnemyType ThisEnemyType
+	{
+		get { return _enemyType; }
+	}
+
+	public AttackType ThisAttackState
+	{
+		get { return _attackType; }
+	}
 
 	public float Health
 	{
@@ -89,7 +115,12 @@ public partial class Enemy : CharacterBody2D
 
 	public AnimatedSprite2D Sprite
 	{
-		get {return _sprite; }
+		get { return _sprite; }
+	}
+
+	public Brain Brain
+	{
+		get { return _brain; }
 	}
 
 	public PlayerCharacter Player;
@@ -111,22 +142,7 @@ public partial class Enemy : CharacterBody2D
 
 		Reset();
 
-		if (_detectionArea != null)
-		{
-			_detectionArea.BodyEntered += OnBodyEntered;
-			_detectionArea.BodyExited += OnBodyExited;
-		}
-
-		if (_sprite != null)
-		{
-			_sprite.AnimationFinished += OnAnimationFinished;
-		}
-
-		if (_agent != null)
-		{
-			_agent.VelocityComputed += OnVelocityComputed;
-			_agent.NavigationFinished += OnNavigationFinished;
-		}
+		ConnectSignals();
 	}
 
     public override void _ExitTree()
@@ -146,6 +162,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			_agent.VelocityComputed -= OnVelocityComputed;
 			_agent.NavigationFinished -= OnNavigationFinished;
+		}
+
+		if (_homeSpawner != null)
+		{
+			_homeSpawner.SpawnerDamaged -= OnSpawnerDamaged;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -202,7 +223,7 @@ public partial class Enemy : CharacterBody2D
 
 		if (!HasRoute)
 		{
-			SetPositionTarget();
+			SetPatrolTarget();
 		}
 
 
@@ -267,14 +288,25 @@ public partial class Enemy : CharacterBody2D
 	public void SetPlayerTarget()
 	{
 		_agent.TargetPosition = PlayerPosition;
+
+		if (!_agent.IsTargetReachable())
+		{
+			_brain.TargetIsNotReachable();
+		}
 	}
 
-	public void SetPositionTarget()
+	public void SetPatrolTarget()
 	{
 		// while (!isAllowed)
 		_agent.TargetPosition = GlobalPosition + RandomPosition(_minPatrolDistance, _maxPatrolDistance);
 
 		HasRoute = true;
+
+		if (!_agent.IsTargetReachable())
+		{
+			_brain.TargetIsNotReachable();
+			HasRoute = false;
+		}
 	}
 
 	public void LookAtPosition()
@@ -289,7 +321,10 @@ public partial class Enemy : CharacterBody2D
 
 		Vector2 position = new Vector2(x, y);
 
-		return position;
+		// If random position is not on baked region, find closest point.
+		Vector2 validPosition = NavigationServer2D.MapGetClosestPoint(_agent.GetNavigationMap(), position);
+
+		return validPosition;
 	}
 
 	public void NavUpdate(double delta)
@@ -310,7 +345,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		UpdateDamageArea();
 
-		if (_brain.ThisAttackState == Brain.AttackType.Leech)
+		if (ThisAttackState == AttackType.Leech)
 		{
 			if (CheckAttackAnimation())
 			{
@@ -437,6 +472,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			_brain.Defeat();
 		}
+
+		HasRoute = false;
+
+		// Stop monitoring the damage area to prevent bugs.
+		_dmgArea.Monitoring = false;
 	}
 
 	public void AlarmBuddies()
@@ -492,7 +532,18 @@ public partial class Enemy : CharacterBody2D
 		return false;
 	}
 
-	private void OnBodyEntered(Node2D body)
+	public void SetHomeSpawner(EnemySpawner spawner)
+	{
+		if (_homeSpawner == null)
+		{
+			_homeSpawner = spawner;
+			_homeSpawner.SpawnerDamaged += OnSpawnerDamaged;
+		}
+	}
+
+
+
+    private void OnBodyEntered(Node2D body)
     {
         if (body is PlayerCharacter player)
 		{
@@ -521,6 +572,13 @@ public partial class Enemy : CharacterBody2D
 	private void OnNavigationFinished()
     {
         _brain.NavigationFinished();
+
+		HasRoute = false;
+    }
+
+	private void OnSpawnerDamaged()
+    {
+        Alarmed();
     }
 
 	public void SetPatrolDistances(float min, float max)
@@ -555,5 +613,25 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		_navTimer = _navInterval;
+	}
+
+	private void ConnectSignals()
+	{
+		if (_detectionArea != null)
+		{
+			_detectionArea.BodyEntered += OnBodyEntered;
+			_detectionArea.BodyExited += OnBodyExited;
+		}
+
+		if (_sprite != null)
+		{
+			_sprite.AnimationFinished += OnAnimationFinished;
+		}
+
+		if (_agent != null)
+		{
+			_agent.VelocityComputed += OnVelocityComputed;
+			_agent.NavigationFinished += OnNavigationFinished;
+		}
 	}
 }

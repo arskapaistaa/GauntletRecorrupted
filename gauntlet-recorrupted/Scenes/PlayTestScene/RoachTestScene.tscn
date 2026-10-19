@@ -54,8 +54,8 @@ sources/0 = SubResource("TileSetAtlasSource_d0wku")
 
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("Player")]
 script = ExtResource("1_avrhf")
-Player = NodePath("Player")
 _maxTotalEnemyCount = 10
+Player = NodePath("Player")
 
 [node name="Ground" type="Sprite2D" parent="." unique_id=389584147]
 texture_repeat = 2

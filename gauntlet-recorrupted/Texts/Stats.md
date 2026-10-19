@@ -27,21 +27,29 @@ DMG: 34
 AS: NONE
 DR: 600.0
 AR: 200.0
-ALR: 10000.0
+ALR: 1000.0
 
 ### Tick
 S: 400.0
 H: 20
 DMG: 19
-AS: 800.0
+AS: 1000.0
 DR: 200.0
 AR: 600.0
-ALR: 2000.0
+ALR: 1500.0
 
 #### Tick spawner
 H: 100
 SC: 10.0
 
+### Baby
+S: 500.0
+H: 30
+DMG: 25
+AS: NONE
+DR: 700.0
+AR: 100.0
+ALR: 2000.0
 
 ### Worm
 S: 0.0

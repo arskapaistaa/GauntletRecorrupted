@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ctf84d65x3l3m"]
+
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_by8mi"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2400, 1200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -360.0
+angle_max = 360.00003
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_max = 8.0
+color = Color(0.62384886, 0.5371237, 0.1692642, 1)
+turbulence_enabled = true
+turbulence_influence_max = 0.5
+
+[node name="Dust" type="GPUParticles2D" unique_id=1882848814]
+material = ExtResource("1_by8mi")
+amount = 150
+lifetime = 6.0
+visibility_rect = Rect2(-2400, -1200, 4800, 2400)
+process_material = SubResource("ParticleProcessMaterial_sopei")
