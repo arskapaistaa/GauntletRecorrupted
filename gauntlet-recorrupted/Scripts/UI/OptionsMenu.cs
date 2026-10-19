@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class OptionsMenu : Control
@@ -12,18 +13,53 @@ public partial class OptionsMenu : Control
 	{
 		GetCurrentSettings();
 
-		_displayMode.ItemSelected += (long index) => SettingsManager.Instance.OnWindowsModeSelected((int)index);
-		_resolution.ItemSelected += (long index) => SettingsManager.Instance.OnResolutionSelected((int)index);
+		_displayMode.ItemSelected += OnDisplayModeSelected;
+		_resolution.ItemSelected += OnResolutionSelected;
 
-		_masterVolume.ValueChanged += (double value) => SettingsManager.Instance.OnMasterVolumeChange((float)value);
-		_sfxVolume.ValueChanged += (double value) => SettingsManager.Instance.OnSfxVolumeChange((float)value);
-		_musicVolume.ValueChanged += (double value) => SettingsManager.Instance.OnMusicVolumeChange((float)value);
+		_masterVolume.ValueChanged += OnMasterVolumeChanged;
+		_sfxVolume.ValueChanged += OnSfxVolumeChanged;
+		_musicVolume.ValueChanged += OnMusicVolumeChanged;
 	}
 
-	private void GetCurrentSettings()
+    public override void _ExitTree()
+    {
+		_displayMode.ItemSelected -= OnDisplayModeSelected;
+		_resolution.ItemSelected -= OnResolutionSelected;
+
+		_masterVolume.ValueChanged -= OnMasterVolumeChanged;
+		_sfxVolume.ValueChanged -= OnSfxVolumeChanged;
+		_musicVolume.ValueChanged -= OnMusicVolumeChanged;
+    }
+
+    private void OnDisplayModeSelected(long index)
+    {
+        SettingsManager.Instance.OnDisplayModeSelected((int)index);
+    }
+
+	private void OnResolutionSelected(long index)
+    {
+        SettingsManager.Instance.OnResolutionSelected((int)index);
+    }
+
+	private void OnMasterVolumeChanged(double value)
+    {
+        SettingsManager.Instance.OnMasterVolumeChange((float)value);
+    }
+
+	private void OnSfxVolumeChanged(double value)
+    {
+        SettingsManager.Instance.OnSfxVolumeChange((float)value);
+    }
+
+	private void OnMusicVolumeChanged(double value)
+    {
+        SettingsManager.Instance.OnMusicVolumeChange((float)value);
+    }
+
+    private void GetCurrentSettings()
 	{
 		// Display settings
-		_displayMode.Select(SettingsManager.Instance.GetWindowModeIndex());
+		_displayMode.Select(SettingsManager.Instance.GetDisplayModeIndex());
 		_resolution.Select(SettingsManager.Instance.GetResolutionIndex());
 
 		// Audio settings
