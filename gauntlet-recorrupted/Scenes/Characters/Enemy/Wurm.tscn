@@ -276,7 +276,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(162, 78)
 
-[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
+[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
@@ -288,8 +288,6 @@ _dmg = 34
 _attackRange = 200.0
 _alarmRange = 10000.0
 _brain = NodePath("Brain")
-_sprite = NodePath("")
-_shadowSprite = NodePath("")
 _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
@@ -309,8 +307,10 @@ CantReachTargetState = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=106838091]
 sprite_frames = SubResource("SpriteFrames_gs6ov")
-animation = &"Move"
+animation = &"Idle"
 autoplay = "Idle"
+frame = 1
+frame_progress = 0.9333459
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
