@@ -8,22 +8,22 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "1, 1000, 1")]
 	private float _health;
 
-	[Export(PropertyHint.Range, "100, 800, 10")]
+	[Export(PropertyHint.Range, "100, 800, 10, suffix:Pixels/s")]
 	private float _maxSpeed;
 
-	[Export(PropertyHint.Range, "100, 1600, 10")]
+	[Export(PropertyHint.Range, "0, 1600, 10, suffix:Pixels/s")]
 	private float _attackSpeed;
 
-	[Export(PropertyHint.Range, "200, 1500, 100")]
+	[Export(PropertyHint.Range, "200, 1500, 100, suffix:Pixels")]
 	private float _detectionRange;
 
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "100, 600, 10")]
+	[Export(PropertyHint.Range, "100, 600, 10, suffix:Pixels")]
 	private float _attackRange;
 
-	[Export(PropertyHint.Range, "300, 10000, 100")]
+	[Export(PropertyHint.Range, "0, 10000, 100, suffix:Pixels")]
 	private float _alarmRange;
 
 	[ExportGroup("Node References")]
@@ -453,6 +453,9 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		HasRoute = false;
+
+		// Stop monitoring the damage area to prevent bugs.
+		_dmgArea.Monitoring = false;
 	}
 
 	public void AlarmBuddies()
