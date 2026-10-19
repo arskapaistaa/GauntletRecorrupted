@@ -221,6 +221,7 @@ radius = 200.0
 size = Vector2(162, 78)
 
 [node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
+z_index = 1
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
@@ -230,7 +231,7 @@ _maxSpeed = 400.0
 _detectionRange = 600.0
 _dmg = 34
 _attackRange = 200.0
-_alarmRange = 10000.0
+_alarmRange = 1000.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
