@@ -402,7 +402,7 @@ _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
 _rayCast = NodePath("RayCast2D")
-_attackFrames = PackedInt32Array(3, 4, 5, 6)
+_attackFrames = PackedInt32Array(3, 4, 5)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_4fpts")
@@ -451,7 +451,6 @@ shape = SubResource("CircleShape2D_tn2tk")
 target_desired_distance = 40.0
 avoidance_enabled = true
 radius = 128.0
-debug_enabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1242660766]
 target_position = Vector2(50, 0)
