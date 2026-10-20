@@ -275,7 +275,7 @@ animations = [{
 size = Vector2(200, 200)
 
 [node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_spawnPoint")]
-z_index = 2
+z_index = 1
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_p1ylh")

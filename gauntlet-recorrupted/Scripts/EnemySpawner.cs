@@ -21,6 +21,8 @@ public partial class EnemySpawner : StaticBody2D
 	[Export] private float _minPatrolDistance;
 	[Export] private float _maxPatrolDistance;
 
+	[Signal] public delegate void SpawnerDamagedEventHandler();
+
 	public enum State
 	{
 		Idle,
@@ -73,6 +75,11 @@ public partial class EnemySpawner : StaticBody2D
 		}
     }
 
+	private void OnTimedOut()
+    {
+        StartSpawning();
+    }
+
     private void OnFrameChanged()
     {
 		// Spawn only on one frame.
@@ -81,17 +88,7 @@ public partial class EnemySpawner : StaticBody2D
 		{
 			if (_sprite.Frame == _spawnFrame)
 			{
-				Enemy enemy = _enemyScene.Instantiate<Enemy>();
-
-				GetParent().AddChild(enemy);
-				enemy.GlobalTransform = GlobalTransform;
-
-				if (_spawnPoint != null)
-				{
-					enemy.SpawnPoint = _spawnPoint.GlobalPosition;
-				}
-
-				enemy.SetPatrolDistances(_minPatrolDistance, _maxPatrolDistance);
+				Spawn();
 			}
 		}
     }
@@ -101,12 +98,10 @@ public partial class EnemySpawner : StaticBody2D
         UpdateAnimation();
     }
 
-    private void OnTimedOut()
-    {
-        Spawn();
-    }
-
-	private void Spawn()
+	/// <summary>
+	/// Method that starts the spawning event.
+	/// </summary>
+	private void StartSpawning()
 	{
 		if (_enemyScene == null)
 		{
@@ -130,6 +125,26 @@ public partial class EnemySpawner : StaticBody2D
 	}
 
 	/// <summary>
+	/// Method to that actually spawns the enemy.
+	/// Call this when the animation is at the correct frame.
+	/// </summary>
+	private void Spawn()
+	{
+		Enemy enemy = _enemyScene.Instantiate<Enemy>();
+
+		GetParent().AddChild(enemy);
+		enemy.GlobalTransform = GlobalTransform;
+
+		if (_spawnPoint != null)
+		{
+			enemy.SpawnPoint = _spawnPoint.GlobalPosition;
+		}
+
+		enemy.SetHomeSpawner(this);
+		enemy.SetPatrolDistances(_minPatrolDistance, _maxPatrolDistance);
+	}
+
+	/// <summary>
 	/// Call this from Bullet etc.
 	/// </summary>
 	/// <param name="dmg">Amount of damage</param>
@@ -150,6 +165,8 @@ public partial class EnemySpawner : StaticBody2D
 		{
 			CurrentState = State.Damaged;
 		}
+
+		EmitSignal(SignalName.SpawnerDamaged);
 	}
 
     private void Destroy()

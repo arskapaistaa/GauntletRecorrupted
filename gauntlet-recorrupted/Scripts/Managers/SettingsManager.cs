@@ -42,7 +42,6 @@ public partial class SettingsManager : Node
 
 	public override void _Ready()
 	{
-
 		_masterBusIndex = AudioServer.GetBusIndex("Master");
 		_sfxBusIndex = AudioServer.GetBusIndex("SFX");
 		_musicBusIndex = AudioServer.GetBusIndex("Music");
@@ -54,7 +53,7 @@ public partial class SettingsManager : Node
 	/// Method to call from button. Changes window setting.
 	/// </summary>
 	/// <param name="isFullscreen">Is the window full screen or windowed</param>
-	public void OnWindowsModeSelected(int index)
+	public void OnDisplayModeSelected(int index)
 	{
 		switch (index)
 		{
@@ -70,7 +69,7 @@ public partial class SettingsManager : Node
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 				break;
 		}
-		_settingsConfig.SetValue("Video", "WindowMode", index);
+		_settingsConfig.SetValue("Video", "DisplayMode", index);
 		SaveSettings();
 	}
 
@@ -140,8 +139,8 @@ public partial class SettingsManager : Node
 			return;
 		}
 
-		int windowMode = (int)_settingsConfig.GetValue("Video", "WindowMode", 1);
-		OnWindowsModeSelected(windowMode);
+		int displayMode = (int)_settingsConfig.GetValue("Video", "DisplayMode", 1);
+		OnDisplayModeSelected(displayMode);
 
 		int resIndex = (int)_settingsConfig.GetValue("Video", "Resolution", 1);
 		OnResolutionSelected(resIndex);
@@ -164,9 +163,9 @@ public partial class SettingsManager : Node
 		return (int)_settingsConfig.GetValue("Video", "Resolution", 1);
 	}
 
-	public int GetWindowModeIndex()
+	public int GetDisplayModeIndex()
 	{
-		return (int)_settingsConfig.GetValue("Video", "WindowMode", 1);
+		return (int)_settingsConfig.GetValue("Video", "DisplayMode", 1);
 	}
 
 	public float GetMasterVolume()
