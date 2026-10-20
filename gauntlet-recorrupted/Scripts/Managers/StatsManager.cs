@@ -138,6 +138,11 @@ public partial class StatsManager : Node
 		_deaths = (int)_statsConfig.GetValue(_statsString, _deathString, 0);
 		_shotsFired = (int)_statsConfig.GetValue(_statsString, _shotsFiredString, 0);
 
+		// Bestiary
+		_roachKilled = (bool)_statsConfig.GetValue(_statsString, _roachKilledString, false);
+		_tickKilled = (bool)_statsConfig.GetValue(_statsString, _tickKilledString, false);
+		_babyKilled = (bool)_statsConfig.GetValue(_statsString, _babyKilledString, false);
+
 	}
 
 	/// <summary>
@@ -147,5 +152,15 @@ public partial class StatsManager : Node
 	public void SaveStats()
 	{
 		_statsConfig.Save(StatsFilePath);
+	}
+
+	public void ResetStats()
+	{
+		_statsConfig.Clear();
+		// _statsConfig.SetValue(_statsString, _killsString, 0);
+		// _statsConfig.SetValue(_statsString, _deathString, 0);
+		// _statsConfig.SetValue(_statsString, _shotsFiredString, 0);
+		SaveStats();
+		LoadSettings();
 	}
 }
