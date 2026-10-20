@@ -40,7 +40,7 @@ public partial class Bestiary : MarginContainer
 		}
 		else
 		{
-			_tickLabel.Text = "No";
+			_babyLabel.Text = "No";
 		}
 
 	}

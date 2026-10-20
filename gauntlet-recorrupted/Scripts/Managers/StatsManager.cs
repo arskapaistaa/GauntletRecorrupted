@@ -37,7 +37,7 @@ public partial class StatsManager : Node
 	private string _shotsFiredString = "ShotsFired";
 	private string _roachKilledString = "RoachKilled";
 	private string _tickKilledString = "TickKilled";
-	private string _babyKilledString = "RoachKilled";
+	private string _babyKilledString = "BabyKilled";
 
 	private bool _roachKilled = false;
 	private bool _tickKilled = false;
