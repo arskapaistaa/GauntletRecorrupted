@@ -9,19 +9,6 @@ public partial class GameManager : Node
 		private set;
 	}
 
-	public GameManager()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else if (Instance != this)
-		{
-			QueueFree();
-			return;
-		}
-	}
-
 	private int _kills;
 	private int _deaths;
 	private int _shotsFired;
@@ -33,6 +20,19 @@ public partial class GameManager : Node
 		set { Mathf.Clamp(_currentLevel, 1, 10); }
 		get { return _currentLevel; }
 	}
+
+    public override sealed void _Ready()
+    {
+        if (Instance == null)
+		{
+			Instance = this;
+		}
+		else if (Instance != this)
+		{
+			QueueFree();
+			return;
+		}
+    }
 
 	/// <summary>
 	/// Call "On" methods when you want to collect stats.
