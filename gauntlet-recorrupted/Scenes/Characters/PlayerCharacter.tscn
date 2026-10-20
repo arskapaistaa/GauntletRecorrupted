@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b133q6jb0onj1" path="res://Art/ConeLightShape.png" id="4_ci7sc"]
 [ext_resource type="Script" uid="uid://bhom7vtl6kd5b" path="res://Scripts/UI/Camera.cs" id="5_kkncw"]
 [ext_resource type="PackedScene" uid="uid://ctf84d65x3l3m" path="res://Scenes/Particles/Dust.tscn" id="6_8cky6"]
+[ext_resource type="Texture2D" uid="uid://04tv05vanndb" path="res://Art/UserInterface/pointer.png" id="8_4t8qp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c32ia"]
 animations = [{
@@ -116,3 +117,9 @@ ShotgunShakeIntensity = 1.5
 [node name="Particles" type="Node2D" parent="." unique_id=2092290381]
 
 [node name="Dust" parent="Particles" unique_id=1882848814 instance=ExtResource("6_8cky6")]
+
+[node name="AimArrow" type="Sprite2D" parent="." unique_id=1320463123]
+position = Vector2(141.79654, -3.5858466e-07)
+rotation = 1.5707964
+scale = Vector2(2, 3.93)
+texture = ExtResource("8_4t8qp")

@@ -130,12 +130,13 @@ position = Vector2(520, 887)
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
-[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles") instance=ExtResource("10_uicjp")]
+[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("10_uicjp")]
 position = Vector2(-3087, -1797)
 RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegion2D/TileMap/DiggableTiles")
+CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -4057
 limit_top = -2793
 limit_right = 3571
@@ -144,8 +145,6 @@ limit_bottom = 2267
 [node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("11_srom3")]
 
 [node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("12_7mlpp")]
-z_index = 3
-position = Vector2(-112, -184)
 PlayerCharacter = NodePath("../Player")
 
 [editable path="Player"]

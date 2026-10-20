@@ -144,12 +144,12 @@ lifetime = 6.0
 visibility_rect = Rect2(-2400, -1200, 4800, 2400)
 process_material = SubResource("ParticleProcessMaterial_sopei")
 
-[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles") instance=ExtResource("3_atvrt")]
-z_index = 1
+[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("3_atvrt")]
 position = Vector2(-3087, -1797)
 DiggableTiles = NodePath("../Environment/NavigationRegion2D/TileMap/DiggableTiles")
+CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -4057
 limit_top = -2793
 limit_right = 3571

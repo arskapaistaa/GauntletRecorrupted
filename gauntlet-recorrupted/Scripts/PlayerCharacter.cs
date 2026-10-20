@@ -6,28 +6,29 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportCategory("Stats")]
 	[ExportGroup("Player Stats")]
-	[Export(PropertyHint.Range, "0,1000,10")] public float Speed = 300.0f;
-	[Export(PropertyHint.Range, "0,100,1")] public int Health = 100;
-	[Export(PropertyHint.Range, "0,100,1")] public int MeleeDamage = 10;
-	[Export(PropertyHint.Range, "0,5,0.1")] public float MeleeCooldown = 0.5f;
+	[Export(PropertyHint.Range, "0,1000,10")] private float Speed = 300.0f;
+	[Export(PropertyHint.Range, "0,100,1")] private int Health = 100;
+	[Export(PropertyHint.Range, "0,100,1")] private int MeleeDamage = 10;
+	[Export(PropertyHint.Range, "0,5,0.1")] private float MeleeCooldown = 0.5f;
 	[ExportGroup("Weapon Stats")]
-	[Export(PropertyHint.Range, "0,10,0.1")] public float RevolverCooldown = 0.5f;
-	[Export(PropertyHint.Range, "0,10,0.1")] public float RevolverReloadTime = 2.0f;
-	[Export(PropertyHint.Range, "0,10,0.1")] public float ShotgunCooldown = 1.0f;
-	[Export(PropertyHint.Range, "0,70,1.0")] public float ShotgunSpreadAngle = 15.0f;
-	[Export(PropertyHint.Range, "0,50,1")] public int ShotgunPelletCount = 10;
-	[Export(PropertyHint.Range, "0,10,0.1")] public float ShotgunReloadTime = 1.0f;
-	[Export(PropertyHint.Range, "0,50000,500")] public float RecoilForce = 1000.0f;
-	[Export(PropertyHint.Range, "0,50000,100")] public float KnockbackDecay = 12500.0f;
-	[Export(PropertyHint.Enum, "Revolver,Shotgun")] public int WeaponType = 0;
+	[Export(PropertyHint.Range, "0,10,0.1")] private float RevolverCooldown = 0.5f;
+	[Export(PropertyHint.Range, "0,10,0.1")] private float RevolverReloadTime = 2.0f;
+	[Export(PropertyHint.Range, "0,10,0.1")] private float ShotgunCooldown = 1.0f;
+	[Export(PropertyHint.Range, "0,70,1.0")] private float ShotgunSpreadAngle = 15.0f;
+	[Export(PropertyHint.Range, "0,50,1")] private int ShotgunPelletCount = 10;
+	[Export(PropertyHint.Range, "0,10,0.1")] private float ShotgunReloadTime = 1.0f;
+	[Export(PropertyHint.Range, "0,50000,500")] private float RecoilForce = 1000.0f;
+	[Export(PropertyHint.Range, "0,50000,100")] private float KnockbackDecay = 12500.0f;
+	[Export(PropertyHint.Enum, "Revolver,Shotgun")] private int WeaponType = 0;
 
 	[ExportCategory("Node References")]
-	[Export] public PackedScene BulletScene;
-	[Export] public TileMapLayer DiggableTiles;
-	[Export] public Marker2D MuzzlePoint;
-	[Export] public PackedScene BreakEffectScene;
-	[Export] public AnimatedSprite2D PlayerSprite;
-	[Export] public Area2D MeleeArea;
+	[Export] private PackedScene BulletScene;
+	[Export] private TileMapLayer DiggableTiles;
+	[Export] private Marker2D MuzzlePoint;
+	[Export] private PackedScene BreakEffectScene;
+	[Export] private AnimatedSprite2D PlayerSprite;
+	[Export] private Area2D MeleeArea;
+	[Export] private Cursor CustomCursor;
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
 	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
@@ -51,6 +52,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool isReloading = false;
 	private bool isLiving = true;
 	private float _meleeCooldown = 0;
+	private bool _usingController = false;
 
 	public enum FacingDirection
 	{
@@ -81,9 +83,24 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_usingController)
+			CustomCursor.Visible = false;
+		if (!_usingController)
+			CustomCursor.Visible = true;
 		if (isLiving)
 		{
-			LookAt(GetGlobalMousePosition());
+			if (_usingController)
+			{
+				Vector2 aimInput = Input.GetVector("AimLeft", "AimRight", "AimUp", "AimDown", 0.5f);
+				if (aimInput != Vector2.Zero)
+				{
+					GlobalRotation = aimInput.Angle();
+				}
+			}
+			else
+			{
+				LookAt(GetGlobalMousePosition());
+			}
 		}
 		Vector2 velocity = _moveVelocity;
 		float currentSpeed = Speed * _reloadSpeedMultiplier;
@@ -126,6 +143,22 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		HandleInputs();
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventJoypadMotion joypadMotion && Mathf.Abs(joypadMotion.AxisValue) > 0.3f)
+		{
+			_usingController = true;
+		}
+		else if (@event is InputEventJoypadButton)
+		{
+			_usingController = true;
+		}
+		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton)
+		{
+			_usingController = false;
+		}
 	}
 
 	public void HandleInputs()
@@ -294,13 +327,25 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			return;
 		}
-		Vector2 aimDirection = (GetGlobalMousePosition() - MuzzlePoint.GlobalPosition).Normalized();
+
+		Vector2 aimDirection;
+		if (_usingController)
+		{
+			aimDirection = GlobalTransform.X.Normalized();
+		}
+		else
+		{
+			aimDirection = (GetGlobalMousePosition() - MuzzlePoint.GlobalPosition).Normalized();
+		}
+
 		if (WeaponType == 0)
 		{
+			Input.StartJoyVibration(0, 0.5f, 0.7f, 0.13f);
 			SpawnBullet(aimDirection);
 		}
 		else if (WeaponType == 1)
 		{
+			Input.StartJoyVibration(0, 1.0f, 1.0f, 0.2f);
 			for (int i = 0; i < ShotgunPelletCount; i++)
 			{
 				float angleOffset = Mathf.Lerp(-ShotgunSpreadAngle / 2, ShotgunSpreadAngle / 2, (float)i / (ShotgunPelletCount - 1));
