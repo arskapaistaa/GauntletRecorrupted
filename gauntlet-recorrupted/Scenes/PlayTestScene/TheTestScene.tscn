@@ -68,6 +68,7 @@ sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 script = ExtResource("1_6sk6n")
 _maxTotalEnemyCount = 20
 _spawnerCount = 2
+_presetEnemyCount = 5
 _navRegion = NodePath("Environment/NavigationRegion2D")
 Player = NodePath("Player")
 

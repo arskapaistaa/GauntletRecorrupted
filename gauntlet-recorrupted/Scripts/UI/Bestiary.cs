@@ -6,6 +6,7 @@ public partial class Bestiary : MarginContainer
 	[Export] private Label _roachLabel = null;
 	[Export] private Label _tickLabel = null;
 	[Export] private Label _babyLabel = null;
+
 	public override void _Ready()
 	{
 		CheckBestiaryStatus();
