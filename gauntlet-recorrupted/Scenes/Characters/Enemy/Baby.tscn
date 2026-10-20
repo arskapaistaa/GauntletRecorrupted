@@ -222,6 +222,16 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0f3r"]
 size = Vector2(72, 78)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8rpmh"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_we0x6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w0f3r"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ft301"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h88i4"]
+
 [node name="Baby" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
@@ -292,3 +302,25 @@ debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=140824790]
 target_position = Vector2(50, 0)
 collision_mask = 5
+
+[node name="Audios" type="Node" parent="." unique_id=265812572]
+
+[node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1000198320]
+stream = SubResource("AudioStreamRandomizer_8rpmh")
+bus = &"SFX"
+
+[node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1711281695]
+stream = SubResource("AudioStreamRandomizer_we0x6")
+bus = &"SFX"
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1984125170]
+stream = SubResource("AudioStreamRandomizer_w0f3r")
+bus = &"SFX"
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1638979096]
+stream = SubResource("AudioStreamRandomizer_ft301")
+bus = &"SFX"
+
+[node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2072971563]
+stream = SubResource("AudioStreamRandomizer_h88i4")
+bus = &"SFX"

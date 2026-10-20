@@ -459,6 +459,61 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	public void UpdateAudio()
+	{
+		switch (_brain.CurrentState)
+		{
+			case Brain.State.Spawning:
+				break;
+
+			case Brain.State.Idle:
+
+				break;
+
+			case Brain.State.Chase:
+				if (_movementSfx != null)
+				{
+					_movementSfx.Play();
+				}
+				break;
+
+			case Brain.State.Patrol:
+				if (_movementSfx != null)
+				{
+					_movementSfx.Play();
+				}
+				break;
+
+			case Brain.State.Notice:
+				if (_noticeSfx != null)
+				{
+					_noticeSfx.Play();
+				}
+				break;
+
+			case Brain.State.Attack:
+				if (_attackSfx != null)
+				{
+					_attackSfx.Play();
+				}
+				break;
+
+			case Brain.State.Damaged:
+				if (_damagedSfx != null)
+				{
+					_damagedSfx.Play();
+				}
+				break;
+
+			case Brain.State.Defeat:
+				if (_defeatSfx != null)
+				{
+					_defeatSfx.Play();
+				}
+				break;
+		}
+	}
+
 	public void TakeDmg(int dmg)
 	{
 		_brain.Damaged();
