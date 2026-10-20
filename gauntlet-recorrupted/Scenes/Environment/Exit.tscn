@@ -1,25 +1,115 @@
 [gd_scene format=3 uid="uid://fpolu3ovr3ti"]
 
 [ext_resource type="Script" uid="uid://l7wt5o3lscwv" path="res://Scripts/Environment/Exit.cs" id="1_cilr6"]
-[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_3cp03"]
+[ext_resource type="Texture2D" uid="uid://hlvtra4hg7ep" path="res://Art/Environment/ArtExit.png" id="2_3cp03"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv5yy"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43o76"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us1eo"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjloe"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2mb3"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylyon"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8p77"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtn66"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go103"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pal8"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqcih"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2rib"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rubwu"]
+atlas = ExtResource("2_3cp03")
+region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3cp03"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3cp03")
+"texture": SubResource("AtlasTexture_cv5yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43o76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us1eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjloe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2mb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylyon")
 }],
-"loop": 1,
-"name": &"Ready",
+"loop": 0,
+"name": &"Open",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3cp03")
+"texture": SubResource("AtlasTexture_i8p77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtn66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go103")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2pal8")
+}],
+"loop": 1,
+"name": &"Ready",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqcih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2rib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rubwu")
 }],
 "loop": 1,
 "name": &"UnReady",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
@@ -28,13 +118,15 @@ size = Vector2(256, 256)
 [node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
-_sprite = NodePath("AnimatedSprite2D")
 _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
+_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
 modulate = Color(1, 0.67045194, 0.71346325, 1)
 sprite_frames = SubResource("SpriteFrames_3cp03")
-animation = &"Ready"
+animation = &"UnReady"
+autoplay = "UnReady"
+frame_progress = 0.9163409
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
 shape = SubResource("RectangleShape2D_sopei")
