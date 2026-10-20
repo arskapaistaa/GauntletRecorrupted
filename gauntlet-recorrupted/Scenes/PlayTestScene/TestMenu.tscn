@@ -18,6 +18,8 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
+
 [node name="TestMenu" type="Control" unique_id=205651718]
 layout_mode = 3
 anchors_preset = 15
@@ -47,39 +49,46 @@ size_flags_vertical = 4
 texture = ExtResource("2_ootpn")
 stretch_mode = 2
 
-[node name="MainMenu" type="MarginContainer" parent="." unique_id=337710236]
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -29.0
+offset_right = 51.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_cg106")
-
-[node name="Vbox" type="VBoxContainer" parent="MainMenu" unique_id=1899801517]
-layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenu/Vbox" unique_id=843433484]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons" unique_id=843433484]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_cg106")
 theme_override_constants/separation = 16
 
-[node name="Play" type="Button" parent="MainMenu/Vbox/VBoxContainer2" unique_id=132127129]
+[node name="Play" type="Button" parent="Buttons/VBoxContainer2" unique_id=132127129]
 layout_mode = 2
 text = "PLAY"
 script = ExtResource("2_ikpte")
 _pathToScene = "res://Scenes/PlayTestScene/TheTestScene.tscn"
 
-[node name="Options" type="Button" parent="MainMenu/Vbox/VBoxContainer2" unique_id=1176741912]
+[node name="Options" type="Button" parent="Buttons/VBoxContainer2" unique_id=1176741912]
 layout_mode = 2
 text = "OPTIONS"
 script = ExtResource("2_ikpte")
 
-[node name="Stats" type="MarginContainer" parent="." unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+[node name="ResetStats" type="Button" parent="Buttons/VBoxContainer2" unique_id=642283795]
+layout_mode = 2
+text = "RESET STATS"
+script = ExtResource("2_ikpte")
+
+[node name="Stats" type="MarginContainer" parent="." unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -95,6 +104,7 @@ script = ExtResource("4_5ve7l")
 _killsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Deaths")
 _shotsFiredLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ShotsFired")
+_resetStatsButton = NodePath("../Buttons/VBoxContainer2/ResetStats")
 
 [node name="PanelContainer" type="Panel" parent="Stats" unique_id=144935517]
 layout_mode = 2
@@ -333,3 +343,4 @@ script = ExtResource("5_ggxpc")
 script = ExtResource("6_q8jds")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
+libraries/ = SubResource("AnimationLibrary_j8qme")

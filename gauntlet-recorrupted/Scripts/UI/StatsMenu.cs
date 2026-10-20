@@ -6,10 +6,16 @@ public partial class StatsMenu : MarginContainer
 	[Export] private Label _killsLabel = null;
 	[Export] private Label _deathsLabel = null;
 	[Export] private Label _shotsFiredLabel = null;
+	[Export] private Button _resetStatsButton = null;
 
 	public override void _Ready()
 	{
 		UpdateLabels();
+
+		if (_resetStatsButton != null)
+		{
+			_resetStatsButton.Pressed += OnButtonPressed;
+		}
 	}
 
 	/// <summary>
@@ -43,5 +49,11 @@ public partial class StatsMenu : MarginContainer
 		{
 			GD.PrintErr("Missing ShotsFired label");
 		}
+	}
+
+	public void OnButtonPressed()
+	{
+		StatsManager.Instance.ResetStats();
+		UpdateLabels();
 	}
 }
