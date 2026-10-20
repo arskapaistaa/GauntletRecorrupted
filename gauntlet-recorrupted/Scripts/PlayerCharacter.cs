@@ -8,6 +8,8 @@ public partial class PlayerCharacter : CharacterBody2D
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "0,1000,10")] public float Speed = 300.0f;
 	[Export(PropertyHint.Range, "0,100,1")] public int Health = 100;
+	[Export(PropertyHint.Range, "0,100,1")] public int MeleeDamage = 10;
+	[Export(PropertyHint.Range, "0,5,0.1")] public float MeleeCooldown = 0.5f;
 	[ExportGroup("Weapon Stats")]
 	[Export(PropertyHint.Range, "0,10,0.1")] public float RevolverCooldown = 0.5f;
 	[Export(PropertyHint.Range, "0,10,0.1")] public float RevolverReloadTime = 2.0f;
@@ -25,6 +27,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] public Marker2D MuzzlePoint;
 	[Export] public PackedScene BreakEffectScene;
 	[Export] public AnimatedSprite2D PlayerSprite;
+	[Export] public Area2D MeleeArea;
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
 	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
@@ -47,6 +50,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private Vector2I playerCell;
 	private bool isReloading = false;
 	private bool isLiving = true;
+	private float _meleeCooldown = 0;
 
 	public enum FacingDirection
 	{
@@ -100,6 +104,14 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (isLiving)
 		{
 			MoveAndSlide();
+		}
+		if (_meleeCooldown > 0)
+		{
+			_meleeCooldown -= (float)delta;
+		}
+		else
+		{
+			_meleeCooldown = 0;
 		}
 
 		if (_shootTimer > 0)
@@ -234,7 +246,36 @@ public partial class PlayerCharacter : CharacterBody2D
 				GD.Print("Cannot dig while dead");
 				return;
 			}
-			Dig();
+			if (_meleeCooldown > 0)
+			{
+				foreach (Node2D node in MeleeArea.GetOverlappingBodies())
+				{
+					if (node is Enemy e)
+					{
+						return;
+					}
+				}
+				Dig();
+				return;
+			}
+			bool hitEnemy = false;
+			foreach (Node2D node in MeleeArea.GetOverlappingBodies())
+			{
+				if (node is Enemy e)
+				{
+					e.TakeDmg(MeleeDamage);
+					hitEnemy = true;
+					GD.Print("Hit enemy with melee attack");
+				}
+			}
+			if (hitEnemy)
+			{
+				_meleeCooldown = MeleeCooldown;
+			}
+			else
+			{
+				Dig();
+			}
 		}
 
 		if (Input.IsActionJustPressed("Peek"))

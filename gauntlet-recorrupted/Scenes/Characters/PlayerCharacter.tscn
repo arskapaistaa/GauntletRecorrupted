@@ -17,10 +17,21 @@ animations = [{
 "loop": 1,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ci7sc")
+}],
+"loop": 1,
+"name": &"dig",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2o20b"]
 radius = 64.629715
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk2iv"]
+size = Vector2(163, 130)
 
 [sub_resource type="Gradient" id="Gradient_ci7sc"]
 offsets = PackedFloat32Array(0.428, 1)
@@ -32,15 +43,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.20809248, 0.216763)
 
-<<<<<<< HEAD
-[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite")]
-=======
-[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint")]
+[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea")]
 z_index = 1
->>>>>>> main
 collision_mask = 6
 script = ExtResource("1_nu4k2")
 Speed = 600.0
+MeleeDamage = 5
 RevolverCooldown = 0.2
 RevolverReloadTime = 3.0
 ShotgunCooldown = 0.4
@@ -52,14 +60,25 @@ BulletScene = ExtResource("2_lp3jq")
 MuzzlePoint = NodePath("Muzzle Point")
 BreakEffectScene = ExtResource("3_8cky6")
 PlayerSprite = NodePath("AnimatedSprite2D")
+MeleeArea = NodePath("MeleeArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_c32ia")
+animation = &"dig"
+frame_progress = 0.6708041
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
 shape = SubResource("CircleShape2D_2o20b")
+
+[node name="MeleeArea" type="Area2D" parent="." unique_id=52027070]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea" unique_id=497819880]
+position = Vector2(81.5, 0)
+shape = SubResource("RectangleShape2D_rk2iv")
 
 [node name="Muzzle Point" type="Marker2D" parent="." unique_id=1117759917]
 
@@ -89,7 +108,6 @@ drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("5_kkncw")
-MaxLookDistance = 500.0
 PeekingSpeed = 6.0
 Player = NodePath("..")
 RevolverShakeIntensity = 1.0
