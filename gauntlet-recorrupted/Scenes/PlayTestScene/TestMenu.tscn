@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_cg106"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
+[ext_resource type="Texture2D" uid="uid://dk141q4wpe6gq" path="res://Art/UserInterface/LOGO.png" id="2_ootpn"]
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
@@ -32,7 +33,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cg106")
 
-[node name="MainMenu" type="MarginContainer" parent="Panel" unique_id=337710236]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1086189945]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 40.0
+offset_right = 425.0
+offset_bottom = 137.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_ootpn")
+stretch_mode = 2
+
+[node name="MainMenu" type="MarginContainer" parent="." unique_id=337710236]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,110 +53,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cg106")
 
-[node name="Vbox" type="VBoxContainer" parent="Panel/MainMenu" unique_id=1899801517]
+[node name="Vbox" type="VBoxContainer" parent="MainMenu" unique_id=1899801517]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MainMenu/Vbox" unique_id=1560006160]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MainMenu/Vbox/VBoxContainer" unique_id=817346537]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-bbcode_enabled = true
-text = "[wave]Gauntlet Recorrupted"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MainMenu/Vbox" unique_id=843433484]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenu/Vbox" unique_id=843433484]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_cg106")
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="Panel/MainMenu/Vbox/VBoxContainer2" unique_id=881811652]
+[node name="Play" type="Button" parent="MainMenu/Vbox/VBoxContainer2" unique_id=132127129]
 layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "Test scenes"
-
-[node name="Button" type="Button" parent="Panel/MainMenu/Vbox/VBoxContainer2" unique_id=132127129]
-layout_mode = 2
-text = "Tick"
+text = "PLAY"
 script = ExtResource("2_ikpte")
-_pathToScene = "res://Scenes/PlayTestScene/TickTestScene.tscn"
+_pathToScene = "res://Scenes/PlayTestScene/TheTestScene.tscn"
+_pathToSceneMode = 1
 
-[node name="Button2" type="Button" parent="Panel/MainMenu/Vbox/VBoxContainer2" unique_id=1176741912]
+[node name="Options" type="Button" parent="MainMenu/Vbox/VBoxContainer2" unique_id=1176741912]
 layout_mode = 2
-text = "Roach"
+text = "OPTIONS"
 script = ExtResource("2_ikpte")
 _pathToScene = "res://Scenes/PlayTestScene/RoachTestScene.tscn"
-
-[node name="Options" type="MarginContainer" parent="Panel" unique_id=1308395627]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_d61wr")
-
-[node name="PanelContainer" type="Panel" parent="Panel/Options" unique_id=1457671479]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
-
-[node name="Stats" type="MarginContainer" parent="Panel" unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -160.0
-offset_right = 160.0
-grow_vertical = 0
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 80
-script = ExtResource("4_5ve7l")
-_killsLabel = NodePath("PanelContainer/HBoxContainer/Kills")
-_deathsLabel = NodePath("PanelContainer/HBoxContainer/Deaths")
-_shotsFiredLabel = NodePath("PanelContainer/HBoxContainer/ShotsFired")
-
-[node name="PanelContainer" type="Panel" parent="Panel/Stats" unique_id=144935517]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/PanelContainer" unique_id=2131987139]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.5
-offset_top = -11.5
-offset_right = 5.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Kills" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=390686524]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "0"
-
-[node name="Deaths" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=1560595271]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "0"
-
-[node name="ShotsFired" type="Label" parent="Panel/Stats/PanelContainer/HBoxContainer" unique_id=907336537]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "0"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
@@ -156,3 +88,159 @@ script = ExtResource("5_ggxpc")
 
 [node name="GameManager" type="Node" parent="Managers" unique_id=472901907]
 script = ExtResource("6_q8jds")
+
+[node name="Options" type="MarginContainer" parent="." unique_id=1308395627 node_paths=PackedStringArray("_displayMode", "_resolution")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_d61wr")
+_displayMode = NodePath("PanelContainer/HBoxContainer/VideoOptions/DisplayMode")
+_resolution = NodePath("PanelContainer/HBoxContainer/VideoOptions/Resolution")
+
+[node name="PanelContainer" type="Panel" parent="Options" unique_id=1457671479]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/PanelContainer" unique_id=368357455]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoOptions" type="VBoxContainer" parent="Options/PanelContainer/HBoxContainer" unique_id=1821460599]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="DisplayMode" type="OptionButton" parent="Options/PanelContainer/HBoxContainer/VideoOptions" unique_id=574635929]
+layout_mode = 2
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless window"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+
+[node name="Resolution" type="OptionButton" parent="Options/PanelContainer/HBoxContainer/VideoOptions" unique_id=659086223]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "1280 x 720"
+popup/item_0/id = 0
+popup/item_1/text = "1960 x 1080"
+popup/item_1/id = 1
+
+[node name="AudioOptions" type="VBoxContainer" parent="Options/PanelContainer/HBoxContainer" unique_id=134338871]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Master" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1007610259]
+layout_mode = 2
+text = "Master"
+
+[node name="HSlider" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1824834350]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=265546990]
+layout_mode = 2
+text = "Music"
+
+[node name="HSlider2" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=68985266]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=691604112]
+layout_mode = 2
+text = "SFX"
+
+[node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
+layout_mode = 2
+
+[node name="Stats" type="MarginContainer" parent="." unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -231.0
+offset_right = 110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 20
+script = ExtResource("4_5ve7l")
+_killsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Kills")
+_deathsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Deaths")
+_shotsFiredLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ShotsFired")
+
+[node name="PanelContainer" type="Panel" parent="Stats" unique_id=144935517]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_cg106")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/PanelContainer" unique_id=2139475165]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -31.0
+offset_right = 79.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="Stats/PanelContainer/VBoxContainer" unique_id=1553196200]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/PanelContainer/VBoxContainer" unique_id=2131987139]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Kills" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=390686524]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
+
+[node name="Deaths" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1560595271]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
+
+[node name="ShotsFired" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=907336537]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
