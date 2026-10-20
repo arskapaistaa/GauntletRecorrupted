@@ -10,19 +10,6 @@ public partial class SettingsManager : Node
 		private set;
 	}
 
-	public SettingsManager()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else if (Instance != this)
-		{
-			QueueFree();
-			return;
-		}
-	}
-
 	// List of resolutions.
 	private List<Vector2I> _resolutions = new()
 	{
@@ -42,6 +29,16 @@ public partial class SettingsManager : Node
 
 	public override void _Ready()
 	{
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else if (Instance != this)
+		{
+			QueueFree();
+			return;
+		}
+
 		_masterBusIndex = AudioServer.GetBusIndex("Master");
 		_sfxBusIndex = AudioServer.GetBusIndex("SFX");
 		_musicBusIndex = AudioServer.GetBusIndex("Music");

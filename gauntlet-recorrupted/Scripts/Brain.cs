@@ -92,7 +92,7 @@ public partial class Brain : Node
 
 		Level.Current.ChangeEnemyCount(-1);
 
-		GameManager.Instance.OnKillsChanged();
+		GameManager.Instance.OnKillsChanged(_enemy.ThisEnemyType.ToString());
 	}
 
 	public void AfterDamaged()

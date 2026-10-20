@@ -9,19 +9,6 @@ public partial class GameManager : Node
 		private set;
 	}
 
-	public GameManager()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else if (Instance != this)
-		{
-			QueueFree();
-			return;
-		}
-	}
-
 	private int _kills;
 	private int _deaths;
 	private int _shotsFired;
@@ -34,15 +21,37 @@ public partial class GameManager : Node
 		get { return _currentLevel; }
 	}
 
+	// Even this is a public, set it with SetGameState();
+	public GameState CurrentGameState = GameState.Menu;
+	public enum GameState
+	{
+		Menu, // Call from MainMenu _Ready(),
+		Game, 	  // Call when the Player enter in main game. Also when exits from Pause menu
+		Pause,	  // Call when player presses Pause input.
+		End		  // Call when game ends -> Player dies or finishes the game.
+	}
+    public override sealed void _Ready()
+    {
+        if (Instance == null)
+		{
+			Instance = this;
+		}
+		else if (Instance != this)
+		{
+			QueueFree();
+			return;
+		}
+    }
+
 	/// <summary>
 	/// Call "On" methods when you want to collect stats.
 	/// Like after shooting, enemy dies or player dies.
 	/// </summary>
 	/// <returns></returns>
-	public void OnKillsChanged()
+	public void OnKillsChanged(string enemyType)
 	{
 		_kills++;
-		StatsManager.Instance.OnKillsChanged();
+		StatsManager.Instance.OnKillsChanged(enemyType);
 	}
 
 	public void OnDeathsChanged()
@@ -82,6 +91,12 @@ public partial class GameManager : Node
 	public int GetShotsFired()
 	{
 		return _shotsFired;
+	}
+
+	public void SetGameState(GameState state)
+	{
+		CurrentGameState = state;
+		GD.Print(CurrentGameState.ToString());
 	}
 
 	/// <summary>
