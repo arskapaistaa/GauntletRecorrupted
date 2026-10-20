@@ -21,6 +21,15 @@ public partial class GameManager : Node
 		get { return _currentLevel; }
 	}
 
+	// Even this is a public, set it with SetGameState();
+	public GameState CurrentGameState = GameState.Menu;
+	public enum GameState
+	{
+		Menu, // Call from MainMenu _Ready(),
+		Game, 	  // Call when the Player enter in main game. Also when exits from Pause menu
+		Pause,	  // Call when player presses Pause input.
+		End		  // Call when game ends -> Player dies or finishes the game.
+	}
     public override sealed void _Ready()
     {
         if (Instance == null)
@@ -82,6 +91,12 @@ public partial class GameManager : Node
 	public int GetShotsFired()
 	{
 		return _shotsFired;
+	}
+
+	public void SetGameState(GameState state)
+	{
+		CurrentGameState = state;
+		GD.Print(CurrentGameState.ToString());
 	}
 
 	/// <summary>

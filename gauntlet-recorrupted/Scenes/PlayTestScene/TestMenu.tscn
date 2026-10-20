@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfmj0l8f6okh5"]
 
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_cg106"]
+[ext_resource type="Script" uid="uid://cwv474lclofjf" path="res://Scripts/UI/MainMenu.cs" id="1_t3rra"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
 [ext_resource type="Texture2D" uid="uid://dk141q4wpe6gq" path="res://Art/UserInterface/LOGO.png" id="2_ootpn"]
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
@@ -24,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t3rra")
 
 [node name="Panel" type="Panel" parent="." unique_id=681929277]
 layout_mode = 1
@@ -217,7 +219,7 @@ text = "Baby"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 32
+theme_override_constants/separation = 50
 
 [node name="RoachYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=471874157]
 layout_mode = 2
