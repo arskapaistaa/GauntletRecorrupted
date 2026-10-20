@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
+[ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="5_7512y"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
 
@@ -142,6 +143,94 @@ layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
 
+[node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -231.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 20
+script = ExtResource("5_7512y")
+_roachLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/RoachYesNo")
+_tickLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/TickYesNo")
+_babyLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/BabyYesNo")
+
+[node name="PanelContainer" type="Panel" parent="Bestiary" unique_id=1109178975]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_cg106")
+theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Bestiary/PanelContainer" unique_id=814736784]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -31.0
+offset_right = 79.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=1942649462]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Bestiary"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=803825904]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Roach" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1744741776]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Roach"
+
+[node name="Tick" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1113705727]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Tick"
+
+[node name="Baby" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1672198188]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Baby"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=746077657]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="RoachYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=471874157]
+layout_mode = 2
+text = "No"
+
+[node name="TickYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=52754085]
+layout_mode = 2
+text = "No"
+
+[node name="BabyYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1638287457]
+layout_mode = 2
+text = "No"
+
 [node name="Options" type="MarginContainer" parent="." unique_id=1308395627 node_paths=PackedStringArray("_displayMode", "_resolution", "_masterVolume", "_sfxVolume", "_musicVolume")]
 visible = false
 layout_mode = 1
@@ -197,6 +286,7 @@ popup/item_2/id = 2
 
 [node name="Resolution" type="OptionButton" parent="Options/PanelContainer/HBoxContainer/VideoOptions" unique_id=659086223]
 layout_mode = 2
+selected = 1
 item_count = 2
 popup/item_0/text = "1280 x 720"
 popup/item_0/id = 0

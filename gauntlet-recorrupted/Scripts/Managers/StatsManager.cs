@@ -43,10 +43,12 @@ public partial class StatsManager : Node
 	private bool _tickKilled = false;
 	private bool _babyKilled = false;
 
-	public void OnKillsChanged()
+	public void OnKillsChanged(string enemyType)
 	{
 		_kills++;
 		_statsConfig.SetValue(_statsString, _killsString, _kills);
+
+		CheckEnemyKilledStatus(enemyType);
 		SaveStats();
 	}
 
@@ -101,6 +103,22 @@ public partial class StatsManager : Node
 				{
 					_roachKilled = true;
 					_statsConfig.SetValue(_statsString, _roachKilledString, _roachKilled);
+				}
+				break;
+
+			case "Tick":
+				if (!_tickKilled)
+				{
+					_tickKilled = true;
+					_statsConfig.SetValue(_statsString, _tickKilledString, _tickKilled);
+				}
+				break;
+
+			case "Baby":
+				if (!_babyKilled)
+				{
+					_babyKilled = true;
+					_statsConfig.SetValue(_statsString, _babyKilledString, _babyKilled);
 				}
 				break;
 		}

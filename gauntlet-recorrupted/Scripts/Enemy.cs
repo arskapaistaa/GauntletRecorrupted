@@ -63,6 +63,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		Roach,
 		Tick,
+		Baby,
 		Worm
 	}
 

@@ -39,10 +39,10 @@ public partial class GameManager : Node
 	/// Like after shooting, enemy dies or player dies.
 	/// </summary>
 	/// <returns></returns>
-	public void OnKillsChanged()
+	public void OnKillsChanged(string enemyType)
 	{
 		_kills++;
-		StatsManager.Instance.OnKillsChanged();
+		StatsManager.Instance.OnKillsChanged(enemyType);
 	}
 
 	public void OnDeathsChanged()
