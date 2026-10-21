@@ -18,7 +18,59 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Animation" id="Animation_t3rra"]
+resource_name = "CloseOptions"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Options:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j8qme"]
+resource_name = "OpenOptions"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Options:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ux8os"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Options:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
+_data = {
+&"CloseOptions": SubResource("Animation_t3rra"),
+&"OpenOptions": SubResource("Animation_j8qme"),
+&"RESET": SubResource("Animation_ux8os")
+}
 
 [node name="TestMenu" type="Control" unique_id=205651718]
 layout_mode = 3
@@ -72,19 +124,21 @@ size_flags_vertical = 4
 theme = ExtResource("1_cg106")
 theme_override_constants/separation = 16
 
-[node name="Play" type="Button" parent="Buttons/VBoxContainer2" unique_id=132127129]
+[node name="PlayBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=132127129]
 layout_mode = 2
 text = "PLAY"
 script = ExtResource("2_ikpte")
 _pathToScene = "res://Scenes/PlayTestScene/TheTestScene.tscn"
 _isGrabFocus = true
 
-[node name="Options" type="Button" parent="Buttons/VBoxContainer2" unique_id=1176741912]
+[node name="OptionsBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=1176741912 node_paths=PackedStringArray("_animations")]
 layout_mode = 2
 text = "OPTIONS"
 script = ExtResource("2_ikpte")
+_animations = NodePath("../../../AnimationPlayer")
+_pressedAnimName = "OpenOptions"
 
-[node name="ResetStats" type="Button" parent="Buttons/VBoxContainer2" unique_id=642283795]
+[node name="ResetStatsBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=642283795]
 layout_mode = 2
 text = "RESET STATS"
 script = ExtResource("2_ikpte")
@@ -105,7 +159,7 @@ script = ExtResource("4_5ve7l")
 _killsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Deaths")
 _shotsFiredLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ShotsFired")
-_resetStatsButton = NodePath("../Buttons/VBoxContainer2/ResetStats")
+_resetStatsButton = NodePath("../Buttons/VBoxContainer2/ResetStatsBtn")
 
 [node name="PanelContainer" type="Panel" parent="Stats" unique_id=144935517]
 layout_mode = 2
@@ -250,10 +304,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_d61wr")
@@ -331,6 +381,21 @@ text = "SFX"
 
 [node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="Options/PanelContainer" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -54.0
+offset_right = 85.0
+offset_bottom = -27.0
+grow_vertical = 0
+text = "CLOSE"
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../../AnimationPlayer")
+_pressedAnimName = "CloseOptions"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
