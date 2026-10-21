@@ -36,6 +36,7 @@ project/assembly_name="Gauntlet Recorrupted"
 [global_group]
 
 Enemy=""
+Wurm=""
 
 [gui]
 
