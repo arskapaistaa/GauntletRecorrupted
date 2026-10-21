@@ -142,10 +142,13 @@ AimLeft={
 2d_render/layer_2="Enemy"
 2d_render/layer_3="Player"
 2d_physics/layer_1="Player"
+2d_navigation/layer_1="Basic"
 2d_physics/layer_2="Enemy"
+2d_navigation/layer_2="Wurm"
 2d_physics/layer_3="Environment"
 2d_physics/layer_4="Projectile"
 2d_physics/layer_5="Exit"
+2d_physics/layer_6="Wurm"
 
 [physics]
 
