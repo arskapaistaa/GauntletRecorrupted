@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_n6ubs"]
 [ext_resource type="PackedScene" uid="uid://bxvvl8lu0mqvs" path="res://Scenes/Characters/Enemy/Wurm.tscn" id="9_6sk6n"]
 [ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="9_567t2"]
+[ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="10_567t2"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="10_uicjp"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="11_srom3"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="12_7mlpp"]
@@ -67,8 +68,8 @@ sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_6sk6n")
 _maxTotalEnemyCount = 20
-_spawnerCount = 2
-_presetEnemyCount = 5
+_spawnerCount = 1
+_presetEnemyCount = 6
 _isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
@@ -89,10 +90,6 @@ navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 
 [node name="TickSpawner" parent="Environment/NavigationRegionBasic" unique_id=1930281201 instance=ExtResource("3_lpo5v")]
 position = Vector2(3229, 102)
-
-[node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=1034999544 instance=ExtResource("3_lpo5v")]
-position = Vector2(-303, 1011)
-rotation = -0.9477138
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 z_index = 2
@@ -130,10 +127,14 @@ position = Vector2(1561, 778)
 position = Vector2(-3186, 1161)
 
 [node name="Baby2" parent="Environment/Enemies" unique_id=2094612368 instance=ExtResource("9_567t2")]
-position = Vector2(520, 887)
+position = Vector2(-1035, 768)
 
-[node name="Wurm" parent="Environment" unique_id=1509925419 instance=ExtResource("9_6sk6n")]
+[node name="Wurm" parent="Environment/Enemies" unique_id=1509925419 instance=ExtResource("9_6sk6n")]
 position = Vector2(2213, -2150)
+
+[node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("10_567t2")]
+position = Vector2(837, -844)
+_currentLevel = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

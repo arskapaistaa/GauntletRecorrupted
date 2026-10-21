@@ -9,11 +9,11 @@ public partial class Exit : Area2D
 
 	public enum State
 	{
-		Unready,
+		UnReady,
 		Ready
 	}
 
-	public State CurrentState = State.Unready;
+	public State CurrentState = State.UnReady;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -36,6 +36,25 @@ public partial class Exit : Area2D
         BodyEntered -= OnBodyEntered;
 		_currentLevel.OnZeroSpawnerLeft -= OnZeroSpawnerLeft;
     }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        UpdateAnimations();
+    }
+
+	public void UpdateAnimations()
+	{
+		switch (CurrentState)
+		{
+			case State.UnReady:
+				_sprite.Play("UnReady");
+				break;
+
+			case State.Ready:
+				_sprite.Play("Ready");
+				break;
+		}
+	}
 
     private void OnBodyEntered(Node2D body)
     {

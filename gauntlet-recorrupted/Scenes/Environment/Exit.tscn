@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://l7wt5o3lscwv" path="res://Scripts/Environment/Exit.cs" id="1_cilr6"]
 [ext_resource type="Texture2D" uid="uid://hlvtra4hg7ep" path="res://Art/Environment/ArtExit.png" id="2_3cp03"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_cv5yy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cv5yy"]
 atlas = ExtResource("2_3cp03")
@@ -118,15 +119,16 @@ size = Vector2(256, 256)
 [node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
-_nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 _sprite = NodePath("AnimatedSprite2D")
+_nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
 modulate = Color(1, 0.67045194, 0.71346325, 1)
+material = ExtResource("2_cv5yy")
 sprite_frames = SubResource("SpriteFrames_3cp03")
 animation = &"UnReady"
 autoplay = "UnReady"
-frame_progress = 0.9163409
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
+visible = false
 shape = SubResource("RectangleShape2D_sopei")
