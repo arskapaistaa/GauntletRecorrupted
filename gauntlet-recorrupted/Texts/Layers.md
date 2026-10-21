@@ -6,7 +6,7 @@ Layer guide for collision and visibility.
 
 3 - UI elements
 
-2 - Walls
+2 - Walls, Spawners
 
 1 - Player, Enemies, Particles (Most of the time) & Bullet
 

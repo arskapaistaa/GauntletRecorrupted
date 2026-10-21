@@ -8,26 +8,34 @@ public partial class Enemy : CharacterBody2D
 
 	[ExportGroup("Stats")]
 
-	[Export(PropertyHint.Range, "1, 1000, 1")]
+	[Export(PropertyHint.Range, "1,1000,1")]
 	private float _health;
 
-	[Export(PropertyHint.Range, "100, 800, 10, suffix:Pixels/s")]
+	[Export(PropertyHint.Range, "100,800,10,suffix:Pixels/s")]
 	private float _maxSpeed;
 
-	[Export(PropertyHint.Range, "0, 1600, 10, suffix:Pixels/s")]
+	[Export(PropertyHint.Range, "0,1600,10,suffix:Pixels/s")]
 	private float _attackSpeed;
 
-	[Export(PropertyHint.Range, "200, 1500, 100, suffix:Pixels")]
+	[Export(PropertyHint.Range, "0,1500,100,suffix:Pixels")]
 	private float _detectionRange;
 
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "100, 600, 10, suffix:Pixels")]
+	[Export(PropertyHint.Range, "100,600,10,suffix:Pixels")]
 	private float _attackRange;
 
-	[Export(PropertyHint.Range, "0, 10000, 100, suffix:Pixels")]
+	[Export(PropertyHint.Range, "0,10000,100,suffix:Pixels")]
 	private float _alarmRange;
+
+	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
+	private float _patrolDistance;
+
+	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
+	private float _patrolAtleastDistance;
+
+	[Export] private bool _canBeAlarmed = true;
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
@@ -53,8 +61,6 @@ public partial class Enemy : CharacterBody2D
 	private bool _isAlive = true;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
-	private float _minPatrolDistance;
-	private float _maxPatrolDistance;
 	private EnemySpawner _homeSpawner = null;
 
 	// PUBLIC, NO EXPORT
@@ -70,7 +76,8 @@ public partial class Enemy : CharacterBody2D
 	public enum AttackType
 	{
 		Sting,
-		Leech
+		Leech,
+		Static
 	}
 
 	public EnemyType ThisEnemyType
@@ -78,7 +85,7 @@ public partial class Enemy : CharacterBody2D
 		get { return _enemyType; }
 	}
 
-	public AttackType ThisAttackState
+	public AttackType ThisAttackType
 	{
 		get { return _attackType; }
 	}
@@ -299,7 +306,7 @@ public partial class Enemy : CharacterBody2D
 	public void SetPatrolTarget()
 	{
 		// while (!isAllowed)
-		_agent.TargetPosition = GlobalPosition + RandomPosition(_minPatrolDistance, _maxPatrolDistance);
+		_agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
 
 		HasRoute = true;
 
@@ -315,10 +322,17 @@ public partial class Enemy : CharacterBody2D
 		LookAt(_agent.GetNextPathPosition());
 	}
 
-	public Vector2 RandomPosition(float min, float max)
+	/// <summary>
+	/// Helper method to get random position for patrolling.
+	/// </summary>
+	/// <param name="min">Min value</param>
+	/// <param name="max">Max value</param>
+	/// <param name="offset">If you want to have like move atleast 200px </param>
+	/// <returns></returns>
+	public Vector2 RandomPosition(float distance, float offset = default)
 	{
-		float x = (float)GD.RandRange(min, max);
-		float y = (float)GD.RandRange(min, max);
+		float x = (float)GD.RandRange(-distance - offset, distance + offset);
+		float y = (float)GD.RandRange(-distance - offset, distance + offset);
 
 		Vector2 position = new Vector2(x, y);
 
@@ -346,7 +360,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		UpdateDamageArea();
 
-		if (ThisAttackState == AttackType.Leech)
+		if (ThisAttackType == AttackType.Leech)
 		{
 			if (CheckAttackAnimation())
 			{
@@ -532,7 +546,10 @@ public partial class Enemy : CharacterBody2D
 		HasRoute = false;
 
 		// Stop monitoring the damage area to prevent bugs.
-		_dmgArea.Monitoring = false;
+		if (ThisEnemyType != EnemyType.Worm)
+		{
+			_dmgArea.Monitoring = false;
+		}
 	}
 
 	public void AlarmBuddies()
@@ -553,7 +570,15 @@ public partial class Enemy : CharacterBody2D
 
 	private void Alarmed()
 	{
-		_brain.Alarmed();
+		if (_canBeAlarmed)
+		{
+			_brain.Alarmed();
+		}
+	}
+
+	public void WakeUp()
+	{
+		_brain.GetWakedUp();
 	}
 
 	public bool HasLineOfSight()
@@ -597,8 +622,6 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-
-
     private void OnBodyEntered(Node2D body)
     {
         if (body is PlayerCharacter player)
@@ -637,12 +660,6 @@ public partial class Enemy : CharacterBody2D
         Alarmed();
     }
 
-	public void SetPatrolDistances(float min, float max)
-	{
-		_minPatrolDistance = min;
-		_maxPatrolDistance = max;
-	}
-
 	// Helper method to change detecytion range.
 	public void SetDetectionRange(float range)
 	{
@@ -663,7 +680,7 @@ public partial class Enemy : CharacterBody2D
 			circle.Radius = _detectionRange;
 		}
 
-		if (_dmgArea != null)
+		if (_dmgArea != null && ThisAttackType != AttackType.Static)
 		{
 			_dmgArea.Monitoring = false;
 		}
