@@ -64,13 +64,16 @@ tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 4
 sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_6sk6n")
 _maxTotalEnemyCount = 20
 _spawnerCount = 2
 _presetEnemyCount = 5
+_isThereWurmInThisLevel = true
+_wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")
+_eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
 
@@ -137,10 +140,8 @@ color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("10_uicjp")]
 position = Vector2(-3087, -1797)
-MeleeDamage = 10
 RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
-BreakEffectScene = null
 CustomCursor = NodePath("../Cursor")
 
 [node name="Camera2D" parent="Player" index="6" unique_id=292159288]
@@ -148,11 +149,13 @@ limit_left = -4057
 limit_top = -2793
 limit_right = 3571
 limit_bottom = 2267
-PeekingSpeed = 8.0
 
 [node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("11_srom3")]
 
 [node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("12_7mlpp")]
 PlayerCharacter = NodePath("../Player")
+
+[node name="EventTimer" type="Timer" parent="." unique_id=475063518]
+wait_time = 5.0
 
 [editable path="Player"]

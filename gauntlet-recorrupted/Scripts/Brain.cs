@@ -28,6 +28,8 @@ public partial class Brain : Node
 
 	[ExportGroup("Alarmed")]
 	[Export] public State AfterAlarmedState = State.None;
+	[ExportGroup("Waked Up")]
+	[Export] public State AfterWakedUp = State.None;
 
 	[ExportGroup("Can't Reach the Target")]
 	[Export] public State CantReachTargetState = State.None;
@@ -155,6 +157,11 @@ public partial class Brain : Node
 			_enemy.Player = Level.Current.Player;
 			_enemy.SetPlayerTarget();
 		}
+	}
+
+	public void GetWakedUp()
+	{
+		SetCurrentState(AfterWakedUp);
 	}
 
 	public void AnimationFinished()

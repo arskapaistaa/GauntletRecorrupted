@@ -277,7 +277,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(177, 98)
 
-[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
+[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy", "Wurm"]]
 collision_layer = 32
 collision_mask = 8
 motion_mode = 1
@@ -290,6 +290,7 @@ _dmg = 40
 _attackRange = 200.0
 _patrolDistance = 3000.0
 _patrolAtleastDistance = 1500.0
+_canBeAlarmed = false
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
@@ -302,11 +303,11 @@ _attackFrames = PackedInt32Array(2)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_36dg4")
-StartingState = 2
-EntersAreaState = 4
+InCombatState = 2
+OutOfCombatState = 2
 AfterNoticeState = 2
-AfterAttackState = 2
 NavigationFinishedState = 2
+AfterWakedUp = 2
 CantReachTargetState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=106838091]

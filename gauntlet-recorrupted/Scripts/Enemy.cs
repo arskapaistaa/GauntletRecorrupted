@@ -35,6 +35,8 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
 	private float _patrolAtleastDistance;
 
+	[Export] private bool _canBeAlarmed = true;
+
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
 	[Export] private AnimatedSprite2D _sprite = null;
@@ -568,7 +570,15 @@ public partial class Enemy : CharacterBody2D
 
 	private void Alarmed()
 	{
-		_brain.Alarmed();
+		if (_canBeAlarmed)
+		{
+			_brain.Alarmed();
+		}
+	}
+
+	public void WakeUp()
+	{
+		_brain.GetWakedUp();
 	}
 
 	public bool HasLineOfSight()

@@ -244,6 +244,7 @@ _maxSpeed = 500.0
 _detectionRange = 700.0
 _dmg = 25
 _attackRange = 150.0
+_canBeAlarmed = false
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
