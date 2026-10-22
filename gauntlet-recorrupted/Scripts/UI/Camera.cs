@@ -4,8 +4,11 @@ using System;
 public partial class Camera : Camera2D
 {
 	[ExportGroup("Cursor Follow Settings")]
+	// The dead zone is the area around the center of the screen where the camera won't move in response to mouse movement.
 	[Export(PropertyHint.Range, "0.0,0.95,0.05")] public float DeadZone = 0.5f;
+	// The maximum distance the camera can shift in response to mouse movement.
 	[Export(PropertyHint.Range, "0.0,2000.0,10.0")] public float MaxPeekDistance = 120.0f;
+	// The speed at which the camera moves towards the target position when peeking.
 	[Export(PropertyHint.Range, "0.0,20.0,0.5")] public float PeekingSpeed = 8.0f;
 
 	[ExportGroup("Camera Shake Settings")]
@@ -31,22 +34,33 @@ public partial class Camera : Camera2D
 		Vector2 targetShift = Vector2.Zero;
 		if (_isPeeking) 
 		{
-			// Mouse position in pixels
-			Vector2 mousePosition = GetViewport().GetMousePosition();
-			// Center of the screen in pixels
-			Vector2 screenCenter = GetViewportRect().Size / 2;
-			// Calculate the offset from the center of the screen to the mouse position
-			Vector2 pixelOffset = mousePosition - screenCenter;
-			// Normalize the offset to a range of -1 to 1 based on the screen size
-			Vector2 relativeOffset = pixelOffset / screenCenter;
-			// Clamp the relative offset to ensure it doesn't exceed the range of -1 to 1
-			relativeOffset.X = Mathf.Clamp(relativeOffset.X, -1.0f, 1.0f);
-			relativeOffset.Y = Mathf.Clamp(relativeOffset.Y, -1.0f, 1.0f);
-			// Apply dead zone to the relative offset
-			relativeOffset.X = ApplyDeadZone(relativeOffset.X);
-			relativeOffset.Y = ApplyDeadZone(relativeOffset.Y);
-			// Scale the relative offset by the maximum look distance to get the target shift
-			targetShift = relativeOffset * MaxPeekDistance;
+			if (!GameManager.Instance.IsUsingController())
+			{
+				// Get the mouse position in the viewport
+				Vector2 mousePosition = GetViewport().GetMousePosition();
+				// Get the center point of the viewport as a Vector2
+				Vector2 screenCenter = GetViewportRect().Size / 2;
+				// The vector from the center of the screen to the mouse position
+				Vector2 pixelOffset = mousePosition - screenCenter;
+				// THE MOST IMPORTANT PART. Dividing the pixel offset by the screen center gives us
+				// a relative offset where the center of the screen is 0,0 and the edges of the screen are -1,-1 to 1,1.
+				// This allows us to have a consistent camera movement regardless of the screen resolution.
+				Vector2 relativeOffset = pixelOffset / screenCenter;
+				// Clamp the relative offset to ensure it doesn't exceed the range of -1 to 1.
+				// This means that even if the mouse is outisde the screen, the camera will only move to its maximum offset.
+				relativeOffset.X = Mathf.Clamp(relativeOffset.X, -1.0f, 1.0f);
+				relativeOffset.Y = Mathf.Clamp(relativeOffset.Y, -1.0f, 1.0f);
+				// After clamping, we apply the dead zone to the relative offset.
+				relativeOffset.X = ApplyDeadZone(relativeOffset.X);
+				relativeOffset.Y = ApplyDeadZone(relativeOffset.Y);
+				targetShift = relativeOffset * MaxPeekDistance;
+			}
+			else
+			{
+				Vector2 stickInput = Input.GetVector("AimLeft", "AimRight", "AimUp", "AimDown");
+				targetShift = stickInput * MaxPeekDistance;
+
+			}
 		}
 
 		float weight = 1.0f - Mathf.Exp(-PeekingSpeed * (float)delta);
