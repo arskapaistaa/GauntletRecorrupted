@@ -13,7 +13,7 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 texture = SubResource("CompressedTexture2D_05hi0")
-region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+region_rect = Rect2(0, 0, 242, 216)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nluli"]
 load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
@@ -24,7 +24,7 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 texture = SubResource("CompressedTexture2D_nluli")
-region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+region_rect = Rect2(0, 0, 242, 216)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8g82"]
 content_margin_left = 20.0
@@ -32,7 +32,7 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 texture = ExtResource("1_05hi0")
-region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+region_rect = Rect2(0, 0, 242, 216)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iej2m"]
 load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
@@ -43,7 +43,7 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 texture = SubResource("CompressedTexture2D_iej2m")
-region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+region_rect = Rect2(0, 0, 242, 216)
 
 [resource]
 Button/icons/icon = SubResource("CanvasTexture_ux8os")
