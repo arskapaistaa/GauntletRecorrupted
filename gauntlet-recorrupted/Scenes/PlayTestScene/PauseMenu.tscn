@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bomdb4be3gg7a"]
+
+[ext_resource type="Script" uid="uid://dkd7earp367hu" path="res://Scripts/UI/PauseMenu.cs" id="1_lw475"]
+[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_uvqs0"]
+[ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/TestMenu.tscn" id="2_7xvl2"]
+
+[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uvqs0")
+script = ExtResource("1_lw475")
+ResumeButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
+MainMenuButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button2")
+MainMenuScene = ExtResource("2_7xvl2")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=820047733]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=1652572230]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35703126
+anchor_top = 0.2888889
+anchor_right = 0.6429688
+anchor_bottom = 0.7111111
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1632692286]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game
+Paused"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer" unique_id=1589427293]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Button" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1126346849]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resume"
+
+[node name="Button2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=254443614]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"

@@ -180,7 +180,10 @@ public partial class Enemy : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		StateMachine(delta);
+
 		UpdateAnimation();
+
+		UpdateAudio();
 	}
 
 	public void StateMachine(double delta)

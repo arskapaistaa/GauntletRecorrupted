@@ -14,6 +14,7 @@ public partial class GameManager : Node
 	private int _shotsFired;
 
 	private int _currentLevel;
+	private bool _usingController = false;
 
 	public int CurrentLevel
 	{
@@ -97,6 +98,8 @@ public partial class GameManager : Node
 	{
 		CurrentGameState = state;
 		GD.Print(CurrentGameState.ToString());
+		if (CurrentGameState != GameState.Game)
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
 	/// <summary>
@@ -109,5 +112,26 @@ public partial class GameManager : Node
 		_kills = resetToZero;
 		_deaths = resetToZero;
 		_shotsFired = resetToZero;
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventJoypadMotion joypadMotion && Mathf.Abs(joypadMotion.AxisValue) > 0.3f)
+		{
+			_usingController = true;
+		}
+		else if (@event is InputEventJoypadButton)
+		{
+			_usingController = true;
+		}
+		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton)
+		{
+			_usingController = false;
+		}
+	}
+
+	public bool IsUsingController()
+	{
+		return _usingController;
 	}
 }

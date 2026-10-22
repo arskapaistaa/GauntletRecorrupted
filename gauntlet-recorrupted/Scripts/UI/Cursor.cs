@@ -28,6 +28,10 @@ public partial class Cursor : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (GameManager.Instance.IsUsingController())
+			_cursorSprite.Visible = false;
+		else
+			_cursorSprite.Visible = true;
 		_cursorSprite.GlobalPosition = GetViewport().GetMousePosition();
 	}
 

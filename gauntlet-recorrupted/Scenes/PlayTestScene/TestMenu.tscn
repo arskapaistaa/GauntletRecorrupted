@@ -108,10 +108,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -29.0
-offset_right = 51.0
-offset_bottom = 84.0
+offset_left = -91.5
+offset_top = -44.0
+offset_right = 92.5
+offset_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -122,7 +122,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_cg106")
-theme_override_constants/separation = 16
+theme_override_constants/separation = 0
 
 [node name="PlayBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=132127129]
 layout_mode = 2
@@ -133,6 +133,7 @@ _isGrabFocus = true
 
 [node name="OptionsBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=1176741912 node_paths=PackedStringArray("_animations")]
 layout_mode = 2
+theme = ExtResource("1_cg106")
 text = "OPTIONS"
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../../AnimationPlayer")
@@ -367,6 +368,7 @@ text = "Master"
 
 [node name="HSlider" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1824834350]
 layout_mode = 2
+value = 100.0
 
 [node name="Music" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=265546990]
 layout_mode = 2
@@ -374,6 +376,7 @@ text = "Music"
 
 [node name="HSlider2" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=68985266]
 layout_mode = 2
+value = 100.0
 
 [node name="SFX" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=691604112]
 layout_mode = 2
@@ -381,6 +384,7 @@ text = "SFX"
 
 [node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
 layout_mode = 2
+value = 100.0
 
 [node name="Button" type="Button" parent="Options/PanelContainer" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
