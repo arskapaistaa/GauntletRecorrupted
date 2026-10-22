@@ -367,6 +367,7 @@ text = "Master"
 
 [node name="HSlider" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1824834350]
 layout_mode = 2
+value = 100.0
 
 [node name="Music" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=265546990]
 layout_mode = 2
@@ -374,6 +375,7 @@ text = "Music"
 
 [node name="HSlider2" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=68985266]
 layout_mode = 2
+value = 100.0
 
 [node name="SFX" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=691604112]
 layout_mode = 2
@@ -381,6 +383,7 @@ text = "SFX"
 
 [node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
 layout_mode = 2
+value = 100.0
 
 [node name="Button" type="Button" parent="Options/PanelContainer" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
 layout_mode = 1

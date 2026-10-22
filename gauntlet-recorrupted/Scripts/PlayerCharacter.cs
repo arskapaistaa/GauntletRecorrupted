@@ -29,6 +29,9 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private AnimatedSprite2D PlayerSprite;
 	[Export] private Area2D MeleeArea;
 	[Export] private Cursor CustomCursor;
+
+	[ExportGroup("Audios")]
+	[Export] private AudioStreamPlayer2D _walkingSFX = null;
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
 	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
@@ -104,7 +107,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		Vector2 velocity = _moveVelocity;
 		float currentSpeed = Speed * _reloadSpeedMultiplier;
-		
+
 
 		Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
 		if (direction != Vector2.Zero)
