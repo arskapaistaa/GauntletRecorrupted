@@ -310,10 +310,10 @@ script = ExtResource("3_d61wr")
 _displayMode = NodePath("PanelContainer/HBoxContainer/VideoOptions/DisplayMode")
 _resolution = NodePath("PanelContainer/HBoxContainer/VideoOptions/Resolution")
 _masterVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider")
-_sfxVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider2")
-_musicVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider3")
+_sfxVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider3")
+_musicVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider2")
 
-[node name="PanelContainer" type="Panel" parent="Options" unique_id=1457671479]
+[node name="PanelContainer" type="Panel" parent="Options" unique_id=28957124]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
@@ -325,10 +325,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -125.0
+offset_top = -98.5
+offset_right = 125.0
+offset_bottom = 98.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -367,7 +367,7 @@ text = "Master"
 
 [node name="HSlider" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1824834350]
 layout_mode = 2
-value = 100.0
+max_value = 1.0
 
 [node name="Music" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=265546990]
 layout_mode = 2
@@ -375,7 +375,7 @@ text = "Music"
 
 [node name="HSlider2" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=68985266]
 layout_mode = 2
-value = 100.0
+max_value = 1.0
 
 [node name="SFX" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=691604112]
 layout_mode = 2
@@ -383,7 +383,7 @@ text = "SFX"
 
 [node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
 layout_mode = 2
-value = 100.0
+max_value = 1.0
 
 [node name="Button" type="Button" parent="Options/PanelContainer" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
 layout_mode = 1

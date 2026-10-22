@@ -44,6 +44,7 @@ public partial class OptionsMenu : Control
 	private void OnMasterVolumeChanged(double value)
     {
         SettingsManager.Instance.OnMasterVolumeChange((float)value);
+		GD.Print(SettingsManager.Instance.GetMasterVolume());
     }
 
 	private void OnSfxVolumeChanged(double value)
@@ -64,6 +65,7 @@ public partial class OptionsMenu : Control
 
 		// Audio settings
 		_masterVolume.SetValueNoSignal(SettingsManager.Instance.GetMasterVolume());
+		GD.Print(SettingsManager.Instance.GetMasterVolume());
 		_sfxVolume.SetValueNoSignal(SettingsManager.Instance.GetSfxVolume());
 		_musicVolume.SetValueNoSignal(SettingsManager.Instance.GetMusicVolume());
 	}

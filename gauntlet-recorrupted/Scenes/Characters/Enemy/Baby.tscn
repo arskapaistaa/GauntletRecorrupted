@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d2f08wdm20crl" path="res://Art/Enemies/ArtEnemyBaby.png" id="3_0pa5a"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_8rpmh"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_w0f3r"]
+[ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="6_1bw1k"]
 [ext_resource type="AudioStream" uid="uid://b3w08se04c1ch" path="res://Audio/SFX/BabyNotice.ogg" id="6_h88i4"]
 [ext_resource type="AudioStream" uid="uid://c38orsot28k6d" path="res://Audio/SFX/BabyAttack.ogg" id="7_1bw1k"]
 [ext_resource type="AudioStream" uid="uid://sw7p0g45bep5" path="res://Audio/SFX/BabyTakeDmg.ogg" id="8_5f0w4"]
@@ -226,9 +227,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0f3r"]
 size = Vector2(72, 78)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8rpmh"]
-
-[node name="Baby" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
+[node name="Baby" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 15
@@ -249,7 +248,13 @@ _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
 _rayCast = NodePath("RayCast2D")
-_attackFrames = PackedInt32Array(3, 4)
+_movementSfx = NodePath("Audios/MovementSFX")
+_noticeSfx = NodePath("Audios/NoticeSFX")
+_attackSfx = NodePath("Audios/AttackSFX")
+_damagedSfx = NodePath("Audios/DamagedSFX")
+_defeatSfx = NodePath("Audios/DefeatSFX")
+_attackStartFrame = 3
+_attackEndFrames = 4
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_8rpmh")
@@ -301,24 +306,32 @@ debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 target_position = Vector2(50, 0)
 collision_mask = 5
 
-[node name="Audios" type="Node" parent="." unique_id=265812572]
+[node name="Audios" type="Node2D" parent="." unique_id=974702717]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1000198320]
-stream = SubResource("AudioStreamRandomizer_8rpmh")
+stream = ExtResource("6_1bw1k")
+pitch_scale = 0.62
+max_distance = 1000.0
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1711281695]
 stream = ExtResource("6_h88i4")
+max_distance = 1000.0
 bus = &"SFX"
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1984125170]
 stream = ExtResource("7_1bw1k")
+max_distance = 1000.0
+max_polyphony = 2
 bus = &"SFX"
 
 [node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1638979096]
 stream = ExtResource("8_5f0w4")
+max_distance = 1500.0
+max_polyphony = 3
 bus = &"SFX"
 
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2072971563]
 stream = ExtResource("9_ifoor")
+max_distance = 1000.0
 bus = &"SFX"
