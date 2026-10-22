@@ -263,6 +263,9 @@ CantReachTargetState = 3
 material = ExtResource("3_8rpmh")
 sprite_frames = SubResource("SpriteFrames_0pa5a")
 animation = &"Attack"
+autoplay = "Idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=926783186]
 modulate = Color(0, 0, 0, 0.34509805)

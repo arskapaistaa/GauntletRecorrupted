@@ -313,7 +313,7 @@ CantReachTargetState = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=106838091]
 material = ExtResource("3_gs6ov")
 sprite_frames = SubResource("SpriteFrames_gs6ov")
-animation = &"TakeDmg"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1444355218]

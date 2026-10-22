@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-
+	[Export(PropertyHint.Enum, "Gravedigger,MilitaryGirl")] private int CharacterType = 0;
 	[ExportCategory("Stats")]
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "0,1000,10")] private float Speed = 300.0f;
@@ -32,6 +32,9 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _walkingSFX = null;
+	[Export] private Sprite2D AimArrow;
+
+	// Signals
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
 	[Signal] public delegate void UpdateRevolverAmmoEventHandler(int currentAmmo);
 	[Signal] public delegate void UpdateShotgunAmmoEventHandler(int currentAmmo);
@@ -55,7 +58,6 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool isReloading = false;
 	private bool isLiving = true;
 	private float _meleeCooldown = 0;
-	private bool _usingController = false;
 
 	public enum FacingDirection
 	{
@@ -86,13 +88,13 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_usingController)
-			CustomCursor.Visible = false;
-		if (!_usingController)
-			CustomCursor.Visible = true;
+		if (GameManager.Instance.IsUsingController())
+			AimArrow.Visible = true;
+		else
+			AimArrow.Visible = false;
 		if (isLiving)
 		{
-			if (_usingController)
+			if (GameManager.Instance.IsUsingController())
 			{
 				Vector2 aimInput = Input.GetVector("AimLeft", "AimRight", "AimUp", "AimDown", 0.5f);
 				if (aimInput != Vector2.Zero)
@@ -146,22 +148,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		HandleInputs();
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventJoypadMotion joypadMotion && Mathf.Abs(joypadMotion.AxisValue) > 0.3f)
-		{
-			_usingController = true;
-		}
-		else if (@event is InputEventJoypadButton)
-		{
-			_usingController = true;
-		}
-		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton)
-		{
-			_usingController = false;
-		}
 	}
 
 	public void HandleInputs()
@@ -332,7 +318,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 
 		Vector2 aimDirection;
-		if (_usingController)
+		if (GameManager.Instance.IsUsingController())
 		{
 			aimDirection = GlobalTransform.X.Normalized();
 		}
