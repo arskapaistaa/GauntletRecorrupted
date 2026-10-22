@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bomdb4be3gg7a"]
 
 [ext_resource type="Script" uid="uid://dkd7earp367hu" path="res://Scripts/UI/PauseMenu.cs" id="1_lw475"]
+[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_uvqs0"]
 [ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/TestMenu.tscn" id="2_7xvl2"]
 
 [node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton")]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_uvqs0")
 script = ExtResource("1_lw475")
 ResumeButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
 MainMenuButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button2")

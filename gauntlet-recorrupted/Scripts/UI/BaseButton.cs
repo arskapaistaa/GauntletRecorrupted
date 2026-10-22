@@ -72,6 +72,8 @@ public partial class BaseButton : Button
 
 	private void OnFocusEntered()
     {
+		StyleBox hoverStyle = GetThemeStylebox("hover");
+        AddThemeStyleboxOverride("normal", hoverStyle);
 		if (_enterFocusedSfx != null)
 		{
 			_enterFocusedSfx.Play();
@@ -80,6 +82,7 @@ public partial class BaseButton : Button
 
 	private void OnFocusExited()
     {
+		RemoveThemeStyleboxOverride("normal");
         if (_exitFocusedSfx != null)
 		{
 			_exitFocusedSfx.Play();
