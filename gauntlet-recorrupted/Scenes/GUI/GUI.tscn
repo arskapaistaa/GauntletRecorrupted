@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlx6idtihed6y"]
 
 [ext_resource type="Script" uid="uid://bfqvbnqbml8c2" path="res://Scripts/UI/GUI.cs" id="1_linlh"]
+[ext_resource type="PackedScene" uid="uid://bomdb4be3gg7a" path="res://Scenes/PlayTestScene/PauseMenu.tscn" id="2_17j7b"]
 
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 
@@ -23,3 +24,5 @@ offset_bottom = 80.0
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.54901963)
 text = "FPS"
+
+[node name="PauseMenu" parent="." unique_id=1923251465 instance=ExtResource("2_17j7b")]

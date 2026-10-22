@@ -81,10 +81,13 @@ public partial class Level : Node2D
 
     public override void _Input(InputEvent @event)
     {
+		/* Added a temporary pause menu that handles the "Menu" action.
+		
         if (@event.IsActionPressed("Menu"))
 		{
 			GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/TestMenu.tscn");
 		}
+		*/
     }
 
 	public void ChangeEnemyCount(int amount)
