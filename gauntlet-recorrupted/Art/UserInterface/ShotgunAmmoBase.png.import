@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fgw75geyft6v"
-path="res://.godot/imported/HellsWellTitleBGAnim1.png-e25767e96758eadfaddbb6fd0c245f98.ctex"
+uid="uid://bmvx77nasoib4"
+path="res://.godot/imported/ShotgunAmmoBase.png-7bb658811ca3c306fd1e4eb114bffd72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Title/HellsWellTitleBGAnim1.png"
-dest_files=["res://.godot/imported/HellsWellTitleBGAnim1.png-e25767e96758eadfaddbb6fd0c245f98.ctex"]
+source_file="res://Art/UserInterface/ShotgunAmmoBase.png"
+dest_files=["res://.godot/imported/ShotgunAmmoBase.png-7bb658811ca3c306fd1e4eb114bffd72.ctex"]
 
 [params]
 
