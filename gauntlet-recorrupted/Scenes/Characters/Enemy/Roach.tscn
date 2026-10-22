@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://cbjmc5403g3i5" path="res://Art/Enemies/ArtEnemyRoach.png" id="3_8q24r"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_yb4cs"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_4hohg"]
+[ext_resource type="AudioStream" uid="uid://1062rgg6ri2l" path="res://Audio/SFX/RoachTakeNotice.ogg" id="6_yfp0g"]
+[ext_resource type="AudioStream" uid="uid://btagyopxs51yg" path="res://Audio/SFX/RoachAttack.ogg" id="7_haiou"]
+[ext_resource type="AudioStream" uid="uid://bi7l43sq72may" path="res://Audio/SFX/RoachTakeDmg.ogg" id="8_ll3lk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjqtl"]
 atlas = ExtResource("3_8q24r")
@@ -222,14 +225,6 @@ size = Vector2(162, 78)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yb4cs"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8q24r"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4hohg"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yfp0g"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_haiou"]
-
 [node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
@@ -267,6 +262,8 @@ material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
 animation = &"Attack"
 autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1745444926]
 modulate = Color(0, 0, 0, 0.34509805)
@@ -307,24 +304,26 @@ debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 target_position = Vector2(50, 0)
 collision_mask = 5
 
-[node name="Audios" type="Node" parent="." unique_id=1409873947]
+[node name="Audios" type="Node2D" parent="." unique_id=1571714536]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1311906329]
 stream = SubResource("AudioStreamRandomizer_yb4cs")
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1142729619]
-stream = SubResource("AudioStreamRandomizer_8q24r")
+stream = ExtResource("6_yfp0g")
+max_distance = 10000.0
 bus = &"SFX"
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=992859547]
-stream = SubResource("AudioStreamRandomizer_4hohg")
+stream = ExtResource("7_haiou")
 bus = &"SFX"
 
 [node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=214101032]
-stream = SubResource("AudioStreamRandomizer_yfp0g")
+stream = ExtResource("8_ll3lk")
 bus = &"SFX"
 
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2112349011]
-stream = SubResource("AudioStreamRandomizer_haiou")
+stream = ExtResource("6_yfp0g")
+pitch_scale = 0.61
 bus = &"SFX"
