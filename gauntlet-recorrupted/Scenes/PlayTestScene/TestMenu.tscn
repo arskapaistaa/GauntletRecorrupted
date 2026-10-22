@@ -7,10 +7,14 @@
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Texture2D" uid="uid://coodk017o2rqt" path="res://Art/Title/HellsWellTitle.png" id="3_p1vdu"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
+[ext_resource type="Texture2D" uid="uid://b72oy80tbsjd3" path="res://Art/Title/HellsWellTitleBGAnim2.png" id="3_w2hh5"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
 [ext_resource type="Theme" uid="uid://betifo50ocmef" path="res://Theme/Title.tres" id="4_811aa"]
+[ext_resource type="Texture2D" uid="uid://brt8oo38mtpfa" path="res://Art/Title/HellsWellTitleBGAnim3.png" id="4_ggudn"]
+[ext_resource type="Texture2D" uid="uid://oa5unipbw4fy" path="res://Art/Title/HellsWellTitleBGAnim4.png" id="5_2sxs1"]
 [ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="5_7512y"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
+[ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
@@ -66,12 +70,185 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleScreen/StartBtn:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Background:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TitleScreen/Background2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TitleScreen/Background4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TitleScreen/Background5:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TitleScreen/Logo:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TitleScreen/Background3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v40es"]
+resource_name = "StartPressed"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleScreen/StartBtn:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleScreen/Background:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.6, 1.8000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Background2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8000001, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TitleScreen/Background3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2, 2.1999998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TitleScreen/Background4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.1999998, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TitleScreen/Background5:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TitleScreen/Logo:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
 &"CloseOptions": SubResource("Animation_t3rra"),
 &"OpenOptions": SubResource("Animation_j8qme"),
-&"RESET": SubResource("Animation_ux8os")
+&"RESET": SubResource("Animation_ux8os"),
+&"StartPressed": SubResource("Animation_v40es")
 }
 
 [node name="TestMenu" type="Control" unique_id=205651718]
@@ -100,6 +277,46 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ux8os")
 
+[node name="Background2" type="TextureRect" parent="TitleScreen" unique_id=121870752]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_w2hh5")
+
+[node name="Background3" type="TextureRect" parent="TitleScreen" unique_id=1621887875]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ggudn")
+
+[node name="Background4" type="TextureRect" parent="TitleScreen" unique_id=2106334841]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_2sxs1")
+
+[node name="Background5" type="TextureRect" parent="TitleScreen" unique_id=160158357]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_pwykd")
+
 [node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
 layout_mode = 1
 anchors_preset = 8
@@ -118,21 +335,25 @@ size_flags_vertical = 4
 texture = ExtResource("3_p1vdu")
 stretch_mode = 2
 
-[node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147]
+[node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = 18.0
-offset_right = 64.0
-offset_bottom = 146.0
+offset_left = -75.0
+offset_top = 56.0
+offset_right = 75.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_811aa")
 script = ExtResource("2_ikpte")
+_animations = NodePath("../../AnimationPlayer")
+_pathToScene = "res://Scenes/PlayTestScene/TutorialLevel.tscn"
+_pathToSceneMode = 1
+_pressedAnimName = "StartPressed"
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
 visible = false
