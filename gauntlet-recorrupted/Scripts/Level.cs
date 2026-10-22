@@ -71,24 +71,21 @@ public partial class Level : Node2D
 		}
 	}
 
-    public override void _ExitTree()
-    {
-        if (_eventCheckTimer != null)
+	public override void _ExitTree()
+	{
+		if (_eventCheckTimer != null)
 		{
 			_eventCheckTimer.Timeout -= OnTimerTimeOut;
 		}
-    }
+	}
 
-    public override void _Input(InputEvent @event)
-    {
-		/* Added a temporary pause menu that handles the "Menu" action.
-		
-        if (@event.IsActionPressed("Menu"))
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("Menu"))
 		{
 			GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/TestMenu.tscn");
 		}
-		*/
-    }
+	}
 
 	public void ChangeEnemyCount(int amount)
 	{
@@ -124,8 +121,8 @@ public partial class Level : Node2D
 	}
 
 	private void OnTimerTimeOut()
-    {
-        // Check Wurm
+	{
+		// Check Wurm
 		if (_isThereWurmInThisLevel && !_wurmAweken)
 		{
 			if (RandomEventChange(_wurmPatrolStartChange))
@@ -139,7 +136,7 @@ public partial class Level : Node2D
 				}
 			}
 		}
-    }
+	}
 
 	/// <summary>
 	/// Method check should this event happen.
