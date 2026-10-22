@@ -21,13 +21,10 @@ public partial class DamageArea : Area2D
     private void OnBodyEntered(Node2D body)
     {
         // Extra safety
-        if (_enemy.Brain.CurrentState == Brain.State.Attack)
+        if (body is PlayerCharacter player)
         {
-            if (body is PlayerCharacter player)
-            {
-                player.TakeDmg(_enemy.Dmg);
-                GD.Print("Damage done");
-            }
+            player.TakeDmg(_enemy.Dmg);
+            GD.Print("Damage done");
         }
     }
 

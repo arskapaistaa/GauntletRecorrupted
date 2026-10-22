@@ -5,7 +5,7 @@ public partial class EnemySpawner : StaticBody2D
 {
 	[ExportGroup("Stats")]
 	[Export] private PackedScene _enemyScene = null;
-	[Export(PropertyHint.Range, "1, 180.0, 1.0")]
+	[Export(PropertyHint.Range, "1,180,1,suffix:seconds")]
 	private float _spawningCooldown = 1.0f;
 	[Export] private int _health;
 
@@ -16,10 +16,6 @@ public partial class EnemySpawner : StaticBody2D
 
 	[ExportGroup("Animations")]
 	[Export] private int _spawnFrame = 0;
-
-	[ExportGroup("Enemy properties")]
-	[Export] private float _minPatrolDistance;
-	[Export] private float _maxPatrolDistance;
 
 	[Signal] public delegate void SpawnerDamagedEventHandler();
 
@@ -141,7 +137,6 @@ public partial class EnemySpawner : StaticBody2D
 		}
 
 		enemy.SetHomeSpawner(this);
-		enemy.SetPatrolDistances(_minPatrolDistance, _maxPatrolDistance);
 	}
 
 	/// <summary>

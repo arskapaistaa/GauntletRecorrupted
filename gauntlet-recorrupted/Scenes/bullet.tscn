@@ -15,7 +15,7 @@ width = 32
 [node name="Bullet" type="Area2D" unique_id=873106433]
 z_index = 1
 collision_layer = 8
-collision_mask = 6
+collision_mask = 38
 script = ExtResource("1_oduel")
 RevolverBulletSpeed = 7000.0
 ShotgunBulletSpeed = 5000.0
