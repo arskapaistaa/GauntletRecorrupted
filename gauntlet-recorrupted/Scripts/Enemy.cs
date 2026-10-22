@@ -55,7 +55,9 @@ public partial class Enemy : CharacterBody2D
 	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
 	[ExportGroup("Animations")]
-	[Export] private int[] _attackFrames;
+	[Export] private int[] _attackMovementFrames;
+	[Export] private int _attackStartFrame;
+	[Export] private int _attackEndFrames;
 
 	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
@@ -370,6 +372,14 @@ public partial class Enemy : CharacterBody2D
 				Navigation(delta, _attackSpeed);
 			}
 		}
+
+		if (_brain.CurrentState == Brain.State.Attack)
+		{
+			if (_attackSfx.Playing == false)
+			{
+				_attackSfx.Play();
+			}
+		}
 	}
 
 	/// <summary>
@@ -379,20 +389,20 @@ public partial class Enemy : CharacterBody2D
 	{
 		if (_sprite.Animation == "Attack")
         {
-			for (int x = 0; x < _attackFrames.Length; x++)
+			if (_sprite.Frame == _attackStartFrame)
 			{
-				if (_sprite.Frame == _attackFrames[x])
+				if (_dmgArea != null)
 				{
-					if (_dmgArea != null)
-					{
-						_dmgArea.Monitoring = true;
-					}
-					else
-					{
-						_dmgArea.Monitoring = false;
-					}
+					_dmgArea.Monitoring = true;
 				}
+			}
 
+			if (_sprite.Frame == _attackEndFrames)
+			{
+				if (_dmgArea != null)
+				{
+					_dmgArea.Monitoring = false;
+				}
 			}
         }
 	}
@@ -406,9 +416,9 @@ public partial class Enemy : CharacterBody2D
 	{
 		if (_sprite.Animation == "Attack")
         {
-			for (int x = 0; x < _attackFrames.Length; x++)
+			for (int x = 0; x < _attackMovementFrames.Length; x++)
 			{
-				if (_sprite.Frame == _attackFrames[x])
+				if (_sprite.Frame == _attackMovementFrames[x])
 				{
 					return true;
 				}
@@ -479,56 +489,17 @@ public partial class Enemy : CharacterBody2D
 
 	public void UpdateAudio()
 	{
-		switch (_brain.CurrentState)
+		if (_brain.CurrentState == Brain.State.Chase || _brain.CurrentState == Brain.State.Patrol)
 		{
-			case Brain.State.Spawning:
-				break;
+			if (_movementSfx.Playing == false)
+			{
+				_movementSfx.Playing = true;
+			}
 
-			case Brain.State.Idle:
-
-				break;
-
-			case Brain.State.Chase:
-				if (_movementSfx != null)
-				{
-					_movementSfx.Play();
-				}
-				break;
-
-			case Brain.State.Patrol:
-				if (_movementSfx != null)
-				{
-					_movementSfx.Play();
-				}
-				break;
-
-			case Brain.State.Notice:
-				if (_noticeSfx != null)
-				{
-					_noticeSfx.Play();
-				}
-				break;
-
-			case Brain.State.Attack:
-				if (_attackSfx != null)
-				{
-					_attackSfx.Play();
-				}
-				break;
-
-			case Brain.State.Damaged:
-				if (_damagedSfx != null)
-				{
-					_damagedSfx.Play();
-				}
-				break;
-
-			case Brain.State.Defeat:
-				if (_defeatSfx != null)
-				{
-					_defeatSfx.Play();
-				}
-				break;
+		}
+		else
+		{
+			_movementSfx.Playing = false;
 		}
 	}
 
@@ -543,7 +514,17 @@ public partial class Enemy : CharacterBody2D
 
 		if (Health <= 0)
 		{
+			if (_defeatSfx != null)
+			{
+				_defeatSfx.Play();
+			}
+
 			_brain.Defeat();
+		}
+
+		if (_damagedSfx != null)
+		{
+			_damagedSfx.Play();
 		}
 
 		HasRoute = false;
@@ -568,6 +549,11 @@ public partial class Enemy : CharacterBody2D
 					enemyNode.Alarmed();
 				}
 			}
+		}
+
+		if (_noticeSfx != null)
+		{
+			_noticeSfx.Play();
 		}
 	}
 
