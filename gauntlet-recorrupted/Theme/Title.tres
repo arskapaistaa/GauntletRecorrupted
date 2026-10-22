@@ -1,0 +1,53 @@
+[gd_resource type="Theme" format=3 uid="uid://betifo50ocmef"]
+
+[ext_resource type="Texture2D" uid="uid://uoo657xol87a" path="res://Art/Title/HellsWellTitleStart.png" id="1_05hi0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ux8os"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_05hi0"]
+load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ih4tk"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+texture = SubResource("CompressedTexture2D_05hi0")
+region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nluli"]
+load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kdj2n"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+texture = SubResource("CompressedTexture2D_nluli")
+region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8g82"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+texture = ExtResource("1_05hi0")
+region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iej2m"]
+load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xo7s2"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+texture = SubResource("CompressedTexture2D_iej2m")
+region_rect = Rect2(250.40002, 215.19998, 138.39996, 74.400024)
+
+[resource]
+Button/icons/icon = SubResource("CanvasTexture_ux8os")
+Button/styles/focus = SubResource("StyleBoxTexture_ih4tk")
+Button/styles/hover = SubResource("StyleBoxTexture_kdj2n")
+Button/styles/normal = SubResource("StyleBoxTexture_s8g82")
+Button/styles/pressed = SubResource("StyleBoxTexture_xo7s2")

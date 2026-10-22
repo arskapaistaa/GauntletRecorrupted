@@ -3,10 +3,12 @@
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_cg106"]
 [ext_resource type="Script" uid="uid://cwv474lclofjf" path="res://Scripts/UI/MainMenu.cs" id="1_t3rra"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
-[ext_resource type="Texture2D" uid="uid://dk141q4wpe6gq" path="res://Art/UserInterface/LOGO.png" id="2_ootpn"]
+[ext_resource type="Texture2D" uid="uid://0q6p3vlor8e1" path="res://Art/Title/HellsWellTitleBG.png" id="2_ux8os"]
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
+[ext_resource type="Texture2D" uid="uid://coodk017o2rqt" path="res://Art/Title/HellsWellTitle.png" id="3_p1vdu"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
+[ext_resource type="Theme" uid="uid://betifo50ocmef" path="res://Theme/Title.tres" id="4_811aa"]
 [ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="5_7512y"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
@@ -81,27 +83,59 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t3rra")
 
-[node name="Panel" type="Panel" parent="." unique_id=681929277]
+[node name="TitleScreen" type="Control" parent="." unique_id=1340800981]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_cg106")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1086189945]
-layout_mode = 0
-offset_left = 219.0
-offset_top = 40.0
-offset_right = 425.0
-offset_bottom = 137.0
+[node name="Background" type="TextureRect" parent="TitleScreen" unique_id=995938499]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ux8os")
+
+[node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_ootpn")
+texture = ExtResource("3_p1vdu")
 stretch_mode = 2
 
+[node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 44.0
+offset_right = 50.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_811aa")
+script = ExtResource("2_ikpte")
+
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -116,6 +150,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_cg106")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Buttons" unique_id=843433484]
 layout_mode = 2
@@ -145,6 +180,7 @@ text = "RESET STATS"
 script = ExtResource("2_ikpte")
 
 [node name="Stats" type="MarginContainer" parent="." unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -212,6 +248,7 @@ theme = ExtResource("1_cg106")
 text = "0"
 
 [node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
