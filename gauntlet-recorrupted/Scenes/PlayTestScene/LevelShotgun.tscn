@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="6_u5trh"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_hjqop"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_5k47h"]
+[ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="8_bp4pk"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_88ik6"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8f15i"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_7lkx4"]
@@ -67,7 +68,7 @@ sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 script = ExtResource("1_1q4i8")
 _maxTotalEnemyCount = 30
 _spawnerCount = 4
-_presetEnemyCount = 6
+_presetEnemyCount = 10
 _isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
@@ -77,7 +78,6 @@ _eventCheckTimer = NodePath("EventTimer")
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
 
 [node name="Ground" type="Sprite2D" parent="Environment" unique_id=389584147]
-visible = false
 texture_repeat = 2
 position = Vector2(-22.999878, -2.000122)
 scale = Vector2(1.9869375, 1.9584315)
@@ -128,18 +128,60 @@ navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 navigation_layers = 2
 
 [node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]
+rotation = -0.0019485299
 
 [node name="Roach" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_hjqop")]
 position = Vector2(-598.99994, -3596)
 rotation = -1.996766
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Roach6" parent="Environment/Enemies" unique_id=616672424 instance=ExtResource("7_hjqop")]
+position = Vector2(783.99994, -4323)
+rotation = -2.7405276
+_attackStartFrame = 0
+_attackEndFrames = 0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("7_hjqop")]
 position = Vector2(-5409, 3392)
 rotation = -4.0607853
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Roach5" parent="Environment/Enemies" unique_id=431924615 instance=ExtResource("7_hjqop")]
+position = Vector2(-6055, 3606.9998)
+rotation = -5.3428116
+_attackStartFrame = 0
+_attackEndFrames = 0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("7_hjqop")]
 position = Vector2(5887, 4105.0005)
 rotation = 2.2628999
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Roach4" parent="Environment/Enemies" unique_id=718643321 instance=ExtResource("7_hjqop")]
+position = Vector2(4725, 2126.0005)
+rotation = 4.127412
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Baby" parent="Environment/Enemies" unique_id=1292748900 instance=ExtResource("8_bp4pk")]
+position = Vector2(40.718994, 2197.0835)
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Baby2" parent="Environment/Enemies" unique_id=706497871 instance=ExtResource("8_bp4pk")]
+position = Vector2(-120.36838, 2241.7698)
+rotation = 2.0500908
+_attackStartFrame = 0
+_attackEndFrames = 0
+
+[node name="Baby3" parent="Environment/Enemies" unique_id=1186356819 instance=ExtResource("8_bp4pk")]
+position = Vector2(339.68726, 2213.6663)
+rotation = -1.1437294
+_attackStartFrame = 0
+_attackEndFrames = 0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_5k47h")]
 position = Vector2(2983, -1960)
