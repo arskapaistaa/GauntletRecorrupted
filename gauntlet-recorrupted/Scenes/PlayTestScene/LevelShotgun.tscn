@@ -184,7 +184,7 @@ _attackStartFrame = 0
 _attackEndFrames = 0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_5k47h")]
-position = Vector2(2983, -1960)
+position = Vector2(258, -49)
 _currentLevel = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
