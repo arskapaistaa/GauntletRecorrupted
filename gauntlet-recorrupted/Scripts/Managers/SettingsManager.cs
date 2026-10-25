@@ -46,6 +46,7 @@ public partial class SettingsManager : Node
 
 		LoadSettings();
 	}
+
 	/// <summary>
 	/// Method to call from button. Changes window setting.
 	/// </summary>
@@ -133,6 +134,7 @@ public partial class SettingsManager : Node
 		Error err = _settingsConfig.Load(SettingsFilePath);
 		if (err != Error.Ok)
 		{
+			GD.PrintErr("Settings Manager cant find the file");
 			return;
 		}
 
