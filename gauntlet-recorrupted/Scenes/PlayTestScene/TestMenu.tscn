@@ -351,7 +351,7 @@ grow_vertical = 2
 theme = ExtResource("4_811aa")
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
-_pathToScene = "res://Scenes/PlayTestScene/TutorialLevel.tscn"
+_pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 
