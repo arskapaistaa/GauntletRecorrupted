@@ -6,7 +6,7 @@ public partial class Bullet : Area2D
 	[Export(PropertyHint.Range, "0,10000,100")] public float RevolverBulletSpeed = 800.0f;
 	[Export(PropertyHint.Range, "0,10000,100")] public float ShotgunBulletSpeed = 600.0f;
 	[Export(PropertyHint.Range, "0,100,1")] public int RevolverBulletDamage = 10;
-	[Export(PropertyHint.Range, "0,100,1")] public int ShotgunBulletDamage = 2;
+	[Export(PropertyHint.Range, "0,100,1")] public int ShotgunBulletDamage = 5;
 	[Export(PropertyHint.Range, "0,10,0.5")] public float RevolverBulletLifetime = 2.0f;
 	[Export(PropertyHint.Range, "0,10,0.5")] public float ShotgunBulletLifetime = 1.0f;
 
