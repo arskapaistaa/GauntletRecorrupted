@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bfqvbnqbml8c2" path="res://Scripts/UI/GUI.cs" id="1_linlh"]
 [ext_resource type="PackedScene" uid="uid://bomdb4be3gg7a" path="res://Scenes/PlayTestScene/PauseMenu.tscn" id="2_17j7b"]
+[ext_resource type="PackedScene" uid="uid://c5ayn855gwmmj" path="res://Scenes/PlayTestScene/DeathMenu.tscn" id="3_n3sgb"]
 
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
+process_mode = 3
 
 [node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel")]
 layout_mode = 3
@@ -26,3 +28,5 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.54901963)
 text = "FPS"
 
 [node name="PauseMenu" parent="." unique_id=1923251465 instance=ExtResource("2_17j7b")]
+
+[node name="PauseMenu2" parent="." unique_id=828802279 instance=ExtResource("3_n3sgb")]
