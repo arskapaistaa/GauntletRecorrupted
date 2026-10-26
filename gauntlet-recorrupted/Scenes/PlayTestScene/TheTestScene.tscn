@@ -137,7 +137,7 @@ position = Vector2(837, -844)
 _currentLevel = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
-color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+color = Color(0.30249536, 0.3024954, 0.3024954, 1)
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("10_uicjp")]
 position = Vector2(-3087, -1797)

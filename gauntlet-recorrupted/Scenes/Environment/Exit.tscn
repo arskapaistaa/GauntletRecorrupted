@@ -116,19 +116,46 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
-[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
+[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite", "_spawnerCountLabel")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
 _sprite = NodePath("AnimatedSprite2D")
 _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
+_spawnerCountLabel = NodePath("Control/Label")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
-modulate = Color(1, 0.67045194, 0.71346325, 1)
 material = ExtResource("2_cv5yy")
 sprite_frames = SubResource("SpriteFrames_3cp03")
-animation = &"UnReady"
+animation = &"Open"
 autoplay = "UnReady"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
-visible = false
 shape = SubResource("RectangleShape2D_sopei")
+
+[node name="Control" type="Control" parent="." unique_id=812691231]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -193.0
+offset_bottom = -193.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=1775727677]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "0/2"
+horizontal_alignment = 1
+vertical_alignment = 1
