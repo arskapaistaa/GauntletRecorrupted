@@ -79,7 +79,7 @@ BS: 7000.0
 
 ### Shotgun
 A: 2
-DMG: 40 (2 x 20)
+DMG: 100 (5 x 20)
 RT: 2.0
 CD: 0.5
 KB: MEDIUM
