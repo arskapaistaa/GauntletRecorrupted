@@ -6,6 +6,7 @@ public partial class Exit : Area2D
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private string _nextLevelPath;
 	[Export] private Level _currentLevel = null;
+	[Export] private Label _spawnerCountLabel = null;
 
 	public enum State
 	{
@@ -28,6 +29,8 @@ public partial class Exit : Area2D
 		}
 
 		BodyEntered += OnBodyEntered;
+
+		UpdateSpawnerCountLabel();
 	}
 
 
@@ -82,4 +85,12 @@ public partial class Exit : Area2D
     {
         CurrentState = State.Ready;
     }
+
+	public void UpdateSpawnerCountLabel()
+	{
+		//if (_spawnerCountLabel != null)
+		//{
+		//	_spawnerCountLabel.Text = Level.Current.CurrentSpawnerCount.ToString() + "/" + Level.Current.SpawnerCount.ToString();
+		// }
+	}
 }

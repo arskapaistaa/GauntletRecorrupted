@@ -22,6 +22,7 @@ public partial class Level : Node2D
 	private float _wurmPatrolStartChange = 0.1f;
 
 	[ExportCategory("Node preferences")]
+	[Export] public AnimationPlayer AnimationPlayer = null;
 	[Export] public NavigationRegion2D _navRegion = null;
 	[Export] public PlayerCharacter Player = null;
 	[Export] private Timer _eventCheckTimer = null;
@@ -51,6 +52,8 @@ public partial class Level : Node2D
 	{
 		get { return _spawnerCount; }
 	}
+
+	public int CurrentSpawnerCount = 0;
 	public int CurrentTotalEnemyCount = 0;
 
 	[Signal] public delegate void OnZeroSpawnerLeftEventHandler();
@@ -69,6 +72,8 @@ public partial class Level : Node2D
 			_eventCheckTimer.Start();
 			_eventCheckTimer.Timeout += OnTimerTimeOut;
 		}
+
+		CurrentSpawnerCount = SpawnerCount;
 	}
 
 	public override void _ExitTree()
@@ -96,12 +101,12 @@ public partial class Level : Node2D
 
 	public void ChangeSpawnerCount()
 	{
-		if (_spawnerCount > 0)
+		if (CurrentSpawnerCount > 0)
 		{
-			_spawnerCount--;
+			CurrentSpawnerCount--;
 		}
 
-		if (_spawnerCount == 0)
+		if (CurrentSpawnerCount == 0)
 		{
 			EmitSignal(SignalName.OnZeroSpawnerLeft);
 		}
