@@ -121,20 +121,14 @@ navigation_layers = 2
 
 [node name="Roach" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_7okfi")]
 position = Vector2(671, -1574)
-_attackStartFrame = 0
-_attackEndFrames = 0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("7_7okfi")]
 position = Vector2(-3176, 1327)
 rotation = -2.4734964
-_attackStartFrame = 0
-_attackEndFrames = 0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("7_7okfi")]
 position = Vector2(2928, 1174)
 rotation = 2.0017114
-_attackStartFrame = 0
-_attackEndFrames = 0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
 position = Vector2(2983, -1960)
