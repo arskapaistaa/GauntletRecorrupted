@@ -123,7 +123,6 @@ _sprite = NodePath("AnimatedSprite2D")
 _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
-modulate = Color(1, 0.67045194, 0.71346325, 1)
 material = ExtResource("2_cv5yy")
 sprite_frames = SubResource("SpriteFrames_3cp03")
 animation = &"UnReady"
