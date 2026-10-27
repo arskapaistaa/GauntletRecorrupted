@@ -35,12 +35,20 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
 	private float _patrolAtleastDistance;
 
+	[ExportGroup("Perks")]
+	[ExportSubgroup("Damaged movement")]
+	[Export] private bool _canMoveWhileDamaged = false;
+	[Export(PropertyHint.Range, "50,1000,10,suffix:Sixels/s")]
+	private float _damagedSpeed = 100.0f;
+
+	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private AnimatedSprite2D _shadowSprite = null;
+	[Export] private CollisionShape2D _characterCollision = null;
 	[Export] private Area2D _detectionArea = null;
 	[Export] private DamageArea _dmgArea = null;
 	[Export] private CollisionShape2D _detectionShape = null;
@@ -161,6 +169,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			_detectionArea.BodyEntered -= OnBodyEntered;
 			_detectionArea.BodyExited -= OnBodyExited;
+
+			_detectionArea.AreaEntered -= OnAreaEntered;
 		}
 
 		if (_sprite != null)
@@ -206,6 +216,10 @@ public partial class Enemy : CharacterBody2D
 
 			case Brain.State.Attack:
 				UpdateAttack(delta);
+				break;
+
+			case Brain.State.Damaged:
+				UpdateDamaged(delta);
 				break;
 		}
 	}
@@ -300,6 +314,11 @@ public partial class Enemy : CharacterBody2D
 
 	public void SetPlayerTarget()
 	{
+		if (Player == null)
+		{
+			Player = Level.Current.Player;
+		}
+
 		_agent.TargetPosition = PlayerPosition;
 
 		if (!_agent.IsTargetReachable())
@@ -429,6 +448,14 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
+	private void UpdateDamaged(double delta)
+	{
+		if (_canMoveWhileDamaged && _brain.CurrentCombatState == Brain.CombatState.InCombat)
+		{
+			Navigation(delta, _damagedSpeed);
+		}
+	}
+
 	private void UpdateAnimation()
 	{
 		if (_sprite == null)
@@ -512,14 +539,10 @@ public partial class Enemy : CharacterBody2D
 			_health -= dmg;
 		}
 
+		// Defeat
 		if (Health <= 0)
 		{
-			if (_defeatSfx != null)
-			{
-				_defeatSfx.Play();
-			}
-
-			_brain.Defeat();
+			Defeat();
 		}
 
 		if (_damagedSfx != null)
@@ -528,6 +551,28 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		HasRoute = false;
+
+
+	}
+
+	private void Defeat()
+	{
+		if (_defeatSfx != null)
+		{
+			_defeatSfx.Play();
+		}
+
+		if (_characterCollision != null)
+		{
+			_characterCollision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		}
+
+		if (_homeSpawner != null)
+		{
+			_homeSpawner.DecreaseActiveEnemiesCount();
+		}
+
+		_brain.Defeat();
 
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)
@@ -621,6 +666,14 @@ public partial class Enemy : CharacterBody2D
 		}
     }
 
+	private void OnAreaEntered(Area2D area)
+    {
+        if (area is Bullet)
+		{
+			_brain.BulletDetected();
+		}
+    }
+
 	private void OnBodyExited(Node2D body)
     {
 		// Hmmm...
@@ -683,6 +736,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			_detectionArea.BodyEntered += OnBodyEntered;
 			_detectionArea.BodyExited += OnBodyExited;
+
+			_detectionArea.AreaEntered += OnAreaEntered;
 		}
 
 		if (_sprite != null)

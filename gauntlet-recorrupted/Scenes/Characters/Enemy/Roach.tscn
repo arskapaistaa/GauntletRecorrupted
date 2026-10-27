@@ -6,9 +6,10 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_yb4cs"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_4hohg"]
 [ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="6_haiou"]
-[ext_resource type="AudioStream" uid="uid://1062rgg6ri2l" path="res://Audio/SFX/RoachTakeNotice.ogg" id="6_yfp0g"]
-[ext_resource type="AudioStream" uid="uid://btagyopxs51yg" path="res://Audio/SFX/RoachAttack.ogg" id="7_haiou"]
-[ext_resource type="AudioStream" uid="uid://bi7l43sq72may" path="res://Audio/SFX/RoachTakeDmg.ogg" id="8_ll3lk"]
+[ext_resource type="AudioStream" uid="uid://8yda6bixdgua" path="res://Audio/SFX/Roach/RoachNotice.wav" id="7_ll3lk"]
+[ext_resource type="AudioStream" uid="uid://6u60chiltksq" path="res://Audio/SFX/Roach/RoachAttack.wav" id="8_r6b76"]
+[ext_resource type="AudioStream" uid="uid://duw2ig4orhg7d" path="res://Audio/SFX/Roach/RoachDamaged.wav" id="9_d6fmx"]
+[ext_resource type="AudioStream" uid="uid://dn4wocju0u24f" path="res://Audio/SFX/Roach/RoachDefeat.wav" id="10_rmn24"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjqtl"]
 atlas = ExtResource("3_8q24r")
@@ -224,7 +225,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(162, 78)
 
-[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy"]]
+[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 15
@@ -236,9 +237,12 @@ _detectionRange = 600.0
 _dmg = 34
 _attackRange = 200.0
 _alarmRange = 1000.0
+_canMoveWhileDamaged = true
+_damagedSpeed = 200.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
+_characterCollision = NodePath("CharacterCollision")
 _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
@@ -260,6 +264,7 @@ OutOfCombatState = 4
 AfterNoticeState = 5
 AfterAttackState = 4
 AfterAlarmedState = 4
+AfterBulledDetected = 4
 CantReachTargetState = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
@@ -280,13 +285,14 @@ sprite_frames = SubResource("SpriteFrames_26j5x")
 animation = &"Attack"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
+[node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_26j5x")
 debug_color = Color(0.5509443, 0.3997974, 1, 0.41960785)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
 collision_layer = 2
+collision_mask = 9
 
 [node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
 shape = SubResource("CircleShape2D_dxocv")
@@ -314,29 +320,24 @@ collision_mask = 5
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1311906329]
 stream = ExtResource("6_haiou")
 pitch_scale = 0.9
-max_distance = 1000.0
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1142729619]
-stream = ExtResource("6_yfp0g")
-max_distance = 1000.0
+stream = ExtResource("7_ll3lk")
 max_polyphony = 2
 bus = &"SFX"
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=992859547]
-stream = ExtResource("7_haiou")
+stream = ExtResource("8_r6b76")
 max_distance = 1000.0
 max_polyphony = 2
 bus = &"SFX"
 
 [node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=214101032]
-stream = ExtResource("8_ll3lk")
-max_distance = 1500.0
+stream = ExtResource("9_d6fmx")
 max_polyphony = 3
 bus = &"SFX"
 
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2112349011]
-stream = ExtResource("6_yfp0g")
-pitch_scale = 0.61
-max_distance = 1500.0
+stream = ExtResource("10_rmn24")
 bus = &"SFX"

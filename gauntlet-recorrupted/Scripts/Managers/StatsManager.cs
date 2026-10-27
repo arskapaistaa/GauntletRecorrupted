@@ -43,6 +43,11 @@ public partial class StatsManager : Node
 	private bool _tickKilled = false;
 	private bool _babyKilled = false;
 
+	/// <summary>
+	/// Every "On" method is called from GameManager.
+	/// To actually save data to config file.
+	/// </summary>
+	/// <param name="enemyType">Enemy to check if the player is ever kille it</param>
 	public void OnKillsChanged(string enemyType)
 	{
 		_kills++;
@@ -94,6 +99,10 @@ public partial class StatsManager : Node
 		return (bool)_statsConfig.GetValue(_statsString, _babyKilledString, false);
 	}
 
+	/// <summary>
+	/// Check if the player is killed this enemy type.
+	/// </summary>
+	/// <param name="type"></param>
 	public void CheckEnemyKilledStatus(string type)
 	{
 		switch (type)
@@ -124,6 +133,9 @@ public partial class StatsManager : Node
 		}
 	}
 
+	/// <summary>
+	/// Load settings from config file.
+	/// </summary>
 	private void LoadSettings()
 	{
 		// Check if there is save file, else use defaults.
@@ -157,9 +169,7 @@ public partial class StatsManager : Node
 	public void ResetStats()
 	{
 		_statsConfig.Clear();
-		// _statsConfig.SetValue(_statsString, _killsString, 0);
-		// _statsConfig.SetValue(_statsString, _deathString, 0);
-		// _statsConfig.SetValue(_statsString, _shotsFiredString, 0);
+
 		SaveStats();
 		LoadSettings();
 	}

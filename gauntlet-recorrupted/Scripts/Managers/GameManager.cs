@@ -94,6 +94,10 @@ public partial class GameManager : Node
 		return _shotsFired;
 	}
 
+	/// <summary>
+	/// Set current game state with this method.
+	/// </summary>
+	/// <param name="state">Next state</param>
 	public void SetGameState(GameState state)
 	{
 		CurrentGameState = state;

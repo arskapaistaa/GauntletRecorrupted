@@ -30,6 +30,8 @@ public partial class Brain : Node
 	[Export] public State AfterAlarmedState = State.None;
 	[ExportGroup("Waked Up")]
 	[Export] public State AfterWakedUp = State.None;
+	[ExportGroup("Detect Bullet")]
+	[Export] public State AfterBulledDetected = State.None;
 
 	[ExportGroup("Can't Reach the Target")]
 	[Export] public State CantReachTargetState = State.None;
@@ -105,13 +107,12 @@ public partial class Brain : Node
 		{
 			SetCurrentState(OutOfCombatState);
 
-			// Maybe change this logic
-			_enemy.Player = Level.Current.Player;
 			_enemy.SetPlayerTarget();
 		}
 		else if (_enemy.Player != null)
 		{
 			SetCurrentState(InCombatState);
+
 			_enemy.SetPlayerTarget();
 		}
 	}
@@ -153,8 +154,16 @@ public partial class Brain : Node
 		{
 			SetCurrentState(AfterAlarmedState);
 
-			// Maybe change this logic
-			_enemy.Player = Level.Current.Player;
+			_enemy.SetPlayerTarget();
+		}
+	}
+
+	public void BulletDetected()
+	{
+		if (CurrentCombatState == CombatState.OutOfCombat)
+		{
+			SetCurrentState(AfterBulledDetected);
+
 			_enemy.SetPlayerTarget();
 		}
 	}
