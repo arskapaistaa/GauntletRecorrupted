@@ -161,6 +161,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			_detectionArea.BodyEntered -= OnBodyEntered;
 			_detectionArea.BodyExited -= OnBodyExited;
+
+			_detectionArea.AreaEntered -= OnAreaEntered;
 		}
 
 		if (_sprite != null)
@@ -300,6 +302,11 @@ public partial class Enemy : CharacterBody2D
 
 	public void SetPlayerTarget()
 	{
+		if (Player == null)
+		{
+			Player = Level.Current.Player;
+		}
+
 		_agent.TargetPosition = PlayerPosition;
 
 		if (!_agent.IsTargetReachable())
@@ -621,6 +628,14 @@ public partial class Enemy : CharacterBody2D
 		}
     }
 
+	private void OnAreaEntered(Area2D area)
+    {
+        if (area is Bullet)
+		{
+			_brain.BulletDetected();
+		}
+    }
+
 	private void OnBodyExited(Node2D body)
     {
 		// Hmmm...
@@ -683,6 +698,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			_detectionArea.BodyEntered += OnBodyEntered;
 			_detectionArea.BodyExited += OnBodyExited;
+
+			_detectionArea.AreaEntered += OnAreaEntered;
 		}
 
 		if (_sprite != null)

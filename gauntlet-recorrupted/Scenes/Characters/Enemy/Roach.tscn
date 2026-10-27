@@ -260,6 +260,7 @@ OutOfCombatState = 4
 AfterNoticeState = 5
 AfterAttackState = 4
 AfterAlarmedState = 4
+AfterBulledDetected = 4
 CantReachTargetState = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
@@ -287,6 +288,7 @@ debug_color = Color(0.5509443, 0.3997974, 1, 0.41960785)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
 collision_layer = 2
+collision_mask = 9
 
 [node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
 shape = SubResource("CircleShape2D_dxocv")
@@ -314,12 +316,10 @@ collision_mask = 5
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1311906329]
 stream = ExtResource("6_haiou")
 pitch_scale = 0.9
-max_distance = 1000.0
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1142729619]
 stream = ExtResource("6_yfp0g")
-max_distance = 1000.0
 max_polyphony = 2
 bus = &"SFX"
 
@@ -331,12 +331,10 @@ bus = &"SFX"
 
 [node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=214101032]
 stream = ExtResource("8_ll3lk")
-max_distance = 1500.0
 max_polyphony = 3
 bus = &"SFX"
 
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2112349011]
 stream = ExtResource("6_yfp0g")
 pitch_scale = 0.61
-max_distance = 1500.0
 bus = &"SFX"
