@@ -11,7 +11,8 @@ public partial class EnemySpawner : StaticBody2D
 	/// <summary>
 	/// How many enemies can be active at the same time, spawned from this spawner.
 	/// </summary>
-	[Export] private int _maxActiveEnemiesCount = 5;
+	[Export(PropertyHint.Range, "1,20,suffix:at the same time")]
+	private int _maxActiveEnemiesCount = 5;
 
 	[ExportGroup("Node references")]
 	[Export] private Timer _timer;

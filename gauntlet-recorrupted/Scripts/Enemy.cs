@@ -35,6 +35,13 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
 	private float _patrolAtleastDistance;
 
+	[ExportGroup("Perks")]
+	[ExportSubgroup("Damaged movement")]
+	[Export] private bool _canMoveWhileDamaged = false;
+	[Export(PropertyHint.Range, "50,1000,10,suffix:Sixels/s")]
+	private float _damagedSpeed = 100.0f;
+
+	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
 
 	[ExportGroup("Node References")]
@@ -209,6 +216,10 @@ public partial class Enemy : CharacterBody2D
 
 			case Brain.State.Attack:
 				UpdateAttack(delta);
+				break;
+
+			case Brain.State.Damaged:
+				UpdateDamaged(delta);
 				break;
 		}
 	}
@@ -437,6 +448,14 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
+	private void UpdateDamaged(double delta)
+	{
+		if (_canMoveWhileDamaged && _brain.CurrentCombatState == Brain.CombatState.InCombat)
+		{
+			Navigation(delta, _damagedSpeed);
+		}
+	}
+
 	private void UpdateAnimation()
 	{
 		if (_sprite == null)
@@ -543,8 +562,16 @@ public partial class Enemy : CharacterBody2D
 			_defeatSfx.Play();
 		}
 
-		_characterCollision.Disabled = true;
-		_homeSpawner.DecreaseActiveEnemiesCount();
+		if (_characterCollision != null)
+		{
+			_characterCollision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		}
+
+		if (_homeSpawner != null)
+		{
+			_homeSpawner.DecreaseActiveEnemiesCount();
+		}
+
 		_brain.Defeat();
 
 		// Stop monitoring the damage area to prevent bugs.

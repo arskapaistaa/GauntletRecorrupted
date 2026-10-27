@@ -277,7 +277,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(177, 98)
 
-[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy", "Wurm"]]
+[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy", "Wurm"]]
 collision_layer = 32
 collision_mask = 8
 motion_mode = 1
@@ -294,6 +294,7 @@ _canBeAlarmed = false
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _shadowSprite = NodePath("AnimatedSprite2D/ShadowSprite")
+_characterCollision = NodePath("CharacterCollision")
 _detectionArea = NodePath("DetectionArea")
 _dmgArea = NodePath("DamageArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
@@ -304,7 +305,6 @@ _noticeSfx = NodePath("Audios/NoticeSFX")
 _attackSfx = NodePath("Audios/AttackSFX")
 _damagedSfx = NodePath("Audios/DamagedSFX")
 _defeatSfx = NodePath("Audios/DefeatSFX")
-_attackFrames = PackedInt32Array(2)
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_36dg4")
@@ -330,7 +330,7 @@ sprite_frames = SubResource("SpriteFrames_gs6ov")
 animation = &"Defeat"
 autoplay = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1210553099]
+[node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_cjwot")
 debug_color = Color(0.5509443, 0.3997974, 1, 0.41960785)

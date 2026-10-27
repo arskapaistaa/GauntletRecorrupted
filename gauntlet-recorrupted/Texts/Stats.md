@@ -19,6 +19,7 @@ AR - Attack range
 ALR - Alarm range
 
 SC - Spawning cooldown
+MAX - Max active enemies at the same time
 
 ### Roach
 S: 500.0
@@ -40,7 +41,7 @@ ALR: 1500.0
 
 #### Tick spawner
 H: 100
-SC: 10.0
+SC: 15.0
 
 ### Baby
 S: 500.0
