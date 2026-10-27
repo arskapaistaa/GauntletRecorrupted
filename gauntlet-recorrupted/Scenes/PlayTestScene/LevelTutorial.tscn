@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b72bsma3b38yx"]
 
 [ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_vaf4p"]
-[ext_resource type="Texture2D" uid="uid://e87xjucwdbya" path="res://Art/Environment/Ground_Tile_Repeating.png" id="2_ivumw"]
+[ext_resource type="Texture2D" uid="uid://dyuna64jw44sg" path="res://Art/Environment/GroundTileRepeating.png" id="2_vaf4p"]
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="3_5y76b"]
 [ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="4_3qguu"]
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="5_cthuj"]
@@ -80,7 +80,7 @@ _eventCheckTimer = NodePath("EventTimer")
 texture_repeat = 2
 position = Vector2(-186.99997, -349)
 scale = Vector2(1.081, 1.085098)
-texture = ExtResource("2_ivumw")
+texture = ExtResource("2_vaf4p")
 region_enabled = true
 region_rect = Rect2(0, 0, 8000, 5100)
 
