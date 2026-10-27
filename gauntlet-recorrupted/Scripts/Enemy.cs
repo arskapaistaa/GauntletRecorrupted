@@ -41,6 +41,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] private Brain _brain = null;
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private AnimatedSprite2D _shadowSprite = null;
+	[Export] private CollisionShape2D _characterCollision = null;
 	[Export] private Area2D _detectionArea = null;
 	[Export] private DamageArea _dmgArea = null;
 	[Export] private CollisionShape2D _detectionShape = null;
@@ -519,14 +520,10 @@ public partial class Enemy : CharacterBody2D
 			_health -= dmg;
 		}
 
+		// Defeat
 		if (Health <= 0)
 		{
-			if (_defeatSfx != null)
-			{
-				_defeatSfx.Play();
-			}
-
-			_brain.Defeat();
+			Defeat();
 		}
 
 		if (_damagedSfx != null)
@@ -535,6 +532,20 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		HasRoute = false;
+
+
+	}
+
+	private void Defeat()
+	{
+		if (_defeatSfx != null)
+		{
+			_defeatSfx.Play();
+		}
+
+		_characterCollision.Disabled = true;
+		_homeSpawner.DecreaseActiveEnemiesCount();
+		_brain.Defeat();
 
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)

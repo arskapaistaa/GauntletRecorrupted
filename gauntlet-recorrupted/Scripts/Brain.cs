@@ -160,11 +160,12 @@ public partial class Brain : Node
 
 	public void BulletDetected()
 	{
-
-		SetCurrentState(AfterBulledDetected);
+		if (CurrentCombatState == CombatState.OutOfCombat)
+		{
+			SetCurrentState(AfterBulledDetected);
 
 			_enemy.SetPlayerTarget();
-
+		}
 	}
 
 	public void GetWakedUp()

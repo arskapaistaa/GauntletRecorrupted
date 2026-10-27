@@ -8,6 +8,10 @@ public partial class EnemySpawner : StaticBody2D
 	[Export(PropertyHint.Range, "1,180,1,suffix:seconds")]
 	private float _spawningCooldown = 1.0f;
 	[Export] private int _health;
+	/// <summary>
+	/// How many enemies can be active at the same time, spawned from this spawner.
+	/// </summary>
+	[Export] private int _maxActiveEnemiesCount = 5;
 
 	[ExportGroup("Node references")]
 	[Export] private Timer _timer;
@@ -28,8 +32,8 @@ public partial class EnemySpawner : StaticBody2D
 	}
 
 	public State CurrentState = State.Idle;
-
 	public bool IsAlive = true;
+	private int _currentActiveEnemiesCount = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -115,8 +119,14 @@ public partial class EnemySpawner : StaticBody2D
 			return;
 		}
 
+		if (_currentActiveEnemiesCount >= _maxActiveEnemiesCount)
+		{
+			return;
+		}
+
 		CurrentState = State.Spawn;
 
+		IncreaseActiveEnemiesCount();
 		Level.Current.ChangeEnemyCount(1);
 	}
 
@@ -170,6 +180,16 @@ public partial class EnemySpawner : StaticBody2D
         CurrentState = State.Defeat;
 		Level.Current.ChangeSpawnerCount();
     }
+
+	public void IncreaseActiveEnemiesCount()
+	{
+		_currentActiveEnemiesCount++;
+	}
+
+	public void DecreaseActiveEnemiesCount()
+	{
+		_currentActiveEnemiesCount--;
+	}
 
 	private void UpdateAnimation()
 	{
