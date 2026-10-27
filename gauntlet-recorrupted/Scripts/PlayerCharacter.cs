@@ -58,17 +58,24 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool isReloading = false;
 	private bool isLiving = true;
 	private float _meleeCooldown = 0;
+	private bool _isMoving = false;
+	private bool _isDigging = false;
 
 	public enum FacingDirection
 	{
-		North,
 		East,
+		SouthEast,
 		South,
-		West
+		SouthWest,
+		West,
+		NorthWest,
+		North,
+		NorthEast
 	}
 
 	public override void _Ready()
 	{
+		PlayerSprite.AnimationFinished += OnAnimationFinished;
 		if (WeaponType == 0)
 		{
 			ReloadTime = RevolverReloadTime;
@@ -92,6 +99,39 @@ public partial class PlayerCharacter : CharacterBody2D
 			AimArrow.Visible = true;
 		else
 			AimArrow.Visible = false;
+		
+		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
+		HandleTimers(delta);
+		HandleInputs();
+		HandleMovement(delta);
+		HandleAnimations(); 
+	}
+
+	private void HandleTimers(double delta)
+	{
+		if (_meleeCooldown > 0)
+		{
+			_meleeCooldown -= (float)delta;
+		}
+		else
+		{
+			_meleeCooldown = 0;
+		}
+
+		if (_shootTimer > 0)
+		{
+			_shootTimer -= (float)delta;
+		}
+		else
+		{
+			_shootTimer = 0;
+			_reloadSpeedMultiplier = 1.0f;
+			isReloading = false;
+		}
+	}
+
+	private void HandleMovement(double delta)
+	{
 		if (isLiving)
 		{
 			if (GameManager.Instance.IsUsingController())
@@ -114,10 +154,12 @@ public partial class PlayerCharacter : CharacterBody2D
 		Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
 		if (direction != Vector2.Zero)
 		{
+			_isMoving = true;
 			velocity = direction * currentSpeed;
 		}
 		else
 		{
+			_isMoving = false;
 			velocity = velocity.MoveToward(Vector2.Zero, currentSpeed);
 		}
 		_moveVelocity = velocity;
@@ -127,27 +169,14 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			MoveAndSlide();
 		}
-		if (_meleeCooldown > 0)
+	}
+	
+	private void OnAnimationFinished()
+	{
+		if (_isDigging)
 		{
-			_meleeCooldown -= (float)delta;
+			_isDigging = false;
 		}
-		else
-		{
-			_meleeCooldown = 0;
-		}
-
-		if (_shootTimer > 0)
-		{
-			_shootTimer -= (float)delta;
-		}
-		else
-		{
-			_shootTimer = 0;
-			_reloadSpeedMultiplier = 1.0f;
-			isReloading = false;
-		}
-		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
-		HandleInputs();
 	}
 
 	public void HandleInputs()
@@ -268,6 +297,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				GD.Print("Cannot dig while dead");
 				return;
 			}
+			_isDigging = true;
 			if (_meleeCooldown > 0)
 			{
 				foreach (Node2D node in MeleeArea.GetOverlappingBodies())
@@ -307,6 +337,27 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (Input.IsActionJustReleased("Peek"))
 		{
 			EmitSignal(SignalName.PeekCameraMovement, false);
+		}
+	}
+
+	private void HandleAnimations()
+	{
+		if (!isLiving)
+		{
+			// Handle dead animation
+			return;
+		}
+		if (_isDigging)
+		{
+			PlayerSprite.Play("Dig");
+		}
+		else if (_isMoving)
+		{
+			PlayerSprite.Play("Walk");
+		}
+		else
+		{
+			PlayerSprite.Play("Idle");
 		}
 	}
 
@@ -358,19 +409,133 @@ public partial class PlayerCharacter : CharacterBody2D
 		GD.Print($"Player's position in grid: {playerCell}");
 		GD.Print($"Player is facing: {GetFacingDirection()}");
 		Vector2I targetCell;
+		// no diagonal digging if there are walls in front of the diagonal direction
+		// so if there is wall north and east, you cannot dig northeast, etc.
 		switch (GetFacingDirection())
 		{
-			case FacingDirection.North:
-				targetCell = playerCell + new Vector2I(0, -1);
-				break;
 			case FacingDirection.East:
 				targetCell = playerCell + new Vector2I(1, 0);
+				break;
+			case FacingDirection.SouthEast:
+				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 1)) != null)
+				{
+					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) == null)
+						targetCell = playerCell + new Vector2I(1, 1);
+					else if (GetNormalFacingDirection() == FacingDirection.East)
+						targetCell = playerCell + new Vector2I(1, 0);
+					else
+						targetCell = playerCell + new Vector2I(0, 1);
+				}
+				else
+				{
+					if (GetNormalFacingDirection() == FacingDirection.East)
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) != null)
+							targetCell = playerCell + new Vector2I(1, 0);
+						else
+							targetCell = playerCell + new Vector2I(0, 1);
+					}
+					else
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) != null)
+							targetCell = playerCell + new Vector2I(0, 1);
+						else
+							targetCell = playerCell + new Vector2I(1, 0);
+					}
+				}
 				break;
 			case FacingDirection.South:
 				targetCell = playerCell + new Vector2I(0, 1);
 				break;
+			case FacingDirection.SouthWest:
+				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 1)) != null)
+				{
+					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) == null)
+						targetCell = playerCell + new Vector2I(-1, 1);
+					else if (GetNormalFacingDirection() == FacingDirection.West)
+						targetCell = playerCell + new Vector2I(-1, 0);
+					else
+						targetCell = playerCell + new Vector2I(0, 1);
+				}
+				else
+				{
+					if (GetNormalFacingDirection() == FacingDirection.West)
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) != null)
+							targetCell = playerCell + new Vector2I(-1, 0);
+						else
+							targetCell = playerCell + new Vector2I(0, 1);
+					}
+					else
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) != null)
+							targetCell = playerCell + new Vector2I(0, 1);
+						else
+							targetCell = playerCell + new Vector2I(-1, 0);
+					}
+				}
+				break;
 			case FacingDirection.West:
 				targetCell = playerCell + new Vector2I(-1, 0);
+				break;
+			case FacingDirection.NorthWest:
+				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, -1)) != null)
+				{
+					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) == null)
+						targetCell = playerCell + new Vector2I(-1, -1);
+					else if (GetNormalFacingDirection() == FacingDirection.West)
+						targetCell = playerCell + new Vector2I(-1, 0);
+					else
+						targetCell = playerCell + new Vector2I(0, -1);
+				}
+				else
+				{
+					if (GetNormalFacingDirection() == FacingDirection.West)
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) != null)
+							targetCell = playerCell + new Vector2I(-1, 0);
+						else
+							targetCell = playerCell + new Vector2I(0, -1);
+					}
+					else
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) != null)
+							targetCell = playerCell + new Vector2I(0, -1);
+						else
+							targetCell = playerCell + new Vector2I(-1, 0);
+					}
+				}
+				break;
+			case FacingDirection.North:
+				targetCell = playerCell + new Vector2I(0, -1);
+				break;
+			case FacingDirection.NorthEast:
+				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, -1)) != null)
+				{
+					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) == null)
+						targetCell = playerCell + new Vector2I(1, -1);
+					else if (GetNormalFacingDirection() == FacingDirection.East)
+						targetCell = playerCell + new Vector2I(1, 0);
+					else
+						targetCell = playerCell + new Vector2I(0, -1);
+				}
+				else
+				{
+					if (GetNormalFacingDirection() == FacingDirection.East)
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) != null)
+							targetCell = playerCell + new Vector2I(1, 0);
+						else
+							targetCell = playerCell + new Vector2I(0, -1);
+					}
+					else
+					{
+						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) != null)
+							targetCell = playerCell + new Vector2I(0, -1);
+						else
+							targetCell = playerCell + new Vector2I(1, 0);
+					}
+				}
 				break;
 			default:
 				return;
@@ -399,26 +564,32 @@ public partial class PlayerCharacter : CharacterBody2D
 	}
 
 	private FacingDirection GetFacingDirection()
-    {
-        Vector2 direction = GlobalTransform.X;
+	{
+		// Current facing direction
+		Vector2 direction = GlobalTransform.X;
+		// Angle of the facing direction in radians
+		float angle = direction.Angle();
+		// Circle is divided into 8 slices
+		float sliceSize = Mathf.Tau / 8f;
+		// Determine which slice the angle falls into
+		int sliceIndex = Mathf.RoundToInt(angle / sliceSize);
+		// Wrap the slice index so it is always between 0 and 7
+		sliceIndex = Mathf.PosMod(sliceIndex, 8);
+		return (FacingDirection)sliceIndex;
+	}
 
-        if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
-        {
-            // More horizontal than vertical
-            if (direction.X > 0)
-            {
-                return FacingDirection.East;
-            }
-            return FacingDirection.West;
-        }
-
-        // More vertical than horizontal
-        if (direction.Y > 0)
-        {
-            return FacingDirection.South;
-        }
-        return FacingDirection.North;
-    }
+	private FacingDirection GetNormalFacingDirection()
+	{
+		Vector2 direction = GlobalTransform.X;
+		if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
+		{
+			return direction.X > 0 ? FacingDirection.East : FacingDirection.West;
+		}
+		else
+		{
+			return direction.Y > 0 ? FacingDirection.South : FacingDirection.North;
+		}
+	}
 
 	private void SpawnBreakEffect(Vector2I cell)
 	{
