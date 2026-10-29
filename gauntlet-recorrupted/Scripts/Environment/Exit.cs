@@ -6,7 +6,8 @@ public partial class Exit : Area2D
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private string _nextLevelPath;
 	[Export] private Level _currentLevel = null;
-	[Export] private Label _spawnerCountLabel = null;
+	[Export(PropertyHint.Enum, "FadeInAndOut")]
+	private string _transitionName;
 
 	public enum State
 	{
@@ -67,7 +68,7 @@ public partial class Exit : Area2D
 			{
 				if (_nextLevelPath != null)
 				{
-					GetTree().CallDeferred("change_scene_to_file", _nextLevelPath);
+					TransitionController.Instance.PlayTransition(_transitionName, _nextLevelPath);
 				}
 				else
 				{

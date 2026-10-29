@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
+[ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/transition_controller.tscn" id="17_ggudn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -669,6 +670,8 @@ script = ExtResource("5_ggxpc")
 
 [node name="GameManager" type="Node" parent="Managers" unique_id=472901907]
 script = ExtResource("6_q8jds")
+
+[node name="TransitionController" parent="Managers" unique_id=1356249380 instance=ExtResource("17_ggudn")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
 libraries/ = SubResource("AnimationLibrary_j8qme")
