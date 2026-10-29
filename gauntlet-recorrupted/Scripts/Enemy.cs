@@ -75,6 +75,9 @@ public partial class Enemy : CharacterBody2D
 
 	// PUBLIC, NO EXPORT
 	public bool HasRoute = false;
+	public bool AttackSucceed = false;
+	// For Leech attack
+	public Vector2 AttackDirection;
 	public enum EnemyType
 	{
 		Roach,
@@ -327,6 +330,16 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	public void SetAttackDirection()
+	{
+		if (Player == null)
+		{
+			Player = Level.Current.Player;
+		}
+
+		AttackDirection = (PlayerPosition - GlobalPosition).Normalized();
+	}
+
 	public void SetPatrolTarget()
 	{
 		// while (!isAllowed)
@@ -388,7 +401,12 @@ public partial class Enemy : CharacterBody2D
 		{
 			if (CheckAttackAnimation())
 			{
-				Navigation(delta, _attackSpeed);
+				AttackMovement(_attackSpeed);
+			}
+
+			if (_sprite.Animation == "AttackFail")
+			{
+				AttackMovement(_maxSpeed);
 			}
 		}
 
@@ -399,6 +417,14 @@ public partial class Enemy : CharacterBody2D
 				_attackSfx.Play();
 			}
 		}
+	}
+
+	public void AttackMovement(float speed)
+	{
+		Vector2 velocity = AttackDirection * speed;
+
+		Velocity = velocity;
+		MoveAndSlide();
 	}
 
 	/// <summary>
@@ -498,8 +524,17 @@ public partial class Enemy : CharacterBody2D
 				break;
 
 			case Brain.State.Attack:
-				_sprite.Play("Attack");
-				_shadowSprite.Play("Attack");
+				if (AttackSucceed)
+				{
+					_sprite.Play("AttackHit");
+					_shadowSprite.Play("AttackHit");
+				}
+
+				if (_sprite.Animation != "AttackFail" && _sprite.Animation != "AttackHit")
+				{
+					_sprite.Play("Attack");
+					_shadowSprite.Play("Attack");
+				}
 				break;
 
 			case Brain.State.Damaged:
@@ -702,6 +737,11 @@ public partial class Enemy : CharacterBody2D
         Alarmed();
     }
 
+	private void OnAttackSucceed()
+    {
+        AttackSucceed = true;
+    }
+
 	// Helper method to change detecytion range.
 	public void SetDetectionRange(float range)
 	{
@@ -738,6 +778,11 @@ public partial class Enemy : CharacterBody2D
 			_detectionArea.BodyExited += OnBodyExited;
 
 			_detectionArea.AreaEntered += OnAreaEntered;
+		}
+
+		if (_dmgArea != null)
+		{
+			_dmgArea.AttackSucceed += OnAttackSucceed;
 		}
 
 		if (_sprite != null)

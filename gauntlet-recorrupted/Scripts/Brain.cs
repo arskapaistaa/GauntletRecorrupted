@@ -79,6 +79,11 @@ public partial class Brain : Node
 			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
 			{
 				CurrentState = State.Attack;
+
+				if (_enemy.ThisAttackType == Enemy.AttackType.Leech)
+					{
+						_enemy.SetAttackDirection();
+					}
 			}
 
 			break;
@@ -196,6 +201,22 @@ public partial class Brain : Node
 		}
 
 		if (_enemy.Sprite.Animation == "Attack")
+		{
+			if (_enemy.AttackSucceed == false && _enemy.ThisAttackType == Enemy.AttackType.Leech)
+			{
+				_enemy.Sprite.Play("AttackFail");
+				return;
+			}
+
+			AfterAttack();
+		}
+
+		if (_enemy.Sprite.Animation == "AttackFail")
+		{
+			AfterAttack();
+		}
+
+		if (_enemy.Sprite.Animation == "AttackHit")
 		{
 			AfterAttack();
 		}

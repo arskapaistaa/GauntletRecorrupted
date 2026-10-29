@@ -4,6 +4,8 @@ using System;
 public partial class DamageArea : Area2D
 {
 	private Enemy _enemy;
+
+    [Signal] public delegate void AttackSucceedEventHandler();
 	public override void _Ready()
 	{
 		_enemy = (Enemy)GetParent();
@@ -24,7 +26,7 @@ public partial class DamageArea : Area2D
         if (body is PlayerCharacter player)
         {
             player.TakeDmg(_enemy.Dmg);
-            GD.Print("Damage done");
+            EmitSignal(SignalName.AttackSucceed);
         }
     }
 
