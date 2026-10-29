@@ -34,16 +34,6 @@ radius = 64.629715
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rk2iv"]
 size = Vector2(163, 130)
 
-[sub_resource type="Gradient" id="Gradient_ci7sc"]
-offsets = PackedFloat32Array(0.428, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2bdb"]
-gradient = SubResource("Gradient_ci7sc")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.20809248, 0.216763)
-
 [node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow")]
 z_index = 1
 collision_mask = 6
@@ -92,12 +82,6 @@ shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 1.0
 texture = ExtResource("4_ci7sc")
-
-[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=805688956]
-position = Vector2(-0.004880772, 0.006275773)
-rotation = -1.5707964
-scale = Vector2(4.6873636, 4.6877813)
-texture = SubResource("GradientTexture2D_i2bdb")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292159288 node_paths=PackedStringArray("Player")]
 zoom = Vector2(0.2, 0.2)
