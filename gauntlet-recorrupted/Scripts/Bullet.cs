@@ -9,6 +9,10 @@ public partial class Bullet : Area2D
 	[Export(PropertyHint.Range, "0,100,1")] public int ShotgunBulletDamage = 5;
 	[Export(PropertyHint.Range, "0,10,0.5")] public float RevolverBulletLifetime = 2.0f;
 	[Export(PropertyHint.Range, "0,10,0.5")] public float ShotgunBulletLifetime = 1.0f;
+	/// <summary>
+	/// Multiplier for critical strikes -> When enemy is in attack state
+	/// </summary>
+	[Export(PropertyHint.Range, "1,2,0.1,suffix:x dmg")] private float _criticalDmgMultiplier = 1.5f;
 
 	private float Speed;
 	private int Damage;
@@ -65,6 +69,14 @@ public partial class Bullet : Area2D
 	{
 		if (body is Enemy enemy)
 		{
+			// Check if enemy is in attack state. Return if true.
+			if (enemy.Brain.CurrentState == Brain.State.Attack)
+			{
+				enemy.TakeDmg((int)(Damage * _criticalDmgMultiplier));
+				return;
+			}
+			// Make this "else" to remove the bug. And take return of.
+
 			enemy.TakeDmg(Damage);
 		}
 		else if (body is EnemySpawner spawner)
