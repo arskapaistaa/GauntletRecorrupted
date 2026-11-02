@@ -156,19 +156,19 @@ region = Rect2(3584, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t45lx"]
 atlas = ExtResource("1_rqdc8")
-region = Rect2(3584, 0, 512, 512)
+region = Rect2(4096, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5sa7"]
 atlas = ExtResource("1_rqdc8")
-region = Rect2(4096, 0, 512, 512)
+region = Rect2(4608, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7jl8t"]
 atlas = ExtResource("1_rqdc8")
-region = Rect2(4608, 0, 512, 512)
+region = Rect2(5120, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j58m"]
 atlas = ExtResource("1_rqdc8")
-region = Rect2(5120, 0, 512, 512)
+region = Rect2(0, 512, 512, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kxvjs"]
 animations = [{
@@ -223,6 +223,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hykqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1l6y")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wwuxb")
@@ -363,8 +366,9 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
 sprite_frames = SubResource("SpriteFrames_kxvjs")
-animation = &"Attack"
+animation = &"Walk"
 autoplay = "Idle"
+frame_progress = 0.6613062
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")
