@@ -185,11 +185,6 @@ public partial class Brain : Node
 			AfterSpawn();
 		}
 
-		if (_enemy.Sprite.Animation == "Defeat")
-		{
-			_enemy.QueueFree();
-		}
-
 		if (_enemy.Sprite.Animation == "Notice")
 		{
 			AfterNotice();

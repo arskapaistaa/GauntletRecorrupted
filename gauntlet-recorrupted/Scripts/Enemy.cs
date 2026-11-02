@@ -65,6 +65,9 @@ public partial class Enemy : CharacterBody2D
 	[ExportSubgroup("Particles")]
 	[Export] private GpuParticles2D _damagedParticles = null;
 
+	[ExportSubgroup("Timers")]
+	[Export] private Timer _destroyTimer = null;
+
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
 	[Export] private int _attackStartFrame;
@@ -193,6 +196,11 @@ public partial class Enemy : CharacterBody2D
 		if (_homeSpawner != null)
 		{
 			_homeSpawner.SpawnerDamaged -= OnSpawnerDamaged;
+		}
+
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Timeout -= OnTimerTimedOut;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -500,6 +508,11 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
+		if (_sprite.Animation == "Defeat")
+		{
+			return;
+		}
+
 		switch (_brain.CurrentState)
 		{
 			case Brain.State.Spawning:
@@ -612,6 +625,11 @@ public partial class Enemy : CharacterBody2D
 		if (_homeSpawner != null)
 		{
 			_homeSpawner.DecreaseActiveEnemiesCount();
+		}
+
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Start();
 		}
 
 		_brain.Defeat();
@@ -806,5 +824,15 @@ public partial class Enemy : CharacterBody2D
 			_agent.VelocityComputed += OnVelocityComputed;
 			_agent.NavigationFinished += OnNavigationFinished;
 		}
+
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Timeout += OnTimerTimedOut;
+		}
 	}
+
+    private void OnTimerTimedOut()
+    {
+        QueueFree();
+    }
 }

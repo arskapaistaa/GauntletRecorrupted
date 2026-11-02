@@ -226,7 +226,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(162, 78)
 
-[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles") groups=["Enemy"]]
+[node name="Roach" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_shadowSprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 15
@@ -255,6 +255,7 @@ _attackSfx = NodePath("Audios/AttackSFX")
 _damagedSfx = NodePath("Audios/DamagedSFX")
 _defeatSfx = NodePath("Audios/DefeatSFX")
 _damagedParticles = NodePath("Particles/EnemyDamaged")
+_destroyTimer = NodePath("Timers/DestroyTimer")
 _attackStartFrame = 2
 _attackEndFrames = 3
 
@@ -350,3 +351,9 @@ bus = &"SFX"
 [node name="Particles" type="Node2D" parent="." unique_id=1612982129]
 
 [node name="EnemyDamaged" parent="Particles" unique_id=113120183 instance=ExtResource("11_r6b76")]
+
+[node name="Timers" type="Node" parent="." unique_id=916174820]
+
+[node name="DestroyTimer" type="Timer" parent="Timers" unique_id=552070090]
+wait_time = 3.0
+one_shot = true
