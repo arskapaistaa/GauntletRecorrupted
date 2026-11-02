@@ -228,12 +228,6 @@ public partial class EnemySpawner : StaticBody2D
 
 	private void SetSpawningCooldown(float multiplier)
 	{
-		if (multiplier < 1.0f)
-		{
-			GD.PrintErr("Spawner cooldown multiplier less than 1.0f");
-			return;
-		}
-
 		if (Level.Current.IntensityLevel < Config.LowIntensityMax)
 		{
 			CurrentSpawningCooldown = _spawningCooldown ;

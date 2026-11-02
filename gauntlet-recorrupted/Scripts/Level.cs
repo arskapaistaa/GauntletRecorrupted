@@ -39,11 +39,14 @@ public partial class Level : Node2D
 	private float _intensityLevel = 0.0f;
 	public float IntensityLevel
 	{
-		get { return _intensityLevel; }
+		get
+		{
+			GD.Print("Intensity level: " + _intensityLevel);
+			return _intensityLevel;
+		}
 		private set
 		{
 			Mathf.Clamp(_intensityLevel, 0.0f, 10.0f);
-			GD.Print(IntensityLevel);
 		}
 	}
 
@@ -133,27 +136,31 @@ public partial class Level : Node2D
 	{
 		if (value > 0.0f)
 		{
-			IntensityLevel += value;
+			_intensityLevel += value;
 		}
 
 		// Limit level to 10.0f
 		if (IntensityLevel > 10.0f)
 		{
-			IntensityLevel = 10.0f;
+			_intensityLevel = 10.0f;
 		}
 	}
 
+	/// <summary>
+	/// Decrease current Intensity.
+	/// </summary>
+	/// <param name="value">Use values form Config</param>
 	public void DecreaseIntensity(float value)
 	{
 		if (value > 0.0f)
 		{
-			IntensityLevel -= value;
+			_intensityLevel -= value;
 		}
 
 		// Limit level to 0.0f;
 		if (IntensityLevel < 0.0f)
 		{
-			IntensityLevel = 0.0f;
+			_intensityLevel = 0.0f;
 		}
 	}
 

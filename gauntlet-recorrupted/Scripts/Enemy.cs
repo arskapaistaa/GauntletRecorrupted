@@ -320,6 +320,7 @@ public partial class Enemy : CharacterBody2D
 		if (Player == null)
 		{
 			Player = Level.Current.Player;
+			Level.Current.IncreaseIntensity(Config.EnemyNoticeValue);
 		}
 
 		_agent.TargetPosition = PlayerPosition;
@@ -613,6 +614,11 @@ public partial class Enemy : CharacterBody2D
 		if (ThisEnemyType != EnemyType.Worm)
 		{
 			_dmgArea.Monitoring = false;
+		}
+
+		if (Player != null)
+		{
+			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
 	}
 
