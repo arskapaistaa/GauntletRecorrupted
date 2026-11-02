@@ -252,7 +252,7 @@ _data = {
 &"StartPressed": SubResource("Animation_v40es")
 }
 
-[node name="TestMenu" type="Control" unique_id=205651718]
+[node name="TestMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -260,6 +260,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t3rra")
+_animations = NodePath("AnimationPlayer")
 
 [node name="TitleScreen" type="Control" parent="." unique_id=1340800981]
 layout_mode = 1
@@ -355,6 +356,13 @@ _animations = NodePath("../../AnimationPlayer")
 _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+
+[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=527330769]
+visible = false
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 39.0
+text = "Settings"
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
 visible = false
@@ -567,38 +575,81 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_d61wr")
-_displayMode = NodePath("PanelContainer/HBoxContainer/VideoOptions/DisplayMode")
-_resolution = NodePath("PanelContainer/HBoxContainer/VideoOptions/Resolution")
-_masterVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider")
-_sfxVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider3")
-_musicVolume = NodePath("PanelContainer/HBoxContainer/AudioOptions/HSlider2")
+_displayMode = NodePath("PanelContainer/VideoOptions/DisplayMode")
+_resolution = NodePath("PanelContainer/VideoOptions/Resolution")
+_masterVolume = NodePath("PanelContainer/AudioOptions/HSlider")
+_sfxVolume = NodePath("PanelContainer/AudioOptions/HSlider3")
+_musicVolume = NodePath("PanelContainer/AudioOptions/HSlider2")
 
 [node name="PanelContainer" type="Panel" parent="Options" unique_id=28957124]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Options/PanelContainer" unique_id=368357455]
+[node name="AudioOptions" type="VBoxContainer" parent="Options/PanelContainer" unique_id=134338871]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -98.5
-offset_right = 125.0
-offset_bottom = 98.5
-grow_horizontal = 2
+offset_left = -194.0
+offset_top = -99.0
+offset_right = -44.0
+offset_bottom = 101.0
+grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("1_cg106")
+theme_override_constants/separation = 16
+alignment = 1
 
-[node name="VideoOptions" type="VBoxContainer" parent="Options/PanelContainer/HBoxContainer" unique_id=1821460599]
+[node name="Master" type="Label" parent="Options/PanelContainer/AudioOptions" unique_id=1007610259]
 layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Options/PanelContainer/AudioOptions" unique_id=1824834350]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+max_value = 1.0
+step = 0.1
+
+[node name="Music" type="Label" parent="Options/PanelContainer/AudioOptions" unique_id=265546990]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="HSlider2" type="HSlider" parent="Options/PanelContainer/AudioOptions" unique_id=68985266]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+max_value = 1.0
+step = 0.1
+
+[node name="SFX" type="Label" parent="Options/PanelContainer/AudioOptions" unique_id=691604112]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="HSlider3" type="HSlider" parent="Options/PanelContainer/AudioOptions" unique_id=250886736]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+max_value = 1.0
+step = 0.1
+
+[node name="VideoOptions" type="VBoxContainer" parent="Options/PanelContainer" unique_id=1821460599]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 39.0
+offset_top = -70.0
+offset_right = 290.0
+offset_bottom = 70.0
+grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="DisplayMode" type="OptionButton" parent="Options/PanelContainer/HBoxContainer/VideoOptions" unique_id=574635929]
+[node name="DisplayMode" type="OptionButton" parent="Options/PanelContainer/VideoOptions" unique_id=574635929]
 layout_mode = 2
-fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
@@ -607,7 +658,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Fullscreen"
 popup/item_2/id = 2
 
-[node name="Resolution" type="OptionButton" parent="Options/PanelContainer/HBoxContainer/VideoOptions" unique_id=659086223]
+[node name="Resolution" type="OptionButton" parent="Options/PanelContainer/VideoOptions" unique_id=659086223]
 layout_mode = 2
 selected = 1
 item_count = 2
@@ -616,44 +667,13 @@ popup/item_0/id = 0
 popup/item_1/text = "1960 x 1080"
 popup/item_1/id = 1
 
-[node name="AudioOptions" type="VBoxContainer" parent="Options/PanelContainer/HBoxContainer" unique_id=134338871]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Master" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1007610259]
-layout_mode = 2
-text = "Master"
-
-[node name="HSlider" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=1824834350]
-layout_mode = 2
-max_value = 1.0
-
-[node name="Music" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=265546990]
-layout_mode = 2
-text = "Music"
-
-[node name="HSlider2" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=68985266]
-layout_mode = 2
-max_value = 1.0
-
-[node name="SFX" type="Label" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=691604112]
-layout_mode = 2
-text = "SFX"
-
-[node name="HSlider3" type="HSlider" parent="Options/PanelContainer/HBoxContainer/AudioOptions" unique_id=250886736]
-layout_mode = 2
-max_value = 1.0
-
 [node name="Button" type="Button" parent="Options/PanelContainer" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 31.0
-offset_top = -54.0
-offset_right = 85.0
-offset_bottom = -27.0
+offset_top = -62.0
+offset_right = 137.0
 grow_vertical = 0
 text = "CLOSE"
 script = ExtResource("2_ikpte")

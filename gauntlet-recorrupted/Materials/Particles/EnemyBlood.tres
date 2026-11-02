@@ -1,0 +1,16 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://cb8rh61fpuh4b"]
+
+[sub_resource type="Gradient" id="Gradient_ll3lk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_ll3lk")
+
+[resource]
+particle_flag_disable_z = true
+radial_velocity_min = 9.999977
+radial_velocity_max = 399.99997
+gravity = Vector3(0, 0, 0)
+scale_max = 4.0
+color = Color(0.6509804, 0.6392157, 0.5058824, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")

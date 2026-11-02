@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://r78dpllnlyu8"]
 
 [ext_resource type="Script" uid="uid://cuhex13vxsjoe" path="res://Scripts/Bullet.cs" id="1_oduel"]
-[ext_resource type="Material" uid="uid://csi712uhvjryu" path="res://Materials/Particles/Bulletl.tres" id="2_oduel"]
 
 [sub_resource type="Gradient" id="Gradient_oduel"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -27,10 +26,3 @@ texture = SubResource("GradientTexture1D_rd3qt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]
 shape = SubResource("CircleShape2D_ycag2")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1139997155]
-visible = false
-amount = 32
-lifetime = 0.1
-speed_scale = 2.0
-process_material = ExtResource("2_oduel")

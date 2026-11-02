@@ -7,6 +7,7 @@ public partial class EnemySpawner : StaticBody2D
 	[Export] private PackedScene _enemyScene = null;
 	[Export(PropertyHint.Range, "1,180,1,suffix:seconds")]
 	private float _spawningCooldown = 1.0f;
+	[Export] private float[] _cooldownMultiplier = new float[4];
 	[Export] private int _health;
 	/// <summary>
 	/// How many enemies can be active at the same time, spawned from this spawner.
@@ -33,6 +34,7 @@ public partial class EnemySpawner : StaticBody2D
 	}
 
 	public State CurrentState = State.Idle;
+	public float CurrentSpawningCooldown;
 	public bool IsAlive = true;
 	private int _currentActiveEnemiesCount = 0;
 
@@ -49,7 +51,9 @@ public partial class EnemySpawner : StaticBody2D
 
 		if (_timer.IsStopped())
 		{
-			_timer.WaitTime = _spawningCooldown;
+			CurrentSpawningCooldown = _spawningCooldown;
+
+			_timer.WaitTime = CurrentSpawningCooldown;
 			_timer.Start();
 		}
 
@@ -129,6 +133,8 @@ public partial class EnemySpawner : StaticBody2D
 
 		IncreaseActiveEnemiesCount();
 		Level.Current.ChangeEnemyCount(1);
+
+		CheckIntensityLevel();
 	}
 
 	/// <summary>
@@ -190,6 +196,48 @@ public partial class EnemySpawner : StaticBody2D
 	public void DecreaseActiveEnemiesCount()
 	{
 		_currentActiveEnemiesCount--;
+	}
+
+	/// <summary>
+	/// To check what is the current intensity in the game.
+	/// Decrease spawning rate by multiplier
+	/// </summary>
+	private void CheckIntensityLevel()
+	{
+		float multiplier = 0.0f;
+
+		if (Level.Current.IntensityLevel > Config.LowIntensityMax)
+		{
+			multiplier = _cooldownMultiplier[0];
+		}
+		else if (Level.Current.IntensityLevel > Config.MidIntensityMax)
+		{
+			multiplier = _cooldownMultiplier[1];
+		}
+		else if (Level.Current.IntensityLevel > Config.HighIntensityMax)
+		{
+			multiplier = _cooldownMultiplier[2];
+		}
+		else if (Level.Current.IntensityLevel > Config.InstaneIntensityMax)
+		{
+			multiplier = _cooldownMultiplier[3];
+		}
+
+		SetSpawningCooldown(multiplier);
+	}
+
+	private void SetSpawningCooldown(float multiplier)
+	{
+		if (Level.Current.IntensityLevel < Config.LowIntensityMax)
+		{
+			CurrentSpawningCooldown = _spawningCooldown ;
+		}
+		else
+		{
+			CurrentSpawningCooldown = _spawningCooldown * multiplier;
+		}
+
+		_timer.WaitTime = CurrentSpawningCooldown;
 	}
 
 	private void UpdateAnimation()

@@ -6,9 +6,9 @@ Layer guide for collision and visibility.
 
 3 - UI elements
 
-2 - Walls, Spawners
+2 - Walls, Spawners & Particles (Most of the time)
 
-1 - Player, Enemies, Particles (Most of the time) & Bullet
+1 - Player, Enemies & Bullet
 
 0 - Ground
 

@@ -62,6 +62,12 @@ public partial class Enemy : CharacterBody2D
 	[Export] private AudioStreamPlayer2D _damagedSfx = null;
 	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
+	[ExportSubgroup("Particles")]
+	[Export] private GpuParticles2D _damagedParticles = null;
+
+	[ExportSubgroup("Timers")]
+	[Export] private Timer _destroyTimer = null;
+
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
 	[Export] private int _attackStartFrame;
@@ -190,6 +196,11 @@ public partial class Enemy : CharacterBody2D
 		if (_homeSpawner != null)
 		{
 			_homeSpawner.SpawnerDamaged -= OnSpawnerDamaged;
+		}
+
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Timeout -= OnTimerTimedOut;
 		}
     }
 	public override void _PhysicsProcess(double delta)
@@ -320,6 +331,7 @@ public partial class Enemy : CharacterBody2D
 		if (Player == null)
 		{
 			Player = Level.Current.Player;
+			Level.Current.IncreaseIntensity(Config.EnemyNoticeValue);
 		}
 
 		_agent.TargetPosition = PlayerPosition;
@@ -496,6 +508,11 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
+		if (_sprite.Animation == "Defeat")
+		{
+			return;
+		}
+
 		switch (_brain.CurrentState)
 		{
 			case Brain.State.Spawning:
@@ -524,7 +541,7 @@ public partial class Enemy : CharacterBody2D
 				break;
 
 			case Brain.State.Attack:
-				if (AttackSucceed)
+				if (AttackSucceed && ThisAttackType == AttackType.Leech)
 				{
 					_sprite.Play("AttackHit");
 					_shadowSprite.Play("AttackHit");
@@ -569,6 +586,16 @@ public partial class Enemy : CharacterBody2D
 	{
 		_brain.Damaged();
 
+		if (_damagedSfx != null)
+		{
+			_damagedSfx.Play();
+		}
+
+		if (_damagedParticles != null)
+		{
+			_damagedParticles.Restart();
+		}
+
 		if (IsAlive)
 		{
 			_health -= dmg;
@@ -580,14 +607,7 @@ public partial class Enemy : CharacterBody2D
 			Defeat();
 		}
 
-		if (_damagedSfx != null)
-		{
-			_damagedSfx.Play();
-		}
-
 		HasRoute = false;
-
-
 	}
 
 	private void Defeat()
@@ -607,12 +627,22 @@ public partial class Enemy : CharacterBody2D
 			_homeSpawner.DecreaseActiveEnemiesCount();
 		}
 
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Start();
+		}
+
 		_brain.Defeat();
 
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)
 		{
 			_dmgArea.Monitoring = false;
+		}
+
+		if (Player != null)
+		{
+			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
 	}
 
@@ -693,10 +723,9 @@ public partial class Enemy : CharacterBody2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (body is PlayerCharacter player)
+        if (body is PlayerCharacter)
 		{
-			//TODO: IsAlive etc.
-			Player = player;
+			SetPlayerTarget();
 			_brain.PlayerEntered();
 		}
     }
@@ -795,5 +824,15 @@ public partial class Enemy : CharacterBody2D
 			_agent.VelocityComputed += OnVelocityComputed;
 			_agent.NavigationFinished += OnNavigationFinished;
 		}
+
+		if (_destroyTimer != null)
+		{
+			_destroyTimer.Timeout += OnTimerTimedOut;
+		}
 	}
+
+    private void OnTimerTimedOut()
+    {
+        QueueFree();
+    }
 }

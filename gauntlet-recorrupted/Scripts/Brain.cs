@@ -106,15 +106,15 @@ public partial class Brain : Node
 
 	public void AfterDamaged()
 	{
-		CurrentCombatState = CombatState.InCombat;
-
-		if (_enemy.Player == null)
+		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(OutOfCombatState);
 
 			_enemy.SetPlayerTarget();
+
+			CurrentCombatState = CombatState.InCombat;
 		}
-		else if (_enemy.Player != null)
+		else if (CurrentCombatState == CombatState.InCombat)
 		{
 			SetCurrentState(InCombatState);
 
@@ -183,11 +183,6 @@ public partial class Brain : Node
 		if (_enemy.Sprite.Animation == "Spawn")
 		{
 			AfterSpawn();
-		}
-
-		if (_enemy.Sprite.Animation == "Defeat")
-		{
-			_enemy.QueueFree();
 		}
 
 		if (_enemy.Sprite.Animation == "Notice")

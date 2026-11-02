@@ -26,7 +26,8 @@ public partial class GameManager : Node
 	public GameState CurrentGameState = GameState.Menu;
 	public enum GameState
 	{
-		Menu, // Call from MainMenu _Ready(),
+		Menu, // Call from MainMenu _Ready()
+		Settings, // Call in MainMenu
 		Game, 	  // Call when the Player enter in main game. Also when exits from Pause menu
 		Pause,	  // Call when player presses Pause input.
 		End		  // Call when game ends -> Player dies or finishes the game.
