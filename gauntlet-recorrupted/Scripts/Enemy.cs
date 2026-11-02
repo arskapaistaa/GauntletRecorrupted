@@ -528,7 +528,7 @@ public partial class Enemy : CharacterBody2D
 				break;
 
 			case Brain.State.Attack:
-				if (AttackSucceed)
+				if (AttackSucceed && ThisAttackType == AttackType.Leech)
 				{
 					_sprite.Play("AttackHit");
 					_shadowSprite.Play("AttackHit");
@@ -705,10 +705,9 @@ public partial class Enemy : CharacterBody2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (body is PlayerCharacter player)
+        if (body is PlayerCharacter)
 		{
-			//TODO: IsAlive etc.
-			Player = player;
+			SetPlayerTarget();
 			_brain.PlayerEntered();
 		}
     }

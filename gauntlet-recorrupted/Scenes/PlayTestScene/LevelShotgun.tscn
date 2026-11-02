@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_5k47h"]
 [ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="8_bp4pk"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_88ik6"]
+[ext_resource type="PackedScene" uid="uid://cvp3ahdy72b8i" path="res://Scenes/Environment/CanvasModulateDarken.tscn" id="10_4shlo"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8f15i"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_7lkx4"]
 
@@ -185,8 +186,7 @@ _attackEndFrames = 0
 position = Vector2(258, -49)
 _currentLevel = NodePath("../..")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
-color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+[node name="CanvasModulateDarken" parent="Environment" unique_id=521195149 instance=ExtResource("10_4shlo")]
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("9_88ik6")]
 position = Vector2(-1, 3646.0002)
@@ -195,7 +195,7 @@ RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
 visible = false
 limit_left = -7819
 limit_top = -4847

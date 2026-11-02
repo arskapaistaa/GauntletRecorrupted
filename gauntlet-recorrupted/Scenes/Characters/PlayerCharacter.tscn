@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://diiwj2ya03wkt" path="res://Scripts/PlayerCharacter.cs" id="1_nu4k2"]
 [ext_resource type="PackedScene" uid="uid://r78dpllnlyu8" path="res://Scenes/bullet.tscn" id="2_lp3jq"]
 [ext_resource type="Texture2D" uid="uid://bgsujgo8700n3" path="res://Art/ArtProtagonistIdle.png" id="3_ci7sc"]
-[ext_resource type="Texture2D" uid="uid://b133q6jb0onj1" path="res://Art/ConeLightShape.png" id="4_ci7sc"]
+[ext_resource type="Texture2D" uid="uid://dqqsqsjc16mbg" path="res://Art/ConeOfLight/ConeLightShape.png_0001.png" id="4_w51uo"]
 [ext_resource type="Script" uid="uid://bhom7vtl6kd5b" path="res://Scripts/UI/Camera.cs" id="5_kkncw"]
 [ext_resource type="PackedScene" uid="uid://ctf84d65x3l3m" path="res://Scenes/Particles/Dust.tscn" id="6_8cky6"]
+[ext_resource type="Texture2D" uid="uid://m1htnmgb1iuc" path="res://Art/ConeOfLight/ConeLightShape.png_0002.png" id="6_i7eac"]
+[ext_resource type="Texture2D" uid="uid://b6ugmjqgytwpi" path="res://Art/ConeOfLight/ConeLightShape.png_0003.png" id="7_nwqxr"]
 [ext_resource type="Texture2D" uid="uid://04tv05vanndb" path="res://Art/UserInterface/pointer.png" id="8_4t8qp"]
 [ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="8_8kqif"]
+[ext_resource type="Texture2D" uid="uid://cjtjmcfbs7pkx" path="res://Art/ConeOfLight/ConeLightShape.png_0004.png" id="8_40gda"]
+[ext_resource type="Texture2D" uid="uid://c2g608wf1fkyo" path="res://Art/ConeOfLight/ConeLightShape.png_0005.png" id="9_lhk5l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c32ia"]
 animations = [{
@@ -36,6 +40,7 @@ size = Vector2(163, 130)
 
 [sub_resource type="Animation" id="Animation_4t8qp"]
 resource_name = "LightAnimation"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,10 +48,10 @@ tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_ci7sc")]
+"values": [ExtResource("4_w51uo"), ExtResource("6_i7eac"), ExtResource("7_nwqxr"), ExtResource("8_40gda"), ExtResource("9_lhk5l")]
 }
 
 [sub_resource type="Animation" id="Animation_8kqif"]
@@ -61,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ci7sc")]
+"values": [ExtResource("4_w51uo")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_elcmd"]
@@ -117,10 +122,11 @@ range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 1
 shadow_filter_smooth = 1.0
-texture = ExtResource("4_ci7sc")
+texture = ExtResource("4_w51uo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D" unique_id=265087623]
 libraries/ = SubResource("AnimationLibrary_elcmd")
+autoplay = &"LightAnimation"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=292159288 node_paths=PackedStringArray("Player")]
 zoom = Vector2(0.2, 0.2)

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="9_567t2"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="10_567t2"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="10_uicjp"]
+[ext_resource type="PackedScene" uid="uid://cvp3ahdy72b8i" path="res://Scenes/Environment/CanvasModulateDarken.tscn" id="11_lpo5v"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="11_srom3"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="12_7mlpp"]
 
@@ -136,8 +137,7 @@ position = Vector2(2213, -2150)
 position = Vector2(837, -844)
 _currentLevel = NodePath("../..")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
-color = Color(0.30249536, 0.3024954, 0.3024954, 1)
+[node name="CanvasModulateDarken" parent="." unique_id=521195149 instance=ExtResource("11_lpo5v")]
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("10_uicjp")]
 position = Vector2(-3087, -1797)
