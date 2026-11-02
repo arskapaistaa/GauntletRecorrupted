@@ -62,6 +62,9 @@ public partial class Enemy : CharacterBody2D
 	[Export] private AudioStreamPlayer2D _damagedSfx = null;
 	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
+	[ExportSubgroup("Particles")]
+	[Export] private GpuParticles2D _damagedParticles = null;
+
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
 	[Export] private int _attackStartFrame;
@@ -570,6 +573,16 @@ public partial class Enemy : CharacterBody2D
 	{
 		_brain.Damaged();
 
+		if (_damagedSfx != null)
+		{
+			_damagedSfx.Play();
+		}
+
+		if (_damagedParticles != null)
+		{
+			_damagedParticles.Restart();
+		}
+
 		if (IsAlive)
 		{
 			_health -= dmg;
@@ -581,14 +594,7 @@ public partial class Enemy : CharacterBody2D
 			Defeat();
 		}
 
-		if (_damagedSfx != null)
-		{
-			_damagedSfx.Play();
-		}
-
 		HasRoute = false;
-
-
 	}
 
 	private void Defeat()
