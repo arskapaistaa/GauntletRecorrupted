@@ -273,9 +273,9 @@ CantReachTargetState = 3
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"Attack"
+animation = &"Defeat"
 autoplay = "Idle"
-frame = 4
+frame = 3
 frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1745444926]
@@ -329,6 +329,7 @@ bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1142729619]
 stream = ExtResource("7_ll3lk")
+pitch_scale = 1.1
 max_polyphony = 2
 bus = &"SFX"
 
@@ -345,6 +346,7 @@ bus = &"SFX"
 
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2112349011]
 stream = ExtResource("10_rmn24")
+pitch_scale = 0.9
 bus = &"SFX"
 
 [node name="Particles" type="Node2D" parent="." unique_id=1612982129]

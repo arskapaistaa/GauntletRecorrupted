@@ -315,11 +315,11 @@ collision_mask = 5
 [node name="Audios" type="Node2D" parent="." unique_id=974702717]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1000198320]
+stream = ExtResource("6_1bw1k")
 pitch_scale = 0.62
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1711281695]
-stream = ExtResource("6_1bw1k")
 bus = &"SFX"
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1984125170]

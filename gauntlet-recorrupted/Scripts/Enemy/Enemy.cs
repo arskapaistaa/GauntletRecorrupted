@@ -422,7 +422,7 @@ public partial class Enemy : CharacterBody2D
 			}
 		}
 
-		if (_brain.CurrentState == Brain.State.Attack)
+		if (_sprite.Animation == "Attack")
 		{
 			if (_attackSfx.Playing == false)
 			{
@@ -572,24 +572,32 @@ public partial class Enemy : CharacterBody2D
 		{
 			if (_movementSfx.Playing == false)
 			{
-				_movementSfx.Playing = true;
+				_movementSfx.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
+				_movementSfx.Play();
 			}
-
 		}
-		else
+
+		switch (_sprite.Animation)
 		{
-			_movementSfx.Playing = false;
+			case "Attack":
+				if (_attackSfx != null && _attackSfx.Playing == false)
+				{
+					_attackSfx.Play();
+				}
+				break;
+
+			case "Notice":
+				if (_noticeSfx != null && _noticeSfx.Playing == false)
+				{
+					_noticeSfx.Play();
+				}
+				break;
 		}
 	}
 
 	public void TakeDmg(int dmg)
 	{
 		_brain.Damaged();
-
-		if (_damagedSfx != null)
-		{
-			_damagedSfx.Play();
-		}
 
 		if (_damagedParticles != null)
 		{
@@ -605,6 +613,12 @@ public partial class Enemy : CharacterBody2D
 		if (Health <= 0)
 		{
 			Defeat();
+			return;
+		}
+
+		if (_damagedSfx != null)
+		{
+			_damagedSfx.Play();
 		}
 
 		HasRoute = false;
@@ -612,11 +626,6 @@ public partial class Enemy : CharacterBody2D
 
 	private void Defeat()
 	{
-		if (_defeatSfx != null)
-		{
-			_defeatSfx.Play();
-		}
-
 		if (_characterCollision != null)
 		{
 			_characterCollision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
@@ -644,6 +653,16 @@ public partial class Enemy : CharacterBody2D
 		{
 			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
+
+		if (_defeatSfx != null)
+		{
+			_defeatSfx.Play();
+		}
+	}
+
+	public void PlaySingleAudio()
+	{
+
 	}
 
 	public void AlarmBuddies()
@@ -659,11 +678,6 @@ public partial class Enemy : CharacterBody2D
 					enemyNode.Alarmed();
 				}
 			}
-		}
-
-		if (_noticeSfx != null)
-		{
-			_noticeSfx.Play();
 		}
 	}
 
