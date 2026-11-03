@@ -601,16 +601,17 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 5.0
+offset_left = 14.0
 offset_top = -65.0
-offset_right = 205.0
+offset_right = 212.0
 offset_bottom = 65.0
 grow_vertical = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 
 [node name="DisplayMode" type="OptionButton" parent="Options/VideoOptions" unique_id=574635929]
 layout_mode = 2
 alignment = 1
+text_overrun_behavior = 1
 fit_to_longest_item = false
 item_count = 3
 popup/item_0/text = "Windowed"
@@ -631,6 +632,11 @@ popup/item_0/id = 0
 popup/item_1/text = "1920 x 1080"
 popup/item_1/id = 1
 
+[node name="CheckButton" type="CheckButton" parent="Options/VideoOptions" unique_id=1654093455]
+visible = false
+layout_mode = 2
+text = "vsync"
+
 [node name="AudioOptions" type="VBoxContainer" parent="Options" unique_id=134338871]
 layout_mode = 1
 anchors_preset = 6
@@ -638,10 +644,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -62.5
-offset_right = -20.0
-offset_bottom = 62.5
+offset_left = -209.0
+offset_top = -62.0
+offset_right = -29.0
+offset_bottom = 63.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_cg106")
