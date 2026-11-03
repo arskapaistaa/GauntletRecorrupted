@@ -8,5 +8,6 @@ public static class Config
 
     public const float EnemyNoticeValue = 0.5f;
     public const float EnemyDeathValue = 0.5f;
+    public const float ZeroSpawnerLeft = 2.0f;
     #endregion Intensity
 }

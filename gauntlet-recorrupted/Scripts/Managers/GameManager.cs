@@ -18,7 +18,7 @@ public partial class GameManager : Node
 
 	public int CurrentLevel
 	{
-		set { Mathf.Clamp(_currentLevel, 1, 10); }
+		set { _currentLevel = Mathf.Clamp(_currentLevel, 1, 10); }
 		get { return _currentLevel; }
 	}
 

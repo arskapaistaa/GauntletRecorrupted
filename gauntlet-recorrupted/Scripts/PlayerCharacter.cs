@@ -41,6 +41,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Signal] public delegate void ReloadEventHandler(int weaponType);
 	[Signal] public delegate void ShotCameraShakeEventHandler(int weaponType);
 	[Signal] public delegate void PeekCameraMovementEventHandler(bool isPeeking);
+	[Signal] public delegate void PlayerHealthChangedEventHandler();
 	private Vector2 _knockback = Vector2.Zero;
 	private Vector2 _moveVelocity = Vector2.Zero;
 	private float ReloadTime;
@@ -396,6 +397,13 @@ public partial class PlayerCharacter : CharacterBody2D
 			isLiving = false;
 		}
 		FlashSprite();
+
+		EmitSignal(SignalName.PlayerHealthChanged);
+	}
+
+	public int GetHealth()
+	{
+		return Health;
 	}
 
 	private FacingDirection GetFacingDirection()

@@ -50,7 +50,7 @@ public partial class SettingsManager : Node
 	/// <summary>
 	/// Method to call from button. Changes window setting.
 	/// </summary>
-	/// <param name="isFullscreen">Is the window full screen or windowed</param>
+	/// <param name="index"></param>
 	public void OnDisplayModeSelected(int index)
 	{
 		switch (index)
@@ -72,7 +72,7 @@ public partial class SettingsManager : Node
 	}
 
 	/// <summary>
-	/// Method to call when player selects a resolutin in options.
+	/// Method to call when player selects a resolution in options.
 	/// </summary>
 	/// <param name="index"></param>
 	public void OnResolutionSelected(int index)

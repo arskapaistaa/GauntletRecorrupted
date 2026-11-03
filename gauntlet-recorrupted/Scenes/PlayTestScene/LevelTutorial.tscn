@@ -68,7 +68,6 @@ script = ExtResource("1_vaf4p")
 _maxTotalEnemyCount = 7
 _spawnerCount = 2
 _presetEnemyCount = 3
-_isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")

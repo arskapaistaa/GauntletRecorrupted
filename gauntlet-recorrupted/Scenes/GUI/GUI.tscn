@@ -7,7 +7,7 @@
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 process_mode = 3
 
-[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel")]
+[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel", "_healthLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,17 +15,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_linlh")
-_fpsLabel = NodePath("MarginContainer/FPS")
+_fpsLabel = NodePath("FPSContainer/FPS")
+_healthLabel = NodePath("PlayerHealthLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI" unique_id=1924964740]
+[node name="FPSContainer" type="MarginContainer" parent="GUI" unique_id=1924964740]
 layout_mode = 1
 offset_right = 80.0
 offset_bottom = 80.0
 
-[node name="FPS" type="Label" parent="GUI/MarginContainer" unique_id=2064967945]
+[node name="FPS" type="Label" parent="GUI/FPSContainer" unique_id=2064967945]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.54901963)
 text = "FPS"
+
+[node name="PlayerHealthLabel" type="Label" parent="GUI" unique_id=1284538617]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -64.0
+offset_right = 80.0
+offset_bottom = -40.0
+grow_vertical = 0
+text = "100"
 
 [node name="PauseMenu" parent="." unique_id=1923251465 instance=ExtResource("2_17j7b")]
 
