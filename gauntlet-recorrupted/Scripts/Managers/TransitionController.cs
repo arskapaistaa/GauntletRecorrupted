@@ -41,13 +41,16 @@ public partial class TransitionController : Node
     /// <param name="animationName">Set animation name here</param>
     public void PlayTransition(string animationName, string path)
 	{
-		_pathToNextScene = path;
-
-		switch (animationName)
+		if (animationName != "" && path != "")
 		{
-			case "FadeInAndOut":
-				_animationPlayer.Play("FadeIn");
-				break;
+			_pathToNextScene = path;
+
+			switch (animationName)
+			{
+				case "FadeInAndOut":
+					_animationPlayer.Play("FadeIn");
+					break;
+			}
 		}
 	}
 
