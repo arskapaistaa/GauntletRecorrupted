@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://c83l7ond8lwpl"]
 
-[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_4m0ti"]
-[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Brain.cs" id="2_yb4cs"]
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_4m0ti"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_yb4cs"]
 [ext_resource type="Texture2D" uid="uid://cbjmc5403g3i5" path="res://Art/Enemies/ArtEnemyRoach.png" id="3_8q24r"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_yb4cs"]
-[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_4hohg"]
-[ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="6_haiou"]
+[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="4_4hohg"]
+[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_r6b76"]
 [ext_resource type="AudioStream" uid="uid://8yda6bixdgua" path="res://Audio/SFX/Roach/RoachNotice.wav" id="7_ll3lk"]
 [ext_resource type="AudioStream" uid="uid://6u60chiltksq" path="res://Audio/SFX/Roach/RoachAttack.wav" id="8_r6b76"]
 [ext_resource type="AudioStream" uid="uid://duw2ig4orhg7d" path="res://Audio/SFX/Roach/RoachDamaged.wav" id="9_d6fmx"]
@@ -324,8 +324,7 @@ collision_mask = 5
 [node name="Audios" type="Node2D" parent="." unique_id=1571714536]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1311906329]
-stream = ExtResource("6_haiou")
-pitch_scale = 0.9
+stream = ExtResource("6_r6b76")
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1142729619]

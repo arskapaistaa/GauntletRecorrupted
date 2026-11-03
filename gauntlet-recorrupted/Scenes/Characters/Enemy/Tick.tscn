@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://b460hp6jxp5qd"]
 
-[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy.cs" id="1_40av6"]
-[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Brain.cs" id="2_4fpts"]
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_40av6"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_4fpts"]
 [ext_resource type="Texture2D" uid="uid://bgdj3ogwqp23b" path="res://Art/Enemies/ArtEnemyTick.png" id="2_40av6"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_bmxul"]
-[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/DamageArea.cs" id="4_5j7n6"]
-[ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="6_a574k"]
+[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="4_5j7n6"]
+[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_da3tg"]
 [ext_resource type="AudioStream" uid="uid://dtpch8klq46xu" path="res://Audio/SFX/Tick/TickNotice.wav" id="7_a574k"]
 [ext_resource type="AudioStream" uid="uid://cirt7r8wcb5xd" path="res://Audio/SFX/Tick/TickAttack.wav" id="8_da3tg"]
 [ext_resource type="AudioStream" uid="uid://dacibpu5o2rlt" path="res://Audio/SFX/Tick/TickDamaged.wav" id="9_4bw1k"]
@@ -479,8 +479,7 @@ debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 [node name="Audios" type="Node2D" parent="." unique_id=369409679]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=406446165]
-stream = ExtResource("6_a574k")
-pitch_scale = 1.3
+stream = ExtResource("6_da3tg")
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1636719790]

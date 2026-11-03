@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://m1htnmgb1iuc" path="res://Art/ConeOfLight/ConeLightShape.png_0002.png" id="6_i7eac"]
 [ext_resource type="Texture2D" uid="uid://b6ugmjqgytwpi" path="res://Art/ConeOfLight/ConeLightShape.png_0003.png" id="7_nwqxr"]
 [ext_resource type="Texture2D" uid="uid://04tv05vanndb" path="res://Art/UserInterface/pointer.png" id="8_4t8qp"]
-[ext_resource type="AudioStream" uid="uid://c787aawkg1laf" path="res://Audio/SFX/PlayerWalkingLoop.ogg" id="8_8kqif"]
 [ext_resource type="Texture2D" uid="uid://cjtjmcfbs7pkx" path="res://Art/ConeOfLight/ConeLightShape.png_0004.png" id="8_40gda"]
 [ext_resource type="Texture2D" uid="uid://c2g608wf1fkyo" path="res://Art/ConeOfLight/ConeLightShape.png_0005.png" id="9_lhk5l"]
+[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="12_eisek"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c32ia"]
 animations = [{
@@ -158,5 +158,5 @@ current = true
 [node name="Audios" type="Node" parent="." unique_id=1931741506]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=349288383]
-stream = ExtResource("8_8kqif")
+stream = ExtResource("12_eisek")
 bus = &"SFX"
