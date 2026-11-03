@@ -65,11 +65,13 @@ public partial class Level : Node2D
 
 	[Signal] public delegate void OnZeroSpawnerLeftEventHandler();
 	[Signal] public delegate void EnemyCountChangedEventHandler();
+
+    public override void _EnterTree()
+    {
+        Current = this;
+    }
 	public override void _Ready()
 	{
-		// Maybe change this logic
-		Current = this;
-
 		GameManager.Instance.SetGameState(GameManager.GameState.Game);
 
 		ChangeEnemyCount(_presetEnemyCount);
