@@ -116,6 +116,8 @@ public partial class Level : Node2D
 		if (CurrentSpawnerCount == 0)
 		{
 			EmitSignal(SignalName.OnZeroSpawnerLeft);
+
+			IncreaseIntensity(Config.ZeroSpawnerLeft);
 		}
 
 	}

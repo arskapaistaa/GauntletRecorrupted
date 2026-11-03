@@ -354,8 +354,8 @@ public partial class Enemy : CharacterBody2D
 
 	public void SetPatrolTarget()
 	{
-		// while (!isAllowed)
-		_agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
+		// _agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
+		_agent.TargetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 2, true);
 
 		HasRoute = true;
 
