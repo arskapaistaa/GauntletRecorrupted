@@ -16,9 +16,56 @@
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
+[ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="10_mwm07"]
+[ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
+[ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
+[ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
 [ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/transition_controller.tscn" id="17_ggudn"]
 [ext_resource type="Texture2D" uid="uid://f6howkxybnqm" path="res://Art/UserInterface/SettingsBase.png" id="18_2sxs1"]
 [ext_resource type="AudioStream" uid="uid://cupg6ofc20nk1" path="res://Audio/Music/Hells_Well_Menu_2.wav" id="19_pwykd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
+texture = ExtResource("10_mwm07")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
+texture = ExtResource("10_v0gyi")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57vxl"]
+load_path = "res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e76bc"]
+texture = SubResource("CompressedTexture2D_57vxl")
+modulate_color = Color(1, 1, 1, 0.49803922)
+
+[sub_resource type="Theme" id="Theme_dxocv"]
+Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
+Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
+Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
+texture = ExtResource("12_4dvq8")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mwm07"]
+load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dvq8"]
+texture = SubResource("CompressedTexture2D_mwm07")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e5fvg"]
+texture = ExtResource("11_ya24g")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j2dai"]
+load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pvows"]
+texture = SubResource("CompressedTexture2D_j2dai")
+modulate_color = Color(1, 1, 1, 0.49803922)
+
+[sub_resource type="Theme" id="Theme_4dvq8"]
+Button/styles/focus = SubResource("StyleBoxTexture_8r7k7")
+Button/styles/hover = SubResource("StyleBoxTexture_4dvq8")
+Button/styles/normal = SubResource("StyleBoxTexture_e5fvg")
+Button/styles/pressed = SubResource("StyleBoxTexture_pvows")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -359,12 +406,29 @@ _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 
-[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=527330769]
-visible = false
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 39.0
-text = "Settings"
+[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 64.0
+grow_vertical = 0
+theme = SubResource("Theme_dxocv")
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../AnimationPlayer")
+_pressedAnimName = "OpenOptions"
+
+[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 128.0
+grow_vertical = 0
+theme = SubResource("Theme_4dvq8")
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
 visible = false
