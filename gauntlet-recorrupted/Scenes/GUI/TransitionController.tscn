@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdoi22w881ase"]
 
-[ext_resource type="Script" uid="uid://dmg1sjbj5galy" path="res://Scripts/Managers/TransitionController.cs" id="1_s6g8a"]
+[ext_resource type="Script" uid="uid://dmg1sjbj5galy" path="res://Scripts/Managers/TransitionController.cs" id="1_877fm"]
 
 [sub_resource type="Animation" id="Animation_ggudn"]
 resource_name = "FadeIn"
@@ -91,7 +91,7 @@ _data = {
 }
 
 [node name="TransitionController" type="Node" unique_id=1356249380]
-script = ExtResource("1_s6g8a")
+script = ExtResource("1_877fm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=932540395]
 libraries/ = SubResource("AnimationLibrary_pwykd")
@@ -114,4 +114,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)

@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://bltehx55p6bk"]
+
+[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_un12u"]
+[ext_resource type="Texture2D" uid="uid://f6howkxybnqm" path="res://Art/UserInterface/SettingsBase.png" id="2_ib415"]
+[ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_frjq8"]
+[ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_fwhe4"]
+
+[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayMode", "_resolution", "_masterVolume", "_sfxVolume", "_musicVolume")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -160.0
+offset_right = 230.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_un12u")
+texture = ExtResource("2_ib415")
+region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+script = ExtResource("3_frjq8")
+_displayMode = NodePath("VideoOptions/DisplayMode")
+_resolution = NodePath("VideoOptions/Resolution")
+_masterVolume = NodePath("AudioOptions/HSlider")
+_sfxVolume = NodePath("AudioOptions/HSlider3")
+_musicVolume = NodePath("AudioOptions/HSlider2")
+
+[node name="VideoOptions" type="VBoxContainer" parent="." unique_id=599647938]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -65.0
+offset_right = 212.0
+offset_bottom = 65.0
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="DisplayMode" type="OptionButton" parent="VideoOptions" unique_id=1129266693]
+layout_mode = 2
+alignment = 1
+text_overrun_behavior = 1
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless window"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+
+[node name="Resolution" type="OptionButton" parent="VideoOptions" unique_id=1096953162]
+layout_mode = 2
+alignment = 1
+selected = 1
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "1280 x 720"
+popup/item_0/id = 0
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+
+[node name="CheckButton" type="CheckButton" parent="VideoOptions" unique_id=1456608839]
+visible = false
+layout_mode = 2
+text = "vsync"
+
+[node name="AudioOptions" type="VBoxContainer" parent="." unique_id=2107351994]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -62.0
+offset_right = -29.0
+offset_bottom = 63.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_un12u")
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="Master" type="Label" parent="AudioOptions" unique_id=659851445]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="AudioOptions" unique_id=919517646]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_un12u")
+max_value = 1.0
+step = 0.1
+
+[node name="Music" type="Label" parent="AudioOptions" unique_id=1038580915]
+layout_mode = 2
+text = "Music"
+horizontal_alignment = 1
+
+[node name="HSlider2" type="HSlider" parent="AudioOptions" unique_id=172127301]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_un12u")
+max_value = 1.0
+step = 0.1
+
+[node name="SFX" type="Label" parent="AudioOptions" unique_id=449254999]
+layout_mode = 2
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="HSlider3" type="HSlider" parent="AudioOptions" unique_id=1585915008]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_un12u")
+max_value = 1.0
+step = 0.1
+
+[node name="CloseBtn" type="Button" parent="." unique_id=246201653]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -63.0
+offset_right = 72.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CLOSE"
+script = ExtResource("4_fwhe4")
+_pressedAnimName = "CloseOptions"
