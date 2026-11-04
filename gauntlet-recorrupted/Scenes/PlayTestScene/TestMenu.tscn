@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cwv474lclofjf" path="res://Scripts/UI/MainMenu.cs" id="1_t3rra"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
 [ext_resource type="Texture2D" uid="uid://0q6p3vlor8e1" path="res://Art/Title/HellsWellTitleBG.png" id="2_ux8os"]
-[ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_d61wr"]
 [ext_resource type="Texture2D" uid="uid://coodk017o2rqt" path="res://Art/Title/HellsWellTitle.png" id="3_p1vdu"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
 [ext_resource type="Texture2D" uid="uid://b72oy80tbsjd3" path="res://Art/Title/HellsWellTitleBGAnim2.png" id="3_w2hh5"]
@@ -16,9 +15,57 @@
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
-[ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/transition_controller.tscn" id="17_ggudn"]
-[ext_resource type="Texture2D" uid="uid://f6howkxybnqm" path="res://Art/UserInterface/SettingsBase.png" id="18_2sxs1"]
+[ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="10_mwm07"]
+[ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
+[ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
+[ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
+[ext_resource type="Texture2D" uid="uid://btqiipeywwsr" path="res://Art/UserInterface/PauseBase.png" id="15_mwm07"]
+[ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="17_ggudn"]
+[ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
 [ext_resource type="AudioStream" uid="uid://cupg6ofc20nk1" path="res://Audio/Music/Hells_Well_Menu_2.wav" id="19_pwykd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
+texture = ExtResource("10_mwm07")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
+texture = ExtResource("10_v0gyi")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57vxl"]
+load_path = "res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e76bc"]
+texture = SubResource("CompressedTexture2D_57vxl")
+modulate_color = Color(1, 1, 1, 0.49803922)
+
+[sub_resource type="Theme" id="Theme_dxocv"]
+Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
+Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
+Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
+texture = ExtResource("12_4dvq8")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mwm07"]
+load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dvq8"]
+texture = SubResource("CompressedTexture2D_mwm07")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e5fvg"]
+texture = ExtResource("11_ya24g")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j2dai"]
+load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pvows"]
+texture = SubResource("CompressedTexture2D_j2dai")
+modulate_color = Color(1, 1, 1, 0.49803922)
+
+[sub_resource type="Theme" id="Theme_4dvq8"]
+Button/styles/focus = SubResource("StyleBoxTexture_8r7k7")
+Button/styles/hover = SubResource("StyleBoxTexture_4dvq8")
+Button/styles/normal = SubResource("StyleBoxTexture_e5fvg")
+Button/styles/pressed = SubResource("StyleBoxTexture_pvows")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -33,7 +80,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Options:visible")
+tracks/0/path = NodePath("Settings:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +96,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Options:visible")
+tracks/0/path = NodePath("Settings:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -148,7 +195,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Options:visible")
+tracks/7/path = NodePath("Settings:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -359,122 +406,90 @@ _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 
-[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=527330769]
-visible = false
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 39.0
-text = "Settings"
-
-[node name="Buttons" type="VBoxContainer" parent="." unique_id=1899801517]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -91.5
-offset_top = -44.0
-offset_right = 92.5
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Buttons" unique_id=843433484]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-theme_override_constants/separation = 0
-
-[node name="PlayBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=132127129]
-layout_mode = 2
-text = "PLAY"
-script = ExtResource("2_ikpte")
-_pathToScene = "res://Scenes/PlayTestScene/TheTestScene.tscn"
-_isGrabFocus = true
-
-[node name="OptionsBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=1176741912 node_paths=PackedStringArray("_animations")]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "OPTIONS"
-script = ExtResource("2_ikpte")
-_animations = NodePath("../../../AnimationPlayer")
-_pressedAnimName = "OpenOptions"
-
-[node name="ResetStatsBtn" type="Button" parent="Buttons/VBoxContainer2" unique_id=642283795]
-layout_mode = 2
-text = "RESET STATS"
-script = ExtResource("2_ikpte")
-
-[node name="Stats" type="MarginContainer" parent="." unique_id=685378447 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
-visible = false
+[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -231.0
-offset_right = 220.0
+offset_top = -64.0
+offset_right = 64.0
 grow_vertical = 0
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 20
-script = ExtResource("4_5ve7l")
-_killsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Kills")
-_deathsLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Deaths")
-_shotsFiredLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer/ShotsFired")
-_resetStatsButton = NodePath("../Buttons/VBoxContainer2/ResetStatsBtn")
+theme = SubResource("Theme_dxocv")
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../AnimationPlayer")
+_pressedAnimName = "OpenOptions"
 
-[node name="PanelContainer" type="Panel" parent="Stats" unique_id=144935517]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
+[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 128.0
+grow_vertical = 0
+theme = SubResource("Theme_4dvq8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Stats/PanelContainer" unique_id=2139475165]
+[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -79.0
-offset_top = -31.0
-offset_right = 79.0
-offset_bottom = 31.0
+offset_left = -110.0
+offset_top = -115.5
+offset_right = 110.0
+offset_bottom = 115.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cg106")
+texture = ExtResource("15_mwm07")
+script = ExtResource("4_5ve7l")
+_killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
+_deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
+_shotsFiredLabel = NodePath("VBoxContainer/HBoxContainer/ShotsFired")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats" unique_id=2139475165]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -32.0
+offset_right = 80.5
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="Stats/PanelContainer/VBoxContainer" unique_id=1553196200]
+[node name="Label" type="Label" parent="Stats/VBoxContainer" unique_id=1553196200]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("1_cg106")
 text = "Stats"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/PanelContainer/VBoxContainer" unique_id=2131987139]
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats/VBoxContainer" unique_id=2131987139]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Kills" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=390686524]
+[node name="Kills" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=390686524]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
 
-[node name="Deaths" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1560595271]
+[node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=1560595271]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
 
-[node name="ShotsFired" type="Label" parent="Stats/PanelContainer/VBoxContainer/HBoxContainer" unique_id=907336537]
+[node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=907336537]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
@@ -568,144 +583,8 @@ text = "No"
 layout_mode = 2
 text = "No"
 
-[node name="Options" type="NinePatchRect" parent="." unique_id=1693072245 node_paths=PackedStringArray("_displayMode", "_resolution", "_masterVolume", "_sfxVolume", "_musicVolume")]
-visible = false
+[node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("17_ya24g")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -230.0
-offset_top = -160.0
-offset_right = 230.0
-offset_bottom = 160.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_cg106")
-texture = ExtResource("18_2sxs1")
-region_rect = Rect2(16, 16, 224, 224)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-script = ExtResource("3_d61wr")
-_displayMode = NodePath("VideoOptions/DisplayMode")
-_resolution = NodePath("VideoOptions/Resolution")
-_masterVolume = NodePath("AudioOptions/HSlider")
-_sfxVolume = NodePath("AudioOptions/HSlider3")
-_musicVolume = NodePath("AudioOptions/HSlider2")
-
-[node name="VideoOptions" type="VBoxContainer" parent="Options" unique_id=1821460599]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 14.0
-offset_top = -65.0
-offset_right = 212.0
-offset_bottom = 65.0
-grow_vertical = 2
-theme_override_constants/separation = 8
-
-[node name="DisplayMode" type="OptionButton" parent="Options/VideoOptions" unique_id=574635929]
-layout_mode = 2
-alignment = 1
-text_overrun_behavior = 1
-fit_to_longest_item = false
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_0/id = 0
-popup/item_1/text = "Borderless window"
-popup/item_1/id = 1
-popup/item_2/text = "Fullscreen"
-popup/item_2/id = 2
-
-[node name="Resolution" type="OptionButton" parent="Options/VideoOptions" unique_id=659086223]
-layout_mode = 2
-alignment = 1
-selected = 1
-fit_to_longest_item = false
-item_count = 2
-popup/item_0/text = "1280 x 720"
-popup/item_0/id = 0
-popup/item_1/text = "1920 x 1080"
-popup/item_1/id = 1
-
-[node name="CheckButton" type="CheckButton" parent="Options/VideoOptions" unique_id=1654093455]
-visible = false
-layout_mode = 2
-text = "vsync"
-
-[node name="AudioOptions" type="VBoxContainer" parent="Options" unique_id=134338871]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -209.0
-offset_top = -62.0
-offset_right = -29.0
-offset_bottom = 63.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("1_cg106")
-theme_override_constants/separation = 1
-alignment = 1
-
-[node name="Master" type="Label" parent="Options/AudioOptions" unique_id=1007610259]
-layout_mode = 2
-text = "Master"
-horizontal_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="Options/AudioOptions" unique_id=1824834350]
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-max_value = 1.0
-step = 0.1
-
-[node name="Music" type="Label" parent="Options/AudioOptions" unique_id=265546990]
-layout_mode = 2
-text = "Music"
-horizontal_alignment = 1
-
-[node name="HSlider2" type="HSlider" parent="Options/AudioOptions" unique_id=68985266]
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-max_value = 1.0
-step = 0.1
-
-[node name="SFX" type="Label" parent="Options/AudioOptions" unique_id=691604112]
-layout_mode = 2
-text = "SFX"
-horizontal_alignment = 1
-
-[node name="HSlider3" type="HSlider" parent="Options/AudioOptions" unique_id=250886736]
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-max_value = 1.0
-step = 0.1
-
-[node name="CloseBtn" type="Button" parent="Options" unique_id=1317079116 node_paths=PackedStringArray("_animations")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -72.0
-offset_top = -63.0
-offset_right = 72.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "CLOSE"
-script = ExtResource("2_ikpte")
-_animations = NodePath("../../AnimationPlayer")
-_pressedAnimName = "CloseOptions"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 

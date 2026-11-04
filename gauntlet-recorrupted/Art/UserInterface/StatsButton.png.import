@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://box5gn7gbjp2n"
-path="res://.godot/imported/ConeLightShapeSpritesheet.png-4d116c3dab97678e938a4f56e87dc9f7.ctex"
+uid="uid://bl2tnj1hwmex1"
+path="res://.godot/imported/StatsButton.png-aea3965c1271291c125b60041d7fe41a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ConeLightShapeSpritesheet.png"
-dest_files=["res://.godot/imported/ConeLightShapeSpritesheet.png-4d116c3dab97678e938a4f56e87dc9f7.ctex"]
+source_file="res://Art/UserInterface/StatsButton.png"
+dest_files=["res://.godot/imported/StatsButton.png-aea3965c1271291c125b60041d7fe41a.ctex"]
 
 [params]
 

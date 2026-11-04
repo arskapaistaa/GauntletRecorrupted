@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class StatsMenu : MarginContainer
+public partial class StatsMenu : Control
 {
 	[Export] private Label _killsLabel = null;
 	[Export] private Label _deathsLabel = null;

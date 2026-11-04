@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1i5u2x3g06un"
-path="res://.godot/imported/ConeLightShapeNewTest.png-d08529b52f1f1fda339e5b0d87d49ccd.ctex"
+uid="uid://dk0po0ge0owhk"
+path="res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ConeLightShapeNewTest.png"
-dest_files=["res://.godot/imported/ConeLightShapeNewTest.png-d08529b52f1f1fda339e5b0d87d49ccd.ctex"]
+source_file="res://Art/UserInterface/SettingsButton2.png"
+dest_files=["res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://ds6x7gmdv38w1"]
 
 [ext_resource type="Texture2D" uid="uid://gownojsotbpn" path="res://Art/UserInterface/ButtonHovered.png" id="1_5w5s1"]
-[ext_resource type="FontFile" uid="uid://csg4amkqbc73m" path="res://Art/Fonts/Flavors,Trade_Winds/Trade_Winds/TradeWinds-Regular.ttf" id="1_cdbx3"]
+[ext_resource type="FontFile" uid="uid://ccduu55c2xwjj" path="res://Art/Fonts/merchant-copy/Merchant Copy Doublesize.ttf" id="1_wj1e5"]
 [ext_resource type="Texture2D" uid="uid://b6v2iebuug3nk" path="res://Art/UserInterface/Button.png" id="2_cdbx3"]
 [ext_resource type="FontFile" uid="uid://cdluctjkvwtqr" path="res://Art/Fonts/Mortified.ttf" id="2_g60mq"]
 [ext_resource type="Texture2D" uid="uid://c1v3jy1fqmkij" path="res://Art/UserInterface/ButtonPressed.png" id="3_k6rcp"]
@@ -84,7 +84,7 @@ Button/colors/font_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/font_sizes/font_size = 16
-Button/fonts/font = ExtResource("1_cdbx3")
+Button/fonts/font = ExtResource("1_wj1e5")
 Button/styles/focus = SubResource("StyleBoxEmpty_5w5s1")
 Button/styles/hover = SubResource("StyleBoxTexture_cvlnp")
 Button/styles/normal = SubResource("StyleBoxTexture_tm233")
@@ -102,15 +102,15 @@ Label/colors/font_shadow_color = Color(0, 0, 0, 0.36862746)
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 0
-Label/fonts/font = ExtResource("1_cdbx3")
+Label/fonts/font = ExtResource("1_wj1e5")
 MarginContainer/constants/margin_bottom = 40
 MarginContainer/constants/margin_left = 40
 MarginContainer/constants/margin_right = 40
 MarginContainer/constants/margin_top = 40
 OptionButton/colors/font_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
-OptionButton/fonts/font = ExtResource("1_cdbx3")
+OptionButton/fonts/font = ExtResource("1_wj1e5")
 Panel/styles/panel = SubResource("StyleBoxFlat_xi264")
-PopupMenu/fonts/font = ExtResource("1_cdbx3")
+PopupMenu/fonts/font = ExtResource("1_wj1e5")
 PopupMenu/styles/panel = SubResource("StyleBoxTexture_n3sgb")
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.30980393)
 RichTextLabel/constants/shadow_offset_x = 1

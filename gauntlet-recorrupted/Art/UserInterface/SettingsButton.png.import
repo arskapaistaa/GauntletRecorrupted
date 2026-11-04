@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cer5varg0ntqf"
-path="res://.godot/imported/ConeOfVision.png-269589f153899bec7129ba3514279bb5.ctex"
+uid="uid://c4tkrk668u3i7"
+path="res://.godot/imported/SettingsButton.png-f98032f3fcb052b3453ea8d669b663e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ConeOfVision.png"
-dest_files=["res://.godot/imported/ConeOfVision.png-269589f153899bec7129ba3514279bb5.ctex"]
+source_file="res://Art/UserInterface/SettingsButton.png"
+dest_files=["res://.godot/imported/SettingsButton.png-f98032f3fcb052b3453ea8d669b663e7.ctex"]
 
 [params]
 
