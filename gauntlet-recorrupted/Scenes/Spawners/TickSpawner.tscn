@@ -275,7 +275,7 @@ animations = [{
 size = Vector2(200, 200)
 
 [node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_spawnPoint")]
-z_index = 2
+z_index = 3
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_p1ylh")
@@ -293,7 +293,8 @@ _spawnFrame = 5
 material = ExtResource("3_omace")
 sprite_frames = SubResource("SpriteFrames_fgwj2")
 animation = &"Spawn"
-frame = 5
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1600586051]
 position = Vector2(0, -39.835)

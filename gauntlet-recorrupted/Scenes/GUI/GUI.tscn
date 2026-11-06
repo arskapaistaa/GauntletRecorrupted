@@ -12,6 +12,99 @@
 [ext_resource type="Texture2D" uid="uid://x4pilwwsjt04" path="res://Art/UserInterface/ShotgunAmmo1Bullet.png" id="8_jwth5"]
 [ext_resource type="Texture2D" uid="uid://kxqgpae4mmm5" path="res://Art/UserInterface/ShotgunAmmo2Bullets.png" id="9_1vt16"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga83m"]
+atlas = ExtResource("3_e1ed1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc3oj"]
+atlas = ExtResource("3_e1ed1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxkp4"]
+atlas = ExtResource("3_e1ed1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rea8g"]
+atlas = ExtResource("3_e1ed1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxocv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga83m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc3oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxkp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rea8g")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkhw3"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwth5"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vt16"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbnj7"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y58q"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em2lx"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol1bw"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sopei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkhw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwth5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vt16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbnj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y58q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em2lx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol1bw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 process_mode = 3
 
@@ -56,7 +149,10 @@ offset_top = -74.0
 offset_right = 64.0
 offset_bottom = -10.0
 grow_vertical = 0
-texture = ExtResource("3_e1ed1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Hearth" unique_id=498093232]
+position = Vector2(32, 30)
+sprite_frames = SubResource("SpriteFrames_dxocv")
 
 [node name="PlayerHealthLabel" type="Label" parent="GUI/Hearth" unique_id=1284538617]
 layout_mode = 1
@@ -105,7 +201,10 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_jwth5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Revolver/TextureRect" unique_id=171248841]
+position = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_sopei")
 
 [node name="Shotgun" type="TextureRect" parent="GUI" unique_id=1605463265]
 visible = false

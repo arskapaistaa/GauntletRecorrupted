@@ -3,37 +3,40 @@ using Godot;
 
 public partial class OptionsMenu : Control
 {
-	[Export] private OptionButton _displayMode;
-	[Export] private OptionButton _resolution;
-	[Export] private HSlider _masterVolume;
-	[Export] private HSlider _sfxVolume;
-	[Export] private HSlider _musicVolume;
+	[Export] private OptionButton _displayModeBtn;
+	[Export] private OptionButton _resolutionBtn;
+	[Export] private HSlider _masterVolumeSlider;
+	[Export] private HSlider _sfxVolumeSlider;
+	[Export] private HSlider _musicVolumeSlider;
 
 	public override void _Ready()
 	{
 		GetCurrentSettings();
 
-		_displayMode.ItemSelected += OnDisplayModeSelected;
-		_resolution.ItemSelected += OnResolutionSelected;
+		_displayModeBtn.ItemSelected += OnDisplayModeSelected;
+		_resolutionBtn.ItemSelected += OnResolutionSelected;
 
-		_masterVolume.ValueChanged += OnMasterVolumeChanged;
-		_sfxVolume.ValueChanged += OnSfxVolumeChanged;
-		_musicVolume.ValueChanged += OnMusicVolumeChanged;
+		_masterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
+		_sfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
+		_musicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
+
+		UpdateResolutionButton();
 	}
 
     public override void _ExitTree()
     {
-		_displayMode.ItemSelected -= OnDisplayModeSelected;
-		_resolution.ItemSelected -= OnResolutionSelected;
+		_displayModeBtn.ItemSelected -= OnDisplayModeSelected;
+		_resolutionBtn.ItemSelected -= OnResolutionSelected;
 
-		_masterVolume.ValueChanged -= OnMasterVolumeChanged;
-		_sfxVolume.ValueChanged -= OnSfxVolumeChanged;
-		_musicVolume.ValueChanged -= OnMusicVolumeChanged;
+		_masterVolumeSlider.ValueChanged -= OnMasterVolumeChanged;
+		_sfxVolumeSlider.ValueChanged -= OnSfxVolumeChanged;
+		_musicVolumeSlider.ValueChanged -= OnMusicVolumeChanged;
     }
 
     private void OnDisplayModeSelected(long index)
     {
         SettingsManager.Instance.OnDisplayModeSelected((int)index);
+		UpdateResolutionButton();
     }
 
 	private void OnResolutionSelected(long index)
@@ -60,13 +63,24 @@ public partial class OptionsMenu : Control
     private void GetCurrentSettings()
 	{
 		// Display settings
-		_displayMode.Select(SettingsManager.Instance.GetDisplayModeIndex());
-		_resolution.Select(SettingsManager.Instance.GetResolutionIndex());
+		_displayModeBtn.Select(SettingsManager.Instance.GetDisplayModeIndex());
+		_resolutionBtn.Select(SettingsManager.Instance.GetResolutionIndex());
 
 		// Audio settings
-		_masterVolume.SetValueNoSignal(SettingsManager.Instance.GetMasterVolume());
-		GD.Print(SettingsManager.Instance.GetMasterVolume());
-		_sfxVolume.SetValueNoSignal(SettingsManager.Instance.GetSfxVolume());
-		_musicVolume.SetValueNoSignal(SettingsManager.Instance.GetMusicVolume());
+		_masterVolumeSlider.SetValueNoSignal(SettingsManager.Instance.GetMasterVolume());
+		_sfxVolumeSlider.SetValueNoSignal(SettingsManager.Instance.GetSfxVolume());
+		_musicVolumeSlider.SetValueNoSignal(SettingsManager.Instance.GetMusicVolume());
+	}
+
+	private void UpdateResolutionButton()
+	{
+		if (DisplayServer.WindowGetMode(0) == DisplayServer.WindowMode.Fullscreen)
+		{
+			_resolutionBtn.Disabled = true;
+		}
+		else
+		{
+			_resolutionBtn.Disabled = false;
+		}
 	}
 }

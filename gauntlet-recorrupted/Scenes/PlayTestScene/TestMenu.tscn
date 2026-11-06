@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
 [ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
 [ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
-[ext_resource type="Texture2D" uid="uid://btqiipeywwsr" path="res://Art/UserInterface/PauseBase.png" id="15_mwm07"]
+[ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="15_4dvq8"]
 [ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="17_ggudn"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
 [ext_resource type="AudioStream" uid="uid://cupg6ofc20nk1" path="res://Audio/Music/Hells_Well_Menu_2.wav" id="19_pwykd"]
@@ -233,6 +233,30 @@ tracks/8/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TitleScreen/SettingsBtn:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TitleScreen/StatsBtn:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_v40es"]
 resource_name = "StartPressed"
@@ -320,6 +344,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TitleScreen/SettingsBtn:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TitleScreen/StatsBtn:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_4dvq8"]
@@ -497,13 +545,14 @@ offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cg106")
-texture = ExtResource("15_mwm07")
+texture = ExtResource("15_4dvq8")
+region_rect = Rect2(16, 16, 224, 224)
 script = ExtResource("4_5ve7l")
 _killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
 _shotsFiredLabel = NodePath("VBoxContainer/HBoxContainer/ShotsFired")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Stats" unique_id=2139475165]
+[node name="VBoxContainer" type="HBoxContainer" parent="Stats" unique_id=1164979888]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -511,55 +560,87 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -82.0
-offset_top = -37.0
+offset_top = -97.0
 offset_right = 82.0
-offset_bottom = 27.0
+offset_bottom = 97.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="Stats/VBoxContainer" unique_id=1553196200]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("1_cg106")
-text = "Stats"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Stats/VBoxContainer" unique_id=2131987139]
+[node name="HBoxContainer2" type="VBoxContainer" parent="Stats/VBoxContainer" unique_id=702806671]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="KillsLabel" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=953255772]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Kills"
+
+[node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=437821416]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Deaths"
+
+[node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=1981950260]
+layout_mode = 2
+theme = ExtResource("1_cg106")
+text = "Shots fired"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Stats/VBoxContainer" unique_id=905853011]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
 
 [node name="Kills" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=390686524]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
+horizontal_alignment = 2
 
 [node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=1560595271]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
+horizontal_alignment = 2
 
 [node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=907336537]
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
+horizontal_alignment = 2
 
-[node name="CloseBtn" type="Button" parent="Stats" unique_id=502647496 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+[node name="StatsLabel" type="Label" parent="Stats" unique_id=395449144]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = 19.0
+offset_right = 55.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="Stats" unique_id=877304921 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -96.0
-offset_right = 82.0
-offset_bottom = -35.0
+offset_left = -38.5
+offset_top = -65.0
+offset_right = 38.5
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "CLOSE"
+text = "Close"
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
@@ -655,9 +736,10 @@ layout_mode = 2
 text = "No"
 
 [node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("17_ya24g")]
+visible = false
 layout_mode = 1
 
-[node name="CloseBtn" parent="Settings" index="2" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+[node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 

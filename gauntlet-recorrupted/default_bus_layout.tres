@@ -7,12 +7,14 @@ ceiling_db = -3.0
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
 room_size = 0.7
-hipass = 0.2
+damping = 0.2
+hipass = 0.5
 wet = 0.1
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
 resource_name = "Delay"
-dry = 0.1
+tap1_delay_ms = 500.0
+tap2_delay_ms = 1000.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectHardLimiter_j3pel")
