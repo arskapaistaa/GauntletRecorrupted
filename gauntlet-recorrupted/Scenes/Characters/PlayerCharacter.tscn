@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://diiwj2ya03wkt" path="res://Scripts/PlayerCharacter.cs" id="1_nu4k2"]
 [ext_resource type="PackedScene" uid="uid://r78dpllnlyu8" path="res://Scenes/bullet.tscn" id="2_lp3jq"]
-[ext_resource type="Texture2D" uid="uid://bgsujgo8700n3" path="res://Art/ArtProtagonistIdle.png" id="3_ci7sc"]
-[ext_resource type="Texture2D" uid="uid://dqqsqsjc16mbg" path="res://Art/ConeOfLight/ConeLightShape.png_0001.png" id="4_w51uo"]
 [ext_resource type="Texture2D" uid="uid://l0l43s30tmaw" path="res://Art/sexton_sheet.png" id="3_4t8qp"]
 [ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="3_8kqif"]
-[ext_resource type="Texture2D" uid="uid://b133q6jb0onj1" path="res://Art/ConeLightShape.png" id="4_ci7sc"]
+[ext_resource type="Texture2D" uid="uid://dqqsqsjc16mbg" path="res://Art/ConeOfLight/ConeLightShape.png_0001.png" id="4_w51uo"]
 [ext_resource type="Script" uid="uid://bhom7vtl6kd5b" path="res://Scripts/UI/Camera.cs" id="5_kkncw"]
 [ext_resource type="PackedScene" uid="uid://ctf84d65x3l3m" path="res://Scenes/Particles/Dust.tscn" id="6_8cky6"]
 [ext_resource type="Texture2D" uid="uid://m1htnmgb1iuc" path="res://Art/ConeOfLight/ConeLightShape.png_0002.png" id="6_i7eac"]
@@ -16,21 +14,21 @@
 [ext_resource type="Texture2D" uid="uid://c2g608wf1fkyo" path="res://Art/ConeOfLight/ConeLightShape.png_0005.png" id="9_lhk5l"]
 [ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="12_eisek"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8kqif"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rlv1"]
+atlas = ExtResource("3_4t8qp")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m13on"]
 atlas = ExtResource("3_4t8qp")
 region = Rect2(384, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_elcmd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_15n05"]
 atlas = ExtResource("3_4t8qp")
 region = Rect2(448, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v2mgp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgy0e"]
 atlas = ExtResource("3_4t8qp")
 region = Rect2(512, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eisek"]
-atlas = ExtResource("3_4t8qp")
-region = Rect2(576, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w51uo"]
 atlas = ExtResource("3_4t8qp")
@@ -72,16 +70,16 @@ region = Rect2(512, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8kqif")
+"texture": SubResource("AtlasTexture_3rlv1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_elcmd")
+"texture": SubResource("AtlasTexture_m13on")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v2mgp")
+"texture": SubResource("AtlasTexture_15n05")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eisek")
+"texture": SubResource("AtlasTexture_hgy0e")
 }],
 "loop": 0,
 "name": &"Dig",
@@ -123,6 +121,11 @@ animations = [{
 "loop": 1,
 "name": &"Walk",
 "speed": 14.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2o20b"]
@@ -193,7 +196,7 @@ position = Vector2(64, 0)
 rotation = 1.5707964
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_c32ia")
-animation = &"Walk"
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
 shape = SubResource("CircleShape2D_2o20b")
