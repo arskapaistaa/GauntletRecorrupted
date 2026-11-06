@@ -60,10 +60,6 @@ public partial class SettingsManager : Node
 				break;
 
 			case 1:
-				DisplayServer.WindowSetMode(DisplayServer.WindowMode.ExclusiveFullscreen);
-				break;
-
-			case 2:
 				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
 				break;
 		}

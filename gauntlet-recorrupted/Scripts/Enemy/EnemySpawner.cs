@@ -146,7 +146,7 @@ public partial class EnemySpawner : StaticBody2D
 		Enemy enemy = _enemyScene.Instantiate<Enemy>();
 
 		GetParent().AddChild(enemy);
-		enemy.GlobalTransform = GlobalTransform;
+		enemy.GlobalPosition = GlobalPosition;
 
 		if (_spawnPoint != null)
 		{
