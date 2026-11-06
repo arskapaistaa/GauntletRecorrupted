@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="17_ggudn"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
 [ext_resource type="AudioStream" uid="uid://cupg6ofc20nk1" path="res://Audio/Music/Hells_Well_Menu_2.wav" id="19_pwykd"]
+[ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="24_4dvq8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
 texture = ExtResource("10_mwm07")
@@ -452,7 +453,7 @@ _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 
-[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations")]
+[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -463,9 +464,10 @@ grow_vertical = 0
 theme = SubResource("Theme_dxocv")
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "OpenOptions"
 
-[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations")]
+[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -477,6 +479,7 @@ grow_vertical = 0
 theme = SubResource("Theme_4dvq8")
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "StatsPressed"
 
 [node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
@@ -543,7 +546,7 @@ layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
 
-[node name="CloseBtn" type="Button" parent="Stats" unique_id=502647496 node_paths=PackedStringArray("_animations")]
+[node name="CloseBtn" type="Button" parent="Stats" unique_id=502647496 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -559,6 +562,7 @@ grow_vertical = 0
 text = "CLOSE"
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "CloseStats"
 
 [node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
@@ -653,8 +657,9 @@ text = "No"
 [node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("17_ya24g")]
 layout_mode = 1
 
-[node name="CloseBtn" parent="Settings" index="2" unique_id=246201653 node_paths=PackedStringArray("_animations")]
+[node name="CloseBtn" parent="Settings" index="2" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 _animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
@@ -678,5 +683,9 @@ libraries/ = SubResource("AnimationLibrary_j8qme")
 stream = ExtResource("19_pwykd")
 autoplay = true
 bus = &"Music"
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="Audios" unique_id=793243120]
+stream = ExtResource("24_4dvq8")
+bus = &"SFX"
 
 [editable path="Settings"]
