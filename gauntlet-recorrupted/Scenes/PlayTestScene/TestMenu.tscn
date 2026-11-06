@@ -90,6 +90,22 @@ tracks/0/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_mwm07"]
+resource_name = "CloseStats"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stats:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_j8qme"]
 resource_name = "OpenOptions"
 length = 0.3
@@ -204,6 +220,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Stats:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_v40es"]
 resource_name = "StartPressed"
@@ -293,12 +321,30 @@ tracks/6/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4dvq8"]
+resource_name = "StatsPressed"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stats:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
 &"CloseOptions": SubResource("Animation_t3rra"),
+&"CloseStats": SubResource("Animation_mwm07"),
 &"OpenOptions": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
-&"StartPressed": SubResource("Animation_v40es")
+&"StartPressed": SubResource("Animation_v40es"),
+&"StatsPressed": SubResource("Animation_4dvq8")
 }
 
 [node name="TestMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations")]
@@ -419,7 +465,7 @@ script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
 _pressedAnimName = "OpenOptions"
 
-[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225]
+[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -429,6 +475,9 @@ offset_top = -64.0
 offset_right = 128.0
 grow_vertical = 0
 theme = SubResource("Theme_4dvq8")
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../AnimationPlayer")
+_pressedAnimName = "StatsPressed"
 
 [node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
 visible = false
@@ -438,10 +487,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -115.5
-offset_right = 110.0
-offset_bottom = 115.5
+offset_left = -230.0
+offset_top = -160.0
+offset_right = 230.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_cg106")
@@ -458,10 +507,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.5
-offset_top = -32.0
-offset_right = 80.5
-offset_bottom = 32.0
+offset_left = -82.0
+offset_top = -37.0
+offset_right = 82.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -493,6 +542,24 @@ text = "0"
 layout_mode = 2
 theme = ExtResource("1_cg106")
 text = "0"
+
+[node name="CloseBtn" type="Button" parent="Stats" unique_id=502647496 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -96.0
+offset_right = 82.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CLOSE"
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../AnimationPlayer")
+_pressedAnimName = "CloseStats"
 
 [node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
 visible = false
@@ -586,6 +653,9 @@ text = "No"
 [node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("17_ya24g")]
 layout_mode = 1
 
+[node name="CloseBtn" parent="Settings" index="2" unique_id=246201653 node_paths=PackedStringArray("_animations")]
+_animations = NodePath("../../AnimationPlayer")
+
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
 [node name="SettingsManager" type="Node" parent="Managers" unique_id=1623565682]
@@ -608,3 +678,5 @@ libraries/ = SubResource("AnimationLibrary_j8qme")
 stream = ExtResource("19_pwykd")
 autoplay = true
 bus = &"Music"
+
+[editable path="Settings"]

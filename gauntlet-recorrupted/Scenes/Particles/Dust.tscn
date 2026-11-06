@@ -2,6 +2,12 @@
 
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_by8mi"]
 
+[sub_resource type="Gradient" id="Gradient_87s7p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_87s7p"]
+gradient = SubResource("Gradient_87s7p")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(2400, 1200, 1)
@@ -14,13 +20,16 @@ initial_velocity_min = 10.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 98, 0)
 scale_max = 8.0
-color = Color(0.62384886, 0.5371237, 0.1692642, 1)
+color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+color_ramp = SubResource("GradientTexture1D_87s7p")
+hue_variation_min = -0.100000024
+hue_variation_max = 0.09999997
 turbulence_enabled = true
 turbulence_influence_max = 0.5
 
 [node name="Dust" type="GPUParticles2D" unique_id=1882848814]
 material = ExtResource("1_by8mi")
-amount = 150
+amount = 200
 lifetime = 6.0
 visibility_rect = Rect2(-2400, -1200, 4800, 2400)
 process_material = SubResource("ParticleProcessMaterial_sopei")
