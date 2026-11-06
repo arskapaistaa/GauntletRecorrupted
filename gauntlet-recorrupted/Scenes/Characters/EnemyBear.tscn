@@ -368,7 +368,7 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_kxvjs")
 animation = &"Walk"
 autoplay = "Idle"
-frame_progress = 0.6613062
+frame_progress = 0.23025982
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")
