@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b72bsma3b38yx"]
 
 [ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_vaf4p"]
-[ext_resource type="Texture2D" uid="uid://dyuna64jw44sg" path="res://Art/Environment/GroundTileRepeating.png" id="2_vaf4p"]
+[ext_resource type="Texture2D" uid="uid://dsfkhytevjpyn" path="res://Art/Environment/ArtTileGrass.png" id="2_vaf4p"]
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="3_5y76b"]
 [ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="4_3qguu"]
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="5_cthuj"]
