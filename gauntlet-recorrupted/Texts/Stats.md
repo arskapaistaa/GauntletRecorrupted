@@ -24,7 +24,7 @@ MAX - Max active enemies at the same time
 ### Roach
 S: 500.0
 H: 40
-DMG: 34
+DMG: 20
 AS: NONE
 DR: 600.0
 AR: 200.0
@@ -33,14 +33,14 @@ ALR: 1000.0
 ### Tick
 S: 400.0
 H: 20
-DMG: 19
+DMG: 15
 AS: 1000.0
 DR: 200.0
 AR: 600.0
 ALR: 1500.0
 
 #### Tick spawner
-H: 100
+H: 15
 SC: 15.0
 
 ### Baby
@@ -59,6 +59,15 @@ DMG: 0
 AS: 0.0
 DR: 0.0
 AR: 0.0
+ALR: 0.0
+
+### Bear
+S: 200.0
+H: 200
+DMG: 34
+AS: 800.0
+DR: 1500.0
+AR: 1000.0
 ALR: 0.0
 
 

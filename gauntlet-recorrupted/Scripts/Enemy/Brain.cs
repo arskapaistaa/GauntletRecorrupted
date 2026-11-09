@@ -35,6 +35,8 @@ public partial class Brain : Node
 
 	[ExportGroup("Can't Reach the Target")]
 	[Export] public State CantReachTargetState = State.None;
+	[ExportGroup("After Idle timer timeout")]
+	[Export] public State FromIdleTo = State.None;
 
 	private Enemy _enemy;
 	public enum State
@@ -46,6 +48,7 @@ public partial class Brain : Node
 		Notice,
 		Chase,
 		Attack,
+		Ranged,
 		Damaged,
 		Defeat
 	}
@@ -80,7 +83,7 @@ public partial class Brain : Node
 			{
 				CurrentState = State.Attack;
 
-				if (_enemy.ThisAttackType == Enemy.AttackType.Leech)
+				if (_enemy.ThisAttackType == Enemy.AttackType.Dash)
 					{
 						_enemy.SetAttackDirection();
 					}
@@ -173,6 +176,14 @@ public partial class Brain : Node
 		}
 	}
 
+	public void IdleTimerTimedOut()
+	{
+		if (CurrentCombatState == CombatState.OutOfCombat)
+		{
+			SetCurrentState(FromIdleTo);
+		}
+	}
+
 	public void GetWakedUp()
 	{
 		SetCurrentState(AfterWakedUp);
@@ -197,7 +208,7 @@ public partial class Brain : Node
 
 		if (_enemy.Sprite.Animation == "Attack")
 		{
-			if (_enemy.AttackSucceed == false && _enemy.ThisAttackType == Enemy.AttackType.Leech)
+			if (_enemy.AttackSucceed == false && _enemy.ThisAttackType == Enemy.AttackType.Dash)
 			{
 				_enemy.Sprite.Play("AttackFail");
 				return;
@@ -222,6 +233,11 @@ public partial class Brain : Node
 		if (CurrentState == State.Patrol)
 		{
 			SetCurrentState(NavigationFinishedState);
+
+			if (NavigationFinishedState == State.Idle)
+			{
+				_enemy.EnterIdle();
+			}
 		}
 	}
 

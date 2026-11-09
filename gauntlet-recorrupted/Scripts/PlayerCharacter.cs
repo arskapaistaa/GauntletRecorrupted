@@ -100,12 +100,12 @@ public partial class PlayerCharacter : CharacterBody2D
 			AimArrow.Visible = true;
 		else
 			AimArrow.Visible = false;
-		
+
 		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		HandleTimers(delta);
 		HandleInputs();
 		HandleMovement(delta);
-		HandleAnimations(); 
+		HandleAnimations();
 	}
 
 	private void HandleTimers(double delta)
@@ -171,7 +171,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			MoveAndSlide();
 		}
 	}
-	
+
 	private void OnAnimationFinished()
 	{
 		if (_isDigging)
@@ -395,6 +395,9 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
+
+		// Tell GameManager that player shot.
+		GameManager.Instance.OnShotsFiredChanged();
 	}
 
 	private void SpawnBullet(Vector2 direction)
@@ -560,6 +563,9 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			GD.Print("Player is dead");
 			isLiving = false;
+
+			// Tell Game Manager that player is dead -> Track deaths.
+			GameManager.Instance.OnDeathsChanged();
 		}
 		FlashSprite();
 
