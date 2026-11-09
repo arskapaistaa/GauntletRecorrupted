@@ -23,7 +23,7 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "1, 100, 1")]
 	private int _dmg;
 
-	[Export(PropertyHint.Range, "100,600,10,suffix:Pixels")]
+	[Export(PropertyHint.Range, "100,1000,10,suffix:Pixels")]
 	private float _attackRange;
 
 	[Export(PropertyHint.Range, "0,10000,100,suffix:Pixels")]
@@ -38,8 +38,22 @@ public partial class Enemy : CharacterBody2D
 	[ExportGroup("Perks")]
 	[ExportSubgroup("Damaged movement")]
 	[Export] private bool _canMoveWhileDamaged = false;
-	[Export(PropertyHint.Range, "50,1000,10,suffix:Sixels/s")]
+	[Export(PropertyHint.Range, "50,1000,10,suffix:Pixels/s")]
 	private float _damagedSpeed = 100.0f;
+
+	[ExportSubgroup("Normal patrol (No Tick)")]
+	[Export] private bool _canPatrol = false;
+	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")]
+	private float _minIdleTime = 1.0f;
+
+	[Export(PropertyHint.Range, "2,20,1,suffix:seconds")]
+	private float _maxIdleTime = 1.0f;
+
+	[ExportSubgroup("Ranged Attack")]
+	[Export] private bool _canRangedAttack = false;
+	[Export(PropertyHint.Range, "0.1,5.0f,0.1,suffix:seconds")]
+	private float _rangedCooldownTime = 1.0f;
+	[Export] private PackedScene _projectileScene = null;
 
 	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
@@ -47,7 +61,6 @@ public partial class Enemy : CharacterBody2D
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
 	[Export] private AnimatedSprite2D _sprite = null;
-	[Export] private AnimatedSprite2D _shadowSprite = null;
 	[Export] private CollisionShape2D _characterCollision = null;
 	[Export] private Area2D _detectionArea = null;
 	[Export] private DamageArea _dmgArea = null;
@@ -67,6 +80,8 @@ public partial class Enemy : CharacterBody2D
 
 	[ExportSubgroup("Timers")]
 	[Export] private Timer _destroyTimer = null;
+	[Export] private Timer _fromIdleToPatrolTimer = null;
+	[Export] private Timer _rangedCooldownTimer = null;
 
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
@@ -77,7 +92,9 @@ public partial class Enemy : CharacterBody2D
 	private bool _isAlive = true;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
+	private float _attackNavInterval = 0.5f;
 	private EnemySpawner _homeSpawner = null;
+	private bool _canShoot = true;
 
 	// PUBLIC, NO EXPORT
 	public bool HasRoute = false;
@@ -89,13 +106,15 @@ public partial class Enemy : CharacterBody2D
 		Roach,
 		Tick,
 		Baby,
-		Worm
+		Worm,
+		Bear
 	}
 
 	public enum AttackType
 	{
 		Sting,
-		Leech,
+		Dash,
+		Rush,
 		Static
 	}
 
@@ -202,6 +221,16 @@ public partial class Enemy : CharacterBody2D
 		{
 			_destroyTimer.Timeout -= OnTimerTimedOut;
 		}
+
+		if (_fromIdleToPatrolTimer != null)
+		{
+			_fromIdleToPatrolTimer.Timeout -= OnIdleTimerTimedOut;
+		}
+
+		if (_rangedCooldownTimer != null)
+		{
+			_rangedCooldownTimer.Timeout -= OnRangedCooldownTimerTimedOut;
+		}
     }
 	public override void _PhysicsProcess(double delta)
 	{
@@ -232,9 +261,29 @@ public partial class Enemy : CharacterBody2D
 				UpdateAttack(delta);
 				break;
 
+			case Brain.State.Ranged:
+				UpdateRanged();
+				break;
+
 			case Brain.State.Damaged:
 				UpdateDamaged(delta);
 				break;
+		}
+	}
+
+	public void EnterIdle()
+	{
+		if (_fromIdleToPatrolTimer != null)
+		{
+			if (_fromIdleToPatrolTimer.Paused == true)
+			{
+				_fromIdleToPatrolTimer.WaitTime = RandomWaitTime();
+				_fromIdleToPatrolTimer.Start();
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
 
@@ -251,7 +300,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta, _maxSpeed);
+		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPlayer();
 	}
 
@@ -273,7 +322,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta, _maxSpeed);
+		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPosition();
     }
 
@@ -291,15 +340,15 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		Navigation(delta, _maxSpeed);
+		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPosition();
 	}
 
-	public void Navigation(double delta, float speed)
+	public void Navigation(double delta, float speed, float interval)
 	{
-		if (_brain.CurrentState == Brain.State.Chase)
+		if (_brain.CurrentState == Brain.State.Chase || ThisAttackType == AttackType.Rush)
 		{
-			NavUpdate(delta);
+			NavUpdate(delta, interval);
 		}
 
 		Vector2 currentPosition = GlobalPosition;
@@ -391,12 +440,12 @@ public partial class Enemy : CharacterBody2D
 		return validPosition;
 	}
 
-	public void NavUpdate(double delta)
+	public void NavUpdate(double delta, float interval)
 	{
 		if (_navTimer <= 0.0f)
 		{
 			SetPlayerTarget();
-			_navTimer = _navInterval;
+			_navTimer = interval;
 			return;
 		}
 		else
@@ -409,16 +458,27 @@ public partial class Enemy : CharacterBody2D
 	{
 		UpdateDamageArea();
 
-		if (ThisAttackType == AttackType.Leech)
+		if (ThisAttackType == AttackType.Dash)
 		{
 			if (CheckAttackAnimation())
 			{
-				AttackMovement(_attackSpeed);
+				DashAttackMovement(_attackSpeed);
 			}
 
-			if (_sprite.Animation == "AttackFail")
+			if (ThisEnemyType == EnemyType.Tick)
 			{
-				AttackMovement(_maxSpeed);
+				if (_sprite.Animation == "AttackFail")
+				{
+					DashAttackMovement(_maxSpeed);
+				}
+			}
+		}
+
+		if (ThisAttackType == AttackType.Rush)
+		{
+			if (CheckAttackAnimation())
+			{
+				RushAttackMovement(delta, AttackSpeed);
 			}
 		}
 
@@ -431,12 +491,29 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-	public void AttackMovement(float speed)
+	public void DashAttackMovement(float speed)
 	{
 		Vector2 velocity = AttackDirection * speed;
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public void RushAttackMovement(double delta, float speed)
+	{
+		if (_agent == null)
+		{
+			return;
+		}
+
+		if (_agent.IsNavigationFinished())
+		{
+			// TODO: Call brain.
+			return;
+		}
+
+		Navigation(delta, speed, _attackNavInterval);
+		LookAtPosition();
 	}
 
 	/// <summary>
@@ -486,11 +563,37 @@ public partial class Enemy : CharacterBody2D
 
 	}
 
+	private void UpdateRanged()
+	{
+		LookAtPlayer();
+
+		if (HasLineOfSight() && _canShoot)
+		{
+			Shoot();
+			_canShoot = false;
+		}
+	}
+
+	private void Shoot()
+	{
+		if (_projectileScene == null)
+		{
+			GD.PrintErr("There is no projectile reference on enemy");
+			return;
+		}
+
+		Vector2 direction = GlobalTransform.X.Normalized();
+
+		Projectile projectile = _projectileScene.Instantiate<Projectile>();
+		projectile.GlobalPosition = GlobalPosition;
+		projectile.Initialize(direction);
+	}
+
 	private void UpdateDamaged(double delta)
 	{
 		if (_canMoveWhileDamaged && _brain.CurrentCombatState == Brain.CombatState.InCombat)
 		{
-			Navigation(delta, _damagedSpeed);
+			Navigation(delta, _damagedSpeed, _navInterval);
 		}
 	}
 
@@ -499,12 +602,6 @@ public partial class Enemy : CharacterBody2D
 		if (_sprite == null)
 		{
 			GD.PrintErr("Animation sprite cant be found");
-			return;
-		}
-
-		if (_shadowSprite == null)
-		{
-			GD.PrintErr("Shadow animation sprite cant be found");
 			return;
 		}
 
@@ -517,51 +614,47 @@ public partial class Enemy : CharacterBody2D
 		{
 			case Brain.State.Spawning:
 				_sprite.Play("Spawn");
-				_shadowSprite.Play("Spawn");
 				break;
 
 			case Brain.State.Idle:
 				_sprite.Play("Idle");
-				_shadowSprite.Play("Idle");
 				break;
 
 			case Brain.State.Chase:
 				_sprite.Play("Walk");
-				_shadowSprite.Play("Walk");
 				break;
 
 			case Brain.State.Patrol:
 				_sprite.Play("Walk");
-				_shadowSprite.Play("Walk");
 				break;
 
 			case Brain.State.Notice:
 				_sprite.Play("Notice");
-				_shadowSprite.Play("Notice");
 				break;
 
 			case Brain.State.Attack:
-				if (AttackSucceed && ThisAttackType == AttackType.Leech)
+				if (AttackSucceed && ThisEnemyType == EnemyType.Tick)
 				{
 					_sprite.Play("AttackHit");
-					_shadowSprite.Play("AttackHit");
 				}
 
-				if (_sprite.Animation != "AttackFail" && _sprite.Animation != "AttackHit")
+				if (AttackSucceed && ThisEnemyType == EnemyType.Tick &&
+					_sprite.Animation != "AttackFail" && _sprite.Animation != "AttackHit")
 				{
 					_sprite.Play("Attack");
-					_shadowSprite.Play("Attack");
+				}
+				else
+				{
+					_sprite.Play("Attack");
 				}
 				break;
 
 			case Brain.State.Damaged:
 				_sprite.Play("TakeDmg");
-				_shadowSprite.Play("TakeDmg");
 				break;
 
 			case Brain.State.Defeat:
 				_sprite.Play("Defeat");
-				_shadowSprite.Play("Defeat");
 				break;
 		}
 	}
@@ -844,6 +937,32 @@ public partial class Enemy : CharacterBody2D
 		{
 			_destroyTimer.Timeout += OnTimerTimedOut;
 		}
+
+		if (_fromIdleToPatrolTimer != null)
+		{
+			_fromIdleToPatrolTimer.Timeout += OnIdleTimerTimedOut;
+		}
+
+		if (_rangedCooldownTimer != null)
+		{
+			_rangedCooldownTimer.Timeout += OnRangedCooldownTimerTimedOut;
+		}
+	}
+
+    private void OnIdleTimerTimedOut()
+    {
+		_brain.IdleTimerTimedOut();
+    }
+
+	private void OnRangedCooldownTimerTimedOut()
+    {
+        _canShoot = true;
+    }
+
+	private double RandomWaitTime()
+	{
+		double waitTime = GD.RandRange(_minIdleTime, _maxIdleTime);
+		return waitTime;
 	}
 
     private void OnTimerTimedOut()
