@@ -22,9 +22,9 @@ public partial class BaseButton : Button
 	[ExportSubgroup("If the button should grab focus, choose only one btn in the scene")]
 	[Export] private bool _isGrabFocus = false;
 
-    public override void _EnterTree()
-    {
-        Pressed += OnButtonPressed;
+	public override void _EnterTree()
+	{
+		Pressed += OnButtonPressed;
 		FocusEntered += OnFocusEntered;
 		FocusExited += OnFocusExited;
 
@@ -32,14 +32,14 @@ public partial class BaseButton : Button
 		{
 			_animations.AnimationFinished += OnAnimationFinished;
 		}
-    }
+	}
 
-    public override void _ExitTree()
-    {
-        Pressed -= OnButtonPressed;
+	public override void _ExitTree()
+	{
+		Pressed -= OnButtonPressed;
 		FocusEntered -= OnFocusEntered;
 		FocusExited -= OnFocusExited;
-    }
+	}
 	public override void _Ready()
 	{
 
@@ -50,8 +50,8 @@ public partial class BaseButton : Button
 
 	}
 
-    private void OnButtonPressed()
-    {
+	private void OnButtonPressed()
+	{
 		// Play Sfx first
 		if (_pressedSfx != null)
 		{
@@ -64,33 +64,33 @@ public partial class BaseButton : Button
 		}
 
 		// Load new scene after the last frame is finished.
-        if (_pathToScene != null && _pathToSceneMode == TriggerMode.Pressed)
+		if (_pathToScene != null && _pathToSceneMode == TriggerMode.Pressed)
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
 		}
-    }
+	}
 
 	private void OnFocusEntered()
-    {
+	{
 		StyleBox hoverStyle = GetThemeStylebox("hover");
-        AddThemeStyleboxOverride("normal", hoverStyle);
+		AddThemeStyleboxOverride("normal", hoverStyle);
 		if (_enterFocusedSfx != null)
 		{
 			_enterFocusedSfx.Play();
 		}
-    }
+	}
 
 	private void OnFocusExited()
-    {
+	{
 		RemoveThemeStyleboxOverride("normal");
-        if (_exitFocusedSfx != null)
+		if (_exitFocusedSfx != null)
 		{
 			_exitFocusedSfx.Play();
 		}
-    }
+	}
 
 	private void OnAnimationFinished(StringName animName)
-    {
+	{
 		if (_animations == null)
 		{
 			return;
@@ -100,5 +100,5 @@ public partial class BaseButton : Button
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
 		}
-    }
+	}
 }
