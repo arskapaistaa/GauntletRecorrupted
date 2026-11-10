@@ -312,12 +312,6 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		if (!HasRoute)
-		{
-			SetPatrolTarget();
-		}
-
-
 		if (_agent.IsNavigationFinished())
 		{
 			return;
@@ -326,6 +320,11 @@ public partial class Enemy : CharacterBody2D
 		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPosition();
     }
+
+	public void EnterPatrol()
+	{
+		SetPatrolTarget();
+	}
 
 	private void UpdateSpawn(double delta)
 	{
@@ -405,7 +404,8 @@ public partial class Enemy : CharacterBody2D
 	public void SetPatrolTarget()
 	{
 		// _agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
-		_agent.TargetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 2, true);
+		// Currently hard coded on Layer 1 so WURM wont work.
+		_agent.TargetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 1, true);
 
 		HasRoute = true;
 
@@ -608,11 +608,6 @@ public partial class Enemy : CharacterBody2D
 		{
 			Navigation(delta, _damagedSpeed, _navInterval);
 		}
-	}
-
-	private void UpdateAwake()
-	{
-
 	}
 
 	private void UpdateAnimation()

@@ -258,9 +258,9 @@ _attackEndFrames = 3
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
 EntersAreaState = 4
-InCombatState = 5
+InCombatState = 6
 OutOfCombatState = 4
-AfterNoticeState = 5
+AfterNoticeState = 6
 AfterAttackState = 4
 AfterAlarmedState = 4
 AfterBulledDetected = 4
