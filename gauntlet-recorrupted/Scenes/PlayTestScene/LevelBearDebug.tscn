@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="6_hfpqq"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="7_6iyf1"]
 [ext_resource type="PackedScene" uid="uid://dw87ycdqt76cg" path="res://Scenes/Characters/Enemy/Bear.tscn" id="7_wmri6"]
+[ext_resource type="PackedScene" uid="uid://dfavr87xu6e8m" path="res://Scenes/Characters/Enemy/Adult.tscn" id="8_sngsp"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="9_7koen"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="10_77btd"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="11_os2st"]
@@ -155,7 +156,7 @@ tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 4
 sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="DebugLevel" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_sngsp")
 _maxTotalEnemyCount = 7
 _spawnerCount = 2
@@ -204,6 +205,9 @@ navigation_layers = 2
 
 [node name="Bear" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_wmri6")]
 position = Vector2(2330, -1593)
+
+[node name="Adult" parent="Environment/Enemies" unique_id=1156803834 instance=ExtResource("8_sngsp")]
+position = Vector2(303, -1500)
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_7koen")]
 position = Vector2(2983, -1960)

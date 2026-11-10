@@ -28,7 +28,7 @@ DMG: 20
 AS: NONE
 DR: 600.0
 AR: 200.0
-ALR: 1000.0
+ALR: 2000.0
 
 ### Tick
 S: 400.0
@@ -49,6 +49,15 @@ H: 30
 DMG: 25
 AS: NONE
 DR: 700.0
+AR: 100.0
+ALR: 2000.0
+
+### Adult
+S: 200.0
+H: 100
+DMG: 20
+AS: NONE
+DR: 200.0
 AR: 100.0
 ALR: 2000.0
 
