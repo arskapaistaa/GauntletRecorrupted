@@ -41,7 +41,7 @@ public partial class Level : Node2D
 	{
 		get
 		{
-			GD.Print("Intensity level: " + _intensityLevel);
+			// GD.Print("Intensity level: " + _intensityLevel);
 			return _intensityLevel;
 		}
 		private set
@@ -95,10 +95,6 @@ public partial class Level : Node2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("Menu"))
-		{
-			GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/TestMenu.tscn");
-		}
 	}
 
 	public void ChangeEnemyCount(int amount)
