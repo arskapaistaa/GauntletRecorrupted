@@ -2,8 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://uoo657xol87a" path="res://Art/Title/HellsWellTitleStart.png" id="1_05hi0"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_ux8os"]
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_05hi0"]
 load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
 
@@ -42,7 +40,6 @@ content_margin_bottom = 20.0
 texture = SubResource("CompressedTexture2D_iej2m")
 
 [resource]
-Button/icons/icon = SubResource("CanvasTexture_ux8os")
 Button/styles/focus = SubResource("StyleBoxTexture_ih4tk")
 Button/styles/hover = SubResource("StyleBoxTexture_kdj2n")
 Button/styles/normal = SubResource("StyleBoxTexture_s8g82")
