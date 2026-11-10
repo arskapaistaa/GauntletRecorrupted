@@ -15,6 +15,8 @@ public partial class BaseButton : Button
 	[ExportGroup("Pressed")]
 	[Export] private AudioStreamPlayer _pressedSfx = null;
 	[Export] private string _pressedAnimName = null;
+	[ExportSubgroup("This is a exit button")]
+	[Export] private bool _isExitButton = false;
 
 	[ExportGroup("Focus")]
 	[Export] private AudioStreamPlayer _enterFocusedSfx = null;
@@ -67,6 +69,11 @@ public partial class BaseButton : Button
 		if (_pathToScene != null && _pathToSceneMode == TriggerMode.Pressed)
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
+		}
+
+		if (_isExitButton)
+		{
+			GetTree().Quit();
 		}
 	}
 

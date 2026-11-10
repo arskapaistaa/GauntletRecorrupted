@@ -9,7 +9,7 @@ public partial class OptionsMenu : Control
 	[Export] private HSlider _sfxVolumeSlider;
 	[Export] private HSlider _musicVolumeSlider;
 
-	public override void _Ready()
+	public override void _EnterTree()
 	{
 		GetCurrentSettings();
 

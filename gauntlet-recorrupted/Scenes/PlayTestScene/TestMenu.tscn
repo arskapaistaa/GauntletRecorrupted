@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
 [ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="23_3pkmq"]
 [ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="24_4dvq8"]
+[ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
@@ -110,6 +111,22 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Animation" id="Animation_e76bc"]
+resource_name = "CloseExitPanel"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExitPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_t3rra"]
 resource_name = "CloseOptions"
 length = 0.1
@@ -140,6 +157,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_57vxl"]
+resource_name = "OpenExitPanel"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExitPanel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_j8qme"]
@@ -244,6 +277,42 @@ tracks/6/keys = {
 "update": 1,
 "values": [ExtResource("2_ux8os")]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audios/MainMenuMusic:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Particles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ExitPanel:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_v40es"]
 resource_name = "StartPressed"
@@ -323,6 +392,47 @@ tracks/5/keys = {
 "times": PackedFloat32Array(1)
 }
 tracks/5/use_blend = true
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Audios")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [2, 0, true],
+"method": &"AudioEffect"
+}, {
+"args": [2, 0, false],
+"method": &"AudioEffect"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Audios/MainMenuMusic:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Particles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_4dvq8"]
 resource_name = "StatsPressed"
@@ -342,8 +452,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
+&"CloseExitPanel": SubResource("Animation_e76bc"),
 &"CloseOptions": SubResource("Animation_t3rra"),
 &"CloseStats": SubResource("Animation_mwm07"),
+&"OpenExitPanel": SubResource("Animation_57vxl"),
 &"OpenOptions": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
 &"StartPressed": SubResource("Animation_v40es"),
@@ -468,6 +580,10 @@ grow_vertical = 2
 theme = ExtResource("1_cg106")
 texture = ExtResource("15_4dvq8")
 region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 script = ExtResource("4_5ve7l")
 _killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
@@ -664,6 +780,83 @@ layout_mode = 1
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 
+[node name="ExitPanel" type="Control" parent="." unique_id=867063999]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ExitPanel" unique_id=1457525542]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_4dvq8")
+region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="Label" type="Label" parent="ExitPanel/NinePatchRect" unique_id=1959008665]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_top = 14.0
+offset_right = 163.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Are you really giving up so easily..."
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="ExitPanel/NinePatchRect" unique_id=976874893]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.0
+offset_top = -54.0
+offset_right = 74.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="YES" type="Button" parent="ExitPanel/NinePatchRect/Buttons" unique_id=2060735018 node_paths=PackedStringArray("_pressedSfx")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "yes"
+script = ExtResource("2_ikpte")
+_pressedSfx = NodePath("../../../../Audios/ButtonSFX")
+_isExitButton = true
+
+[node name="NO" type="Button" parent="ExitPanel/NinePatchRect/Buttons" unique_id=1036419074 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../../../AnimationPlayer")
+_pressedSfx = NodePath("../../../../Audios/ButtonSFX")
+_pressedAnimName = "CloseExitPanel"
+_isGrabFocus = true
+
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
 [node name="SettingsManager" type="Node" parent="Managers" unique_id=1623565682]
@@ -680,11 +873,12 @@ script = ExtResource("6_q8jds")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
 libraries/ = SubResource("AnimationLibrary_j8qme")
 
-[node name="Audios" type="Node" parent="." unique_id=423380486]
+[node name="Audios" type="Node" parent="." unique_id=423380486 node_paths=PackedStringArray("_music")]
+script = ExtResource("24_57vxl")
+_music = NodePath("MainMenuMusic")
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="Audios" unique_id=925341035]
 stream = ExtResource("23_3pkmq")
-autoplay = true
 bus = &"Music"
 
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="Audios" unique_id=793243120]
