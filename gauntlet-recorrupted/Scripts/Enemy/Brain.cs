@@ -168,12 +168,6 @@ public partial class Brain : Node
 	public void AfterAwake()
 	{
 		CurrentState = AfterAwakeState;
-
-		if (AfterAwakeState == State.Idle)
-		{
-			_enemy.SetDetectionRange(_enemy.DetectionRange);
-			_enemy.EnterIdle();
-		}
 	}
 
 	public void AfterAttack()
@@ -221,11 +215,6 @@ public partial class Brain : Node
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(FromIdleTo);
-
-			if (FromIdleTo == State.Awake)
-			{
-				_enemy.SetDetectionRange(_enemy.AwakeDetectionRange);
-			}
 		}
 	}
 
@@ -288,11 +277,6 @@ public partial class Brain : Node
 		if (CurrentState == State.Patrol)
 		{
 			SetCurrentState(NavigationFinishedState);
-
-			if (NavigationFinishedState == State.Idle)
-			{
-				_enemy.EnterIdle();
-			}
 		}
 	}
 
@@ -306,6 +290,27 @@ public partial class Brain : Node
 		if (state != State.None)
 		{
 			CurrentState = state;
+
+			CheckStateEnters(state);
+		}
+	}
+
+	private void CheckStateEnters(State state)
+	{
+		switch (state)
+		{
+			case State.Idle:
+				_enemy.EnterIdle();
+				_enemy.SetDetectionRange(_enemy.DetectionRange);
+				break;
+
+			case State.Awake:
+				_enemy.SetDetectionRange(_enemy.AwakeDetectionRange);
+				break;
+
+			case State.Patrol:
+				_enemy.EnterPatrol();
+				break;
 		}
 	}
 

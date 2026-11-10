@@ -260,11 +260,11 @@ _attackEndFrames = 5
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_8rpmh")
-EntersAreaState = 5
-InCombatState = 5
-OutOfCombatState = 5
-AfterAttackState = 5
-AfterBulledDetected = 5
+EntersAreaState = 6
+InCombatState = 6
+OutOfCombatState = 6
+AfterAttackState = 6
+AfterBulledDetected = 6
 CantReachTargetState = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1358740588]

@@ -426,7 +426,6 @@ _attackEndFrames = 16
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_17jru")
-StartingState = 2
 EntersAreaState = 4
 InCombatState = 6
 OutOfCombatState = 4
