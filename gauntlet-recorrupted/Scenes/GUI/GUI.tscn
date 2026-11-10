@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bomdb4be3gg7a" path="res://Scenes/PlayTestScene/PauseMenu.tscn" id="2_17j7b"]
 [ext_resource type="Texture2D" uid="uid://d0r62pe33mx2o" path="res://Art/UserInterface/HeartHealthbar.png" id="3_e1ed1"]
 [ext_resource type="PackedScene" uid="uid://c5ayn855gwmmj" path="res://Scenes/PlayTestScene/DeathMenu.tscn" id="3_n3sgb"]
+[ext_resource type="Texture2D" uid="uid://c0f7s1d4ldcy7" path="res://Art/UserInterface/ArtUiExit.png" id="3_nkhw3"]
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="4_234st"]
 [ext_resource type="Texture2D" uid="uid://djnutyln1yhif" path="res://Art/UserInterface/RevolverAmmoBase.png" id="5_nkhw3"]
 [ext_resource type="Texture2D" uid="uid://bqtgkheev0177" path="res://Art/UserInterface/RevolverAmmoBullets.png" id="6_jwth5"]
@@ -12,21 +13,93 @@
 [ext_resource type="Texture2D" uid="uid://x4pilwwsjt04" path="res://Art/UserInterface/ShotgunAmmo1Bullet.png" id="8_jwth5"]
 [ext_resource type="Texture2D" uid="uid://kxqgpae4mmm5" path="res://Art/UserInterface/ShotgunAmmo2Bullets.png" id="9_1vt16"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ga83m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l23vg"]
 atlas = ExtResource("3_e1ed1")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rc3oj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5r47"]
 atlas = ExtResource("3_e1ed1")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nxkp4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s62j3"]
 atlas = ExtResource("3_e1ed1")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rea8g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr77d"]
 atlas = ExtResource("3_e1ed1")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bepdp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l23vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5r47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s62j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr77d")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga83m"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(0, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc3oj"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(94, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxkp4"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(188, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rea8g"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(94, 94, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c82cv"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(188, 94, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tl2s"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(282, 94, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aul4t"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(376, 94, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3rc6"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(188, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d3ul"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(282, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb6qx"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(376, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okxml"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(470, 0, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jopcm"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(0, 94, 94, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sbyh"]
+atlas = ExtResource("3_nkhw3")
+region = Rect2(94, 94, 94, 94)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dxocv"]
 animations = [{
@@ -39,12 +112,49 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nxkp4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rea8g")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Closed",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rea8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c82cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tl2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aul4t")
+}],
+"loop": 1,
+"name": &"Open",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3rc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d3ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb6qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okxml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jopcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sbyh")
+}],
+"loop": 0,
+"name": &"Opening",
 "speed": 5.0
 }]
 
@@ -150,9 +260,9 @@ offset_right = 64.0
 offset_bottom = -10.0
 grow_vertical = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Hearth" unique_id=498093232]
-position = Vector2(32, 30)
-sprite_frames = SubResource("SpriteFrames_dxocv")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Hearth" unique_id=753294916]
+position = Vector2(31, 31)
+sprite_frames = SubResource("SpriteFrames_bepdp")
 
 [node name="PlayerHealthLabel" type="Label" parent="GUI/Hearth" unique_id=1284538617]
 layout_mode = 1
@@ -173,6 +283,22 @@ theme_override_font_sizes/font_size = 12
 text = "100"
 horizontal_alignment = 1
 
+[node name="Exit" type="TextureRect" parent="GUI" unique_id=1075959590]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 469.0
+offset_top = -300.0
+offset_right = 533.0
+offset_bottom = -236.0
+grow_vertical = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Exit" unique_id=1524370158]
+position = Vector2(131, -18)
+sprite_frames = SubResource("SpriteFrames_dxocv")
+animation = &"Opening"
+
 [node name="Revolver" type="TextureRect" parent="GUI" unique_id=1145253756]
 layout_mode = 1
 anchors_preset = 3
@@ -180,10 +306,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -74.0
-offset_top = -74.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -68.0
+offset_top = -70.0
+offset_right = -4.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("5_nkhw3")
