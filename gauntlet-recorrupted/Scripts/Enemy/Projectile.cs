@@ -7,8 +7,6 @@ public partial class Projectile : Area2D
     public float Speed = 800.0f;
 
 	[Export(PropertyHint.Range, "0,100,1")]
-    public int RevolverBulletDamage = 10;
-	[Export(PropertyHint.Range, "0,100,1")]
     public int Damage = 5;
 	[Export(PropertyHint.Range, "0,10,0.5")]
 

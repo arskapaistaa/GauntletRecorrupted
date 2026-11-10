@@ -8,55 +8,49 @@ public partial class Enemy : CharacterBody2D
 
 	[ExportGroup("Stats")]
 
-	[Export(PropertyHint.Range, "1,1000,1")]
-	private float _health;
+	[Export(PropertyHint.Range, "1,1000,1")] private float _health;
 
-	[Export(PropertyHint.Range, "100,800,10,suffix:Pixels/s")]
-	private float _maxSpeed;
+	[Export(PropertyHint.Range, "100,800,10,suffix:Pixels/s")] private float _maxSpeed;
 
-	[Export(PropertyHint.Range, "0,1600,10,suffix:Pixels/s")]
-	private float _attackSpeed;
+	[Export(PropertyHint.Range, "0,1600,10,suffix:Pixels/s")] private float _attackSpeed;
 
-	[Export(PropertyHint.Range, "0,1500,100,suffix:Pixels")]
-	private float _detectionRange;
+	[Export(PropertyHint.Range, "0,1500,100,suffix:Pixels")] public float DetectionRange;
 
-	[Export(PropertyHint.Range, "1, 100, 1")]
-	private int _dmg;
+	[Export(PropertyHint.Range, "1, 100, 1")] private int _dmg;
 
-	[Export(PropertyHint.Range, "100,1000,10,suffix:Pixels")]
-	private float _attackRange;
+	[Export(PropertyHint.Range, "100,1000,10,suffix:Pixels")] private float _attackRange;
 
-	[Export(PropertyHint.Range, "0,10000,100,suffix:Pixels")]
-	private float _alarmRange;
+	[Export(PropertyHint.Range, "0,10000,100,suffix:Pixels")] private float _alarmRange;
 
-	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
-	private float _patrolDistance;
+	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")] private float _patrolDistance;
 
-	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")]
-	private float _patrolAtleastDistance;
+	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")] private float _patrolAtleastDistance;
 
 	[ExportGroup("Perks")]
 	[ExportSubgroup("Damaged movement")]
 	[Export] private bool _canMoveWhileDamaged = false;
-	[Export(PropertyHint.Range, "50,1000,10,suffix:Pixels/s")]
-	private float _damagedSpeed = 100.0f;
+	[Export(PropertyHint.Range, "50,1000,10,suffix:Pixels/s")] private float _damagedSpeed = 100.0f;
 
 	[ExportSubgroup("Normal patrol (No Tick)")]
 	[Export] private bool _canPatrol = false;
-	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")]
-	private float _minIdleTime = 1.0f;
+	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")] private float _minIdleTime = 1.0f;
 
-	[Export(PropertyHint.Range, "2,20,1,suffix:seconds")]
-	private float _maxIdleTime = 1.0f;
+	[Export(PropertyHint.Range, "2,20,1,suffix:seconds")] private float _maxIdleTime = 1.0f;
 
 	[ExportSubgroup("Ranged Attack")]
-	[Export] private bool _canRangedAttack = false;
-	[Export(PropertyHint.Range, "0.1,5.0f,0.1,suffix:seconds")]
-	private float _rangedCooldownTime = 1.0f;
+	[Export] public bool CanRangedAttack = false;
+	[Export(PropertyHint.Range, "0.1,5.0f,0.1,suffix:seconds")] private float _rangedCooldownTime = 1.0f;
 	[Export] private PackedScene _projectileScene = null;
+	[Export] private Marker2D _projectileSpawnPoint = null;
 
 	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
+	[ExportSubgroup("Awake")]
+	[Export] private bool _canAwake = false;
+	[Export(PropertyHint.Range, "200,2000,100,suffix:pixels")] public float AwakeDetectionRange = 200.0f;
+	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")] private float _minAwakeIntervalTime = 1.0f;
+	[Export(PropertyHint.Range, "2,30,1,suffix:seconds")] private float _maxAwakeIntervalTime = 1.0f;
+
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
@@ -80,8 +74,9 @@ public partial class Enemy : CharacterBody2D
 
 	[ExportSubgroup("Timers")]
 	[Export] private Timer _destroyTimer = null;
-	[Export] private Timer _fromIdleToPatrolTimer = null;
+	[Export] private Timer _fromIdleToTimer = null;
 	[Export] private Timer _rangedCooldownTimer = null;
+
 
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
@@ -106,6 +101,7 @@ public partial class Enemy : CharacterBody2D
 		Roach,
 		Tick,
 		Baby,
+		Adult,
 		Worm,
 		Bear
 	}
@@ -219,12 +215,12 @@ public partial class Enemy : CharacterBody2D
 
 		if (_destroyTimer != null)
 		{
-			_destroyTimer.Timeout -= OnTimerTimedOut;
+			_destroyTimer.Timeout -= OnDestroyTimerTimedOut;
 		}
 
-		if (_fromIdleToPatrolTimer != null)
+		if (_fromIdleToTimer != null)
 		{
-			_fromIdleToPatrolTimer.Timeout -= OnIdleTimerTimedOut;
+			_fromIdleToTimer.Timeout -= OnIdleTimerTimedOut;
 		}
 
 		if (_rangedCooldownTimer != null)
@@ -273,12 +269,17 @@ public partial class Enemy : CharacterBody2D
 
 	public void EnterIdle()
 	{
-		if (_fromIdleToPatrolTimer != null)
+		if (_fromIdleToTimer != null)
 		{
-			if (_fromIdleToPatrolTimer.Paused == true)
+			if (_fromIdleToTimer.IsStopped() == true && _canPatrol)
 			{
-				_fromIdleToPatrolTimer.WaitTime = RandomWaitTime();
-				_fromIdleToPatrolTimer.Start();
+				_fromIdleToTimer.WaitTime = RandomWaitTime(_minIdleTime, _maxIdleTime);
+				_fromIdleToTimer.Start();
+			}
+			else if (_fromIdleToTimer.IsStopped() == true && _canAwake)
+			{
+				_fromIdleToTimer.WaitTime = RandomWaitTime(_minAwakeIntervalTime, _maxAwakeIntervalTime);
+				_fromIdleToTimer.Start();
 			}
 			else
 			{
@@ -582,10 +583,22 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
+		if (_rangedCooldownTimer != null)
+		{
+			_rangedCooldownTimer.WaitTime = _rangedCooldownTime;
+			_rangedCooldownTimer.Start();
+		}
+
 		Vector2 direction = GlobalTransform.X.Normalized();
 
 		Projectile projectile = _projectileScene.Instantiate<Projectile>();
-		projectile.GlobalPosition = GlobalPosition;
+		GetTree().CurrentScene.AddChild(projectile);
+
+		if (_projectileSpawnPoint != null)
+		{
+			projectile.GlobalPosition = _projectileSpawnPoint.GlobalPosition;
+		}
+
 		projectile.Initialize(direction);
 	}
 
@@ -595,6 +608,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			Navigation(delta, _damagedSpeed, _navInterval);
 		}
+	}
+
+	private void UpdateAwake()
+	{
+
 	}
 
 	private void UpdateAnimation()
@@ -632,20 +650,31 @@ public partial class Enemy : CharacterBody2D
 				_sprite.Play("Notice");
 				break;
 
+			case Brain.State.Awake:
+				_sprite.Play("Awake");
+				break;
+
 			case Brain.State.Attack:
 				if (AttackSucceed && ThisEnemyType == EnemyType.Tick)
 				{
 					_sprite.Play("AttackHit");
 				}
 
-				if (AttackSucceed && ThisEnemyType == EnemyType.Tick &&
+				if (ThisEnemyType == EnemyType.Tick &&
 					_sprite.Animation != "AttackFail" && _sprite.Animation != "AttackHit")
 				{
 					_sprite.Play("Attack");
 				}
-				else
+				else if (ThisEnemyType != EnemyType.Tick)
 				{
 					_sprite.Play("Attack");
+				}
+				break;
+
+			case Brain.State.Ranged:
+				if (CanRangedAttack)
+				{
+					_sprite.Play("Ranged");
 				}
 				break;
 
@@ -765,7 +794,7 @@ public partial class Enemy : CharacterBody2D
 		// OR IN SAME "FACTION"
 		foreach (Node enemy in GetTree().GetNodesInGroup("Enemy"))
 		{
-			if (enemy is Enemy enemyNode && enemy != this)
+			if (enemy is Enemy enemyNode && enemy != this && enemyNode.ThisEnemyType == ThisEnemyType && enemyNode._canBeAlarmed)
 			{
 				if (GlobalPosition.DistanceTo(enemyNode.GlobalPosition) <= _alarmRange)
 				{
@@ -777,10 +806,7 @@ public partial class Enemy : CharacterBody2D
 
 	private void Alarmed()
 	{
-		if (_canBeAlarmed)
-		{
-			_brain.Alarmed();
-		}
+		_brain.Alarmed();
 	}
 
 	public void WakeUp()
@@ -887,6 +913,11 @@ public partial class Enemy : CharacterBody2D
 			circle.Radius = range;
 		}
 	}
+
+	public float GetDetectionRange()
+	{
+		return DetectionRange;
+	}
 	public void Reset()
 	{
 		if (_detectionShape == null)
@@ -896,7 +927,7 @@ public partial class Enemy : CharacterBody2D
 
 		if (_detectionShape.Shape is CircleShape2D circle)
 		{
-			circle.Radius = _detectionRange;
+			circle.Radius = DetectionRange;
 		}
 
 		if (_dmgArea != null && ThisAttackType != AttackType.Static)
@@ -935,12 +966,12 @@ public partial class Enemy : CharacterBody2D
 
 		if (_destroyTimer != null)
 		{
-			_destroyTimer.Timeout += OnTimerTimedOut;
+			_destroyTimer.Timeout += OnDestroyTimerTimedOut;
 		}
 
-		if (_fromIdleToPatrolTimer != null)
+		if (_fromIdleToTimer != null)
 		{
-			_fromIdleToPatrolTimer.Timeout += OnIdleTimerTimedOut;
+			_fromIdleToTimer.Timeout += OnIdleTimerTimedOut;
 		}
 
 		if (_rangedCooldownTimer != null)
@@ -957,15 +988,16 @@ public partial class Enemy : CharacterBody2D
 	private void OnRangedCooldownTimerTimedOut()
     {
         _canShoot = true;
+		GD.Print("Can shoot");
     }
 
-	private double RandomWaitTime()
+	private double RandomWaitTime(float min, float max)
 	{
-		double waitTime = GD.RandRange(_minIdleTime, _maxIdleTime);
+		double waitTime = GD.RandRange(min, max);
 		return waitTime;
 	}
 
-    private void OnTimerTimedOut()
+    private void OnDestroyTimerTimedOut()
     {
         QueueFree();
     }

@@ -16,6 +16,9 @@ public partial class Brain : Node
 	[ExportGroup("Notice")]
 	[Export] public State AfterNoticeState = State.None;
 
+	[ExportGroup("Awake")]
+	[Export] public State AfterAwakeState = State.None;
+
 	[ExportGroup("Attack")]
 	[Export] public State AfterAttackState = State.None;
 	[Export] public CombatState AfterAttackCombatState = CombatState.InCombat;
@@ -38,6 +41,9 @@ public partial class Brain : Node
 	[ExportGroup("After Idle timer timeout")]
 	[Export] public State FromIdleTo = State.None;
 
+	[ExportGroup("Ranged")]
+	[Export] public State AfterRangedState = State.None;
+
 	private Enemy _enemy;
 	public enum State
 	{
@@ -46,6 +52,7 @@ public partial class Brain : Node
 		Patrol,
 		Idle,
 		Notice,
+		Awake,
 		Chase,
 		Attack,
 		Ranged,
@@ -66,6 +73,10 @@ public partial class Brain : Node
 
 		CurrentState = StartingState;
 
+		if (StartingState == State.Idle)
+		{
+			_enemy.EnterIdle();
+		}
 	}
 
 	public override void _Process(double delta)
@@ -79,6 +90,12 @@ public partial class Brain : Node
 		{
 			case State.Chase:
 			// If enemy is in attack range and can see player, start Attacking.
+
+			if (_enemy.ThisAttackType == Enemy.AttackType.Static)
+				{
+					return;
+				}
+
 			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
 			{
 				CurrentState = State.Attack;
@@ -89,6 +106,13 @@ public partial class Brain : Node
 					}
 			}
 
+			if (_enemy.Player != null && _enemy.CanRangedAttack)
+			{
+				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.GetDetectionRange() && _enemy.HasLineOfSight())
+				{
+					CurrentState = State.Ranged;
+				}
+			}
 			break;
 		}
 	}
@@ -141,6 +165,17 @@ public partial class Brain : Node
 		}
 	}
 
+	public void AfterAwake()
+	{
+		CurrentState = AfterAwakeState;
+
+		if (AfterAwakeState == State.Idle)
+		{
+			_enemy.SetDetectionRange(_enemy.DetectionRange);
+			_enemy.EnterIdle();
+		}
+	}
+
 	public void AfterAttack()
 	{
 		if (_enemy.Player != null)
@@ -149,6 +184,11 @@ public partial class Brain : Node
 
 			CurrentCombatState = AfterAttackCombatState;
 		}
+	}
+
+	public void AfterRanged()
+	{
+		SetCurrentState(AfterRangedState);
 	}
 
 	public void AfterSpawn()
@@ -181,6 +221,11 @@ public partial class Brain : Node
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(FromIdleTo);
+
+			if (FromIdleTo == State.Awake)
+			{
+				_enemy.SetDetectionRange(_enemy.AwakeDetectionRange);
+			}
 		}
 	}
 
@@ -201,6 +246,11 @@ public partial class Brain : Node
 			AfterNotice();
 		}
 
+		if (_enemy.Sprite.Animation == "Awake")
+		{
+			AfterAwake();
+		}
+
 		if (_enemy.Sprite.Animation == "TakeDmg")
 		{
 			AfterDamaged();
@@ -208,7 +258,7 @@ public partial class Brain : Node
 
 		if (_enemy.Sprite.Animation == "Attack")
 		{
-			if (_enemy.AttackSucceed == false && _enemy.ThisAttackType == Enemy.AttackType.Dash)
+			if (_enemy.AttackSucceed == false && _enemy.ThisEnemyType == Enemy.EnemyType.Tick)
 			{
 				_enemy.Sprite.Play("AttackFail");
 				return;
@@ -225,6 +275,11 @@ public partial class Brain : Node
 		if (_enemy.Sprite.Animation == "AttackHit")
 		{
 			AfterAttack();
+		}
+
+		if (_enemy.Sprite.Animation == "Ranged")
+		{
+			AfterRanged();
 		}
 	}
 
@@ -258,11 +313,7 @@ public partial class Brain : Node
 	{
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
-			if (EntersAreaState != State.None)
-			{
-				CurrentState = EntersAreaState;
-			}
-
+			CurrentState = EntersAreaState;
 			_enemy.SetPlayerTarget();
 		}
 	}
