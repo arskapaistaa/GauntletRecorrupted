@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
 [ext_resource type="AudioStream" uid="uid://c3ayuna72gig5" path="res://Audio/Music/Ambience01.ogg" id="10_5y76b"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
+[ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_r27b6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
@@ -246,6 +247,10 @@ stream = ExtResource("10_5y76b")
 volume_db = -12.0
 autoplay = true
 bus = &"Music"
+
+[node name="TutorialArea" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
+position = Vector2(-2276, -1407)
+ThisTutorial = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

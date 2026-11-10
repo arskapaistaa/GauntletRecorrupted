@@ -385,10 +385,20 @@ public partial class Enemy : CharacterBody2D
 
 		_agent.TargetPosition = PlayerPosition;
 
+		CheckTargetReachable();
+	}
+
+	private bool CheckTargetReachable()
+	{
 		if (!_agent.IsTargetReachable())
 		{
+			_detectionArea.GetOverlappingBodies().Clear();
+
 			_brain.TargetIsNotReachable();
+			return false;
 		}
+
+		return true;
 	}
 
 	public void SetAttackDirection()

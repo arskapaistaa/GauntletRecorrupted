@@ -580,6 +580,10 @@ grow_vertical = 2
 theme = ExtResource("1_cg106")
 texture = ExtResource("15_4dvq8")
 region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 script = ExtResource("4_5ve7l")
 _killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
@@ -786,6 +790,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ExitPanel" unique_id=1457525542]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -800,6 +805,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_4dvq8")
 region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
 
 [node name="Label" type="Label" parent="ExitPanel/NinePatchRect" unique_id=1959008665]
 layout_mode = 1

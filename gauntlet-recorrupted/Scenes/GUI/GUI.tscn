@@ -299,7 +299,7 @@ grow_horizontal = 0
 position = Vector2(24, 44)
 sprite_frames = SubResource("SpriteFrames_dxocv")
 animation = &"Closed"
-frame_progress = 0.8435498
+frame_progress = 0.52134407
 
 [node name="Revolver" type="TextureRect" parent="GUI" unique_id=1145253756]
 layout_mode = 1
