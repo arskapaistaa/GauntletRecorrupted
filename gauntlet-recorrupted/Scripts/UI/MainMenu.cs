@@ -18,7 +18,7 @@ public partial class MainMenu : Control
 		{
 			if (_animations != null)
 			{
-				_animations.Play("OpenOptions");
+				_animations.Play("OpenExitPanel");
 			}
 		}
 
