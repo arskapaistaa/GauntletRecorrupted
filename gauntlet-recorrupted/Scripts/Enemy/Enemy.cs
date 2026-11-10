@@ -50,10 +50,11 @@ public partial class Enemy : CharacterBody2D
 	private float _maxIdleTime = 1.0f;
 
 	[ExportSubgroup("Ranged Attack")]
-	[Export] private bool _canRangedAttack = false;
+	[Export] public bool CanRangedAttack = false;
 	[Export(PropertyHint.Range, "0.1,5.0f,0.1,suffix:seconds")]
 	private float _rangedCooldownTime = 1.0f;
 	[Export] private PackedScene _projectileScene = null;
+	[Export] private Marker2D _projectileSpawnPoint = null;
 
 	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
@@ -219,7 +220,7 @@ public partial class Enemy : CharacterBody2D
 
 		if (_destroyTimer != null)
 		{
-			_destroyTimer.Timeout -= OnTimerTimedOut;
+			_destroyTimer.Timeout -= OnDestroyTimerTimedOut;
 		}
 
 		if (_fromIdleToPatrolTimer != null)
@@ -582,10 +583,22 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
+		if (_rangedCooldownTimer != null)
+		{
+			_rangedCooldownTimer.WaitTime = _rangedCooldownTime;
+			_rangedCooldownTimer.Start();
+		}
+
 		Vector2 direction = GlobalTransform.X.Normalized();
 
 		Projectile projectile = _projectileScene.Instantiate<Projectile>();
-		projectile.GlobalPosition = GlobalPosition;
+		GetTree().CurrentScene.AddChild(projectile);
+
+		if (_projectileSpawnPoint != null)
+		{
+			projectile.GlobalPosition = _projectileSpawnPoint.GlobalPosition;
+		}
+
 		projectile.Initialize(direction);
 	}
 
@@ -638,14 +651,21 @@ public partial class Enemy : CharacterBody2D
 					_sprite.Play("AttackHit");
 				}
 
-				if (AttackSucceed && ThisEnemyType == EnemyType.Tick &&
+				if (ThisEnemyType == EnemyType.Tick &&
 					_sprite.Animation != "AttackFail" && _sprite.Animation != "AttackHit")
 				{
 					_sprite.Play("Attack");
 				}
-				else
+				else if (ThisEnemyType != EnemyType.Tick)
 				{
 					_sprite.Play("Attack");
+				}
+				break;
+
+			case Brain.State.Ranged:
+				if (CanRangedAttack)
+				{
+					_sprite.Play("Ranged");
 				}
 				break;
 
@@ -887,6 +907,11 @@ public partial class Enemy : CharacterBody2D
 			circle.Radius = range;
 		}
 	}
+
+	public float GetDetectionRange()
+	{
+		return _detectionRange;
+	}
 	public void Reset()
 	{
 		if (_detectionShape == null)
@@ -935,7 +960,7 @@ public partial class Enemy : CharacterBody2D
 
 		if (_destroyTimer != null)
 		{
-			_destroyTimer.Timeout += OnTimerTimedOut;
+			_destroyTimer.Timeout += OnDestroyTimerTimedOut;
 		}
 
 		if (_fromIdleToPatrolTimer != null)
@@ -957,6 +982,7 @@ public partial class Enemy : CharacterBody2D
 	private void OnRangedCooldownTimerTimedOut()
     {
         _canShoot = true;
+		GD.Print("Can shoot");
     }
 
 	private double RandomWaitTime()
@@ -965,7 +991,7 @@ public partial class Enemy : CharacterBody2D
 		return waitTime;
 	}
 
-    private void OnTimerTimedOut()
+    private void OnDestroyTimerTimedOut()
     {
         QueueFree();
     }

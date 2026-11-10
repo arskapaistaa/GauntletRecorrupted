@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cac5cd8v1rsjc"]
+
+[ext_resource type="Script" uid="uid://5vnq15dnqdqa" path="res://Scripts/Enemy/Projectile.cs" id="1_k1cl8"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_0tri7"]
+[ext_resource type="Texture2D" uid="uid://caceh7ogx4f8x" path="res://Art/Screenshot 2026-09-29 142148.png" id="2_y0kec"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 99.99999
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ycag2"]
+
+[sub_resource type="Gradient" id="Gradient_ds7j7"]
+offsets = PackedFloat32Array(0, 0.2204142, 0.6464497)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sopei"]
+gradient = SubResource("Gradient_ds7j7")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Projectile" type="Area2D" unique_id=873106433]
+z_index = 1
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_k1cl8")
+Damage = 10
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1951838495]
+visible = false
+process_material = SubResource("ParticleProcessMaterial_sopei")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=350203725]
+light_mask = 2
+material = ExtResource("2_0tri7")
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_y0kec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]
+visible = false
+shape = SubResource("CircleShape2D_ycag2")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=258874302]
+color = Color(0.5764706, 0.7882353, 0.85882354, 1)
+texture = SubResource("GradientTexture2D_sopei")

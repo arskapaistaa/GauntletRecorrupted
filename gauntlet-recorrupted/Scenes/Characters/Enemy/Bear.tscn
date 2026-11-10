@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_wbn85"]
 [ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_17jru"]
+[ext_resource type="PackedScene" uid="uid://cac5cd8v1rsjc" path="res://Scenes/Projectile.tscn" id="2_wbn85"]
 [ext_resource type="Texture2D" uid="uid://bh1olfn0v3x84" path="res://Art/Enemies/ArtEnemyBear.png" id="3_34kni"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="4_17jru"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_0p4qj"]
 [ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_5shc7"]
 [ext_resource type="AudioStream" uid="uid://8yda6bixdgua" path="res://Audio/SFX/Roach/RoachNotice.wav" id="7_uof38"]
@@ -375,9 +377,9 @@ height = 250.0
 radius = 200.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
-size = Vector2(203, 164)
+size = Vector2(165, 164)
 
-[node name="Bear" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToPatrolTimer") groups=["Enemy"]]
+[node name="Bear" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_projectileSpawnPoint", "_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToPatrolTimer", "_rangedCooldownTimer") groups=["Enemy"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 15
@@ -396,6 +398,10 @@ _damagedSpeed = 600.0
 _canPatrol = true
 _minIdleTime = 2.0
 _maxIdleTime = 10.0
+CanRangedAttack = true
+_rangedCooldownTime = 2.0
+_projectileScene = ExtResource("2_wbn85")
+_projectileSpawnPoint = NodePath("ProjectileSpawnPoint")
 _canBeAlarmed = false
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
@@ -413,6 +419,7 @@ _defeatSfx = NodePath("Audios/DefeatSFX")
 _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _fromIdleToPatrolTimer = NodePath("Timers/FromIdleToPatrolTimer")
+_rangedCooldownTimer = NodePath("Timers/RangedCooldownTimer")
 _attackMovementFrames = PackedInt32Array(8, 9, 10, 11, 12, 13, 14, 15, 16)
 _attackStartFrame = 8
 _attackEndFrames = 16
@@ -429,13 +436,14 @@ NavigationFinishedState = 3
 AfterAlarmedState = 4
 AfterBulledDetected = 4
 CantReachTargetState = 3
+AfterRangedState = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1314240996]
+material = ExtResource("4_17jru")
 sprite_frames = SubResource("SpriteFrames_wbn85")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 18
-frame_progress = 1.0
+frame = 14
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -459,7 +467,7 @@ collision_layer = 0
 script = ExtResource("5_0p4qj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=134463378]
-position = Vector2(109.5, 0)
+position = Vector2(90.5, 0)
 shape = SubResource("RectangleShape2D_sopei")
 debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 
@@ -504,3 +512,9 @@ wait_time = 3.0
 one_shot = true
 
 [node name="FromIdleToPatrolTimer" type="Timer" parent="Timers" unique_id=1376134820]
+
+[node name="RangedCooldownTimer" type="Timer" parent="Timers" unique_id=671791147]
+one_shot = true
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="." unique_id=1014509177]
+position = Vector2(178, -11)

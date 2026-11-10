@@ -38,6 +38,9 @@ public partial class Brain : Node
 	[ExportGroup("After Idle timer timeout")]
 	[Export] public State FromIdleTo = State.None;
 
+	[ExportGroup("Ranged")]
+	[Export] public State AfterRangedState = State.None;
+
 	private Enemy _enemy;
 	public enum State
 	{
@@ -89,6 +92,13 @@ public partial class Brain : Node
 					}
 			}
 
+			if (_enemy.Player != null && _enemy.CanRangedAttack)
+			{
+				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.GetDetectionRange() && _enemy.HasLineOfSight())
+				{
+					CurrentState = State.Ranged;
+				}
+			}
 			break;
 		}
 	}
@@ -151,6 +161,11 @@ public partial class Brain : Node
 		}
 	}
 
+	public void AfterRanged()
+	{
+		SetCurrentState(AfterRangedState);
+	}
+
 	public void AfterSpawn()
 	{
 		SetCurrentState(AfterSpawnState);
@@ -208,7 +223,7 @@ public partial class Brain : Node
 
 		if (_enemy.Sprite.Animation == "Attack")
 		{
-			if (_enemy.AttackSucceed == false && _enemy.ThisAttackType == Enemy.AttackType.Dash)
+			if (_enemy.AttackSucceed == false && _enemy.ThisEnemyType == Enemy.EnemyType.Tick)
 			{
 				_enemy.Sprite.Play("AttackFail");
 				return;
@@ -225,6 +240,11 @@ public partial class Brain : Node
 		if (_enemy.Sprite.Animation == "AttackHit")
 		{
 			AfterAttack();
+		}
+
+		if (_enemy.Sprite.Animation == "Ranged")
+		{
+			AfterRanged();
 		}
 	}
 
