@@ -27,7 +27,7 @@ public partial class SettingsManager : Node
 	private int _musicBusIndex;
 	private int _ambienceBusIndex;
 
-	public override sealed void _Ready()
+	public override sealed void _EnterTree()
 	{
 		if (Instance == null)
 		{
