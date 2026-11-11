@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="5_cthuj"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="6_xsbsw"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_7okfi"]
+[ext_resource type="Script" uid="uid://cyblqv1lf4kxj" path="res://Scripts/Environment/DiggableTiles.cs" id="7_cthuj"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
 [ext_resource type="AudioStream" uid="uid://c3ayuna72gig5" path="res://Audio/Music/Ambience01.ogg" id="10_5y76b"]
@@ -139,12 +140,15 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
+0:0/0/custom_data_0 = 21
 
 [sub_resource type="TileSet" id="TileSet_rk2iv"]
 tile_size = Vector2i(256, 256)
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
+custom_data_layer_0/name = "MaxHealth"
+custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_7xtta")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgjw0"]
@@ -208,6 +212,7 @@ tile_set = SubResource("TileSet_sopei")
 z_index = 2
 tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
+script = ExtResource("7_cthuj")
 
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")
@@ -223,14 +228,17 @@ navigation_layers = 2
 [node name="Roach" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_7okfi")]
 position = Vector2(2676, -966)
 rotation = -1.5773634
+DetectionRange = 0.0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("7_7okfi")]
 position = Vector2(9726, -1143.9999)
 rotation = 0.48373985
+DetectionRange = 0.0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("7_7okfi")]
 position = Vector2(8817, 900.9999)
 rotation = 3.1404202
+DetectionRange = 0.0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
 position = Vector2(7419.9995, 901.9997)
@@ -250,7 +258,6 @@ bus = &"Music"
 
 [node name="TutorialArea" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
 position = Vector2(-2276, -1407)
-ThisTutorial = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

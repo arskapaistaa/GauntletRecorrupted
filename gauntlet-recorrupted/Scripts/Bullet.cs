@@ -83,6 +83,10 @@ public partial class Bullet : Area2D
 		{
 			spawner.TakeDmg(Damage);
 		}
+		else if (body is DiggableTiles tile)
+		{
+			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), Damage);
+		}
 
 		QueueFree();
 	}

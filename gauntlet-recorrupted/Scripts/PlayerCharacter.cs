@@ -3,7 +3,6 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-	[Export(PropertyHint.Enum, "Gravedigger,MilitaryGirl")] private int CharacterType = 0;
 	[ExportCategory("Stats")]
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "0,1000,10")] private float Speed = 300.0f;
@@ -23,7 +22,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportCategory("Node References")]
 	[Export] private PackedScene BulletScene;
-	[Export] private TileMapLayer DiggableTiles;
+	[Export] private DiggableTiles DiggableTiles;
 	[Export] private Marker2D MuzzlePoint;
 	[Export] private PackedScene BreakEffectScene;
 	[Export] private AnimatedSprite2D PlayerSprite;
@@ -550,8 +549,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			GD.Print("Cannot dig that tile.");
 			return;
 		}
-		SpawnBreakEffect(targetCell);
-		DiggableTiles.EraseCell(targetCell);
+		DiggableTiles.DamageTile(targetCell, 1000);
 		Level.Current.UpdateNavRegion();
 		GD.Print($"Dug tile at {targetCell}");
 	}
@@ -605,17 +603,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
-	private void SpawnBreakEffect(Vector2I cell)
-	{
-		if (BreakEffectScene == null)
-		{
-			return;
-		}
-
-		Node2D effect = BreakEffectScene.Instantiate<Node2D>();
-		GetTree().CurrentScene.AddChild(effect);
-		effect.GlobalPosition = DiggableTiles.ToGlobal(DiggableTiles.MapToLocal(cell));
-	}
+	
 	private void FlashSprite()
 	{
 		Tween tween = CreateTween();
