@@ -18,17 +18,14 @@ shape = SubResource("RectangleShape2D_sopei")
 layer = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer" unique_id=1605220021]
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -134.0
-offset_right = 200.0
-offset_bottom = -34.0
+offset_left = -150.0
+offset_top = 31.0
+offset_right = 150.0
+offset_bottom = 111.0
 grow_horizontal = 2
-grow_vertical = 2
 texture = ExtResource("2_jrnfu")
 region_rect = Rect2(16, 16, 224, 224)
 patch_margin_left = 50

@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
 [ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
+[ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="10_e76bc"]
 [ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="10_mwm07"]
 [ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
 [ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
@@ -26,6 +27,18 @@
 [ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="24_4dvq8"]
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
+
+[sub_resource type="Gradient" id="Gradient_e5fvg"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e76bc"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_dxocv")
+color_ramp = SubResource("Gradient_e5fvg")
+seamless = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
 texture = ExtResource("10_mwm07")
@@ -456,10 +469,10 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
 &"CloseExitPanel": SubResource("Animation_e76bc"),
-&"CloseOptions": SubResource("Animation_t3rra"),
+&"CloseSettings": SubResource("Animation_t3rra"),
 &"CloseStats": SubResource("Animation_mwm07"),
 &"OpenExitPanel": SubResource("Animation_57vxl"),
-&"OpenOptions": SubResource("Animation_j8qme"),
+&"OpenSettings": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
 &"StartPressed": SubResource("Animation_v40es"),
 &"StatsPressed": SubResource("Animation_4dvq8")
@@ -492,6 +505,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ux8os")
 
+[node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("10_e76bc")]
+position = Vector2(319, 179)
+scale = Vector2(2.5, 1.40625)
+texture = SubResource("NoiseTexture2D_e76bc")
+
 [node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
 layout_mode = 1
 anchors_preset = 8
@@ -522,7 +540,7 @@ theme = SubResource("Theme_dxocv")
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
-_pressedAnimName = "OpenOptions"
+_pressedAnimName = "OpenSettings"
 
 [node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1

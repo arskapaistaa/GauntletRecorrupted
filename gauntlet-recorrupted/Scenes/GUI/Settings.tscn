@@ -150,4 +150,4 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
 script = ExtResource("4_fwhe4")
-_pressedAnimName = "CloseOptions"
+_pressedAnimName = "CloseSettings"
