@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_frjq8"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_fwhe4"]
 
-[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider")]
+[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_removeScreenShakeBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -27,6 +27,7 @@ patch_margin_bottom = 60
 script = ExtResource("3_frjq8")
 _displayModeBtn = NodePath("VideoOptions/DisplayMode")
 _resolutionBtn = NodePath("VideoOptions/Resolution")
+_removeScreenShakeBtn = NodePath("VideoOptions/ScreenShakeBtn")
 _masterVolumeSlider = NodePath("AudioOptions/HSlider")
 _sfxVolumeSlider = NodePath("AudioOptions/HSlider3")
 _musicVolumeSlider = NodePath("AudioOptions/HSlider2")
@@ -77,10 +78,11 @@ popup/item_0/id = 0
 popup/item_1/text = "1920 x 1080"
 popup/item_1/id = 1
 
-[node name="CheckButton" type="CheckButton" parent="VideoOptions" unique_id=1456608839]
-visible = false
+[node name="ScreenShakeBtn" type="Button" parent="VideoOptions" unique_id=2080002038]
 layout_mode = 2
-text = "vsync"
+theme = ExtResource("1_un12u")
+toggle_mode = true
+text = "Screen shake"
 
 [node name="AudioOptions" type="VBoxContainer" parent="." unique_id=2107351994]
 layout_mode = 1

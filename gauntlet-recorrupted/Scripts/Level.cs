@@ -60,6 +60,14 @@ public partial class Level : Node2D
 		get { return _spawnerCount; }
 	}
 
+	private int _enemyAudioCount = 0;
+
+	public int EnemyAudioCount
+	{
+		get { return _enemyAudioCount; }
+		set { _enemyAudioCount = Mathf.Clamp(_enemyAudioCount, 0, 10); }
+	}
+
 	public int CurrentSpawnerCount = 0;
 	public int CurrentTotalEnemyCount = 0;
 

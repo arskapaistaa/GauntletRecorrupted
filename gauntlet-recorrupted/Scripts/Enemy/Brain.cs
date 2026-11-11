@@ -291,26 +291,7 @@ public partial class Brain : Node
 		{
 			CurrentState = state;
 
-			CheckStateEnters(state);
-		}
-	}
-
-	private void CheckStateEnters(State state)
-	{
-		switch (state)
-		{
-			case State.Idle:
-				_enemy.EnterIdle();
-				_enemy.SetDetectionRange(_enemy.DetectionRange);
-				break;
-
-			case State.Awake:
-				_enemy.SetDetectionRange(_enemy.AwakeDetectionRange);
-				break;
-
-			case State.Patrol:
-				_enemy.EnterPatrol();
-				break;
+			_enemy.OnStateChanged(CurrentState);
 		}
 	}
 
