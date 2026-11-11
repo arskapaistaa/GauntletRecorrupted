@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 public partial class DiggableTiles : TileMapLayer
 {
+	[ExportCategory("Enemy Spawning")]
+	[Export(PropertyHint.Range, "0,1,0.01")] public float EnemySpawnChance = 0.08f;
+	[Export] public PackedScene TickScene;
+	[Export] public PackedScene BabyScene;
+	[Export] public PackedScene RoachScene;
+	[ExportCategory("Tile Data")]
 	[Export] public string MaxHealthDataString = "MaxHealth";
 	[Export] public PackedScene BreakEffectScene;
 	private readonly Dictionary<Vector2I, int> _tileHealth = new Dictionary<Vector2I, int>();
@@ -23,6 +29,7 @@ public partial class DiggableTiles : TileMapLayer
 			_tileHealth.Remove(coords);
 			EraseCell(coords);
 			SpawnBreakEffect(coords);
+			RandomlySpawnEnemy(coords);
 		}
 		else
         {
@@ -56,5 +63,20 @@ public partial class DiggableTiles : TileMapLayer
 		Node2D effect = BreakEffectScene.Instantiate<Node2D>();
 		GetTree().CurrentScene.AddChild(effect);
 		effect.GlobalPosition = ToGlobal(MapToLocal(cell));
+	}
+
+	private void RandomlySpawnEnemy(Vector2I cell)
+	{
+		if (TickScene == null || BabyScene == null || RoachScene == null)
+			return;
+
+		if (GD.Randf() >= EnemySpawnChance)
+			return;
+
+		PackedScene[] enemyScenes = { TickScene, BabyScene, RoachScene };
+		PackedScene chosenScene = enemyScenes[GD.Randi() % enemyScenes.Length];
+		Enemy enemy = chosenScene.Instantiate<Enemy>();
+		enemy.Position = ToGlobal(MapToLocal(cell));
+		GetTree().CurrentScene.CallDeferred(Node.MethodName.AddChild, enemy);
 	}
 }

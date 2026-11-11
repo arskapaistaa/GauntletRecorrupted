@@ -9,8 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="6_xsbsw"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_7okfi"]
 [ext_resource type="Script" uid="uid://cyblqv1lf4kxj" path="res://Scripts/Environment/DiggableTiles.cs" id="7_cthuj"]
+[ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="8_7okfi"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
+[ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="9_tyw8m"]
 [ext_resource type="AudioStream" uid="uid://c3ayuna72gig5" path="res://Audio/Music/Ambience01.ogg" id="10_5y76b"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
 [ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
@@ -140,7 +142,7 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
-0:0/0/custom_data_0 = 21
+0:0/0/custom_data_0 = 30
 
 [sub_resource type="TileSet" id="TileSet_rk2iv"]
 tile_size = Vector2i(256, 256)
@@ -213,6 +215,9 @@ z_index = 2
 tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
 script = ExtResource("7_cthuj")
+TickScene = ExtResource("8_7okfi")
+BabyScene = ExtResource("9_tyw8m")
+RoachScene = ExtResource("7_7okfi")
 
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")

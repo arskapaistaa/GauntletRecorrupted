@@ -388,9 +388,10 @@ public partial class PlayerCharacter : CharacterBody2D
 			Input.StartJoyVibration(0, 1.0f, 1.0f, 0.2f);
 			for (int i = 0; i < ShotgunPelletCount; i++)
 			{
-				float angleOffset = Mathf.Lerp(-ShotgunSpreadAngle / 2, ShotgunSpreadAngle / 2, (float)i / (ShotgunPelletCount - 1));
-				Vector2 pelletDirection = aimDirection.Rotated(Mathf.DegToRad(angleOffset));
-				SpawnBullet(pelletDirection);
+				float spreadDegrees = (float)GD.RandRange(-ShotgunSpreadAngle, ShotgunSpreadAngle);
+					float spreadRadians = Mathf.DegToRad(spreadDegrees);
+					Vector2 shotDirection = aimDirection.Rotated(spreadRadians);
+					SpawnBullet(shotDirection);
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
