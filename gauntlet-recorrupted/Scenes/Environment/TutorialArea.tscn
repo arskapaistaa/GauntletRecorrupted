@@ -6,10 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
-[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialLabel")]
+[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialLabel", "TutorialPanel")]
 script = ExtResource("1_1suxu")
-LabelText = "Move MF"
 TutorialLabel = NodePath("CanvasLayer/NinePatchRect/Label")
+TutorialPanel = NodePath("CanvasLayer/NinePatchRect")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1676742655]
 shape = SubResource("RectangleShape2D_sopei")
@@ -30,10 +30,11 @@ offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_jrnfu")
+region_rect = Rect2(16, 16, 224, 224)
 patch_margin_left = 50
-patch_margin_top = 50
+patch_margin_top = 20
 patch_margin_right = 50
-patch_margin_bottom = 50
+patch_margin_bottom = 20
 
 [node name="Label" type="Label" parent="CanvasLayer/NinePatchRect" unique_id=1660650157]
 layout_mode = 1
