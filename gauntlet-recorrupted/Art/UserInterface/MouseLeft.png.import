@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsbim653jqe51"
-path="res://.godot/imported/ArtUiExit_0010.png-266b3b57840d063d3afbe1377f8ce95f.ctex"
+uid="uid://bgmugk75lu6c"
+path="res://.godot/imported/MouseLeft.png-03bd2405c3df77ed1018ba3dbead1b01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UserInterface/ArtUiExit_0010.png"
-dest_files=["res://.godot/imported/ArtUiExit_0010.png-266b3b57840d063d3afbe1377f8ce95f.ctex"]
+source_file="res://Art/UserInterface/MouseLeft.png"
+dest_files=["res://.godot/imported/MouseLeft.png-03bd2405c3df77ed1018ba3dbead1b01.ctex"]
 
 [params]
 
