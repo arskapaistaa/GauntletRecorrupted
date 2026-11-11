@@ -334,13 +334,10 @@ bus = &"SFX"
 
 [node name="AudioStreams" type="Node" parent="Audios" unique_id=1593382089]
 script = ExtResource("11_d6fmx")
-_takeDmgStream = ExtResource("9_d6fmx")
-_defeatStream = ExtResource("10_rmn24")
-_noticeStream = ExtResource("7_ll3lk")
-_attackStream = ExtResource("8_r6b76")
 
-[node name="EnemyAudioPlayer" type="AudioStreamPlayer2D" parent="Audios" unique_id=624728069]
+[node name="EnemyAudioPlayer" type="AudioStreamPlayer2D" parent="Audios" unique_id=624728069 node_paths=PackedStringArray("_audioStreams")]
 script = ExtResource("12_rmn24")
+_audioStreams = NodePath("../AudioStreams")
 
 [node name="Particles" type="Node2D" parent="." unique_id=1612982129]
 

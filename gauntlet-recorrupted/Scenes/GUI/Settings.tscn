@@ -79,6 +79,7 @@ popup/item_1/text = "1920 x 1080"
 popup/item_1/id = 1
 
 [node name="ScreenShakeBtn" type="Button" parent="VideoOptions" unique_id=2080002038]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_un12u")
 toggle_mode = true

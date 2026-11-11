@@ -511,6 +511,7 @@ scale = Vector2(2.5, 1.40625)
 texture = SubResource("NoiseTexture2D_e76bc")
 
 [node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
+z_index = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -558,6 +559,7 @@ _pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "StatsPressed"
 
 [node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147 node_paths=PackedStringArray("_animations")]
+z_index = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

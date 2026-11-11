@@ -3,18 +3,11 @@ using System;
 
 public partial class TutorialArea : Area2D
 {
-	[Export] public string LabelText = "";
-	[Export] public Label TutorialLabel = null;
 	[Export] public Control TutorialPanel = null;
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 		BodyExited += OnBodyExited;
-
-		if (TutorialLabel != null)
-		{
-			TutorialLabel.Text = LabelText;
-		}
 
 		if (TutorialPanel != null)
 		{
