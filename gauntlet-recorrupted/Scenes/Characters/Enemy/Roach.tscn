@@ -10,7 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://6u60chiltksq" path="res://Audio/SFX/Roach/RoachAttack.wav" id="8_r6b76"]
 [ext_resource type="AudioStream" uid="uid://duw2ig4orhg7d" path="res://Audio/SFX/Roach/RoachDamaged.wav" id="9_d6fmx"]
 [ext_resource type="AudioStream" uid="uid://dn4wocju0u24f" path="res://Audio/SFX/Roach/RoachDefeat.wav" id="10_rmn24"]
+[ext_resource type="Script" uid="uid://y0oem8u8mduo" path="res://Scripts/Enemy/AudioStreams.cs" id="11_d6fmx"]
 [ext_resource type="PackedScene" uid="uid://yx1vgqtq4v3r" path="res://Scenes/Particles/EnemyDamaged.tscn" id="11_r6b76"]
+[ext_resource type="Script" uid="uid://dd727ltsfisn0" path="res://Scripts/Enemy/EnemyAudioPlayer.cs" id="12_rmn24"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tjqtl"]
 atlas = ExtResource("3_8q24r")
@@ -329,6 +331,13 @@ bus = &"SFX"
 [node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=2112349011]
 stream = ExtResource("10_rmn24")
 bus = &"SFX"
+
+[node name="AudioStreams" type="Node" parent="Audios" unique_id=1593382089]
+script = ExtResource("11_d6fmx")
+
+[node name="EnemyAudioPlayer" type="AudioStreamPlayer2D" parent="Audios" unique_id=624728069 node_paths=PackedStringArray("_audioStreams")]
+script = ExtResource("12_rmn24")
+_audioStreams = NodePath("../AudioStreams")
 
 [node name="Particles" type="Node2D" parent="." unique_id=1612982129]
 

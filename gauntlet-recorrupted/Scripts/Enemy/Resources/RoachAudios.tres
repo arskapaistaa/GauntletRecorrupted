@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyAudios" format=3 uid="uid://dn56000lxwxr4"]
+
+[ext_resource type="AudioStream" uid="uid://6u60chiltksq" path="res://Audio/SFX/Roach/RoachAttack.wav" id="1_mksdt"]
+[ext_resource type="Script" uid="uid://vwrsae7ye745" path="res://Scripts/Enemy/EnemyAudios.cs" id="1_sqs05"]
+[ext_resource type="AudioStream" uid="uid://dn4wocju0u24f" path="res://Audio/SFX/Roach/RoachDefeat.wav" id="2_foygd"]
+[ext_resource type="AudioStream" uid="uid://8yda6bixdgua" path="res://Audio/SFX/Roach/RoachNotice.wav" id="3_wg8bb"]
+[ext_resource type="AudioStream" uid="uid://duw2ig4orhg7d" path="res://Audio/SFX/Roach/RoachDamaged.wav" id="4_qrg6t"]
+
+[resource]
+script = ExtResource("1_sqs05")
+NoticeStream = ExtResource("3_wg8bb")
+TakeDmgStream = ExtResource("4_qrg6t")
+AttackStream = ExtResource("1_mksdt")
+DefeatStream = ExtResource("2_foygd")
+metadata/_custom_type_script = "uid://vwrsae7ye745"

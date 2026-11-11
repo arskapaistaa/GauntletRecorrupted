@@ -3,16 +3,15 @@ using System;
 
 public partial class TutorialArea : Area2D
 {
-	[Export] public string LabelText = "";
-	[Export] public Label TutorialLabel = null;
+	[Export] public Control TutorialPanel = null;
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 		BodyExited += OnBodyExited;
 
-		if (TutorialLabel != null)
+		if (TutorialPanel != null)
 		{
-			TutorialLabel.Text = LabelText;
+			TutorialPanel.Visible = false;
 		}
 	}
     public override void _ExitTree()
@@ -36,9 +35,9 @@ public partial class TutorialArea : Area2D
     {
         if (body is PlayerCharacter)
 		{
-			if (TutorialLabel != null)
+			if (TutorialPanel != null)
 			{
-				TutorialLabel.Visible = true;
+				TutorialPanel.Visible = true;
 			}
 		}
     }
@@ -47,9 +46,9 @@ public partial class TutorialArea : Area2D
     {
         if (body is PlayerCharacter)
 		{
-			if (TutorialLabel != null)
+			if (TutorialPanel != null)
 			{
-				TutorialLabel.Visible = false;
+				TutorialPanel.Visible = false;
 			}
 		}
     }

@@ -146,6 +146,12 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_7xtta")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4shlo"]
+vertices = PackedVector2Array(9408.008, -4142.0234, 9412.969, 5801.9063, -6417.828, 5768.078, -6377.1563, -4151.9688)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-6417, -4192, 9448, -4182, 9453, 5842, -6458, 5808)])
+agent_radius = 40.0
+
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_1q4i8")
 _maxTotalEnemyCount = 30
@@ -210,8 +216,9 @@ tile_map_data = PackedByteArray("AAD+/xEAAAAAAAAAAAD1/wwAAAAAAAAAAAD1/w0AAAAAAAA
 tile_set = SubResource("TileSet_rk2iv")
 
 [node name="NavigationRegionForWurm" type="NavigationRegion2D" parent="Environment" unique_id=375523845]
+visible = false
 position = Vector2(-1514, -792)
-navigation_polygon = SubResource("NavigationPolygon_lpo5v")
+navigation_polygon = SubResource("NavigationPolygon_4shlo")
 navigation_layers = 2
 
 [node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]

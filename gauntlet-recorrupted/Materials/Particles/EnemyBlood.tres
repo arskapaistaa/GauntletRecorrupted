@@ -14,3 +14,6 @@ gravity = Vector3(0, 0, 0)
 scale_max = 4.0
 color = Color(0.6509804, 0.6392157, 0.5058824, 1)
 color_ramp = SubResource("GradientTexture1D_dxocv")
+anim_speed_min = 1.0
+anim_speed_max = 5.0
+anim_offset_max = 1.0

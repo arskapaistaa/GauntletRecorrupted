@@ -63,6 +63,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] private RayCast2D _rayCast = null;
 
 	[ExportSubgroup("Audios")]
+	[Export] private EnemyAudioPlayer _enemyAudioPlayer = null;
 	[Export] private AudioStreamPlayer2D _movementSfx = null;
 	[Export] private AudioStreamPlayer2D _noticeSfx = null;
 	[Export] private AudioStreamPlayer2D _attackSfx = null;
@@ -909,6 +910,27 @@ public partial class Enemy : CharacterBody2D
     {
         AttackSucceed = true;
     }
+
+	public void OnStateChanged(Brain.State state)
+	{
+		// _enemyAudioPlayer.PlayAudioStream(state);
+
+		switch (state)
+		{
+			case Brain.State.Idle:
+				EnterIdle();
+				SetDetectionRange(DetectionRange);
+				break;
+
+			case Brain.State.Awake:
+				SetDetectionRange(AwakeDetectionRange);
+				break;
+
+			case Brain.State.Patrol:
+				EnterPatrol();
+				break;
+		}
+	}
 
 	// Helper method to change detecytion range.
 	public void SetDetectionRange(float range)
