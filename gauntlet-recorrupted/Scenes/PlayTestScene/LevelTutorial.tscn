@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="6_xsbsw"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_7okfi"]
 [ext_resource type="Script" uid="uid://cyblqv1lf4kxj" path="res://Scripts/Environment/DiggableTiles.cs" id="7_cthuj"]
+[ext_resource type="Texture2D" uid="uid://dawid7ph0d2b7" path="res://Art/Environment/ArtTileFlesh.png" id="7_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="8_7okfi"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
 [ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_r27b6"]
+[ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="12_l5mvp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
 vertices = PackedVector2Array(-2477.6328, 7183.508, -2623.4688, 3648, 14098, 3648, 14248.523, 6975.4766, 14364.469, -1702.2891, 14098, -1710.9297, 9666, 1088, 9666, 2288, 8210, 2288, 8210, 1776, 7698, 1776, 7698, 1600, 8210, 1600, 8210, 1088, 4882, 1088, 4882, 576, 5826, 576, 5826, 1776, 4882, 1776, 4882, 1264, 4290, 1088, 4114, 1264, 4114, -528, 4290, -704, 2498, -704, 2498, -528, 2498, -16, 1042, -16, 1042, -528, 1042, -704, -238, -528, -238, -704, 2498, -1216, 1042, -1216, 7362, 1776, 7186, 1776, 7186, 1600, 7362, 1600, 10434, 1776, 10258, 1776, 10258, 1600, 10434, 1600, 11970, 496, 11794, 496, 11794, 320, 11970, 320, -574, -16, -2286, -16, -2286, -1216, -574, -1216, 12738, 832, 12738, 2544, 12692.867, 2267.3906, 12570.844, 2519.3906, 11026, 2544, 12318.844, 2397.3281, 11026, 1776, 12440.867, 2145.3281, 11026, 832, 11026, 1600, 10770, 1776, 10770, 1600, 12677.8125, -1251.6172, 12738, -1472, 12738, -16, 12538.82, -1008.5469, 12434.727, -1390.6094, 11026, -1472, 12295.75, -1147.5391, 11026, -16)
@@ -144,6 +146,56 @@ texture_region_size = Vector2i(256, 256)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
 0:0/0/custom_data_0 = 30
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5mvp"]
+texture = ExtResource("7_tyw8m")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/custom_data_0 = 30
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = 30
+1:0/0/custom_data_1 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = 30
+2:0/0/custom_data_1 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = 30
+3:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = 30
+0:1/0/custom_data_1 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = 30
+1:1/0/custom_data_1 = true
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+2:1/0/custom_data_0 = 30
+2:1/0/custom_data_1 = true
+3:1/0 = 0
+3:1/0/custom_data_0 = 30
+3:1/0/custom_data_1 = true
+0:2/0 = 0
+0:2/0/custom_data_0 = 30
+0:2/0/custom_data_1 = true
+1:2/0 = 0
+1:2/0/custom_data_0 = 30
+1:2/0/custom_data_1 = true
+2:2/0 = 0
+2:2/0/custom_data_0 = 30
+2:2/0/custom_data_1 = true
+3:2/0 = 0
+3:2/0/custom_data_0 = 30
+3:2/0/custom_data_1 = true
+1:3/0 = 0
+1:3/0/custom_data_0 = 30
+1:3/0/custom_data_1 = true
+2:3/0 = 0
+2:3/0/custom_data_0 = 30
+2:3/0/custom_data_1 = true
+3:3/0 = 0
+3:3/0/custom_data_0 = 30
+3:3/0/custom_data_1 = true
+
 [sub_resource type="TileSet" id="TileSet_rk2iv"]
 tile_size = Vector2i(256, 256)
 occlusion_layer_0/light_mask = 1
@@ -151,7 +203,10 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
 custom_data_layer_0/name = "MaxHealth"
 custom_data_layer_0/type = 2
+custom_data_layer_1/name = "HasEnemy"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_7xtta")
+sources/2 = SubResource("TileSetAtlasSource_l5mvp")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgjw0"]
 texture = ExtResource("6_xsbsw")
@@ -212,12 +267,13 @@ tile_set = SubResource("TileSet_sopei")
 
 [node name="DiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1666934862]
 z_index = 2
-tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD2//n/AgACAAEAAAD5//r/AgACAAEAAAD6//r/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
 script = ExtResource("7_cthuj")
 TickScene = ExtResource("8_7okfi")
 BabyScene = ExtResource("9_tyw8m")
 RoachScene = ExtResource("7_7okfi")
+BreakEffectScene = ExtResource("12_l5mvp")
 
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")
