@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deh23v56wwyg1"
-path="res://.godot/imported/ArtUiExit_0009.png-bf6b121fda40b5ddfbdf521840d4c85b.ctex"
+uid="uid://ccixxtby6xx0r"
+path="res://.godot/imported/WASD.png-5438b01f92d4b5a8fcc8626aa8e202be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UserInterface/ArtUiExit_0009.png"
-dest_files=["res://.godot/imported/ArtUiExit_0009.png-bf6b121fda40b5ddfbdf521840d4c85b.ctex"]
+source_file="res://Art/UserInterface/WASD.png"
+dest_files=["res://.godot/imported/WASD.png-5438b01f92d4b5a8fcc8626aa8e202be.ctex"]
 
 [params]
 

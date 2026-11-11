@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b385jttriq6od"
-path="res://.godot/imported/ArtUiExit_0004.png-7d6414045ba0455ee6d592afc1749ebc.ctex"
+uid="uid://ugelrgswlbd0"
+path="res://.godot/imported/ArtEnemyCoccoon.png-3d11528d6b071034a8318d7eff9c531e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UserInterface/ArtUiExit_0004.png"
-dest_files=["res://.godot/imported/ArtUiExit_0004.png-7d6414045ba0455ee6d592afc1749ebc.ctex"]
+source_file="res://Art/Enemies/ArtEnemyCoccoon.png"
+dest_files=["res://.godot/imported/ArtEnemyCoccoon.png-3d11528d6b071034a8318d7eff9c531e.ctex"]
 
 [params]
 

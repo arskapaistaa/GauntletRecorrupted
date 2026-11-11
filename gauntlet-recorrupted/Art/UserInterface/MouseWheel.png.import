@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://basq88206xh4d"
-path="res://.godot/imported/ArtUiExit_0001.png-f26a14d1f0654c274a363ef4c5b1bc73.ctex"
+uid="uid://dtm70x67kiiun"
+path="res://.godot/imported/MouseWheel.png-592db8f55407211678d44c81b71b6446.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UserInterface/ArtUiExit_0001.png"
-dest_files=["res://.godot/imported/ArtUiExit_0001.png-f26a14d1f0654c274a363ef4c5b1bc73.ctex"]
+source_file="res://Art/UserInterface/MouseWheel.png"
+dest_files=["res://.godot/imported/MouseWheel.png-592db8f55407211678d44c81b71b6446.ctex"]
 
 [params]
 
