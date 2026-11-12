@@ -18,7 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
 [ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_r27b6"]
-[ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="12_l5mvp"]
+[ext_resource type="Texture2D" uid="uid://cuvwpq0akwtdb" path="res://Art/UserInterface/Space.png" id="12_l5mvp"]
+[ext_resource type="Texture2D" uid="uid://bgmugk75lu6c" path="res://Art/UserInterface/MouseLeft.png" id="12_tyw8m"]
+[ext_resource type="PackedScene" uid="uid://ch28284riawxa" path="res://Scenes/Environment/Fog.tscn" id="12_xsbsw"]
+[ext_resource type="Shader" uid="uid://2xb7b8tny3rf" path="res://Materials/Shaders/Fog.gdshader" id="13_7okfi"]
+[ext_resource type="Texture2D" uid="uid://cpodakdj6a6ff" path="res://Art/UserInterface/R.png" id="13_l5mvp"]
+[ext_resource type="Texture2D" uid="uid://cwxe3h8ebityw" path="res://Art/UserInterface/Shift.png" id="15_8tc7b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
 vertices = PackedVector2Array(-2477.6328, 7183.508, -2623.4688, 3648, 14098, 3648, 14248.523, 6975.4766, 14364.469, -1702.2891, 14098, -1710.9297, 9666, 1088, 9666, 2288, 8210, 2288, 8210, 1776, 7698, 1776, 7698, 1600, 8210, 1600, 8210, 1088, 4882, 1088, 4882, 576, 5826, 576, 5826, 1776, 4882, 1776, 4882, 1264, 4290, 1088, 4114, 1264, 4114, -528, 4290, -704, 2498, -704, 2498, -528, 2498, -16, 1042, -16, 1042, -528, 1042, -704, -238, -528, -238, -704, 2498, -1216, 1042, -1216, 7362, 1776, 7186, 1776, 7186, 1600, 7362, 1600, 10434, 1776, 10258, 1776, 10258, 1600, 10434, 1600, 11970, 496, 11794, 496, 11794, 320, 11970, 320, -574, -16, -2286, -16, -2286, -1216, -574, -1216, 12738, 832, 12738, 2544, 12692.867, 2267.3906, 12570.844, 2519.3906, 11026, 2544, 12318.844, 2397.3281, 11026, 1776, 12440.867, 2145.3281, 11026, 832, 11026, 1600, 10770, 1776, 10770, 1600, 12677.8125, -1251.6172, 12738, -1472, 12738, -16, 12538.82, -1008.5469, 12434.727, -1390.6094, 11026, -1472, 12295.75, -1147.5391, 11026, -16)
@@ -225,6 +230,44 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2909, -2303, 14405, -1741, 14288, 7015, -2516, 7224)])
 agent_radius = 40.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5xva"]
+size = Vector2(600, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tc7b"]
+size = Vector2(403, 471)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r27b6"]
+load_path = "res://.godot/imported/MouseMovement.png-62ef9c6673b9a0df63370ca9d1e5df99.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsbsw"]
+size = Vector2(1462, 1206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r27b6"]
+size = Vector2(959, 1206)
+
+[sub_resource type="Gradient" id="Gradient_e5fvg"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sopei"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_dxocv")
+color_ramp = SubResource("Gradient_e5fvg")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyw8m"]
+shader = ExtResource("13_7okfi")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_sopei")
+shader_parameter/fog_color = Color(0.8, 0.85, 0.9, 1)
+shader_parameter/density = 0.10000000475
+shader_parameter/tiling = Vector2(2, 2)
+shader_parameter/speed_a = Vector2(-0.03, 0.05)
+shader_parameter/speed_b = Vector2(0.05, -0.03)
+shader_parameter/edge_low = 0.3
+shader_parameter/edge_high = 0.8
+
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_vaf4p")
 _maxTotalEnemyCount = 7
@@ -317,8 +360,57 @@ volume_db = -12.0
 autoplay = true
 bus = &"Music"
 
-[node name="TutorialArea" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
-position = Vector2(-2276, -1407)
+[node name="TutorialAreaMovement" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
+position = Vector2(-3101, -1501)
+
+[node name="CollisionShape2D" parent="Environment/TutorialAreaMovement" index="0" unique_id=1676742655]
+position = Vector2(-37, -15)
+shape = SubResource("RectangleShape2D_c5xva")
+
+[node name="TutorialAreaDigging" parent="Environment" unique_id=1257224739 instance=ExtResource("11_3qguu")]
+position = Vector2(-2313, -1359)
+
+[node name="CollisionShape2D" parent="Environment/TutorialAreaDigging" index="0" unique_id=1676742655]
+position = Vector2(62.5, -46.5)
+shape = SubResource("RectangleShape2D_8tc7b")
+
+[node name="Texture" parent="Environment/TutorialAreaDigging/CanvasLayer/Container" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="0" unique_id=82429987]
+texture = ExtResource("12_l5mvp")
+
+[node name="Texture2" parent="Environment/TutorialAreaDigging/CanvasLayer/Container" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="1" unique_id=1732987967]
+visible = false
+texture = SubResource("CompressedTexture2D_r27b6")
+
+[node name="TutorialAreaShoot" parent="Environment" unique_id=1821799274 instance=ExtResource("11_3qguu")]
+position = Vector2(-140, -1399)
+
+[node name="CollisionShape2D" parent="Environment/TutorialAreaShoot" index="0" unique_id=1676742655]
+position = Vector2(395, -9)
+shape = SubResource("RectangleShape2D_xsbsw")
+
+[node name="Texture" parent="Environment/TutorialAreaShoot/CanvasLayer/Container" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="0" unique_id=82429987]
+texture = ExtResource("12_tyw8m")
+
+[node name="Texture2" parent="Environment/TutorialAreaShoot/CanvasLayer/Container" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="1" unique_id=1732987967]
+texture = ExtResource("13_l5mvp")
+
+[node name="TutorialAreaShoot2" parent="Environment" unique_id=1111604012 instance=ExtResource("11_3qguu")]
+position = Vector2(3702, 398)
+
+[node name="CollisionShape2D" parent="Environment/TutorialAreaShoot2" index="0" unique_id=1676742655]
+position = Vector2(143.5, -9)
+shape = SubResource("RectangleShape2D_r27b6")
+
+[node name="Texture" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
+texture = ExtResource("15_8tc7b")
+
+[node name="Texture2" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="1" unique_id=1732987967]
+visible = false
+
+[node name="Fog" parent="Environment" unique_id=699577285 instance=ExtResource("12_xsbsw")]
+material = SubResource("ShaderMaterial_tyw8m")
+position = Vector2(4360, 152.00012)
+scale = Vector2(63.820313, 20.703125)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
@@ -343,4 +435,8 @@ PlayerCharacter = NodePath("../Player")
 [node name="EventTimer" type="Timer" parent="." unique_id=475063518]
 wait_time = 5.0
 
+[editable path="Environment/TutorialAreaMovement"]
+[editable path="Environment/TutorialAreaDigging"]
+[editable path="Environment/TutorialAreaShoot"]
+[editable path="Environment/TutorialAreaShoot2"]
 [editable path="Player"]

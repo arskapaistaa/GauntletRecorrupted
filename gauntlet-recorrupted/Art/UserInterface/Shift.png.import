@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxorevb2wndri"
-path="res://.godot/imported/ArtUiExit_0006.png-348b54ee17dc55d8f0a5fe209c522d67.ctex"
+uid="uid://cwxe3h8ebityw"
+path="res://.godot/imported/Shift.png-9322b61554d218bfb3572e4f6a111803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/UserInterface/ArtUiExit_0006.png"
-dest_files=["res://.godot/imported/ArtUiExit_0006.png-348b54ee17dc55d8f0a5fe209c522d67.ctex"]
+source_file="res://Art/UserInterface/Shift.png"
+dest_files=["res://.godot/imported/Shift.png-9322b61554d218bfb3572e4f6a111803.ctex"]
 
 [params]
 

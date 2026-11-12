@@ -38,10 +38,13 @@ public partial class StatsManager : Node
 	private string _roachKilledString = "RoachKilled";
 	private string _tickKilledString = "TickKilled";
 	private string _babyKilledString = "BabyKilled";
+	private string _tutorialLevelComplitedString = "TutorialComplited";
 
 	private bool _roachKilled = false;
 	private bool _tickKilled = false;
 	private bool _babyKilled = false;
+
+	private bool _tutorialLevelComplited = false;
 
 	/// <summary>
 	/// Every "On" method is called from GameManager.
@@ -131,6 +134,16 @@ public partial class StatsManager : Node
 				}
 				break;
 		}
+
+		SaveStats();
+	}
+
+	public void SetTutoriLevelComplited()
+	{
+		_tutorialLevelComplited = true;
+		_statsConfig.SetValue(_statsString, _tutorialLevelComplitedString, _tutorialLevelComplited);
+
+		SaveStats();
 	}
 
 	/// <summary>
@@ -154,6 +167,9 @@ public partial class StatsManager : Node
 		_roachKilled = (bool)_statsConfig.GetValue(_statsString, _roachKilledString, false);
 		_tickKilled = (bool)_statsConfig.GetValue(_statsString, _tickKilledString, false);
 		_babyKilled = (bool)_statsConfig.GetValue(_statsString, _babyKilledString, false);
+
+		// Tutorial level
+		_tutorialLevelComplited = (bool)_statsConfig.GetValue(_statsString, _tutorialLevelComplitedString, false);
 
 	}
 

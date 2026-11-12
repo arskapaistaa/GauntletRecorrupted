@@ -27,6 +27,8 @@ public partial class SettingsManager : Node
 	private int _musicBusIndex;
 	private int _ambienceBusIndex;
 
+	private bool _isScreenShakeOn = true;
+
 	public override sealed void _EnterTree()
 	{
 		if (Instance == null)
@@ -82,6 +84,17 @@ public partial class SettingsManager : Node
 		}
 	}
 
+	public void OnScreenShakeBtnToggled(bool toggledOn)
+	{
+		_isScreenShakeOn = toggledOn;
+		_settingsConfig.SetValue("Video", "ScreenShake", _isScreenShakeOn);
+		SaveSettings();
+	}
+
+	public bool GetScreenShakeSetting()
+	{
+		return _isScreenShakeOn;
+	}
 	public void OnMasterVolumeChange(float linearVolume)
 	{
 		SetBusVolume(_masterBusIndex, linearVolume);
@@ -139,6 +152,8 @@ public partial class SettingsManager : Node
 
 		int resIndex = (int)_settingsConfig.GetValue("Video", "Resolution", 1);
 		OnResolutionSelected(resIndex);
+
+		_isScreenShakeOn = (bool)_settingsConfig.GetValue("Video", "ScreenShake", true);
 
 		float masterVol = (float)_settingsConfig.GetValue("Audio", "Master", 1.0f);
 		SetBusVolume(_masterBusIndex, masterVol);

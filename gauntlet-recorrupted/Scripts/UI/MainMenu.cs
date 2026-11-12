@@ -13,7 +13,6 @@ public partial class MainMenu : Control
 
     public override void _Input(InputEvent @event)
     {
-		// Open settings
         if (@event.IsActionPressed("Menu") && GameManager.Instance.CurrentGameState != GameManager.GameState.Settings)
 		{
 			if (_animations != null)
@@ -21,25 +20,16 @@ public partial class MainMenu : Control
 				_animations.Play("OpenExitPanel");
 			}
 		}
-
-		// Close settings
-		if (@event.IsActionPressed("Menu") && GameManager.Instance.CurrentGameState != GameManager.GameState.Menu)
-		{
-			if (_animations != null)
-			{
-				_animations.Play("CloseOptions");
-			}
-		}
     }
 
 	private void OnAnimationFinished(StringName animName)
     {
-        if (animName == "OpenOptions")
+        if (animName == "OpenSettings")
 		{
 			GameManager.Instance.SetGameState(GameManager.GameState.Settings);
 		}
 
-		if (animName == "CloseOptions")
+		if (animName == "CloseSettings")
 		{
 			GameManager.Instance.SetGameState(GameManager.GameState.Menu);
 		}

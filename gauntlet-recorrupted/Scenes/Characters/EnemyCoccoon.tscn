@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dwhjrynd806qa"]
+
+[ext_resource type="Texture2D" uid="uid://ugelrgswlbd0" path="res://Art/Enemies/ArtEnemyCoccoon.png" id="1_6n436"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbo4x"]
+atlas = ExtResource("1_6n436")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbfs2"]
+atlas = ExtResource("1_6n436")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odv2f"]
+atlas = ExtResource("1_6n436")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clvn1"]
+atlas = ExtResource("1_6n436")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukqcp"]
+atlas = ExtResource("1_6n436")
+region = Rect2(2048, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cg1ct"]
+atlas = ExtResource("1_6n436")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6vv5"]
+atlas = ExtResource("1_6n436")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n80q"]
+atlas = ExtResource("1_6n436")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq6my"]
+atlas = ExtResource("1_6n436")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exvxd"]
+atlas = ExtResource("1_6n436")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxvjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbo4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbfs2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odv2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clvn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukqcp")
+}],
+"loop": 0,
+"name": &"Defeat",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cg1ct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6vv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n80q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq6my")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exvxd")
+}],
+"loop": 0,
+"name": &"TakeDmg",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfutn"]
+
+[node name="EnemyRoach" type="Node2D" unique_id=1331104816]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1019985219]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
+sprite_frames = SubResource("SpriteFrames_kxvjs")
+animation = &"TakeDmg"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
+shape = SubResource("CapsuleShape2D_bfutn")

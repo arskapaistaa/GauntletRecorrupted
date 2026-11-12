@@ -5,6 +5,7 @@ public partial class OptionsMenu : Control
 {
 	[Export] private OptionButton _displayModeBtn;
 	[Export] private OptionButton _resolutionBtn;
+	[Export] private Button _removeScreenShakeBtn;
 	[Export] private HSlider _masterVolumeSlider;
 	[Export] private HSlider _sfxVolumeSlider;
 	[Export] private HSlider _musicVolumeSlider;
@@ -15,6 +16,8 @@ public partial class OptionsMenu : Control
 
 		_displayModeBtn.ItemSelected += OnDisplayModeSelected;
 		_resolutionBtn.ItemSelected += OnResolutionSelected;
+
+		_removeScreenShakeBtn.Toggled += OnScreenShakeBtnToggled;
 
 		_masterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 		_sfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
@@ -27,6 +30,8 @@ public partial class OptionsMenu : Control
     {
 		_displayModeBtn.ItemSelected -= OnDisplayModeSelected;
 		_resolutionBtn.ItemSelected -= OnResolutionSelected;
+
+		_removeScreenShakeBtn.Toggled -= OnScreenShakeBtnToggled;
 
 		_masterVolumeSlider.ValueChanged -= OnMasterVolumeChanged;
 		_sfxVolumeSlider.ValueChanged -= OnSfxVolumeChanged;
@@ -44,10 +49,14 @@ public partial class OptionsMenu : Control
         SettingsManager.Instance.OnResolutionSelected((int)index);
     }
 
+	private void OnScreenShakeBtnToggled(bool toggledOn)
+    {
+        SettingsManager.Instance.OnScreenShakeBtnToggled(toggledOn);
+    }
+
 	private void OnMasterVolumeChanged(double value)
     {
         SettingsManager.Instance.OnMasterVolumeChange((float)value);
-		GD.Print(SettingsManager.Instance.GetMasterVolume());
     }
 
 	private void OnSfxVolumeChanged(double value)
