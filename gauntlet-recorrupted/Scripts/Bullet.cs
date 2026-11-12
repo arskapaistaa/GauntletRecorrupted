@@ -18,6 +18,7 @@ public partial class Bullet : Area2D
 	private int Damage;
 	private float Lifetime;
 	private float _timeAlive = 0.0f;
+	private int shotgunPierce = 1;
 
 	public int WeaponType { get; private set; } = 0; // 0 for revolver, 1 for shotgun
 	private Vector2 _direction = Vector2.Right;
@@ -75,9 +76,16 @@ public partial class Bullet : Area2D
 				enemy.TakeDmg((int)(Damage * _criticalDmgMultiplier));
 				return;
 			}
-			// Make this "else" to remove the bug. And take return of.
 
 			enemy.TakeDmg(Damage);
+			if (WeaponType == 1)
+			{
+				shotgunPierce--;
+				if (shotgunPierce >= 0)
+				{
+					return;
+				}
+			}
 		}
 		else if (body is EnemySpawner spawner)
 		{
@@ -87,7 +95,7 @@ public partial class Bullet : Area2D
 		{
 			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), Damage);
 		}
-
+		
 		QueueFree();
 	}
 }

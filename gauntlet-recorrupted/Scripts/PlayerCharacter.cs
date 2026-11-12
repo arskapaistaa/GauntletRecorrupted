@@ -60,6 +60,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private float _meleeCooldown = 0;
 	private bool _isMoving = false;
 	private bool _isDigging = false;
+	private bool _isShooting = false;
 	private int _forceRevolverReloadCounter = 0;
 	private int _forceShotgunReloadCounter = 0;
 
@@ -103,6 +104,14 @@ public partial class PlayerCharacter : CharacterBody2D
 			AimArrow.Visible = false;
 
 		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
+		if (WeaponType == 0)
+		{
+			MuzzlePoint.Position = new Vector2(148, 4);
+		}
+		else if (WeaponType == 1)
+		{
+			MuzzlePoint.Position = new Vector2(120, 10);
+		}
 		HandleTimers(delta);
 		HandleInputs();
 		HandleMovement(delta);
@@ -178,6 +187,10 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (_isDigging)
 		{
 			_isDigging = false;
+		}
+		if (_isShooting)
+		{
+			_isShooting = false;
 		}
 	}
 
@@ -366,6 +379,17 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			PlayerSprite.Play("Dig");
 		}
+		else if (_isShooting)
+		{
+			if (WeaponType == 0)
+			{
+				PlayerSprite.Play("RevolverShoot");
+			}
+			else if (WeaponType == 1)
+			{
+				PlayerSprite.Play("ShotgunShoot");
+			}
+		}
 		else if (_isMoving)
 		{
 			PlayerSprite.Play("Walk");
@@ -410,7 +434,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
-
+		_isShooting = true;
 		// Tell GameManager that player shot.
 		GameManager.Instance.OnShotsFiredChanged();
 	}

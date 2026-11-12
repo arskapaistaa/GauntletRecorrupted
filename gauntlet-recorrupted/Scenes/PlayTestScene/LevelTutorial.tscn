@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_r27b6"]
 [ext_resource type="Texture2D" uid="uid://cuvwpq0akwtdb" path="res://Art/UserInterface/Space.png" id="12_l5mvp"]
 [ext_resource type="Texture2D" uid="uid://bgmugk75lu6c" path="res://Art/UserInterface/MouseLeft.png" id="12_tyw8m"]
+[ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="12_vopof"]
 [ext_resource type="PackedScene" uid="uid://ch28284riawxa" path="res://Scenes/Environment/Fog.tscn" id="12_xsbsw"]
 [ext_resource type="Shader" uid="uid://2xb7b8tny3rf" path="res://Materials/Shaders/Fog.gdshader" id="13_7okfi"]
 [ext_resource type="Texture2D" uid="uid://cpodakdj6a6ff" path="res://Art/UserInterface/R.png" id="13_l5mvp"]
@@ -149,56 +150,56 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
-0:0/0/custom_data_0 = 30
+0:0/0/custom_data_0 = 50
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5mvp"]
 texture = ExtResource("7_tyw8m")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
-0:0/0/custom_data_0 = 30
+0:0/0/custom_data_0 = 10
 0:0/0/custom_data_1 = true
 1:0/0 = 0
-1:0/0/custom_data_0 = 30
+1:0/0/custom_data_0 = 10
 1:0/0/custom_data_1 = true
 2:0/0 = 0
-2:0/0/custom_data_0 = 30
+2:0/0/custom_data_0 = 10
 2:0/0/custom_data_1 = true
 3:0/0 = 0
-3:0/0/custom_data_0 = 30
+3:0/0/custom_data_0 = 10
 3:0/0/custom_data_1 = true
 0:1/0 = 0
-0:1/0/custom_data_0 = 30
+0:1/0/custom_data_0 = 10
 0:1/0/custom_data_1 = true
 1:1/0 = 0
-1:1/0/custom_data_0 = 30
+1:1/0/custom_data_0 = 10
 1:1/0/custom_data_1 = true
 2:1/0 = 0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
-2:1/0/custom_data_0 = 30
+2:1/0/custom_data_0 = 10
 2:1/0/custom_data_1 = true
 3:1/0 = 0
-3:1/0/custom_data_0 = 30
+3:1/0/custom_data_0 = 10
 3:1/0/custom_data_1 = true
 0:2/0 = 0
-0:2/0/custom_data_0 = 30
+0:2/0/custom_data_0 = 10
 0:2/0/custom_data_1 = true
 1:2/0 = 0
-1:2/0/custom_data_0 = 30
+1:2/0/custom_data_0 = 10
 1:2/0/custom_data_1 = true
 2:2/0 = 0
-2:2/0/custom_data_0 = 30
+2:2/0/custom_data_0 = 10
 2:2/0/custom_data_1 = true
 3:2/0 = 0
-3:2/0/custom_data_0 = 30
+3:2/0/custom_data_0 = 10
 3:2/0/custom_data_1 = true
 1:3/0 = 0
-1:3/0/custom_data_0 = 30
+1:3/0/custom_data_0 = 10
 1:3/0/custom_data_1 = true
 2:3/0 = 0
-2:3/0/custom_data_0 = 30
+2:3/0/custom_data_0 = 10
 2:3/0/custom_data_1 = true
 3:3/0 = 0
-3:3/0/custom_data_0 = 30
+3:3/0/custom_data_0 = 10
 3:3/0/custom_data_1 = true
 
 [sub_resource type="TileSet" id="TileSet_rk2iv"]
@@ -310,13 +311,13 @@ tile_set = SubResource("TileSet_sopei")
 
 [node name="DiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1666934862]
 z_index = 2
-tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD2//n/AgACAAEAAAD5//r/AgACAAEAAAD6//r/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD5//r/AgACAAEAAAD6//r/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
 script = ExtResource("7_cthuj")
 TickScene = ExtResource("8_7okfi")
 BabyScene = ExtResource("9_tyw8m")
 RoachScene = ExtResource("7_7okfi")
-BreakEffectScene = ExtResource("12_l5mvp")
+BreakEffectScene = ExtResource("12_vopof")
 
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")

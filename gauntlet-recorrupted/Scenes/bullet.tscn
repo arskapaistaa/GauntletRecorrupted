@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://eyvbqm2qgp4" path="res://Art/Environment/bulletsprite.png" id="2_oduel"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ycag2"]
+radius = 12.0
 
 [node name="Bullet" type="Area2D" unique_id=873106433]
 z_index = 1
