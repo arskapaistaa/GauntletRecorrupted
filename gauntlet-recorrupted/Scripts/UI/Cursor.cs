@@ -7,15 +7,15 @@ public partial class Cursor : CanvasLayer
 	[Export] private PlayerCharacter PlayerCharacter;
 	public override void _Ready()
 	{
-		if (PlayerCharacter.getWeaponType() == 0)
+		if (PlayerCharacter.GetWeaponType() == 0)
 		{
 			_cursorSprite.Animation = "revolverAmmo";
-			_cursorSprite.Frame = PlayerCharacter.getRevolverAmmo();
+			_cursorSprite.Frame = PlayerCharacter.GetRevolverAmmo();
 		}
-		else if (PlayerCharacter.getWeaponType() == 1)
+		else if (PlayerCharacter.GetWeaponType() == 1)
 		{
 			_cursorSprite.Animation = "shotgunAmmo";
-			_cursorSprite.Frame = PlayerCharacter.getShotgunAmmo();
+			_cursorSprite.Frame = PlayerCharacter.GetShotgunAmmo();
 		}
 		PlayerCharacter.WeaponSwitched += OnWeaponSwitched;
 		PlayerCharacter.UpdateRevolverAmmo += OnUpdateRevolverAmmo;
@@ -41,11 +41,11 @@ public partial class Cursor : CanvasLayer
 		{
 			case 0: // Revolver
 				_cursorSprite.Animation = "revolverAmmo";
-				_cursorSprite.Frame = PlayerCharacter.getRevolverAmmo();
+				_cursorSprite.Frame = PlayerCharacter.GetRevolverAmmo();
 				break;
 			case 1: // Shotgun
 				_cursorSprite.Animation = "shotgunAmmo";
-				_cursorSprite.Frame = PlayerCharacter.getShotgunAmmo();
+				_cursorSprite.Frame = PlayerCharacter.GetShotgunAmmo();
 				break;
 			default:
 				GD.PrintErr($"Unknown weapon type: {newWeaponType}");
@@ -90,12 +90,12 @@ public partial class Cursor : CanvasLayer
 		if (_cursorSprite.Animation == "revolverReload")
 		{
 			_cursorSprite.Animation = "revolverAmmo";
-			_cursorSprite.Frame = PlayerCharacter.getRevolverAmmo();
+			_cursorSprite.Frame = PlayerCharacter.GetRevolverAmmo();
 		}
 		else if (_cursorSprite.Animation == "shotgunReload")
 		{
 			_cursorSprite.Animation = "shotgunAmmo";
-			_cursorSprite.Frame = PlayerCharacter.getShotgunAmmo();
+			_cursorSprite.Frame = PlayerCharacter.GetShotgunAmmo();
 		}
 	}
 }
