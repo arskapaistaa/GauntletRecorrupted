@@ -287,10 +287,13 @@ navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 [node name="TickSpawner" parent="Environment/NavigationRegionBasic" unique_id=1930281201 instance=ExtResource("3_5y76b")]
 position = Vector2(12469.999, 2315)
 rotation = 2.021811
+_maxActiveEnemiesCount = 2
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("3_5y76b")]
 position = Vector2(12467, -1165.0002)
 rotation = 0.519444
+_spawningCooldown = 7.0
+_maxActiveEnemiesCount = 1
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 position = Vector2(1514, 792)
