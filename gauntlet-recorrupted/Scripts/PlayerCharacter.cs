@@ -644,7 +644,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
-	
+
 	private void FlashSprite()
 	{
 		Tween tween = CreateTween();
@@ -699,8 +699,6 @@ public partial class PlayerCharacter : CharacterBody2D
 			_diggingSFX.Play();
 		}
 	}
-
-	public int getRevolverAmmo()
 	public int GetRevolverAmmo()
 	{
 		return _currentAmmoRevolver;
