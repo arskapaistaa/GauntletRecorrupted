@@ -701,7 +701,7 @@ public partial class Enemy : CharacterBody2D
 			if (_movementSfx.Playing == false)
 			{
 				_movementSfx.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-				_movementSfx.VolumeDb = (float)GD.RandRange(0.8f, 1.0f);
+				_movementSfx.VolumeDb = (float)GD.RandRange(-1.0f, 0.0f);
 				_movementSfx.Play();
 			}
 		}
