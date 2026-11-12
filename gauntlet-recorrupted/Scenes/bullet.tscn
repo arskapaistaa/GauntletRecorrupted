@@ -1,13 +1,7 @@
 [gd_scene format=3 uid="uid://r78dpllnlyu8"]
 
 [ext_resource type="Script" uid="uid://cuhex13vxsjoe" path="res://Scripts/Bullet.cs" id="1_oduel"]
-
-[sub_resource type="Gradient" id="Gradient_oduel"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rd3qt"]
-gradient = SubResource("Gradient_oduel")
-width = 32
+[ext_resource type="Texture2D" uid="uid://eyvbqm2qgp4" path="res://Art/Environment/bulletsprite.png" id="2_oduel"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ycag2"]
 
@@ -16,13 +10,15 @@ z_index = 1
 collision_layer = 8
 collision_mask = 38
 script = ExtResource("1_oduel")
-RevolverBulletSpeed = 7000.0
-ShotgunBulletSpeed = 5000.0
-ShotgunBulletLifetime = 0.5
+RevolverBulletSpeed = 15000.0
+ShotgunBulletSpeed = 12400.0
+ShotgunBulletDamage = 4
+ShotgunBulletLifetime = 0.3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
-scale = Vector2(1, 10)
-texture = SubResource("GradientTexture1D_rd3qt")
+position = Vector2(-13, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("2_oduel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529130910]
 shape = SubResource("CircleShape2D_ycag2")

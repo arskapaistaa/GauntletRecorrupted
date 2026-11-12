@@ -3,7 +3,6 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-	[Export(PropertyHint.Enum, "Gravedigger,MilitaryGirl")] private int CharacterType = 0;
 	[ExportCategory("Stats")]
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "0,1000,10")] private float Speed = 300.0f;
@@ -23,7 +22,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportCategory("Node References")]
 	[Export] private PackedScene BulletScene;
-	[Export] private TileMapLayer DiggableTiles;
+	[Export] private DiggableTiles DiggableTiles;
 	[Export] private Marker2D MuzzlePoint;
 	[Export] private PackedScene BreakEffectScene;
 	[Export] private AnimatedSprite2D PlayerSprite;
@@ -64,6 +63,8 @@ public partial class PlayerCharacter : CharacterBody2D
 	private float _meleeCooldown = 0;
 	private bool _isMoving = false;
 	private bool _isDigging = false;
+	private int _forceRevolverReloadCounter = 0;
+	private int _forceShotgunReloadCounter = 0;
 
 	public enum FacingDirection
 	{
@@ -226,10 +227,30 @@ public partial class PlayerCharacter : CharacterBody2D
 				if (WeaponType == 0)
 				{
 					GD.Print("Revolver out of ammo");
+					_forceRevolverReloadCounter++;
+					if (_forceRevolverReloadCounter >= 3)
+					{
+						GD.Print("Forcing revolver reload");
+						StartReload();
+					}
+					else
+					{
+						_shootTimer = RevolverCooldown;
+					}
 				}
 				else
 				{
 					GD.Print("Shotgun out of ammo");
+					_forceShotgunReloadCounter++;
+					if (_forceShotgunReloadCounter >= 3)
+					{
+						GD.Print("Forcing shotgun reload");
+						StartReload();
+					}
+					else
+					{
+						_shootTimer = ShotgunCooldown;
+					}
 				}
 				return;
 			}
@@ -268,7 +289,6 @@ public partial class PlayerCharacter : CharacterBody2D
 				GD.Print("Cannot reload while dead");
 				return;
 			}
-			_reloadSpeedMultiplier = 0.5f;
 			if (WeaponType == 0)
 			{
 				if (_currentAmmoRevolver == _maxAmmoRevolver)
@@ -276,8 +296,6 @@ public partial class PlayerCharacter : CharacterBody2D
 					GD.Print("Revolver already full");
 					return;
 				}
-				_currentAmmoRevolver = _maxAmmoRevolver;
-				GD.Print("Reloading Revolver");
 			}
 			else
 			{
@@ -286,12 +304,8 @@ public partial class PlayerCharacter : CharacterBody2D
 					GD.Print("Shotgun already full");
 					return;
 				}
-				_currentAmmoShotgun = _maxAmmoShotgun;
-				GD.Print("Reloading Shotgun");
 			}
-			EmitSignal(SignalName.Reload, WeaponType);
-			_shootTimer = ReloadTime;
-			isReloading = true;
+			StartReload();
 		}
 
 
@@ -393,9 +407,10 @@ public partial class PlayerCharacter : CharacterBody2D
 			Input.StartJoyVibration(0, 1.0f, 1.0f, 0.2f);
 			for (int i = 0; i < ShotgunPelletCount; i++)
 			{
-				float angleOffset = Mathf.Lerp(-ShotgunSpreadAngle / 2, ShotgunSpreadAngle / 2, (float)i / (ShotgunPelletCount - 1));
-				Vector2 pelletDirection = aimDirection.Rotated(Mathf.DegToRad(angleOffset));
-				SpawnBullet(pelletDirection);
+				float spreadDegrees = (float)GD.RandRange(-ShotgunSpreadAngle, ShotgunSpreadAngle);
+					float spreadRadians = Mathf.DegToRad(spreadDegrees);
+					Vector2 shotDirection = aimDirection.Rotated(spreadRadians);
+					SpawnBullet(shotDirection);
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
@@ -412,6 +427,24 @@ public partial class PlayerCharacter : CharacterBody2D
 		GetTree().CurrentScene.AddChild(bullet);
 		bullet.GlobalPosition = MuzzlePoint.GlobalPosition;
 		bullet.Initialize(direction, WeaponType);
+	}
+
+	private void StartReload()
+	{
+		if (WeaponType == 0)
+		{
+			_currentAmmoRevolver = _maxAmmoRevolver;
+			_forceRevolverReloadCounter = 0;
+		}
+		else if (WeaponType == 1)
+		{
+			_currentAmmoShotgun = _maxAmmoShotgun;
+			_forceShotgunReloadCounter = 0;
+		}
+		_reloadSpeedMultiplier = 0.5f;
+		_shootTimer = ReloadTime;
+		isReloading = true;
+		EmitSignal(SignalName.Reload, WeaponType);
 	}
 
 	private void Dig()
@@ -556,8 +589,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			GD.Print("Cannot dig that tile.");
 			return;
 		}
-		SpawnBreakEffect(targetCell);
-		DiggableTiles.EraseCell(targetCell);
+		DiggableTiles.DamageTile(targetCell, 1000);
 		Level.Current.UpdateNavRegion();
 		PlayDiggingSfx();
 		GD.Print($"Dug tile at {targetCell}");
@@ -612,17 +644,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
-	private void SpawnBreakEffect(Vector2I cell)
-	{
-		if (BreakEffectScene == null)
-		{
-			return;
-		}
-
-		Node2D effect = BreakEffectScene.Instantiate<Node2D>();
-		GetTree().CurrentScene.AddChild(effect);
-		effect.GlobalPosition = DiggableTiles.ToGlobal(DiggableTiles.MapToLocal(cell));
-	}
+	
 	private void FlashSprite()
 	{
 		Tween tween = CreateTween();
@@ -679,21 +701,42 @@ public partial class PlayerCharacter : CharacterBody2D
 	}
 
 	public int getRevolverAmmo()
+	public int GetRevolverAmmo()
 	{
 		return _currentAmmoRevolver;
 	}
 
-	public int getShotgunAmmo()
+	public int GetRevolverMaxAmmo()
+	{
+		return _maxAmmoRevolver;
+	}
+
+	public float GetRevolverReloadTime()
+	{
+		return RevolverReloadTime;
+	}
+
+	public float GetShotgunReloadTime()
+	{
+		return ShotgunReloadTime;
+	}
+
+	public int GetShotgunAmmo()
 	{
 		return _currentAmmoShotgun;
 	}
 
-	public int getWeaponType()
+	public int GetShotgunMaxAmmo()
+	{
+		return _maxAmmoShotgun;
+	}
+
+	public int GetWeaponType()
 	{
 		return WeaponType;
 	}
 
-	public bool isAlive()
+	public bool IsAlive()
 	{
 		return isLiving;
 	}

@@ -8,8 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://cjsa2b67earr3" path="res://Art/Environment/_diggable_placeholder.png" id="5_cthuj"]
 [ext_resource type="Texture2D" uid="uid://ra0cs36l3nqn" path="res://Art/Environment/_nondiggable_placeholder.png" id="6_xsbsw"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="7_7okfi"]
+[ext_resource type="Script" uid="uid://cyblqv1lf4kxj" path="res://Scripts/Environment/DiggableTiles.cs" id="7_cthuj"]
+[ext_resource type="Texture2D" uid="uid://dawid7ph0d2b7" path="res://Art/Environment/ArtTileFlesh.png" id="7_tyw8m"]
+[ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="8_7okfi"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
+[ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="9_tyw8m"]
 [ext_resource type="AudioStream" uid="uid://c3ayuna72gig5" path="res://Audio/Music/Ambience01.ogg" id="10_5y76b"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
 [ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
@@ -145,13 +149,69 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
+0:0/0/custom_data_0 = 30
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5mvp"]
+texture = ExtResource("7_tyw8m")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/custom_data_0 = 30
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = 30
+1:0/0/custom_data_1 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = 30
+2:0/0/custom_data_1 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = 30
+3:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = 30
+0:1/0/custom_data_1 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = 30
+1:1/0/custom_data_1 = true
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+2:1/0/custom_data_0 = 30
+2:1/0/custom_data_1 = true
+3:1/0 = 0
+3:1/0/custom_data_0 = 30
+3:1/0/custom_data_1 = true
+0:2/0 = 0
+0:2/0/custom_data_0 = 30
+0:2/0/custom_data_1 = true
+1:2/0 = 0
+1:2/0/custom_data_0 = 30
+1:2/0/custom_data_1 = true
+2:2/0 = 0
+2:2/0/custom_data_0 = 30
+2:2/0/custom_data_1 = true
+3:2/0 = 0
+3:2/0/custom_data_0 = 30
+3:2/0/custom_data_1 = true
+1:3/0 = 0
+1:3/0/custom_data_0 = 30
+1:3/0/custom_data_1 = true
+2:3/0 = 0
+2:3/0/custom_data_0 = 30
+2:3/0/custom_data_1 = true
+3:3/0 = 0
+3:3/0/custom_data_0 = 30
+3:3/0/custom_data_1 = true
 
 [sub_resource type="TileSet" id="TileSet_rk2iv"]
 tile_size = Vector2i(256, 256)
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
+custom_data_layer_0/name = "MaxHealth"
+custom_data_layer_0/type = 2
+custom_data_layer_1/name = "HasEnemy"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_7xtta")
+sources/2 = SubResource("TileSetAtlasSource_l5mvp")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgjw0"]
 texture = ExtResource("6_xsbsw")
@@ -227,10 +287,13 @@ navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 [node name="TickSpawner" parent="Environment/NavigationRegionBasic" unique_id=1930281201 instance=ExtResource("3_5y76b")]
 position = Vector2(12469.999, 2315)
 rotation = 2.021811
+_maxActiveEnemiesCount = 2
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("3_5y76b")]
 position = Vector2(12467, -1165.0002)
 rotation = 0.519444
+_spawningCooldown = 7.0
+_maxActiveEnemiesCount = 1
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 position = Vector2(1514, 792)
@@ -250,8 +313,13 @@ tile_set = SubResource("TileSet_sopei")
 
 [node name="DiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1666934862]
 z_index = 2
-tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD2//n/AgACAAEAAAD5//r/AgACAAEAAAD6//r/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
+script = ExtResource("7_cthuj")
+TickScene = ExtResource("8_7okfi")
+BabyScene = ExtResource("9_tyw8m")
+RoachScene = ExtResource("7_7okfi")
+BreakEffectScene = ExtResource("12_l5mvp")
 
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")
@@ -267,14 +335,17 @@ navigation_layers = 2
 [node name="Roach" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_7okfi")]
 position = Vector2(2676, -966)
 rotation = -1.5773634
+DetectionRange = 0.0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("7_7okfi")]
 position = Vector2(9726, -1143.9999)
 rotation = 0.48373985
+DetectionRange = 0.0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("7_7okfi")]
 position = Vector2(8817, 900.9999)
 rotation = 3.1404202
+DetectionRange = 0.0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
 position = Vector2(7419.9995, 901.9997)

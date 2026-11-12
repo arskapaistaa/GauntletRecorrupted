@@ -3,12 +3,12 @@ using Godot;
 public partial class Bullet : Area2D
 {
 	[ExportCategory("Bullet Stats")]
-	[Export(PropertyHint.Range, "0,10000,100")] public float RevolverBulletSpeed = 800.0f;
-	[Export(PropertyHint.Range, "0,10000,100")] public float ShotgunBulletSpeed = 600.0f;
+	[Export(PropertyHint.Range, "0,100000,100")] public float RevolverBulletSpeed = 8000.0f;
+	[Export(PropertyHint.Range, "0,100000,100")] public float ShotgunBulletSpeed = 6000.0f;
 	[Export(PropertyHint.Range, "0,100,1")] public int RevolverBulletDamage = 10;
 	[Export(PropertyHint.Range, "0,100,1")] public int ShotgunBulletDamage = 5;
-	[Export(PropertyHint.Range, "0,10,0.5")] public float RevolverBulletLifetime = 2.0f;
-	[Export(PropertyHint.Range, "0,10,0.5")] public float ShotgunBulletLifetime = 1.0f;
+	[Export(PropertyHint.Range, "0,10,0.1")] public float RevolverBulletLifetime = 2.0f;
+	[Export(PropertyHint.Range, "0,10,0.1")] public float ShotgunBulletLifetime = 1.0f;
 	/// <summary>
 	/// Multiplier for critical strikes -> When enemy is in attack state
 	/// </summary>
@@ -82,6 +82,10 @@ public partial class Bullet : Area2D
 		else if (body is EnemySpawner spawner)
 		{
 			spawner.TakeDmg(Damage);
+		}
+		else if (body is DiggableTiles tile)
+		{
+			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), Damage);
 		}
 
 		QueueFree();

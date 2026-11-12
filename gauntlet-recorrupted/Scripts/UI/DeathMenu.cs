@@ -37,7 +37,7 @@ public partial class DeathMenu : Control
 
 	public override void _Process(double delta)
 	{
-		if (!Level.Current.Player.isAlive() && !Visible)
+		if (!Level.Current.Player.IsAlive() && !Visible)
 		{
 			ShowDeathMenu();
 		}

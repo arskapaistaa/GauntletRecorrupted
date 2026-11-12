@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bmvx77nasoib4" path="res://Art/UserInterface/ShotgunAmmoBase.png" id="7_nkhw3"]
 [ext_resource type="Texture2D" uid="uid://x4pilwwsjt04" path="res://Art/UserInterface/ShotgunAmmo1Bullet.png" id="8_jwth5"]
 [ext_resource type="Texture2D" uid="uid://kxqgpae4mmm5" path="res://Art/UserInterface/ShotgunAmmo2Bullets.png" id="9_1vt16"]
+[ext_resource type="Texture2D" uid="uid://hlvtra4hg7ep" path="res://Art/Environment/ArtExit.png" id="9_bbnj7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l23vg"]
 atlas = ExtResource("3_e1ed1")
@@ -158,67 +159,88 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nkhw3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol1bw"]
 atlas = ExtResource("6_jwth5")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jwth5"]
-atlas = ExtResource("6_jwth5")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1vt16"]
-atlas = ExtResource("6_jwth5")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbnj7"]
-atlas = ExtResource("6_jwth5")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8y58q"]
-atlas = ExtResource("6_jwth5")
-region = Rect2(256, 0, 64, 64)
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_em2lx"]
 atlas = ExtResource("6_jwth5")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ol1bw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y58q"]
 atlas = ExtResource("6_jwth5")
-region = Rect2(384, 0, 64, 64)
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbnj7"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vt16"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwth5"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkhw3"]
+atlas = ExtResource("6_jwth5")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sopei"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nkhw3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jwth5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1vt16")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbnj7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8y58q")
+"texture": SubResource("AtlasTexture_ol1bw")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_em2lx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ol1bw")
+"texture": SubResource("AtlasTexture_8y58q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbnj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vt16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwth5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkhw3")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Ammo",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdpq8"]
+atlas = ExtResource("9_bbnj7")
+region = Rect2(1280, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rk2iv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdpq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jwth5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1vt16")
+}],
+"loop": 0,
+"name": &"Ammo",
 "speed": 5.0
 }]
 
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 process_mode = 3
 
-[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel", "_healthLabel", "_healthIndicator", "_exitIndicator")]
+[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel", "_healthLabel", "_healthIndicator", "_exitIndicator", "Revolver", "Shotgun", "_revolverAmmoSprite", "_shotgunAmmoSprite")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -230,6 +252,10 @@ _fpsLabel = NodePath("FPSContainer/FPS")
 _healthLabel = NodePath("Hearth/PlayerHealthLabel")
 _healthIndicator = NodePath("Hearth/HearthIndicator")
 _exitIndicator = NodePath("Exit/ExitIndicator")
+Revolver = NodePath("Revolver")
+Shotgun = NodePath("Shotgun")
+_revolverAmmoSprite = NodePath("Revolver/TextureRect/RevolverAmmo")
+_shotgunAmmoSprite = NodePath("Shotgun/TextureRect/ShotgunAmmo")
 
 [node name="TextureRect" type="TextureRect" parent="GUI" unique_id=2073629210]
 layout_mode = 0
@@ -330,27 +356,27 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GUI/Revolver/TextureRect" unique_id=171248841]
+[node name="RevolverAmmo" type="AnimatedSprite2D" parent="GUI/Revolver/TextureRect" unique_id=171248841]
 position = Vector2(20, 20)
 sprite_frames = SubResource("SpriteFrames_sopei")
+animation = &"Ammo"
 
 [node name="Shotgun" type="TextureRect" parent="GUI" unique_id=1605463265]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -74.0
-offset_top = -74.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -68.0
+offset_top = -70.0
+offset_right = -4.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("7_nkhw3")
 
-[node name="1Ammo" type="TextureRect" parent="GUI/Shotgun" unique_id=496409440]
+[node name="TextureRect" type="TextureRect" parent="GUI/Shotgun" unique_id=496409440]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -363,13 +389,13 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("8_jwth5")
 
-[node name="2Ammo" type="TextureRect" parent="GUI/Shotgun" unique_id=708677386]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("9_1vt16")
+[node name="ShotgunAmmo" type="AnimatedSprite2D" parent="GUI/Shotgun/TextureRect" unique_id=491204957]
+sprite_frames = SubResource("SpriteFrames_rk2iv")
+animation = &"Ammo"
+frame = 2
+frame_progress = 1.0
+centered = false
 
 [node name="PauseMenu" parent="." unique_id=1923251465 instance=ExtResource("2_17j7b")]
 visible = false
