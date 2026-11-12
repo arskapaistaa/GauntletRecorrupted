@@ -28,10 +28,13 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private AnimatedSprite2D PlayerSprite;
 	[Export] private Area2D MeleeArea;
 	[Export] private Cursor CustomCursor;
+	[Export] private Sprite2D AimArrow;
 
 	[ExportGroup("Audios")]
-	[Export] private AudioStreamPlayer2D _walkingSFX = null;
-	[Export] private Sprite2D AimArrow;
+	[Export] private AudioStreamPlayer2D _movementSFX = null;
+	[Export] private AudioStreamPlayer2D _revolverSFX = null;
+	[Export] private AudioStreamPlayer2D _shotgunSFX = null;
+	[Export] private AudioStreamPlayer2D _diggingSFX = null;
 
 	// Signals
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
@@ -116,6 +119,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		HandleInputs();
 		HandleMovement(delta);
 		HandleAnimations();
+		UpdateAudio();
 	}
 
 	private void HandleTimers(double delta)
@@ -434,7 +438,13 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
+<<<<<<< HEAD
 		_isShooting = true;
+=======
+
+		PlayGunSfx(WeaponType);
+
+>>>>>>> main
 		// Tell GameManager that player shot.
 		GameManager.Instance.OnShotsFiredChanged();
 	}
@@ -609,6 +619,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		DiggableTiles.DamageTile(targetCell, 1000);
 		Level.Current.UpdateNavRegion();
+		PlayDiggingSfx();
 		GD.Print($"Dug tile at {targetCell}");
 	}
 
@@ -661,7 +672,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
-	
+
 	private void FlashSprite()
 	{
 		Tween tween = CreateTween();
@@ -674,6 +685,48 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
+	private void UpdateAudio()
+	{
+		if (_movementSFX == null)
+		{
+			GD.PrintErr("Player is missing Walking sfx");
+			return;
+		}
+
+		if (_isMoving && _movementSFX.Playing == false)
+		{
+			_movementSFX.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
+			_movementSFX.VolumeDb = (float)GD.RandRange(-6.0f, -4.0f);
+			_movementSFX.Play();
+		}
+	}
+
+	private void PlayGunSfx(int weaponType)
+	{
+		if (weaponType == 0)
+		{
+			if (_revolverSFX != null)
+			{
+				_revolverSFX.Play();
+			}
+		}
+		else
+		{
+			if (_shotgunSFX != null)
+			{
+				_shotgunSFX.Play();
+			}
+		}
+	}
+
+	private void PlayDiggingSfx()
+	{
+		if (_diggingSFX != null)
+		{
+			_diggingSFX.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
+			_diggingSFX.Play();
+		}
+	}
 	public int GetRevolverAmmo()
 	{
 		return _currentAmmoRevolver;

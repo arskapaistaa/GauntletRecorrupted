@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://cjtjmcfbs7pkx" path="res://Art/ConeOfLight/ConeLightShape.png_0004.png" id="8_40gda"]
 [ext_resource type="Texture2D" uid="uid://c2g608wf1fkyo" path="res://Art/ConeOfLight/ConeLightShape.png_0005.png" id="9_lhk5l"]
 [ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="12_eisek"]
+[ext_resource type="AudioStream" uid="uid://b0tdwm4jdc17n" path="res://Audio/PrototypeOnly/RevolverSound.wav" id="14_i7eac"]
+[ext_resource type="AudioStream" uid="uid://cep54664cckgc" path="res://Audio/PrototypeOnly/ShotgunSound.wav" id="14_nwqxr"]
+[ext_resource type="AudioStream" uid="uid://bmwks7d35c0ln" path="res://Audio/SFX/Player/Digging.wav" id="16_40gda"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rlv1"]
 atlas = ExtResource("3_4t8qp")
@@ -214,7 +217,7 @@ _data = {
 &"RESET": SubResource("Animation_8kqif")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow")]
+[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow", "_movementSFX", "_revolverSFX", "_shotgunSFX", "_diggingSFX")]
 z_index = 1
 collision_mask = 6
 script = ExtResource("1_nu4k2")
@@ -232,6 +235,10 @@ BreakEffectScene = ExtResource("3_8kqif")
 PlayerSprite = NodePath("AnimatedSprite2D")
 MeleeArea = NodePath("MeleeArea")
 AimArrow = NodePath("AimArrow")
+_movementSFX = NodePath("Audios/MovementSFX")
+_revolverSFX = NodePath("Audios/RevolverSFX")
+_shotgunSFX = NodePath("Audios/ShotgunSFX")
+_diggingSFX = NodePath("Audios/DiggingSFX")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4
@@ -299,8 +306,22 @@ texture = ExtResource("8_4t8qp")
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1423641770]
 current = true
 
-[node name="Audios" type="Node" parent="." unique_id=1931741506]
+[node name="Audios" type="Node2D" parent="." unique_id=1056500525]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=349288383]
 stream = ExtResource("12_eisek")
+bus = &"SFX"
+
+[node name="ShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1590027372]
+stream = ExtResource("14_nwqxr")
+volume_db = -6.0
+
+[node name="RevolverSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1428008129]
+stream = ExtResource("14_i7eac")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="DiggingSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1569544295]
+stream = ExtResource("16_40gda")
+volume_db = -6.0
 bus = &"SFX"

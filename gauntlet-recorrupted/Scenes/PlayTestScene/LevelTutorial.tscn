@@ -288,10 +288,13 @@ navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 [node name="TickSpawner" parent="Environment/NavigationRegionBasic" unique_id=1930281201 instance=ExtResource("3_5y76b")]
 position = Vector2(12469.999, 2315)
 rotation = 2.021811
+_maxActiveEnemiesCount = 2
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("3_5y76b")]
 position = Vector2(12467, -1165.0002)
 rotation = 0.519444
+_spawningCooldown = 7.0
+_maxActiveEnemiesCount = 1
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 position = Vector2(1514, 792)
@@ -395,18 +398,15 @@ texture = ExtResource("12_tyw8m")
 [node name="Texture2" parent="Environment/TutorialAreaShoot/CanvasLayer/Container" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="1" unique_id=1732987967]
 texture = ExtResource("13_l5mvp")
 
-[node name="TutorialAreaShoot2" parent="Environment" unique_id=1111604012 instance=ExtResource("11_3qguu")]
+[node name="TutorialAreaShift" parent="Environment" unique_id=1111604012 instance=ExtResource("11_3qguu")]
 position = Vector2(3702, 398)
 
-[node name="CollisionShape2D" parent="Environment/TutorialAreaShoot2" index="0" unique_id=1676742655]
+[node name="CollisionShape2D" parent="Environment/TutorialAreaShift" index="0" unique_id=1676742655]
 position = Vector2(143.5, -9)
 shape = SubResource("RectangleShape2D_r27b6")
 
-[node name="Texture" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
+[node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
 texture = ExtResource("15_8tc7b")
-
-[node name="Texture2" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="1" unique_id=1732987967]
-visible = false
 
 [node name="Fog" parent="Environment" unique_id=699577285 instance=ExtResource("12_xsbsw")]
 material = SubResource("ShaderMaterial_tyw8m")
@@ -439,5 +439,5 @@ wait_time = 5.0
 [editable path="Environment/TutorialAreaMovement"]
 [editable path="Environment/TutorialAreaDigging"]
 [editable path="Environment/TutorialAreaShoot"]
-[editable path="Environment/TutorialAreaShoot2"]
+[editable path="Environment/TutorialAreaShift"]
 [editable path="Player"]
