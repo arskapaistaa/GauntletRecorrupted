@@ -2,16 +2,17 @@
 
 [ext_resource type="Shader" uid="uid://3cxnjyced5ui" path="res://Materials/Shaders/PixelatedFog.gdshader" id="1_n7fgl"]
 
-[sub_resource type="Gradient" id="Gradient_e5fvg"]
+[sub_resource type="Gradient" id="Gradient_vopof"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+noise_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sopei"]
 width = 256
 height = 256
 noise = SubResource("FastNoiseLite_dxocv")
-color_ramp = SubResource("Gradient_e5fvg")
+color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sopei"]
@@ -31,7 +32,7 @@ shader_parameter/pixel_grid = Vector2(160, 90)
 width = 256
 height = 256
 noise = SubResource("FastNoiseLite_dxocv")
-color_ramp = SubResource("Gradient_e5fvg")
+color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
 [node name="Fog" type="Sprite2D" unique_id=699577285]
