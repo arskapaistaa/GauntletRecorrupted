@@ -18,6 +18,7 @@ public partial class EnemySpawner : StaticBody2D
 	[ExportGroup("Node references")]
 	[Export] private Timer _timer;
 	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private GpuParticles2D _takeDmgParticles = null;
 	[Export] private Marker2D _spawnPoint = null; // Can be left null. If you want enemy to go spawn position, then set this.
 
 	[ExportGroup("Animations")]

@@ -28,6 +28,12 @@ public partial class DamageArea : Area2D
             player.TakeDmg(_enemy.Dmg);
             EmitSignal(SignalName.AttackSucceed);
         }
+
+        if (body is DiggableTiles tile)
+		{
+			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), _enemy.Dmg);
+            EmitSignal(SignalName.AttackSucceed);
+		}
     }
 
     private void OnBodyExited(Node2D body)
