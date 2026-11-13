@@ -141,18 +141,18 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1ddx0"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tjq8y"]
 polygon = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xtta"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vopof"]
 texture = ExtResource("5_cthuj")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tjq8y")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
 0:0/0/custom_data_0 = 50
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5mvp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2354"]
 texture = ExtResource("7_tyw8m")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
@@ -211,8 +211,8 @@ custom_data_layer_0/name = "MaxHealth"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "HasEnemy"
 custom_data_layer_1/type = 1
-sources/0 = SubResource("TileSetAtlasSource_7xtta")
-sources/2 = SubResource("TileSetAtlasSource_l5mvp")
+sources/0 = SubResource("TileSetAtlasSource_vopof")
+sources/2 = SubResource("TileSetAtlasSource_h2354")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgjw0"]
 texture = ExtResource("6_xsbsw")
@@ -342,7 +342,6 @@ BreakEffectScene = ExtResource("12_vopof")
 tile_set = SubResource("TileSet_3vko6")
 
 [node name="NavigationRegionForWurm" type="NavigationRegion2D" parent="Environment" unique_id=375523845]
-visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_5y76b")
 navigation_layers = 2
