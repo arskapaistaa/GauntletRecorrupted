@@ -438,13 +438,10 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
-<<<<<<< HEAD
 		_isShooting = true;
-=======
 
 		PlayGunSfx(WeaponType);
 
->>>>>>> main
 		// Tell GameManager that player shot.
 		GameManager.Instance.OnShotsFiredChanged();
 	}
