@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://biaphtxhougfs"]
+
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_ndasq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3ci3x"]
+load_path = "res://.godot/imported/BloodSplatter2.png-78a84c6d4dccb3e1d7bef14db95c5532.ctex"
+
+[sub_resource type="Gradient" id="Gradient_ll3lk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_ll3lk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ndasq"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 199.99997
+gravity = Vector3(0, 0, 0)
+damping_min = 50.000004
+damping_max = 100.00001
+color = Color(0.7948266, 0.78562605, 0.6737601, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")
+
+[node name="EnemyDamaged" type="GPUParticles2D" unique_id=113120183]
+z_index = 2
+material = ExtResource("1_ndasq")
+emitting = false
+amount = 32
+texture = SubResource("CompressedTexture2D_3ci3x")
+one_shot = true
+explosiveness = 1.0
+trail_sections = 2
+process_material = SubResource("ParticleProcessMaterial_ndasq")

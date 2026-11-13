@@ -11,6 +11,8 @@ public partial class GUI : Control
 	[Export] private TextureRect Shotgun = null;
 	[Export] private AnimatedSprite2D _revolverAmmoSprite = null;
 	[Export] private AnimatedSprite2D _shotgunAmmoSprite = null;
+	[Export] private GpuParticles2D _exitOpenParticles = null;
+	[Export] private GpuParticles2D _exitOpenParticlesSmall = null;
 
 	private PlayerCharacter _player = null;
 	private Level _currentLevel = null;
@@ -45,6 +47,11 @@ public partial class GUI : Control
 			_exitIndicator.AnimationFinished += OnExitIndicatorAnimationFinished;
 		}
 
+		if (_exitOpenParticles != null)
+		{
+			_exitOpenParticles.Finished += OnExitOpenParticlesFinished;
+		}
+
 		if (_revolverAmmoSprite != null)
 		{
 			_revolverAmmoSprite.Frame = 6;
@@ -59,6 +66,8 @@ public partial class GUI : Control
 		}
 	}
 
+
+
     public override void _ExitTree()
     {
         if (_player != null)
@@ -67,6 +76,16 @@ public partial class GUI : Control
 			_player.UpdateRevolverAmmo -= UpdateRevolverAmmo;
 			_player.UpdateShotgunAmmo -= UpdateShotgunAmmo;
 			_player.Reload -= ReloadAnimation;
+		}
+
+		if (_exitIndicator != null)
+		{
+			_exitIndicator.AnimationFinished -= OnExitIndicatorAnimationFinished;
+		}
+
+		if (_exitOpenParticles != null)
+		{
+			_exitOpenParticles.Finished -= OnExitOpenParticlesFinished;
 		}
     }
 
@@ -98,7 +117,7 @@ public partial class GUI : Control
 		}
 		UpdateWeaponVisibility();
 	}
-	
+
 	private void UpdateWeaponVisibility()
 	{
 		if (_player.GetWeaponType() == 0)
@@ -202,10 +221,23 @@ public partial class GUI : Control
 		if (_exitIndicator == null)
 		{
 			GD.PrintErr("GUI is missing Exit Indicator");
-			return;
+		}
+
+		if (_exitOpenParticles == null)
+		{
+			GD.PrintErr("GUI is missing Exit particles");
 		}
 
 		_exitIndicator.Play("Opening");
+		_exitOpenParticles.Restart();
+    }
+
+	private void OnExitOpenParticlesFinished()
+    {
+        if (_exitOpenParticlesSmall != null)
+		{
+			_exitOpenParticlesSmall.Emitting = true;
+		}
     }
 
 	private void OnExitIndicatorAnimationFinished()

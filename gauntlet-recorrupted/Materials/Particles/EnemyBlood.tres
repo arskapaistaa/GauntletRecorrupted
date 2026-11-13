@@ -8,12 +8,15 @@ gradient = SubResource("Gradient_ll3lk")
 
 [resource]
 particle_flag_disable_z = true
-radial_velocity_min = 9.999977
-radial_velocity_max = 399.99997
+emission_shape = 1
+emission_sphere_radius = 40.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 199.99997
 gravity = Vector3(0, 0, 0)
-scale_max = 4.0
-color = Color(0.6509804, 0.6392157, 0.5058824, 1)
+damping_min = 50.000004
+damping_max = 100.00001
+color = Color(0.7948266, 0.78562605, 0.6737601, 1)
 color_ramp = SubResource("GradientTexture1D_dxocv")
-anim_speed_min = 1.0
-anim_speed_max = 5.0
-anim_offset_max = 1.0

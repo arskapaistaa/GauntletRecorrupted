@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://yx1vgqtq4v3r"]
 
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_p7uql"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_6iew5"]
+[ext_resource type="Texture2D" uid="uid://bogqt6biy62tf" path="res://Materials/Particles/BloodSplatter2.png" id="1_p7uql"]
 [ext_resource type="Material" uid="uid://cb8rh61fpuh4b" path="res://Materials/Particles/EnemyBlood.tres" id="1_usno6"]
 
 [node name="EnemyDamaged" type="GPUParticles2D" unique_id=113120183]
 z_index = 2
-material = ExtResource("1_p7uql")
+material = ExtResource("1_6iew5")
 emitting = false
 amount = 16
+texture = ExtResource("1_p7uql")
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 trail_sections = 2

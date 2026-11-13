@@ -4,6 +4,8 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_omace"]
 [ext_resource type="Texture2D" uid="uid://bkvnaxfh834ng" path="res://Art/Enemies/ArtEnemySpawnerTick.png" id="4_k810l"]
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="4_p13av"]
+[ext_resource type="PackedScene" uid="uid://biaphtxhougfs" path="res://Scenes/Particles/SpawnerDamaged.tscn" id="5_x6gt1"]
+[ext_resource type="AudioStream" uid="uid://cjms0m212spja" path="res://Audio/SFX/Spawner/SpawnerSFX.wav" id="6_x6gt1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_00uuc"]
 atlas = ExtResource("4_k810l")
@@ -274,7 +276,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(200, 200)
 
-[node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_spawnPoint")]
+[node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_takeDmgParticles", "_takeDmgSFX", "_spawnPoint")]
 z_index = 3
 collision_layer = 4
 collision_mask = 0
@@ -286,6 +288,8 @@ _health = 100
 _maxActiveEnemiesCount = 7
 _timer = NodePath("Timer")
 _sprite = NodePath("AnimatedSprite2D")
+_takeDmgParticles = NodePath("EnemyDamaged")
+_takeDmgSFX = NodePath("TakeDmgSFX")
 _spawnPoint = NodePath("SpawnPoint")
 _spawnFrame = 5
 
@@ -296,6 +300,9 @@ animation = &"Spawn"
 frame = 6
 frame_progress = 1.0
 
+[node name="EnemyDamaged" parent="." unique_id=113120183 instance=ExtResource("5_x6gt1")]
+emitting = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1600586051]
 position = Vector2(0, -39.835)
 shape = SubResource("RectangleShape2D_sopei")
@@ -304,3 +311,8 @@ shape = SubResource("RectangleShape2D_sopei")
 position = Vector2(0, 768)
 
 [node name="Timer" type="Timer" parent="." unique_id=1461182379]
+
+[node name="TakeDmgSFX" type="AudioStreamPlayer2D" parent="." unique_id=403530022]
+stream = ExtResource("6_x6gt1")
+volume_db = -6.0
+bus = &"SFX"

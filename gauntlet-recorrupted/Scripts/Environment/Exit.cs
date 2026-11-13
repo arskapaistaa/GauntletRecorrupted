@@ -4,6 +4,7 @@ using System;
 public partial class Exit : Area2D
 {
 	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private GpuParticles2D _exitOpenParticles = null;
 	[Export] private string _nextLevelPath;
 	[Export] private Level _currentLevel = null;
 	[Export(PropertyHint.Enum, "FadeInAndOut")]
@@ -85,6 +86,11 @@ public partial class Exit : Area2D
 	private void OnZeroSpawnerLeft()
     {
         CurrentState = State.Ready;
+
+		if (_exitOpenParticles != null)
+		{
+			_exitOpenParticles.Emitting = true;
+		}
     }
 
 	public void UpdateSpawnerCountLabel()
