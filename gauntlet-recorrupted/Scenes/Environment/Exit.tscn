@@ -140,10 +140,11 @@ turbulence_enabled = true
 turbulence_noise_strength = 0.3
 turbulence_influence_min = 0.05
 
-[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
+[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite", "_exitOpenParticles")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
 _sprite = NodePath("AnimatedSprite2D")
+_exitOpenParticles = NodePath("Particles")
 _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 _transitionName = "FadeInAndOut"
 
@@ -153,7 +154,6 @@ animation = &"Open"
 autoplay = "UnReady"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
-visible = false
 shape = SubResource("RectangleShape2D_sopei")
 
 [node name="Particles" parent="." unique_id=662982838 instance=ExtResource("4_43o76")]

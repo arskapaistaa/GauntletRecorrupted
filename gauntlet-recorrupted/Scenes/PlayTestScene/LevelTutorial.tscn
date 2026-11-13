@@ -374,6 +374,7 @@ _currentLevel = NodePath("../..")
 [node name="Static" type="Node" parent="Environment/Audios" unique_id=777009556]
 
 [node name="Ambience" type="AudioStreamPlayer" parent="Environment/Audios/Static" unique_id=924462753]
+process_mode = 3
 stream = ExtResource("10_5y76b")
 volume_db = -12.0
 autoplay = true
