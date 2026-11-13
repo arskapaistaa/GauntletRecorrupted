@@ -31,6 +31,8 @@ public partial class PauseMenu : Control
 
 	private void OnMainMenuButtonPressed()
 	{
+		GameManager.Instance.ResetStats();
+
 		GetTree().Paused = false;
 		if (MainMenuScene != null)
 		{
