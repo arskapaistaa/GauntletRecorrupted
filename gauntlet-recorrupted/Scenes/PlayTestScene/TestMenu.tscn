@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="10_e76bc"]
 [ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="10_mwm07"]
 [ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
+[ext_resource type="PackedScene" uid="uid://dxw8eytk1bjph" path="res://Scenes/Particles/MainMenuParticles.tscn" id="11_j2dai"]
 [ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
 [ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
 [ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="15_4dvq8"]
@@ -27,18 +28,6 @@
 [ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="24_4dvq8"]
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
-
-[sub_resource type="Gradient" id="Gradient_e5fvg"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e76bc"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_dxocv")
-color_ramp = SubResource("Gradient_e5fvg")
-seamless = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
 texture = ExtResource("10_mwm07")
@@ -82,40 +71,6 @@ Button/styles/focus = SubResource("StyleBoxTexture_8r7k7")
 Button/styles/hover = SubResource("StyleBoxTexture_4dvq8")
 Button/styles/normal = SubResource("StyleBoxTexture_e5fvg")
 Button/styles/pressed = SubResource("StyleBoxTexture_pvows")
-
-[sub_resource type="Gradient" id="Gradient_3pkmq"]
-offsets = PackedFloat32Array(0, 0.42579505, 0.88869256, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
-gradient = SubResource("Gradient_3pkmq")
-
-[sub_resource type="Curve" id="Curve_3pkmq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5221519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_j3pel"]
-curve = SubResource("Curve_3pkmq")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
-particle_flag_disable_z = true
-angle_min = 1.0728835e-05
-angle_max = 360.00003
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.2351742e-06
-radial_accel_max = 99.99999
-scale_min = 0.19999999
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_j3pel")
-color = Color(0.83548534, 0.20749122, 0.20350298, 1)
-color_ramp = SubResource("GradientTexture1D_dxocv")
-hue_variation_min = -0.100000024
-hue_variation_max = 0.09999997
-turbulence_enabled = true
-turbulence_influence_min = 0.05
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -488,6 +443,15 @@ grow_vertical = 2
 script = ExtResource("1_t3rra")
 _animations = NodePath("AnimationPlayer")
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=455174047]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TitleScreen" type="Control" parent="." unique_id=1340800981]
 layout_mode = 1
 anchors_preset = 15
@@ -504,11 +468,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ux8os")
-
-[node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("10_e76bc")]
-position = Vector2(319, 179)
-scale = Vector2(2.5, 1.40625)
-texture = SubResource("NoiseTexture2D_e76bc")
 
 [node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
 layout_mode = 1
@@ -527,6 +486,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_p1vdu")
 stretch_mode = 2
+
+[node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("10_e76bc")]
+position = Vector2(320, 180)
 
 [node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
@@ -577,12 +539,9 @@ _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 
-[node name="Particles" type="GPUParticles2D" parent="." unique_id=194365748]
+[node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
 position = Vector2(320, 180)
-amount = 20
-lifetime = 8.0
-visibility_rect = Rect2(-320, -180, 640, 360)
-process_material = SubResource("ParticleProcessMaterial_sopei")
+amount = 10
 
 [node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
 visible = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://l7wt5o3lscwv" path="res://Scripts/Environment/Exit.cs" id="1_cilr6"]
 [ext_resource type="Texture2D" uid="uid://hlvtra4hg7ep" path="res://Art/Environment/ArtExit.png" id="2_3cp03"]
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_cv5yy"]
+[ext_resource type="PackedScene" uid="uid://cw4mey2oa0yje" path="res://Scenes/Particles/ExitParticles.tscn" id="4_43o76"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cv5yy"]
 atlas = ExtResource("2_3cp03")
@@ -116,6 +116,30 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
+[sub_resource type="Gradient" id="Gradient_1vt16"]
+offsets = PackedFloat32Array(0, 0.10070671, 0.88869256, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_1vt16")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cv5yy"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 99.99999
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_dxocv")
+turbulence_enabled = true
+turbulence_noise_strength = 0.3
+turbulence_influence_min = 0.05
+
 [node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
@@ -124,38 +148,16 @@ _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 _transitionName = "FadeInAndOut"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
-material = ExtResource("2_cv5yy")
 sprite_frames = SubResource("SpriteFrames_3cp03")
 animation = &"Open"
 autoplay = "UnReady"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
+visible = false
 shape = SubResource("RectangleShape2D_sopei")
 
-[node name="Control" type="Control" parent="." unique_id=812691231]
-visible = false
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_top = -193.0
-offset_bottom = -193.0
-grow_horizontal = 2
-
-[node name="Label" type="Label" parent="Control" unique_id=1775727677]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.0
-offset_right = 20.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "0/2"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Particles" parent="." unique_id=662982838 instance=ExtResource("4_43o76")]
+amount = 10
+lifetime = 10.0
+one_shot = false
+process_material = SubResource("ParticleProcessMaterial_cv5yy")

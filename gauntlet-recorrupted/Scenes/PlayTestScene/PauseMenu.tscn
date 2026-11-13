@@ -3,8 +3,21 @@
 [ext_resource type="Script" uid="uid://dkd7earp367hu" path="res://Scripts/UI/PauseMenu.cs" id="1_lw475"]
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_uvqs0"]
 [ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/TestMenu.tscn" id="2_7xvl2"]
+[ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="4_qm8wn"]
 
-[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton")]
+[sub_resource type="Animation" id="Animation_w3cdy"]
+resource_name = "CloseSettings"
+
+[sub_resource type="Animation" id="Animation_o4wc4"]
+resource_name = "OpenSettings"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_saibd"]
+_data = {
+&"CloseSettings": SubResource("Animation_w3cdy"),
+&"OpenSettings": SubResource("Animation_o4wc4")
+}
+
+[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton", "_animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +26,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_uvqs0")
 script = ExtResource("1_lw475")
-ResumeButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
-MainMenuButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button2")
+ResumeButton = NodePath("Button")
+MainMenuButton = NodePath("HBoxContainer/Button2")
 MainMenuScene = ExtResource("2_7xvl2")
+_animationPlayer = NodePath("AnimationPlayer")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=820047733]
@@ -29,35 +43,67 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5882353)
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=1652572230]
+[node name="Label" type="Label" parent="." unique_id=1632692286]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.35703126
-anchor_top = 0.2888889
-anchor_right = 0.6429688
-anchor_bottom = 0.7111111
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.0
+offset_top = 78.0
+offset_right = 92.0
+offset_bottom = 153.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1632692286]
-layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Game
 Paused"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer" unique_id=1589427293]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Button" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1126346849]
-layout_mode = 2
+[node name="Button" type="Button" parent="." unique_id=1126346849]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 text = "Resume"
 
-[node name="Button2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=254443614]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1205623987]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -121.0
+offset_right = 150.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Button3" type="Button" parent="HBoxContainer" unique_id=864964784]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="Button2" type="Button" parent="HBoxContainer" unique_id=254443614]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1081524037]
+libraries/ = SubResource("AnimationLibrary_saibd")
+
+[node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("4_qm8wn")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
