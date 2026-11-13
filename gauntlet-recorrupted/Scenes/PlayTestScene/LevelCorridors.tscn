@@ -326,105 +326,200 @@ navigation_layers = 2
 [node name="Adult" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("8_6jruc")]
 position = Vector2(3422, 5364)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult8" parent="Environment/Enemies" unique_id=658575070 instance=ExtResource("8_6jruc")]
 position = Vector2(3776.0002, 5091.0005)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult9" parent="Environment/Enemies" unique_id=1369218482 instance=ExtResource("8_6jruc")]
 position = Vector2(2056.9998, 5440)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult2" parent="Environment/Enemies" unique_id=79872344 instance=ExtResource("8_6jruc")]
 position = Vector2(3080.0002, 5582.0005)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult3" parent="Environment/Enemies" unique_id=1402206248 instance=ExtResource("8_6jruc")]
 position = Vector2(2857.9998, 5259)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult4" parent="Environment/Enemies" unique_id=759536863 instance=ExtResource("8_6jruc")]
 position = Vector2(2671.0002, 5648.0005)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult5" parent="Environment/Enemies" unique_id=364319306 instance=ExtResource("8_6jruc")]
 position = Vector2(2413, 5259)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult6" parent="Environment/Enemies" unique_id=2127659982 instance=ExtResource("8_6jruc")]
 position = Vector2(3232.0002, 4946.0005)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult7" parent="Environment/Enemies" unique_id=485221 instance=ExtResource("8_6jruc")]
 position = Vector2(3641, 5709)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult17" parent="Environment/Enemies" unique_id=867689034 instance=ExtResource("8_6jruc")]
 position = Vector2(1152, 1344)
 rotation = -1.6008401
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Roach6" parent="Environment/Enemies" unique_id=529902078 instance=ExtResource("8_7omew")]
 position = Vector2(2817, -521)
+DetectionRange = 0.0
 
 [node name="Baby" parent="Environment/Enemies" unique_id=270258702 instance=ExtResource("9_cj71i")]
 position = Vector2(1359, 2191)
+DetectionRange = 0.0
 
 [node name="Roach" parent="Environment/Enemies" unique_id=455245341 instance=ExtResource("8_7omew")]
 position = Vector2(1147.9998, 988)
 rotation = -1.5773634
+DetectionRange = 0.0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("8_7omew")]
 position = Vector2(5980, 909)
 rotation = 3.1850243
+DetectionRange = 0.0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("8_7omew")]
 position = Vector2(1634.9999, 1902.9998)
 rotation = 3.1404202
+DetectionRange = 0.0
 
 [node name="Roach4" parent="Environment/Enemies" unique_id=980341719 instance=ExtResource("8_7omew")]
 position = Vector2(1668, 2449)
 rotation = -3.1229892
+DetectionRange = 0.0
 
 [node name="Roach5" parent="Environment/Enemies" unique_id=1212375033 instance=ExtResource("8_7omew")]
 position = Vector2(4472, 3365)
 rotation = 1.5792203
+DetectionRange = 0.0
 
 [node name="Roach8" parent="Environment/Enemies" unique_id=1525857881 instance=ExtResource("8_7omew")]
 position = Vector2(2832, -349)
+DetectionRange = 0.0
 
 [node name="Roach7" parent="Environment/Enemies" unique_id=1602827372 instance=ExtResource("8_7omew")]
 position = Vector2(2832, -190)
+DetectionRange = 0.0
 
 [node name="Baby2" parent="Environment/Enemies" unique_id=1086639213 instance=ExtResource("9_cj71i")]
 position = Vector2(2788, 4741)
+DetectionRange = 0.0
 
 [node name="Adult10" parent="Environment/Enemies" unique_id=219843681 instance=ExtResource("8_6jruc")]
 position = Vector2(1407.0001, -1506.0001)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult11" parent="Environment/Enemies" unique_id=1256925498 instance=ExtResource("8_6jruc")]
 position = Vector2(1423, -2049)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult12" parent="Environment/Enemies" unique_id=398284410 instance=ExtResource("8_6jruc")]
 position = Vector2(4400, -1488.0002)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult13" parent="Environment/Enemies" unique_id=1214261551 instance=ExtResource("8_6jruc")]
 position = Vector2(3925.0005, -1503)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult14" parent="Environment/Enemies" unique_id=596967210 instance=ExtResource("8_6jruc")]
 position = Vector2(4355, -1923)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult15" parent="Environment/Enemies" unique_id=1613657104 instance=ExtResource("8_6jruc")]
 position = Vector2(3925, -1923.0001)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Adult16" parent="Environment/Enemies" unique_id=98324106 instance=ExtResource("8_6jruc")]
 position = Vector2(4577, -2307)
 rotation = 1.5564085
+DetectionRange = 0.0
+_canAwake = false
+AwakeDetectionRange = 200.0
+_minAwakeIntervalTime = 1.0
+_maxAwakeIntervalTime = 1.0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_0efah")]
 position = Vector2(4480.9995, -391)
