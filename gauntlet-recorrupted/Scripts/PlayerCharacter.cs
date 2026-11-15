@@ -66,6 +66,11 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool _isShooting = false;
 	private int _forceRevolverReloadCounter = 0;
 	private int _forceShotgunReloadCounter = 0;
+	private const String ANIMATION_DIG = "Dig";
+	private const String ANIMATION_IDLE = "Idle";
+	private const String ANIMATION_SHOOT_REVOLVER = "RevolverShoot";
+	private const String ANIMATION_SHOOT_SHOTGUN = "ShotgunShoot";
+	private const String ANIMATION_WALK = "Walk";
 
 	public enum FacingDirection
 	{
@@ -188,13 +193,15 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	private void OnAnimationFinished()
 	{
-		if (_isDigging)
+		if (PlayerSprite.Animation == ANIMATION_DIG)
 		{
 			_isDigging = false;
+			PlayerSprite.Play(ANIMATION_IDLE);
 		}
-		if (_isShooting)
+		if (PlayerSprite.Animation == ANIMATION_SHOOT_REVOLVER || PlayerSprite.Animation == ANIMATION_SHOOT_SHOTGUN)
 		{
 			_isShooting = false;
+			PlayerSprite.Play(ANIMATION_IDLE);
 		}
 	}
 
@@ -381,26 +388,26 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		if (_isDigging)
 		{
-			PlayerSprite.Play("Dig");
+			PlayerSprite.Play(ANIMATION_DIG);
 		}
 		else if (_isShooting)
 		{
 			if (WeaponType == 0)
 			{
-				PlayerSprite.Play("RevolverShoot");
+				PlayerSprite.Play(ANIMATION_SHOOT_REVOLVER);
 			}
 			else if (WeaponType == 1)
 			{
-				PlayerSprite.Play("ShotgunShoot");
+				PlayerSprite.Play(ANIMATION_SHOOT_SHOTGUN);
 			}
 		}
 		else if (_isMoving)
 		{
-			PlayerSprite.Play("Walk");
+			PlayerSprite.Play(ANIMATION_WALK);
 		}
 		else
 		{
-			PlayerSprite.Play("Idle");
+			PlayerSprite.Play(ANIMATION_IDLE);
 		}
 	}
 
@@ -438,13 +445,10 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			_knockback = -aimDirection * RecoilForce;
 		}
-<<<<<<< HEAD
 		_isShooting = true;
-=======
 
 		PlayGunSfx(WeaponType);
 
->>>>>>> main
 		// Tell GameManager that player shot.
 		GameManager.Instance.OnShotsFiredChanged();
 	}
