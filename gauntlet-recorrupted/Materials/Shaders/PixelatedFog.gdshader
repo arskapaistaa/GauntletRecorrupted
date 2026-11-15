@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode unshaded;
+render_mode blend_mix;
 
 uniform sampler2D noise_tex : repeat_enable, filter_linear_mipmap;
 uniform vec4 fog_color : source_color = vec4(0.8, 0.85, 0.9, 1.0);

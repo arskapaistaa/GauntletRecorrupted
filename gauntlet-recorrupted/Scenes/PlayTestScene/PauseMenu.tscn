@@ -3,8 +3,66 @@
 [ext_resource type="Script" uid="uid://dkd7earp367hu" path="res://Scripts/UI/PauseMenu.cs" id="1_lw475"]
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_uvqs0"]
 [ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/TestMenu.tscn" id="2_7xvl2"]
+[ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="4_qm8wn"]
+[ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_w3cdy"]
+[ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="6_saibd"]
+[ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="7_87ny8"]
 
-[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton")]
+[sub_resource type="Animation" id="Animation_w3cdy"]
+resource_name = "CloseSettings"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Settings:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_o4wc4"]
+resource_name = "OpenSettings"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Settings:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qm8wn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Settings:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_saibd"]
+_data = {
+&"CloseSettings": SubResource("Animation_w3cdy"),
+&"OpenSettings": SubResource("Animation_o4wc4"),
+&"RESET": SubResource("Animation_qm8wn")
+}
+
+[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton", "_animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +71,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_uvqs0")
 script = ExtResource("1_lw475")
-ResumeButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button")
-MainMenuButton = NodePath("ColorRect/VBoxContainer/HBoxContainer/Button2")
+ResumeButton = NodePath("ResumeBtn")
+MainMenuButton = NodePath("HBoxContainer/MainMenuBtn")
 MainMenuScene = ExtResource("2_7xvl2")
+_animationPlayer = NodePath("AnimationPlayer")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=820047733]
@@ -29,35 +88,89 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5882353)
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=1652572230]
+[node name="Label" type="Label" parent="." unique_id=1632692286]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.35703126
-anchor_top = 0.2888889
-anchor_right = 0.6429688
-anchor_bottom = 0.7111111
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.0
+offset_top = 78.0
+offset_right = 92.0
+offset_bottom = 153.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1632692286]
-layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Game
 Paused"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer" unique_id=1589427293]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Button" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=1126346849]
-layout_mode = 2
+[node name="ResumeBtn" type="Button" parent="." unique_id=1126346849 node_paths=PackedStringArray("_pressedSfx")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 3.0
+offset_right = 47.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 text = "Resume"
+script = ExtResource("4_w3cdy")
+_pressedSfx = NodePath("../Audios/ButtonSFX")
 
-[node name="Button2" type="Button" parent="ColorRect/VBoxContainer/HBoxContainer" unique_id=254443614]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1205623987]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -121.0
+offset_right = 150.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="SettingsBtn" type="Button" parent="HBoxContainer" unique_id=864964784 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+script = ExtResource("4_w3cdy")
+_animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
+_pressedAnimName = "OpenSettings"
+
+[node name="MainMenuBtn" type="Button" parent="HBoxContainer" unique_id=254443614 node_paths=PackedStringArray("_pressedSfx")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
+script = ExtResource("4_w3cdy")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1081524037]
+libraries/ = SubResource("AnimationLibrary_saibd")
+
+[node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("4_qm8wn")]
+process_mode = 3
+visible = false
+layout_mode = 1
+
+[node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+_animations = NodePath("../../AnimationPlayer")
+_pressedSfx = NodePath("../../Audios/ButtonSFX")
+
+[node name="Audios" type="Node" parent="." unique_id=359449701 node_paths=PackedStringArray("_music")]
+script = ExtResource("6_saibd")
+_music = NodePath("")
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1610473785]
+stream = ExtResource("7_87ny8")
+bus = &"SFX"
+
+[editable path="Settings"]

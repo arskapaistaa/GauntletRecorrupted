@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Suspense01.ogg-60cdc05cca61971c83b5510079626a
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

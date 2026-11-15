@@ -18,6 +18,8 @@ public partial class EnemySpawner : StaticBody2D
 	[ExportGroup("Node references")]
 	[Export] private Timer _timer;
 	[Export] private AnimatedSprite2D _sprite = null;
+	[Export] private GpuParticles2D _takeDmgParticles = null;
+	[Export] private AudioStreamPlayer2D _takeDmgSFX = null;
 	[Export] private Marker2D _spawnPoint = null; // Can be left null. If you want enemy to go spawn position, then set this.
 
 	[ExportGroup("Animations")]
@@ -176,6 +178,16 @@ public partial class EnemySpawner : StaticBody2D
 		if (CurrentState != State.Spawn && IsAlive)
 		{
 			CurrentState = State.Damaged;
+		}
+
+		if (_takeDmgParticles != null)
+		{
+			_takeDmgParticles.Restart();
+		}
+
+		if (_takeDmgSFX != null)
+		{
+			_takeDmgSFX.Play();
 		}
 
 		EmitSignal(SignalName.SpawnerDamaged);

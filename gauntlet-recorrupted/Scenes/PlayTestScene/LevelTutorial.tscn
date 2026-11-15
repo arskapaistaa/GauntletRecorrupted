@@ -22,9 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://bgmugk75lu6c" path="res://Art/UserInterface/MouseLeft.png" id="12_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="12_vopof"]
 [ext_resource type="PackedScene" uid="uid://ch28284riawxa" path="res://Scenes/Environment/Fog.tscn" id="12_xsbsw"]
-[ext_resource type="Shader" uid="uid://2xb7b8tny3rf" path="res://Materials/Shaders/Fog.gdshader" id="13_7okfi"]
 [ext_resource type="Texture2D" uid="uid://cpodakdj6a6ff" path="res://Art/UserInterface/R.png" id="13_l5mvp"]
 [ext_resource type="Texture2D" uid="uid://cwxe3h8ebityw" path="res://Art/UserInterface/Shift.png" id="15_8tc7b"]
+[ext_resource type="Shader" uid="uid://3cxnjyced5ui" path="res://Materials/Shaders/PixelatedFog.gdshader" id="22_vopof"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
 vertices = PackedVector2Array(-2477.6328, 7183.508, -2623.4688, 3648, 14098, 3648, 14248.523, 6975.4766, 14364.469, -1702.2891, 14098, -1710.9297, 9666, 1088, 9666, 2288, 8210, 2288, 8210, 1776, 7698, 1776, 7698, 1600, 8210, 1600, 8210, 1088, 4882, 1088, 4882, 576, 5826, 576, 5826, 1776, 4882, 1776, 4882, 1264, 4290, 1088, 4114, 1264, 4114, -528, 4290, -704, 2498, -704, 2498, -528, 2498, -16, 1042, -16, 1042, -528, 1042, -704, -238, -528, -238, -704, 2498, -1216, 1042, -1216, 7362, 1776, 7186, 1776, 7186, 1600, 7362, 1600, 10434, 1776, 10258, 1776, 10258, 1600, 10434, 1600, 11970, 496, 11794, 496, 11794, 320, 11970, 320, -574, -16, -2286, -16, -2286, -1216, -574, -1216, 12738, 832, 12738, 2544, 12692.867, 2267.3906, 12570.844, 2519.3906, 11026, 2544, 12318.844, 2397.3281, 11026, 1776, 12440.867, 2145.3281, 11026, 832, 11026, 1600, 10770, 1776, 10770, 1600, 12677.8125, -1251.6172, 12738, -1472, 12738, -16, 12538.82, -1008.5469, 12434.727, -1390.6094, 11026, -1472, 12295.75, -1147.5391, 11026, -16)
@@ -141,18 +141,18 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1ddx0"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tjq8y"]
 polygon = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xtta"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vopof"]
 texture = ExtResource("5_cthuj")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1ddx0")
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tjq8y")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
 0:0/0/custom_data_0 = 50
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5mvp"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2354"]
 texture = ExtResource("7_tyw8m")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
@@ -211,8 +211,8 @@ custom_data_layer_0/name = "MaxHealth"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "HasEnemy"
 custom_data_layer_1/type = 1
-sources/0 = SubResource("TileSetAtlasSource_7xtta")
-sources/2 = SubResource("TileSetAtlasSource_l5mvp")
+sources/0 = SubResource("TileSetAtlasSource_vopof")
+sources/2 = SubResource("TileSetAtlasSource_h2354")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgjw0"]
 texture = ExtResource("6_xsbsw")
@@ -250,6 +250,7 @@ size = Vector2(959, 1206)
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+noise_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sopei"]
 width = 256
@@ -259,15 +260,30 @@ color_ramp = SubResource("Gradient_e5fvg")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tyw8m"]
-shader = ExtResource("13_7okfi")
+shader = ExtResource("22_vopof")
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_sopei")
 shader_parameter/fog_color = Color(0.8, 0.85, 0.9, 1)
 shader_parameter/density = 0.10000000475
-shader_parameter/tiling = Vector2(2, 2)
+shader_parameter/tiling = Vector2(1, 1)
 shader_parameter/speed_a = Vector2(-0.03, 0.05)
 shader_parameter/speed_b = Vector2(0.05, -0.03)
 shader_parameter/edge_low = 0.3
 shader_parameter/edge_high = 0.8
+shader_parameter/pixelate = true
+shader_parameter/pixel_grid = Vector2(160, 90)
+
+[sub_resource type="Gradient" id="Gradient_vopof"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2354"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4bxdr"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_h2354")
+color_ramp = SubResource("Gradient_vopof")
+seamless = true
 
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_vaf4p")
@@ -305,7 +321,7 @@ tile_map_data = PackedByteArray("AADw//f/AAAAAAEAAADw//j/AAAAAAEAAADw//n/AAAAAAE
 tile_set = SubResource("TileSet_pa0li")
 
 [node name="Ground Connect" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1049948724]
-tile_map_data = PackedByteArray("AAAnAPz/AAAGAAAAAAApAPz/AAAJAAAAAAAoAPv/AAAKAAAAAAAoAAIAAAALAAAAAAApAAEAAAAGAAEAAAAqAAAAAAAHAAAAAAAnAAAAAAAHAAIAAAAmAAEAAAAIAAAAAAAnAAIAAAALAAAAAAAkAAMAAAAHAAAAAAAiAAMAAAALAAEAAAAfAAMAAAAHAAIAAAAfAAUAAAAHAAEAAAAeAAQAAAAGAAAAAAAaAAIAAAAJAAIAAAAdAAUAAAAJAAIAAAAaAAMAAAAHAAAAAAAWAAMAAAAKAAEAAAAQAAIAAAAIAAEAAAAPAAMAAAAHAAEAAAAPAAEAAAAHAAIAAAAOAAIAAAAGAAAAAAAQAAAAAAALAAIAAAAOAP//AAALAAIAAAAPAAAAAAAHAAAAAAANAAAAAAAIAAAAAAAOAAEAAAALAAAAAAAPAP//AAAIAAAAAAD3//r/AAAIAAAAAAD5//r/AAAHAAAAAAA=")
+tile_map_data = PackedByteArray("AAAnAPz/AAAGAAAAAAApAPz/AAAJAAAAAAAoAPv/AAAKAAAAAAAoAAIAAAALAAAAAAApAAEAAAAGAAEAAAAqAAAAAAAHAAAAAAAnAAAAAAAHAAIAAAAnAAIAAAALAAAAAAAkAAMAAAAHAAAAAAAiAAMAAAALAAEAAAAfAAMAAAAHAAIAAAAfAAUAAAAHAAEAAAAeAAQAAAAGAAAAAAAaAAIAAAAJAAIAAAAdAAUAAAAJAAIAAAAaAAMAAAAHAAAAAAAWAAMAAAAKAAEAAAAQAAIAAAAIAAEAAAAPAAMAAAAHAAEAAAAPAAEAAAAHAAIAAAAOAAIAAAAGAAAAAAAQAAAAAAALAAIAAAAOAP//AAALAAIAAAAPAAAAAAAHAAAAAAANAAAAAAAIAAAAAAAOAAEAAAALAAAAAAAPAP//AAAIAAAAAAD3//r/AAAIAAAAAAD5//r/AAAHAAAAAAAqAAUAAAAHAAUAAAArAAYAAAAIAAUAAAArAAUAAAAKAAUAAAApAAYAAAAHAAUAAAAqAAYAAAAIAAUAAAApAAQAAAAJAAUAAAAqAPj/AAAHAAQAAAArAPj/AAAGAAQAAAApAPf/AAAGAAMAAAAqAPf/AAAKAAUAAAArAPf/AAAKAAUAAAAoAP7/AAAIAAUAAAAoAP//AAAHAAQAAAAoAP3/AAAHAAUAAADx//j/AAABAAMAAAD0//j/AAAEAAUAAAD0//v/AAAEAAMAAAD0//z/AAAFAAMAAADy//z/AAACAAMAAAD2//v/AAACAAQAAAD3//j/AAAAAAMAAAD0//r/AAABAAUAAAD1//r/AAACAAUAAAD///z/AAAAAAUAAAADAPj/AAADAAQAAAD///n/AAABAAMAAAADAPv/AAABAAUAAAAFAPr/AAACAAMAAAAKAPr/AAAFAAUAAAAKAPv/AAAEAAUAAAAKAP3/AAADAAUAAAAKAAAAAAAAAAQAAAAMAAEAAAADAAQAAAAOAAMAAAACAAMAAAAeAAEAAAABAAQAAAAaAAUAAAAAAAQAAAAbAAQAAAACAAMAAAAbAAIAAAADAAMAAAAeAAIAAAACAAUAAAAqAAMAAAADAAQAAAAmAAUAAAABAAMAAAAlAAYAAAADAAUAAAAlAAAAAAAAAAMAAAAlAAMAAAAEAAUAAAAlAAIAAAAFAAUAAAArAAAAAAAFAAMAAAAmAPj/AAABAAMAAAAmAPn/AAABAAQAAAArAPz/AAACAAQAAAAqAPr/AAACAAMAAAAlAPz/AAACAAUAAAAoAPf/AAADAAQAAAAmAAEAAAAGAAAAAAA=")
 tile_set = SubResource("TileSet_80cxc")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=733672253]
@@ -314,7 +330,7 @@ tile_set = SubResource("TileSet_sopei")
 
 [node name="DiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1666934862]
 z_index = 2
-tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD5//r/AgACAAEAAAD6//r/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAP//AAAAAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAARAAEAAAAAAAAAAAASAAEAAAAAAAAAAAATAAEAAAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAEAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAEAAAAAAAAAAAAWAAEAAAAAAAAAAAAVAP//AAAAAAAAAAAWAP//AAAAAAAAAAAVAAMAAAAAAAAAAAAXAAMAAAAAAAAAAAD4//r/AAAAAAAAAAAgAAMAAAAAAAAAAAAhAAMAAAAAAAAAAAAjAAMAAAAAAAAAAAAoAP//AAAAAAAAAAAoAP3/AAAAAAAAAAD6//r/AAAAAAAAAAAoAP7/AgACAAEAAAA=")
 tile_set = SubResource("TileSet_rk2iv")
 script = ExtResource("7_cthuj")
 TickScene = ExtResource("8_7okfi")
@@ -326,7 +342,6 @@ BreakEffectScene = ExtResource("12_vopof")
 tile_set = SubResource("TileSet_3vko6")
 
 [node name="NavigationRegionForWurm" type="NavigationRegion2D" parent="Environment" unique_id=375523845]
-visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_5y76b")
 navigation_layers = 2
@@ -336,22 +351,19 @@ navigation_layers = 2
 [node name="Roach" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_7okfi")]
 position = Vector2(2676, -966)
 rotation = -1.5773634
-DetectionRange = 0.0
 
 [node name="Roach2" parent="Environment/Enemies" unique_id=1769050227 instance=ExtResource("7_7okfi")]
 position = Vector2(9726, -1143.9999)
 rotation = 0.48373985
-DetectionRange = 0.0
 
 [node name="Roach3" parent="Environment/Enemies" unique_id=2049297512 instance=ExtResource("7_7okfi")]
 position = Vector2(8817, 900.9999)
 rotation = 3.1404202
-DetectionRange = 0.0
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
 position = Vector2(7419.9995, 901.9997)
 rotation = 3.139592
-_nextLevelPath = "res://Scenes/PlayTestScene/LevelShotgun.tscn"
+_nextLevelPath = "res://Scenes/PlayTestScene/LevelCorridors.tscn"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
@@ -359,6 +371,7 @@ _currentLevel = NodePath("../..")
 [node name="Static" type="Node" parent="Environment/Audios" unique_id=777009556]
 
 [node name="Ambience" type="AudioStreamPlayer" parent="Environment/Audios/Static" unique_id=924462753]
+process_mode = 3
 stream = ExtResource("10_5y76b")
 volume_db = -12.0
 autoplay = true
@@ -410,8 +423,9 @@ texture = ExtResource("15_8tc7b")
 
 [node name="Fog" parent="Environment" unique_id=699577285 instance=ExtResource("12_xsbsw")]
 material = SubResource("ShaderMaterial_tyw8m")
-position = Vector2(4360, 152.00012)
-scale = Vector2(63.820313, 20.703125)
+position = Vector2(4360, -425)
+scale = Vector2(63.820313, 25.210936)
+texture = SubResource("NoiseTexture2D_4bxdr")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xhb7kewbet1d" path="res://Art/Enemies/ArtEnemyWurm.png" id="3_cjwot"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_gs6ov"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_bq18e"]
+[ext_resource type="PackedScene" uid="uid://yx1vgqtq4v3r" path="res://Scenes/Particles/EnemyDamaged.tscn" id="6_36dg4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iiks1"]
 atlas = ExtResource("3_cjwot")
@@ -277,7 +278,7 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(177, 98)
 
-[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx") groups=["Enemy", "Wurm"]]
+[node name="Wurm" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToTimer") groups=["Enemy", "Wurm"]]
 collision_layer = 32
 collision_mask = 8
 motion_mode = 1
@@ -287,7 +288,6 @@ _attackType = 3
 _health = 400.0
 _maxSpeed = 200.0
 _dmg = 40
-_attackRange = 200.0
 _patrolDistance = 3000.0
 _patrolAtleastDistance = 1500.0
 _canPatrol = true
@@ -307,13 +307,16 @@ _noticeSfx = NodePath("Audios/NoticeSFX")
 _attackSfx = NodePath("Audios/AttackSFX")
 _damagedSfx = NodePath("Audios/DamagedSFX")
 _defeatSfx = NodePath("Audios/DefeatSFX")
+_damagedParticles = NodePath("Particles/EnemyDamaged")
+_destroyTimer = NodePath("Timers/DestroyTimer")
+_fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_36dg4")
 InCombatState = 2
 OutOfCombatState = 2
 AfterNoticeState = 2
-NavigationFinishedState = 2
+NavigationFinishedState = 3
 AfterWakedUp = 2
 CantReachTargetState = 2
 
@@ -363,6 +366,10 @@ debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
 target_position = Vector2(50, 0)
 collision_mask = 5
 
+[node name="Particles" type="Node2D" parent="." unique_id=1021599722]
+
+[node name="EnemyDamaged" parent="Particles" unique_id=113120183 instance=ExtResource("6_36dg4")]
+
 [node name="Audios" type="Node2D" parent="." unique_id=373545108]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=921413474]
@@ -387,3 +394,12 @@ bus = &"SFX"
 pitch_scale = 0.61
 max_distance = 1000.0
 bus = &"SFX"
+
+[node name="Timers" type="Node" parent="." unique_id=1677342458]
+
+[node name="DestroyTimer" type="Timer" parent="Timers" unique_id=2014842270]
+wait_time = 3.0
+one_shot = true
+
+[node name="FromIdleToPatrolTimer" type="Timer" parent="Timers" unique_id=2073237960]
+one_shot = true

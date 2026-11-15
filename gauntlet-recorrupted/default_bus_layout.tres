@@ -5,9 +5,8 @@ resource_name = "HardLimiter"
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
-room_size = 0.7
-damping = 0.2
-hipass = 0.5
+damping = 0.1
+hipass = 0.2
 wet = 0.1
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]

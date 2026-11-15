@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="10_g4evp"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="11_oogag"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="12_5oljg"]
+[ext_resource type="PackedScene" uid="uid://bxvvl8lu0mqvs" path="res://Scenes/Characters/Enemy/Wurm.tscn" id="16_yhkka"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sopei"]
 vertices = PackedVector2Array(-574, 2800, -750, 2800, -750, 2624, -574, 2624, -830, 2544, -1262, 2544, -1262, 2368, -830, 2368, 3266, 2544, 3090, 2544, 3090, 2368, 3266, 2368, 450, 2288, 274, 2288, 274, 2112, 450, 2112, -1598, 2032, -1774, 2032, -1774, 1856, -1598, 1856, -1598, 1008, -1774, 1008, -1774, 832, -1598, 832, 4546, 752, 4370, 752, 4370, 576, 4546, 576, -1598, -272, -1774, -272, -1774, -448, -1598, -448, -1854, -528, -2030, -528, -2030, -704, -1854, -704, 2754, -704, 3266, -704, 3266, -528, 2322, -528, 2322, -704, 2578, -704, 2754, -960, 2578, -960, -1086, -1216, -1086, -1040, -1342, -1040, -1774, -1216, -1774, -784, -1342, -784, -62, -1040, -238, -1040, -238, -1216, -62, -1216, 962, -1040, 786, -1040, 786, -1216, 962, -1216, 3369, 202.15625, 3369, -77.84375, 3778, -192, 3778, 1776, 2834, -192, 3089, -77.84375, 2322, 1600, 2322, 1264, 2498, 1520, 2498, 1776, 1042, 1776, 1730, 1600, 2834, 752, 3089, 202.15625, 3346, 752, 3346, 1088, 2834, 1776, 2834, 1520, 2498, 1088, 1042, -192, 1730, 1008, 2498, -192, 2066, 1008, 2066, 1264, -139.96875, 955.7578, 706, -192, 706, 1776, -303.35156, 1183.1484, -750, 1776, -530.7422, 1019.75, -750, 576, -367.34375, 792.3828, 18, 576, 18, 240, -750, -192, -750, 240)
@@ -67,6 +68,12 @@ tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 4
 sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yhkka"]
+vertices = PackedVector2Array(4785.172, -1693.1797, 4804.8203, 2817.961, -2292.1094, 2812.0313, -2304.8828, -1725.8125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2345, -1766, 4825, -1733, 4845, 2858, -2332, 2852)])
+agent_radius = 40.0
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(2400, 1200, 1)
@@ -83,12 +90,16 @@ color = Color(0.62384886, 0.5371237, 0.1692642, 1)
 turbulence_enabled = true
 turbulence_influence_max = 0.5
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_wmulu")
-_maxTotalEnemyCount = 50
+_maxTotalEnemyCount = 10
 _spawnerCount = 2
+_presetEnemyCount = 4
+_isThereWurmInThisLevel = true
+_wurmPatrolStartChange = 0.3
 _navRegion = NodePath("Environment/NavigationRegion2D")
 Player = NodePath("Player")
+_eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
 
@@ -128,6 +139,11 @@ RoachScene = ExtResource("7_u88bg")
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/NavigationRegion2D/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")
 
+[node name="NavigationRegionWurm" type="NavigationRegion2D" parent="Environment" unique_id=246627282]
+position = Vector2(-1514, -792)
+navigation_polygon = SubResource("NavigationPolygon_yhkka")
+navigation_layers = 2
+
 [node name="Roach" parent="Environment" unique_id=1765397949 instance=ExtResource("7_u88bg")]
 position = Vector2(-244, -516)
 DetectionRange = 0.0
@@ -143,6 +159,9 @@ DetectionRange = 0.0
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_cbuny")]
 position = Vector2(821, -817)
 _currentLevel = NodePath("../..")
+
+[node name="Wurm" parent="Environment" unique_id=1014149700 instance=ExtResource("16_yhkka")]
+position = Vector2(-1691, -1924)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
@@ -169,5 +188,8 @@ limit_bottom = 2267
 
 [node name="Cursor" parent="." unique_id=1467761183 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("12_5oljg")]
 PlayerCharacter = NodePath("../Player")
+
+[node name="EventTimer" type="Timer" parent="." unique_id=621308671]
+wait_time = 5.0
 
 [editable path="Player"]

@@ -34,9 +34,9 @@ public partial class DiggableTiles : TileMapLayer
 				SpawnEnemy(coords);
 		}
 		else
-        {
-            _tileHealth[coords] = currentHealth;
-        }
+		{
+			_tileHealth[coords] = currentHealth;
+		}
 	}
 
 	private int GetCurrentHealth(Vector2I coords)
@@ -52,7 +52,7 @@ public partial class DiggableTiles : TileMapLayer
 	private int GetMaxHealth(Vector2I coords)
 	{
 		TileData tileData = GetCellTileData(coords);
-        return tileData.GetCustomData(MaxHealthDataString).AsInt32();
+		return tileData.GetCustomData(MaxHealthDataString).AsInt32();
 	}
 
 	private void SpawnBreakEffect(Vector2I cell)

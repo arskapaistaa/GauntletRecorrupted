@@ -54,7 +54,7 @@ ALR: 2000.0
 
 ### Adult
 S: 200.0
-H: 100
+H: 50
 DMG: 20
 AS: NONE
 DR: 200.0

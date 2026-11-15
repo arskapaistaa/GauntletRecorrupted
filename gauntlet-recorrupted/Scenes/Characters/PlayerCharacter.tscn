@@ -246,7 +246,8 @@ position = Vector2(64, 0)
 rotation = 1.5707964
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_c32ia")
-animation = &"ShotgunShoot"
+animation = &"Walk"
+frame_progress = 0.11265108
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
 shape = SubResource("CircleShape2D_2o20b")

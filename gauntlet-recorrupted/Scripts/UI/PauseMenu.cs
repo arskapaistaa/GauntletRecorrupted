@@ -6,6 +6,7 @@ public partial class PauseMenu : Control
 	[Export] private Button ResumeButton;
 	[Export] private Button MainMenuButton;
 	[Export(PropertyHint.File, "*.tscn")] private PackedScene MainMenuScene;
+	[Export] private AnimationPlayer _animationPlayer = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,6 +31,8 @@ public partial class PauseMenu : Control
 
 	private void OnMainMenuButtonPressed()
 	{
+		GameManager.Instance.ResetStats();
+
 		GetTree().Paused = false;
 		if (MainMenuScene != null)
 		{
