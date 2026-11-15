@@ -621,8 +621,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			GD.Print("Cannot dig that tile.");
 			return;
 		}
-		DiggableTiles.DamageTile(targetCell, 1000);
-		Level.Current.UpdateNavRegion();
+		DiggableTiles.DeleteCell(targetCell);
 		PlayDiggingSfx();
 		GD.Print($"Dug tile at {targetCell}");
 	}

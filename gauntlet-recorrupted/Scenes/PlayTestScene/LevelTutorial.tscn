@@ -150,7 +150,7 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tjq8y")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128, -128, -128)
-0:0/0/custom_data_0 = 50
+0:0/0/custom_data_0 = 80
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2354"]
 texture = ExtResource("7_tyw8m")

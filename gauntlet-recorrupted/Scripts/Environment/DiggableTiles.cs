@@ -26,12 +26,8 @@ public partial class DiggableTiles : TileMapLayer
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{
-			bool hasEnemy = TileHasEnemy(coords);
 			_tileHealth.Remove(coords);
-			EraseCell(coords);
-			SpawnBreakEffect(coords);
-			if (hasEnemy)
-				SpawnEnemy(coords);
+			DeleteCell(coords);
 		}
 		else
 		{
@@ -85,5 +81,15 @@ public partial class DiggableTiles : TileMapLayer
 		if (tileData == null)
 			return false;
 		return tileData.GetCustomData(HasEnemyDataString).AsBool();
+	}
+
+	public void DeleteCell(Vector2I coords)
+	{
+		bool hasEnemy = TileHasEnemy(coords);
+		EraseCell(coords);
+		if (hasEnemy)
+			SpawnEnemy(coords);
+		SpawnBreakEffect(coords);
+		Level.Current.UpdateNavRegion();
 	}
 }

@@ -13,7 +13,8 @@ public partial class Bullet : Area2D
 	/// Multiplier for critical strikes -> When enemy is in attack state
 	/// </summary>
 	[Export(PropertyHint.Range, "1,2,0.1,suffix:x dmg")] private float _criticalDmgMultiplier = 1.5f;
-
+	[Export] private PackedScene _hitEffectScene = null;
+	[Export(PropertyHint.Range, "0,1,0.05")] private float _shotgunHitEffectChance = 0.5f;
 	private float Speed;
 	private int Damage;
 	private float Lifetime;
@@ -94,8 +95,22 @@ public partial class Bullet : Area2D
 		else if (body is DiggableTiles tile)
 		{
 			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), Damage);
+			if (WeaponType == 0 || GD.Randf() < _shotgunHitEffectChance)
+				SpawnHitEffect(GlobalPosition);
 		}
-		
 		QueueFree();
+	}
+
+	private void SpawnHitEffect(Vector2 position)
+	{
+		if (_hitEffectScene == null)
+		{
+			GD.PrintErr("Hit effect scene is not assigned.");
+			return;
+		}
+		Node2D effect = _hitEffectScene.Instantiate<Node2D>();
+		GetTree().CurrentScene.AddChild(effect);
+		effect.GlobalPosition = position;
+		effect.Rotation = _direction.Angle() + Mathf.Pi;
 	}
 }

@@ -2,19 +2,22 @@
 
 [ext_resource type="Script" uid="uid://cuhex13vxsjoe" path="res://Scripts/Bullet.cs" id="1_oduel"]
 [ext_resource type="Texture2D" uid="uid://eyvbqm2qgp4" path="res://Art/Environment/bulletsprite.png" id="2_oduel"]
+[ext_resource type="PackedScene" uid="uid://c1komgr7e6ip" path="res://Scenes/Particles/HitEffect.tscn" id="2_ycag2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ycag2"]
-radius = 12.0
+radius = 17.0
 
 [node name="Bullet" type="Area2D" unique_id=873106433]
 z_index = 1
 collision_layer = 8
 collision_mask = 38
 script = ExtResource("1_oduel")
-RevolverBulletSpeed = 15000.0
-ShotgunBulletSpeed = 12400.0
+RevolverBulletSpeed = 9500.0
+ShotgunBulletSpeed = 6800.0
 ShotgunBulletDamage = 4
-ShotgunBulletLifetime = 0.3
+ShotgunBulletLifetime = 0.2
+_hitEffectScene = ExtResource("2_ycag2")
+_shotgunHitEffectChance = 0.15
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1993800644]
 position = Vector2(-13, 0)
