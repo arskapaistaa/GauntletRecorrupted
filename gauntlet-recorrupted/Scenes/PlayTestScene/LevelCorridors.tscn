@@ -467,4 +467,15 @@ PlayerCharacter = NodePath("../Player")
 [node name="EventTimer" type="Timer" parent="." unique_id=475063518]
 wait_time = 5.0
 
+[node name="Audios" type="Node2D" parent="." unique_id=863862495]
+
+[node name="Static" type="Node" parent="Audios" unique_id=296052828]
+
+[node name="Ambience" type="AudioStreamPlayer" parent="Audios/Static" unique_id=336615160]
+process_mode = 3
+stream = ExtResource("10_tjq8y")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+
 [editable path="Player"]
