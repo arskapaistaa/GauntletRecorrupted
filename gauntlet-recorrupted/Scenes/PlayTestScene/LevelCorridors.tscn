@@ -471,7 +471,6 @@ _maxAwakeIntervalTime = 1.0
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_0efah")]
 position = Vector2(4480.9995, -391)
 rotation = 3.139592
-_nextLevelPath = "res://Scenes/PlayTestScene/LevelShotgun.tscn"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
