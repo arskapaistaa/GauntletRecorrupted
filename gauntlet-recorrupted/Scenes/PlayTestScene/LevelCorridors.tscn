@@ -271,6 +271,8 @@ physics_layer_0/collision_layer = 4
 sources/0 = SubResource("TileSetAtlasSource_qgjw0")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5y76b"]
+vertices = PackedVector2Array(9950.43, -2202.2266, 9379.4375, 6913.6875, 818.77344, 6844.3125, 767.21875, -2253.7734)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(727, -2294, 9993, -2242, 9417, 6954, 779, 6884)])
 agent_radius = 40.0
 
@@ -552,7 +554,6 @@ _maxAwakeIntervalTime = 1.0
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_0efah")]
 position = Vector2(4480.9995, -391)
 rotation = 3.139592
-_nextLevelPath = "res://Scenes/PlayTestScene/LevelShotgun.tscn"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
