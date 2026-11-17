@@ -419,12 +419,6 @@ public partial class Enemy : CharacterBody2D
 		_agent.TargetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 1, true);
 
 		HasRoute = true;
-
-		if (!_agent.IsTargetReachable())
-		{
-			_brain.TargetIsNotReachable();
-			HasRoute = false;
-		}
 	}
 
 	public void LookAtPosition()

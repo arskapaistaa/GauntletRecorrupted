@@ -295,10 +295,7 @@ public partial class Brain : Node
 		{
 			if (RandomStateList.Contains(CurrentState))
 			{
-				CurrentState = RandomizedState();
-
-				_enemy.OnStateChanged(CurrentState);
-				return;
+				state = RandomizedState();
 			}
 		}
 

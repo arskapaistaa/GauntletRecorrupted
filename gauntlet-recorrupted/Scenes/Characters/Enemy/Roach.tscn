@@ -240,8 +240,8 @@ _alarmRange = 2000.0
 _canMoveWhileDamaged = true
 _damagedSpeed = 200.0
 _canPatrol = true
-_minIdleTime = 2.0
-_maxIdleTime = 5.0
+_minIdleTime = 10.0
+_maxIdleTime = 20.0
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _characterCollision = NodePath("CharacterCollision")
@@ -263,9 +263,6 @@ _attackEndFrames = 3
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
-_isBehaviourRandomized = true
-RandomStateList = Array[int]([3])
-NextRandomStateList = Array[int]([3, 2])
 EntersAreaState = 4
 InCombatState = 6
 OutOfCombatState = 4
