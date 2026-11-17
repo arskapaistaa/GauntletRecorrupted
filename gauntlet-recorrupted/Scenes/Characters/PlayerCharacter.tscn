@@ -12,7 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://04tv05vanndb" path="res://Art/UserInterface/pointer.png" id="8_4t8qp"]
 [ext_resource type="Texture2D" uid="uid://cjtjmcfbs7pkx" path="res://Art/ConeOfLight/ConeLightShape.png_0004.png" id="8_40gda"]
 [ext_resource type="Texture2D" uid="uid://c2g608wf1fkyo" path="res://Art/ConeOfLight/ConeLightShape.png_0005.png" id="9_lhk5l"]
-[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="12_eisek"]
+[ext_resource type="AudioStream" uid="uid://cy87tpf7uqa7x" path="res://Audio/SFX/Player/Footsteps1.ogg" id="13_lhk5l"]
+[ext_resource type="AudioStream" uid="uid://b3xa5vddc4t6w" path="res://Audio/SFX/Player/Footsteps2.ogg" id="14_1ht1w"]
 [ext_resource type="AudioStream" uid="uid://b0tdwm4jdc17n" path="res://Audio/PrototypeOnly/RevolverSound.wav" id="14_i7eac"]
 [ext_resource type="AudioStream" uid="uid://cep54664cckgc" path="res://Audio/PrototypeOnly/ShotgunSound.wav" id="14_nwqxr"]
 [ext_resource type="AudioStream" uid="uid://bmwks7d35c0ln" path="res://Audio/SFX/Player/Digging.wav" id="16_40gda"]
@@ -217,6 +218,14 @@ _data = {
 &"RESET": SubResource("Animation_8kqif")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rmn24"]
+playback_mode = 1
+random_pitch = 1.1892071
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("13_lhk5l")
+stream_1/stream = ExtResource("14_1ht1w")
+
 [node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow", "_movementSFX", "_revolverSFX", "_shotgunSFX", "_diggingSFX")]
 z_index = 1
 collision_mask = 6
@@ -309,7 +318,8 @@ current = true
 [node name="Audios" type="Node2D" parent="." unique_id=1056500525]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=349288383]
-stream = ExtResource("12_eisek")
+stream = SubResource("AudioStreamRandomizer_rmn24")
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="ShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1590027372]

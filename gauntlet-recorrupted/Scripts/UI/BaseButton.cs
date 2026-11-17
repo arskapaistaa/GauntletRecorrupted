@@ -17,6 +17,8 @@ public partial class BaseButton : Button
 	[Export] private string _pressedAnimName = null;
 	[ExportSubgroup("This is a exit button")]
 	[Export] private bool _isExitButton = false;
+	[ExportSubgroup("This is a Start button")]
+	[Export] private bool _isStartButton = false;
 
 	[ExportGroup("Focus")]
 	[Export] private AudioStreamPlayer _enterFocusedSfx = null;
@@ -75,6 +77,11 @@ public partial class BaseButton : Button
 		{
 			GetTree().Quit();
 		}
+
+		if (_isStartButton)
+		{
+			GameManager.Instance.ResetStats();
+		}
 	}
 
 	private void OnFocusEntered()
@@ -103,7 +110,12 @@ public partial class BaseButton : Button
 			return;
 		}
 
-		if (animName == _pressedAnimName)
+		if (animName == null)
+		{
+			return;
+		}
+
+		if (animName == _pressedAnimName && _pathToSceneMode == TriggerMode.AnimationFinished)
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
 		}

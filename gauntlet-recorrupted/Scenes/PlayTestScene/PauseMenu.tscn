@@ -164,10 +164,10 @@ layout_mode = 1
 [node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
+_pressedAnimName = "CloseSettings"
 
-[node name="Audios" type="Node" parent="." unique_id=359449701 node_paths=PackedStringArray("_music")]
+[node name="Audios" type="Node" parent="." unique_id=359449701]
 script = ExtResource("6_saibd")
-_music = NodePath("")
 
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1610473785]
 stream = ExtResource("7_87ny8")

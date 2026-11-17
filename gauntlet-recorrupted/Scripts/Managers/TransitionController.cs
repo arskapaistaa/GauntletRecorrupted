@@ -9,12 +9,12 @@ public partial class TransitionController : Node
 		private set;
 	}
 
-	private string _pathToNextScene;
+	private string _pathToNextScene = "";
 	private AnimationPlayer _animationPlayer = null;
 
 	[Signal] public delegate void TransitionFinishedEventHandler();
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         if (Instance == null)
 		{
@@ -31,7 +31,18 @@ public partial class TransitionController : Node
 			_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		}
 
-		_animationPlayer.AnimationFinished += OnAnimationFinished;
+		if (_animationPlayer != null)
+		{
+			_animationPlayer.AnimationFinished += OnAnimationFinished;
+		}
+    }
+
+    public override void _ExitTree()
+    {
+		if (_animationPlayer != null)
+		{
+			_animationPlayer.AnimationFinished -= OnAnimationFinished;
+		}
     }
 
     /// <summary>

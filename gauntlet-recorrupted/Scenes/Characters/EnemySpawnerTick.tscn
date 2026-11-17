@@ -181,7 +181,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Defeat",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -279,7 +279,7 @@ position = Vector2(4, -7)
 sprite_frames = SubResource("SpriteFrames_kxvjs")
 animation = &"Defeat"
 autoplay = "Idle"
-frame_progress = 0.8654057
+frame_progress = 0.27311543
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
 shape = SubResource("CapsuleShape2D_bfutn")
