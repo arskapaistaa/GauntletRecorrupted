@@ -54,5 +54,9 @@ public partial class PauseMenu : Control
 				ShowPauseMenu();
 			}
 		}
+		if (!Visible)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Hidden;
+		}
 	}
 }
