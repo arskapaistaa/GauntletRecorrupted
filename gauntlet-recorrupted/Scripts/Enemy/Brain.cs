@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Brain : Node
 {
 	[ExportCategory("States")]
 	[Export] public State StartingState = State.Idle;
+	[Export] public bool _isBehaviourRandomized = false;
+	[Export] public Godot.Collections.Array<State> RandomStateList { get; set; }
+	[Export] public Godot.Collections.Array<State> NextRandomStateList { get; set; }
 
 	[ExportGroup("Interaction with Player")]
 	[Export] public State EntersAreaState = State.None;
@@ -287,12 +291,29 @@ public partial class Brain : Node
 
 	public void SetCurrentState(State state)
 	{
+		if (_isBehaviourRandomized)
+		{
+			if (RandomStateList.Contains(state))
+			{
+				// CurrentState =
+
+				_enemy.OnStateChanged(CurrentState);
+				return;
+			}
+		}
+
 		if (state != State.None)
 		{
 			CurrentState = state;
 
 			_enemy.OnStateChanged(CurrentState);
 		}
+	}
+
+	private State RandomizedState()
+	{
+		State state = NextRandomStateList.PickRandom();
+		return state;
 	}
 
 	public void PlayerEntered()
