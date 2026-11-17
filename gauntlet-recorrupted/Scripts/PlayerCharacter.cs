@@ -708,8 +708,6 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (_isMoving && _movementSFX.Playing == false)
 		{
-			_movementSFX.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-			_movementSFX.VolumeDb = (float)GD.RandRange(-6.0f, -4.0f);
 			_movementSFX.Play();
 		}
 	}

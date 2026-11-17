@@ -6,6 +6,11 @@ public partial class Brain : Node
 	[ExportCategory("States")]
 	[Export] public State StartingState = State.Idle;
 
+	[ExportGroup("Randomization")]
+	[Export] public bool _isBehaviourRandomized = false;
+	[Export] public Godot.Collections.Array<State> RandomStateList { get; set; }
+	[Export] public Godot.Collections.Array<State> NextRandomStateList { get; set; }
+
 	[ExportGroup("Interaction with Player")]
 	[Export] public State EntersAreaState = State.None;
 
@@ -127,7 +132,6 @@ public partial class Brain : Node
 		CurrentState = State.Defeat;
 
 		Level.Current.ChangeEnemyCount(-1);
-
 		GameManager.Instance.OnKillsChanged(_enemy.ThisEnemyType.ToString());
 	}
 
@@ -287,12 +291,26 @@ public partial class Brain : Node
 
 	public void SetCurrentState(State state)
 	{
+		if (_isBehaviourRandomized)
+		{
+			if (RandomStateList.Contains(CurrentState))
+			{
+				state = RandomizedState();
+			}
+		}
+
 		if (state != State.None)
 		{
 			CurrentState = state;
 
 			_enemy.OnStateChanged(CurrentState);
 		}
+	}
+
+	private State RandomizedState()
+	{
+		State state = NextRandomStateList.PickRandom();
+		return state;
 	}
 
 	public void PlayerEntered()

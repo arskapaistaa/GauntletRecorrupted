@@ -416,6 +416,9 @@ _attackEndFrames = 5
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_4fpts")
 StartingState = 1
+_isBehaviourRandomized = true
+RandomStateList = Array[int]([7])
+NextRandomStateList = Array[int]([2, 6])
 EntersAreaState = 6
 InCombatState = 6
 OutOfCombatState = 4
