@@ -274,7 +274,7 @@ AfterAttackState = 4
 NavigationFinishedState = 3
 AfterAlarmedState = 4
 AfterBulledDetected = 4
-CantReachTargetState = 2
+CantReachTargetState = 3
 FromIdleTo = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]

@@ -11,6 +11,11 @@ public partial class MainMenu : Control
 		_animations.AnimationFinished += OnAnimationFinished;
 	}
 
+    public override void _ExitTree()
+    {
+        _animations.AnimationFinished -= OnAnimationFinished;
+    }
+
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("Menu") && GameManager.Instance.CurrentGameState != GameManager.GameState.Settings)

@@ -110,7 +110,12 @@ public partial class BaseButton : Button
 			return;
 		}
 
-		if (animName == _pressedAnimName)
+		if (animName == null)
+		{
+			return;
+		}
+
+		if (animName == _pressedAnimName && _pathToSceneMode == TriggerMode.AnimationFinished)
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
 		}
