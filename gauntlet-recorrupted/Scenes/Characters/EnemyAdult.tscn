@@ -192,7 +192,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Defeat",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -260,9 +260,9 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1296494255]
 sprite_frames = SubResource("SpriteFrames_kxvjs")
-animation = &"Alert"
+animation = &"Defeat"
 autoplay = "Idle"
-frame = 9
+frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=518760545]
