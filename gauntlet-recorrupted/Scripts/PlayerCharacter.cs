@@ -125,6 +125,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		HandleMovement(delta);
 		HandleAnimations();
 		UpdateAudio();
+		ForceShootingAnimationEnd();
 	}
 
 	private void HandleTimers(double delta)
@@ -477,6 +478,15 @@ public partial class PlayerCharacter : CharacterBody2D
 		_shootTimer = ReloadTime;
 		isReloading = true;
 		EmitSignal(SignalName.Reload, WeaponType);
+	}
+
+	private void ForceShootingAnimationEnd()
+	{
+		if ((PlayerSprite.Animation == ANIMATION_SHOOT_REVOLVER || PlayerSprite.Animation == ANIMATION_SHOOT_SHOTGUN) && PlayerSprite.Frame == PlayerSprite.SpriteFrames.GetFrameCount(PlayerSprite.Animation) - 1)
+		{
+			PlayerSprite.Play(ANIMATION_IDLE);
+			_isShooting = false;
+		}
 	}
 
 	private void Dig()
