@@ -552,6 +552,7 @@ _animations = NodePath("../../AnimationPlayer")
 _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+_isGrabFocus = true
 
 [node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
 position = Vector2(320, 180)
@@ -848,7 +849,6 @@ script = ExtResource("2_ikpte")
 _animations = NodePath("../../../../AnimationPlayer")
 _pressedSfx = NodePath("../../../../Audios/ButtonSFX")
 _pressedAnimName = "CloseExitPanel"
-_isGrabFocus = true
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
