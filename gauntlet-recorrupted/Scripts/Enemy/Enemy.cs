@@ -104,6 +104,7 @@ public partial class Enemy : CharacterBody2D
 		Baby,
 		Adult,
 		Worm,
+		Liero,
 		Bear
 	}
 
