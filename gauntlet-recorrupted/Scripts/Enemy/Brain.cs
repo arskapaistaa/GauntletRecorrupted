@@ -1,11 +1,12 @@
 using Godot;
 using System;
-using System.Linq;
 
 public partial class Brain : Node
 {
 	[ExportCategory("States")]
 	[Export] public State StartingState = State.Idle;
+
+	[ExportGroup("Randomization")]
 	[Export] public bool _isBehaviourRandomized = false;
 	[Export] public Godot.Collections.Array<State> RandomStateList { get; set; }
 	[Export] public Godot.Collections.Array<State> NextRandomStateList { get; set; }
@@ -131,7 +132,6 @@ public partial class Brain : Node
 		CurrentState = State.Defeat;
 
 		Level.Current.ChangeEnemyCount(-1);
-
 		GameManager.Instance.OnKillsChanged(_enemy.ThisEnemyType.ToString());
 	}
 
@@ -293,9 +293,9 @@ public partial class Brain : Node
 	{
 		if (_isBehaviourRandomized)
 		{
-			if (RandomStateList.Contains(state))
+			if (RandomStateList.Contains(CurrentState))
 			{
-				// CurrentState =
+				CurrentState = RandomizedState();
 
 				_enemy.OnStateChanged(CurrentState);
 				return;

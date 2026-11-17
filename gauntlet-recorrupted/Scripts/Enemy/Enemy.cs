@@ -35,7 +35,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] private bool _canPatrol = false;
 	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")] private float _minIdleTime = 1.0f;
 
-	[Export(PropertyHint.Range, "2,20,1,suffix:seconds")] private float _maxIdleTime = 1.0f;
+	[Export(PropertyHint.Range, "2,60,1,suffix:seconds")] private float _maxIdleTime = 1.0f;
 
 	[ExportSubgroup("Ranged Attack")]
 	[Export] public bool CanRangedAttack = false;

@@ -17,6 +17,8 @@ public partial class BaseButton : Button
 	[Export] private string _pressedAnimName = null;
 	[ExportSubgroup("This is a exit button")]
 	[Export] private bool _isExitButton = false;
+	[ExportSubgroup("This is a Start button")]
+	[Export] private bool _isStartButton = false;
 
 	[ExportGroup("Focus")]
 	[Export] private AudioStreamPlayer _enterFocusedSfx = null;
@@ -74,6 +76,11 @@ public partial class BaseButton : Button
 		if (_isExitButton)
 		{
 			GetTree().Quit();
+		}
+
+		if (_isStartButton)
+		{
+			GameManager.Instance.ResetStats();
 		}
 	}
 
