@@ -89,8 +89,6 @@ public partial class BaseButton : Button
 
 	private void OnFocusEntered()
 	{
-		StyleBox hoverStyle = GetThemeStylebox("hover");
-		AddThemeStyleboxOverride("normal", hoverStyle);
 		if (_enterFocusedSfx != null)
 		{
 			_enterFocusedSfx.Play();
