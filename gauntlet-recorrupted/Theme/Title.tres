@@ -1,26 +1,21 @@
 [gd_resource type="Theme" format=3 uid="uid://betifo50ocmef"]
 
 [ext_resource type="Texture2D" uid="uid://uoo657xol87a" path="res://Art/Title/HellsWellTitleStart.png" id="1_05hi0"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_05hi0"]
-load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
+[ext_resource type="Texture2D" uid="uid://cyuhrrma26ub8" path="res://Art/Title/HellsWellTitleStart2.png" id="1_ih4tk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ih4tk"]
 content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
-texture = SubResource("CompressedTexture2D_05hi0")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nluli"]
-load_path = "res://.godot/imported/HellsWellTitleStart.png-c836bbdb43492b551d9fa0418048f95b.ctex"
+texture = ExtResource("1_ih4tk")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kdj2n"]
 content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
-texture = SubResource("CompressedTexture2D_nluli")
+texture = ExtResource("1_ih4tk")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8g82"]
 content_margin_left = 20.0

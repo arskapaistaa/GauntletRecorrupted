@@ -23,6 +23,7 @@ public partial class BaseButton : Button
 	[ExportGroup("Focus")]
 	[Export] private AudioStreamPlayer _enterFocusedSfx = null;
 	[Export] private AudioStreamPlayer _exitFocusedSfx = null;
+	[Export] private bool _grabFocusOnHover = true;
 	[ExportSubgroup("If the button should grab focus, choose only one btn in the scene")]
 	[Export] private bool _isGrabFocus = false;
 
@@ -31,6 +32,7 @@ public partial class BaseButton : Button
 		Pressed += OnButtonPressed;
 		FocusEntered += OnFocusEntered;
 		FocusExited += OnFocusExited;
+		MouseEntered += OnMouseEntered;
 
 		if (_animations != null)
 		{
@@ -43,6 +45,7 @@ public partial class BaseButton : Button
 		Pressed -= OnButtonPressed;
 		FocusEntered -= OnFocusEntered;
 		FocusExited -= OnFocusExited;
+		MouseEntered -= OnMouseEntered;
 	}
 	public override void _Ready()
 	{
@@ -119,5 +122,15 @@ public partial class BaseButton : Button
 		{
 			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
 		}
+	}
+
+	private void OnMouseEntered()
+	{
+		if (!_grabFocusOnHover || Disabled || HasFocus())
+		{
+			return;
+		}
+
+		this.GrabFocus();
 	}
 }
