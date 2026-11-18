@@ -486,10 +486,10 @@ limit_top = -2793
 limit_right = 11714
 limit_bottom = 6885
 
-[node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("10_8tc7b")]
-
 [node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("11_r27b6")]
 PlayerCharacter = NodePath("../Player")
+
+[node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("10_8tc7b")]
 
 [node name="EventTimer" type="Timer" parent="." unique_id=475063518]
 wait_time = 5.0
@@ -500,3 +500,4 @@ wait_time = 5.0
 [editable path="Environment/TutorialAreaShoot2"]
 [editable path="Environment/TutorialAreaShift"]
 [editable path="Player"]
+[editable path="CanvasLayer"]

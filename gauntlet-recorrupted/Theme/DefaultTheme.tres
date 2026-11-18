@@ -18,24 +18,11 @@ texture = SubResource("CompressedTexture2D_nglh5")
 region_rect = Rect2(29.100067, 11.645903, 97.73526, 25.719805)
 modulate_color = Color(0.99607843, 0.99607843, 0.99607843, 0.4627451)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_un12u"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yq620"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nglh5"]
 texture = ExtResource("2_wj1e5")
-region_rect = Rect2(22.175507, 3.5342712, 109.40808, 39.766777)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6mkqu"]
-load_path = "res://.godot/imported/Button2Hovered.png-b2fd197eb11108ee2f212e7a4fed8ffb.ctex"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rhaqv"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-texture = SubResource("CompressedTexture2D_6mkqu")
-region_rect = Rect2(22.175507, 3.5342712, 109.40808, 39.766777)
+region_rect = Rect2(22.176, 3.534, 109.408, 39.767)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tm233"]
 content_margin_left = 10.0
@@ -91,8 +78,9 @@ Button/colors/font_outline_color = Color(0.5803922, 0.4392157, 0.3882353, 1)
 Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("7_yq620")
 Button/styles/disabled = SubResource("StyleBoxTexture_sawbk")
-Button/styles/focus = SubResource("StyleBoxTexture_un12u")
-Button/styles/hover = SubResource("StyleBoxTexture_rhaqv")
+Button/styles/focus = SubResource("StyleBoxEmpty_yq620")
+Button/styles/focused_highlight = SubResource("StyleBoxTexture_nglh5")
+Button/styles/hover = SubResource("StyleBoxTexture_tm233")
 Button/styles/normal = SubResource("StyleBoxTexture_tm233")
 Button/styles/pressed = SubResource("StyleBoxTexture_rbhxe")
 CheckButton/icons/checked = ExtResource("5_wj1e5")

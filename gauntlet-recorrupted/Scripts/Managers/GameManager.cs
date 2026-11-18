@@ -103,7 +103,7 @@ public partial class GameManager : Node
 	{
 		CurrentGameState = state;
 		GD.Print(CurrentGameState.ToString());
-		if (CurrentGameState != GameState.Game)
+		if (CurrentGameState != GameState.Game && !_usingController)
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
@@ -124,14 +124,17 @@ public partial class GameManager : Node
 		if (@event is InputEventJoypadMotion joypadMotion && Mathf.Abs(joypadMotion.AxisValue) > 0.3f)
 		{
 			_usingController = true;
+			Input.MouseMode = Input.MouseModeEnum.Hidden;
 		}
 		else if (@event is InputEventJoypadButton)
 		{
 			_usingController = true;
+			Input.MouseMode = Input.MouseModeEnum.Hidden;
 		}
 		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton)
 		{
 			_usingController = false;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 	}
 
