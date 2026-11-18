@@ -21,11 +21,13 @@ public partial class BaseButton : Button
 	[Export] private bool _isStartButton = false;
 
 	[ExportGroup("Focus")]
+	[Export] private bool _useFocusedStyle = true;
 	[Export] private AudioStreamPlayer _enterFocusedSfx = null;
 	[Export] private AudioStreamPlayer _exitFocusedSfx = null;
 	[Export] private bool _grabFocusOnHover = true;
 	[ExportSubgroup("If the button should grab focus, choose only one btn in the scene")]
 	[Export] private bool _isGrabFocus = false;
+	private StyleBox _focusedStyle = null;
 
 	public override void _EnterTree()
 	{
@@ -49,7 +51,10 @@ public partial class BaseButton : Button
 	}
 	public override void _Ready()
 	{
-
+		if (_focusedStyle == null && HasThemeStylebox("focused_highlight"))
+		{
+			_focusedStyle = GetThemeStylebox("focused_highlight");
+		}
 		if (_isGrabFocus)
 		{
 			this.GrabFocus();
@@ -89,6 +94,11 @@ public partial class BaseButton : Button
 
 	private void OnFocusEntered()
 	{
+		if (_useFocusedStyle && _focusedStyle != null)
+		{
+			AddThemeStyleboxOverride("normal", _focusedStyle);
+			AddThemeStyleboxOverride("hover", _focusedStyle);
+		}
 		if (_enterFocusedSfx != null)
 		{
 			_enterFocusedSfx.Play();
@@ -97,7 +107,11 @@ public partial class BaseButton : Button
 
 	private void OnFocusExited()
 	{
-		RemoveThemeStyleboxOverride("normal");
+		if (_useFocusedStyle)
+		{
+			RemoveThemeStyleboxOverride("normal");
+			RemoveThemeStyleboxOverride("hover");
+		}
 		if (_exitFocusedSfx != null)
 		{
 			_exitFocusedSfx.Play();
