@@ -255,15 +255,14 @@ position = Vector2(64, 0)
 rotation = 1.5707964
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_c32ia")
-animation = &"Walk"
-frame_progress = 0.11265108
+animation = &"ShotgunShoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=998764399]
 shape = SubResource("CircleShape2D_2o20b")
 
 [node name="MeleeArea" type="Area2D" parent="." unique_id=52027070]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea" unique_id=497819880]
 position = Vector2(101.5, 0)

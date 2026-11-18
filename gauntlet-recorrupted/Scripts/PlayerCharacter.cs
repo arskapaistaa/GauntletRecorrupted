@@ -359,6 +359,12 @@ public partial class PlayerCharacter : CharacterBody2D
 					hitEnemy = true;
 					GD.Print("Hit enemy with melee attack");
 				}
+				else if (node is EnemySpawner es)
+				{
+					es.TakeDmg(MeleeDamage);
+					hitEnemy = true;
+					GD.Print("Hit enemy spawner with melee attack");
+				}
 			}
 			if (hitEnemy)
 			{
@@ -641,6 +647,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		Health -= damage;
 		if (Health <= 0)
 		{
+			Health = 0;
 			GD.Print("Player is dead");
 			isLiving = false;
 

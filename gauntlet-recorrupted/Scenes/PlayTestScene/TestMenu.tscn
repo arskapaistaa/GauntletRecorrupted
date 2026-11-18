@@ -29,6 +29,9 @@
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3pel"]
+texture = ExtResource("10_mwm07")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
 texture = ExtResource("10_mwm07")
 
@@ -43,6 +46,7 @@ texture = SubResource("CompressedTexture2D_57vxl")
 modulate_color = Color(1, 1, 1, 0.49803922)
 
 [sub_resource type="Theme" id="Theme_dxocv"]
+Button/styles/focus = SubResource("StyleBoxTexture_j3pel")
 Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
 Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
 Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
@@ -538,6 +542,7 @@ _animations = NodePath("../../AnimationPlayer")
 _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+_isGrabFocus = true
 
 [node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
 position = Vector2(320, 180)
@@ -835,7 +840,6 @@ script = ExtResource("2_ikpte")
 _animations = NodePath("../../../../AnimationPlayer")
 _pressedSfx = NodePath("../../../../Audios/ButtonSFX")
 _pressedAnimName = "CloseExitPanel"
-_isGrabFocus = true
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
