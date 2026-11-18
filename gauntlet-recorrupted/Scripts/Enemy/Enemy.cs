@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -93,7 +94,6 @@ public partial class Enemy : CharacterBody2D
 	private bool _canShoot = true;
 
 	// PUBLIC, NO EXPORT
-	public bool HasRoute = false;
 	public bool AttackSucceed = false;
 	// For Leech attack
 	public Vector2 AttackDirection;
@@ -182,6 +182,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			GD.PrintErr("No brains, die biatch");
 			QueueFree();
+		}
+
+		if (Player == null)
+		{
+			Player = Level.Current.Player;
 		}
 
 		Reset();
@@ -288,6 +293,12 @@ public partial class Enemy : CharacterBody2D
 				return;
 			}
 		}
+
+		string[] animationNames = _sprite.SpriteFrames.GetAnimationNames();
+		if (animationNames.Contains("EnterIdle"))
+		{
+			_sprite.Play("EnterIdle");
+		}
 	}
 
     public void UpdateChase(double delta)
@@ -379,23 +390,18 @@ public partial class Enemy : CharacterBody2D
 
 	public void SetPlayerTarget()
 	{
-		if (Player == null)
-		{
-			Player = Level.Current.Player;
-			Level.Current.IncreaseIntensity(Config.EnemyNoticeValue);
-		}
+		Level.Current.IncreaseIntensity(Config.EnemyNoticeValue);
 
-		_agent.TargetPosition = PlayerPosition;
-
-		CheckTargetReachable();
+		CheckTargetReachable(PlayerPosition);
 	}
 
-	private bool CheckTargetReachable()
+	private bool CheckTargetReachable(Vector2 position)
 	{
+		_agent.TargetPosition = position;
+
 		if (!_agent.IsTargetReachable())
 		{
-			_detectionArea.GetOverlappingBodies().Clear();
-
+			// _detectionArea.GetOverlappingBodies().Clear();
 			_brain.TargetIsNotReachable();
 			return false;
 		}
@@ -417,9 +423,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		// _agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
 		// Currently hard coded on Layer 1 so WURM wont work.
-		_agent.TargetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 1, true);
-
-		HasRoute = true;
+		Vector2 targetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 1, true);
+		CheckTargetReachable(targetPosition);
 	}
 
 	public void LookAtPosition()
@@ -636,7 +641,14 @@ public partial class Enemy : CharacterBody2D
 				break;
 
 			case Brain.State.Idle:
-				_sprite.Play("Idle");
+				if (_sprite.Animation == "EnterIdle")
+				{
+					return;
+				}
+				else
+				{
+					_sprite.Play("Idle");
+				}
 				break;
 
 			case Brain.State.Chase:
@@ -744,8 +756,6 @@ public partial class Enemy : CharacterBody2D
 		{
 			_damagedSfx.Play();
 		}
-
-		HasRoute = false;
 	}
 
 	private void Defeat()
@@ -860,7 +870,6 @@ public partial class Enemy : CharacterBody2D
     {
         if (body is PlayerCharacter)
 		{
-			SetPlayerTarget();
 			_brain.PlayerEntered();
 		}
     }
@@ -881,6 +890,11 @@ public partial class Enemy : CharacterBody2D
 	private void OnAnimationFinished()
     {
 		_brain.AnimationFinished();
+
+		if (_sprite.Animation == "EnterIdle")
+		{
+			_sprite.Play("Idle");
+		}
     }
 
 	private void OnVelocityComputed(Vector2 safeVelocity)
@@ -892,8 +906,6 @@ public partial class Enemy : CharacterBody2D
 	private void OnNavigationFinished()
     {
         _brain.NavigationFinished();
-
-		HasRoute = false;
     }
 
 	private void OnSpawnerDamaged()
@@ -924,6 +936,35 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Patrol:
 				EnterPatrol();
 				break;
+
+			case Brain.State.Chase:
+				SetPlayerTarget();
+				break;
+
+			case Brain.State.Notice:
+				SetPlayerTarget();
+				break;
+		}
+
+		UpdateDamageAreaMonitoring(state);
+	}
+
+	private void UpdateDamageAreaMonitoring(Brain.State state)
+	{
+		if (_attackType != AttackType.Static)
+		{
+			return;
+		}
+
+		if (state == Brain.State.Idle)
+		{
+			_dmgArea.SetDeferred("monitoring", false);
+			return;
+		}
+
+		if (state == Brain.State.Patrol)
+		{
+			_dmgArea.SetDeferred("monitoring", true);
 		}
 	}
 
@@ -952,7 +993,7 @@ public partial class Enemy : CharacterBody2D
 			circle.Radius = DetectionRange;
 		}
 
-		if (_dmgArea != null && ThisAttackType != AttackType.Static)
+		if (_dmgArea != null)
 		{
 			_dmgArea.Monitoring = false;
 		}
