@@ -318,6 +318,10 @@ navigation_layers = 2
 
 [node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]
 
+[node name="Wurm" parent="Environment/Enemies" unique_id=1408737760 instance=ExtResource("20_7omew")]
+position = Vector2(4200, -534)
+_dmg = 55
+
 [node name="Adult" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("8_6jruc")]
 position = Vector2(3422, 5364)
 rotation = -1.6008401
@@ -538,9 +542,5 @@ stream = ExtResource("10_tjq8y")
 volume_db = -12.0
 autoplay = true
 bus = &"Music"
-
-[node name="Wurm" parent="." unique_id=1408737760 instance=ExtResource("20_7omew")]
-position = Vector2(4200, -534)
-_dmg = 55
 
 [editable path="Player"]
