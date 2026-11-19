@@ -33,7 +33,7 @@
 texture = ExtResource("10_mwm07")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
-texture = ExtResource("10_mwm07")
+texture = ExtResource("10_v0gyi")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
 texture = ExtResource("10_v0gyi")
@@ -54,11 +54,8 @@ Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
 texture = ExtResource("12_4dvq8")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mwm07"]
-load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dvq8"]
-texture = SubResource("CompressedTexture2D_mwm07")
+texture = ExtResource("11_ya24g")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e5fvg"]
 texture = ExtResource("11_ya24g")
@@ -507,6 +504,7 @@ script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "OpenSettings"
+_useFocusedStyle = false
 
 [node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 layout_mode = 1
@@ -522,6 +520,7 @@ script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "StatsPressed"
+_useFocusedStyle = false
 
 [node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
@@ -542,6 +541,7 @@ _animations = NodePath("../../AnimationPlayer")
 _pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+_useFocusedStyle = false
 _isGrabFocus = true
 
 [node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
