@@ -26,6 +26,7 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")] private float _patrolDistance;
 
 	[Export(PropertyHint.Range, "0,5000,100,suffix:Pixels")] private float _patrolAtleastDistance;
+	[Export(PropertyHint.Range, "1,2,1,suffix:Layer")] private int _navigationLayer = 1;
 
 	[ExportGroup("Perks")]
 	[ExportSubgroup("Damaged movement")]
@@ -423,7 +424,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		// _agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
 		// Currently hard coded on Layer 1 so WURM wont work.
-		Vector2 targetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), 1, true);
+		Vector2 targetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), (uint)_navigationLayer, true);
 		CheckTargetReachable(targetPosition);
 	}
 
