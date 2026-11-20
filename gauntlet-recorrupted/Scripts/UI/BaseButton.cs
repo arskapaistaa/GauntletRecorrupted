@@ -70,6 +70,11 @@ public partial class BaseButton : Button
 			_pressedSfx.Play();
 		}
 
+		if (_pressedSfx == null)
+		{
+			GameManager.Instance.PlayButtonSFX();
+		}
+
 		if (_animations != null)
 		{
 			_animations.Play(_pressedAnimName);

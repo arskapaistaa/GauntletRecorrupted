@@ -3,17 +3,30 @@ using System;
 
 public partial class TutorialArea : Area2D
 {
-	[Export] public Control TutorialPanel = null;
+	// MK = Mouse and Keyboard
+	// Controller = Game Controller
+	[Export] public Control TutorialPanelMK = null;
+	[Export] public Control TutorialPanelController = null;
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 		BodyExited += OnBodyExited;
 
-		if (TutorialPanel != null)
+		if (TutorialPanelMK != null)
 		{
-			TutorialPanel.Visible = false;
+			TutorialPanelMK.Visible = false;
+		}
+		if (TutorialPanelController != null)
+		{
+			TutorialPanelController.Visible = false;
 		}
 	}
+
+	public override void _Process(double delta)
+	{
+		UpdatePanel(GameManager.Instance.IsUsingController());
+	}
+	
     public override void _ExitTree()
     {
         BodyEntered -= OnBodyEntered;
@@ -35,9 +48,19 @@ public partial class TutorialArea : Area2D
     {
         if (body is PlayerCharacter)
 		{
-			if (TutorialPanel != null)
+			if (GameManager.Instance.IsUsingController())
 			{
-				TutorialPanel.Visible = true;
+				if (TutorialPanelController != null)
+				{
+					TutorialPanelController.Visible = true;
+				}
+			}
+			else
+			{
+				if (TutorialPanelMK != null)
+				{
+					TutorialPanelMK.Visible = true;
+				}
 			}
 		}
     }
@@ -46,11 +69,39 @@ public partial class TutorialArea : Area2D
     {
         if (body is PlayerCharacter)
 		{
-			if (TutorialPanel != null)
+			if (TutorialPanelMK != null)
 			{
-				TutorialPanel.Visible = false;
+				TutorialPanelMK.Visible = false;
+			}
+			if (TutorialPanelController != null)
+			{
+				TutorialPanelController.Visible = false;
 			}
 		}
     }
-
+	private void UpdatePanel(bool isUsingController)
+	{
+		if (isUsingController)
+		{
+			if (TutorialPanelController != null && (TutorialPanelController.Visible || TutorialPanelMK.Visible))
+			{
+				TutorialPanelController.Visible = true;
+			}
+			if (TutorialPanelMK != null)
+			{
+				TutorialPanelMK.Visible = false;
+			}
+		}
+		else
+		{
+			if (TutorialPanelMK != null && (TutorialPanelController.Visible || TutorialPanelMK.Visible))
+			{
+				TutorialPanelMK.Visible = true;
+			}
+			if (TutorialPanelController != null)
+			{
+				TutorialPanelController.Visible = false;
+			}
+		}
+	}
 }

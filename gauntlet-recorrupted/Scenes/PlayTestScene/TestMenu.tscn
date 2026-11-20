@@ -23,33 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
 [ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="15_4dvq8"]
 [ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="17_ggudn"]
+[ext_resource type="VideoStream" uid="uid://bq7sawq8hh66k" path="res://Art/Cutscenes/HellsWellStartingAnimFinal.ogv" id="17_pvows"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
 [ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="23_3pkmq"]
-[ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="24_4dvq8"]
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3pel"]
-texture = ExtResource("10_mwm07")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
-texture = ExtResource("10_v0gyi")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
-texture = ExtResource("10_v0gyi")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57vxl"]
-load_path = "res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e76bc"]
-texture = SubResource("CompressedTexture2D_57vxl")
-modulate_color = Color(1, 1, 1, 0.49803922)
-
-[sub_resource type="Theme" id="Theme_dxocv"]
-Button/styles/focus = SubResource("StyleBoxTexture_j3pel")
-Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
-Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
-Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
 texture = ExtResource("12_4dvq8")
@@ -72,6 +50,28 @@ Button/styles/focus = SubResource("StyleBoxTexture_8r7k7")
 Button/styles/hover = SubResource("StyleBoxTexture_4dvq8")
 Button/styles/normal = SubResource("StyleBoxTexture_e5fvg")
 Button/styles/pressed = SubResource("StyleBoxTexture_pvows")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3pel"]
+texture = ExtResource("10_mwm07")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
+texture = ExtResource("10_v0gyi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
+texture = ExtResource("10_v0gyi")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57vxl"]
+load_path = "res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e76bc"]
+texture = SubResource("CompressedTexture2D_57vxl")
+modulate_color = Color(1, 1, 1, 0.49803922)
+
+[sub_resource type="Theme" id="Theme_dxocv"]
+Button/styles/focus = SubResource("StyleBoxTexture_j3pel")
+Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
+Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
+Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
 bg_color = Color(0, 0, 0, 1)
@@ -129,6 +129,58 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j2dai"]
+resource_name = "Intro"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TitleScreen/Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleScreen/StartBtn:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.4333334, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_57vxl"]
@@ -216,7 +268,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("TitleScreen/SettingsBtn:modulate")
+tracks/4/path = NodePath("TitleScreen/Buttons/SettingsBtn:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -228,7 +280,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TitleScreen/StatsBtn:modulate")
+tracks/5/path = NodePath("TitleScreen/Buttons/StatsBtn:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -285,6 +337,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TitleScreen/Buttons:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_v40es"]
 resource_name = "StartPressed"
@@ -316,7 +380,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TitleScreen/SettingsBtn:modulate")
+tracks/2/path = NodePath("TitleScreen/Buttons/SettingsBtn:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -328,7 +392,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TitleScreen/StatsBtn:modulate")
+tracks/3/path = NodePath("TitleScreen/Buttons/StatsBtn:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -427,6 +491,7 @@ _data = {
 &"CloseExitPanel": SubResource("Animation_e76bc"),
 &"CloseSettings": SubResource("Animation_t3rra"),
 &"CloseStats": SubResource("Animation_mwm07"),
+&"Intro": SubResource("Animation_j2dai"),
 &"OpenExitPanel": SubResource("Animation_57vxl"),
 &"OpenSettings": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
@@ -443,15 +508,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t3rra")
 _animations = NodePath("AnimationPlayer")
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=455174047]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="TitleScreen" type="Control" parent="." unique_id=1340800981]
 layout_mode = 1
@@ -491,37 +547,6 @@ stretch_mode = 2
 [node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("10_e76bc")]
 position = Vector2(320, 180)
 
-[node name="SettingsBtn" type="Button" parent="TitleScreen" unique_id=365512205 node_paths=PackedStringArray("_animations", "_pressedSfx")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -64.0
-offset_right = 64.0
-grow_vertical = 0
-theme = SubResource("Theme_dxocv")
-script = ExtResource("2_ikpte")
-_animations = NodePath("../../AnimationPlayer")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
-_pressedAnimName = "OpenSettings"
-_useFocusedStyle = false
-
-[node name="StatsBtn" type="Button" parent="TitleScreen" unique_id=514089225 node_paths=PackedStringArray("_animations", "_pressedSfx")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = -64.0
-offset_right = 128.0
-grow_vertical = 0
-theme = SubResource("Theme_4dvq8")
-script = ExtResource("2_ikpte")
-_animations = NodePath("../../AnimationPlayer")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
-_pressedAnimName = "StatsPressed"
-_useFocusedStyle = false
-
 [node name="StartBtn" type="Button" parent="TitleScreen" unique_id=1312594147 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 8
@@ -543,6 +568,44 @@ _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
 _useFocusedStyle = false
 _isGrabFocus = true
+
+[node name="Buttons" type="Control" parent="TitleScreen" unique_id=2119805048]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_right = 136.0
+grow_vertical = 0
+
+[node name="StatsBtn" type="Button" parent="TitleScreen/Buttons" unique_id=514089225 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 128.0
+grow_vertical = 0
+theme = SubResource("Theme_4dvq8")
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../../AnimationPlayer")
+_pressedAnimName = "StatsPressed"
+_useFocusedStyle = false
+
+[node name="SettingsBtn" type="Button" parent="TitleScreen/Buttons" unique_id=365512205 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 64.0
+grow_vertical = 0
+theme = SubResource("Theme_dxocv")
+script = ExtResource("2_ikpte")
+_animations = NodePath("../../../AnimationPlayer")
+_pressedAnimName = "OpenSettings"
+_useFocusedStyle = false
 
 [node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
 position = Vector2(320, 180)
@@ -665,7 +728,7 @@ grow_vertical = 0
 text = "Close"
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../AnimationPlayer")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
+_pressedSfx = NodePath("")
 _pressedAnimName = "CloseStats"
 
 [node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
@@ -763,7 +826,7 @@ layout_mode = 1
 
 [node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 _animations = NodePath("../../AnimationPlayer")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
+_pressedSfx = NodePath("")
 _pressedAnimName = "CloseSettings"
 
 [node name="ExitPanel" type="Control" parent="." unique_id=867063999]
@@ -829,7 +892,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "yes"
 script = ExtResource("2_ikpte")
-_pressedSfx = NodePath("../../../../Audios/ButtonSFX")
+_pressedSfx = NodePath("")
 _isExitButton = true
 
 [node name="NO" type="Button" parent="ExitPanel/NinePatchRect/Buttons" unique_id=1036419074 node_paths=PackedStringArray("_animations", "_pressedSfx")]
@@ -838,7 +901,7 @@ size_flags_horizontal = 3
 text = "NO"
 script = ExtResource("2_ikpte")
 _animations = NodePath("../../../../AnimationPlayer")
-_pressedSfx = NodePath("../../../../Audios/ButtonSFX")
+_pressedSfx = NodePath("")
 _pressedAnimName = "CloseExitPanel"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
@@ -865,10 +928,21 @@ _music = NodePath("MainMenuMusic")
 stream = ExtResource("23_3pkmq")
 bus = &"Music"
 
-[node name="ButtonSFX" type="AudioStreamPlayer" parent="Audios" unique_id=793243120]
-stream = ExtResource("24_4dvq8")
-bus = &"SFX"
-
 [node name="StartSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1276364434]
+
+[node name="Video" type="AspectRatioContainer" parent="." unique_id=1045937909]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=455174047]
+layout_mode = 2
+stream = ExtResource("17_pvows")
+expand = true
 
 [editable path="Settings"]

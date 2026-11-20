@@ -98,6 +98,10 @@ public partial class Bullet : Area2D
 			if (WeaponType == 0 || GD.Randf() < _shotgunHitEffectChance)
 				SpawnHitEffect(GlobalPosition);
 		}
+		else if (body is Destroyable destroyable)
+		{
+			destroyable.TakeDmg(Damage);
+		}
 		QueueFree();
 	}
 
