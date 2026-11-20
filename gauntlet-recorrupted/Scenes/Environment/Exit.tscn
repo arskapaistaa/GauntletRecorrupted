@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://l7wt5o3lscwv" path="res://Scripts/Environment/Exit.cs" id="1_cilr6"]
 [ext_resource type="Texture2D" uid="uid://hlvtra4hg7ep" path="res://Art/Environment/ArtExit.png" id="2_3cp03"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_ylyon"]
 [ext_resource type="PackedScene" uid="uid://cw4mey2oa0yje" path="res://Scenes/Particles/ExitParticles.tscn" id="4_43o76"]
+[ext_resource type="Texture2D" uid="uid://cjunhiei8wqgd" path="res://Art/ConeOfLight/ConeOfExit_0001.png" id="5_i8p77"]
+[ext_resource type="Texture2D" uid="uid://du3mxqxp2n4x0" path="res://Art/ConeOfLight/ConeOfExit_0002.png" id="6_mtn66"]
+[ext_resource type="Texture2D" uid="uid://dfy2213hll5r4" path="res://Art/ConeOfLight/ConeOfExit_0003.png" id="7_go103"]
+[ext_resource type="Texture2D" uid="uid://byp4qqm8ljnr8" path="res://Art/ConeOfLight/ConeOfExit_0004.png" id="8_2pal8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cv5yy"]
 atlas = ExtResource("2_3cp03")
@@ -140,20 +145,60 @@ turbulence_enabled = true
 turbulence_noise_strength = 0.3
 turbulence_influence_min = 0.05
 
-[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite", "_exitOpenParticles")]
+[sub_resource type="Animation" id="Animation_vqcih"]
+resource_name = "Light"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_i8p77"), ExtResource("6_mtn66"), ExtResource("7_go103"), ExtResource("8_2pal8")]
+}
+
+[sub_resource type="Animation" id="Animation_x2rib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_i8p77")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rubwu"]
+_data = {
+&"Light": SubResource("Animation_vqcih"),
+&"RESET": SubResource("Animation_x2rib")
+}
+
+[node name="Exit" type="Area2D" unique_id=930430844 node_paths=PackedStringArray("_sprite", "_exitOpenParticles", "_exitLight")]
 collision_layer = 16
 script = ExtResource("1_cilr6")
 _sprite = NodePath("AnimatedSprite2D")
 _exitOpenParticles = NodePath("Particles")
+_exitLight = NodePath("PointLight2D")
 _nextLevelPath = "res://Scenes/PlayTestScene/TestMenu.tscn"
 _transitionName = "FadeInAndOut"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1806105699]
+material = ExtResource("2_ylyon")
 sprite_frames = SubResource("SpriteFrames_3cp03")
 animation = &"Open"
 autoplay = "UnReady"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=121279905]
+visible = false
 shape = SubResource("RectangleShape2D_sopei")
 
 [node name="Particles" parent="." unique_id=662982838 instance=ExtResource("4_43o76")]
@@ -161,3 +206,12 @@ amount = 10
 lifetime = 10.0
 one_shot = false
 process_material = SubResource("ParticleProcessMaterial_cv5yy")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=306578462]
+enabled = false
+blend_mode = 2
+texture = ExtResource("5_i8p77")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1252368942]
+libraries/ = SubResource("AnimationLibrary_rubwu")
+autoplay = &"Light"

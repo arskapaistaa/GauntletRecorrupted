@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Ambience01.ogg-e7964e82ad6f4b24d4014a7eeff7a4
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

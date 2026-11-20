@@ -9,6 +9,9 @@ public partial class GameManager : Node
 		private set;
 	}
 
+	[Export] private AudioStreamPlayer _buttonSFX;
+	[Export] private AudioStreamPlayer _gameplayMusic;
+
 	private int _kills;
 	private int _deaths;
 	private int _shotsFired;
@@ -105,6 +108,16 @@ public partial class GameManager : Node
 		GD.Print(CurrentGameState.ToString());
 		if (CurrentGameState != GameState.Game && !_usingController)
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+
+
+		if (CurrentGameState == GameState.Game)
+		{
+			PlayGameplayMusic();
+		}
+		else
+		{
+			StopGameplayMusic();
+		}
 	}
 
 	/// <summary>
@@ -141,5 +154,35 @@ public partial class GameManager : Node
 	public bool IsUsingController()
 	{
 		return _usingController;
+	}
+
+	public void PlayButtonSFX()
+	{
+		if (_buttonSFX != null)
+		{
+			_buttonSFX.Play();
+		}
+	}
+
+	public void PlayGameplayMusic()
+	{
+		if (_gameplayMusic != null)
+		{
+			if (_gameplayMusic.Playing == false)
+			{
+				_gameplayMusic.Play();
+			}
+		}
+	}
+
+	public void StopGameplayMusic()
+	{
+		if (_gameplayMusic != null)
+		{
+			if (_gameplayMusic.Playing == true)
+			{
+				_gameplayMusic.Stop();
+			}
+		}
 	}
 }

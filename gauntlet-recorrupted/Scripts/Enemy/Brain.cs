@@ -141,15 +141,11 @@ public partial class Brain : Node
 		{
 			SetCurrentState(OutOfCombatState);
 
-			_enemy.SetPlayerTarget();
-
 			CurrentCombatState = CombatState.InCombat;
 		}
 		else if (CurrentCombatState == CombatState.InCombat)
 		{
 			SetCurrentState(InCombatState);
-
-			_enemy.SetPlayerTarget();
 		}
 	}
 
@@ -199,8 +195,6 @@ public partial class Brain : Node
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(AfterAlarmedState);
-
-			_enemy.SetPlayerTarget();
 		}
 	}
 
@@ -209,8 +203,6 @@ public partial class Brain : Node
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			SetCurrentState(AfterBulledDetected);
-
-			_enemy.SetPlayerTarget();
 		}
 	}
 
@@ -318,7 +310,6 @@ public partial class Brain : Node
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
 			CurrentState = EntersAreaState;
-			_enemy.SetPlayerTarget();
 		}
 	}
 }
