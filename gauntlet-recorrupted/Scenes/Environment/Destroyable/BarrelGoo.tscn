@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://chc4ebnnhaukj" path="res://Scripts/Environment/Destroyable.cs" id="1_41x6r"]
 [ext_resource type="Texture2D" uid="uid://chqhf6s0cee5g" path="res://Art/Environment/BarrelGooSpritesheet.png" id="2_41x6r"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_nprya"]
 [ext_resource type="PackedScene" uid="uid://ccmo7dj4cop0l" path="res://Scenes/Particles/BarrelParticles.tscn" id="3_uk0dr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uk0dr"]
@@ -43,7 +44,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
 radius = 85.0
 
-[node name="Barrel" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision")]
+[node name="BarrelGoo" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision")]
+z_index = 2
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_41x6r")
@@ -52,6 +54,7 @@ _particles = NodePath("Barrelparticles")
 _collision = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240006552]
+material = ExtResource("2_nprya")
 sprite_frames = SubResource("SpriteFrames_x16ry")
 
 [node name="Barrelparticles" parent="." unique_id=435467720 instance=ExtResource("3_uk0dr")]

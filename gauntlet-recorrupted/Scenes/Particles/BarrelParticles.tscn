@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ccmo7dj4cop0l"]
 
 [ext_resource type="Texture2D" uid="uid://brl14yt8ageqx" path="res://Materials/Particles/BloodSplatter.png" id="1_1gv7o"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_osdvf"]
 
 [sub_resource type="Gradient" id="Gradient_4s2xr"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -35,6 +36,7 @@ hue_variation_min = -0.100000024
 hue_variation_max = 0.09999997
 
 [node name="Barrelparticles" type="GPUParticles2D" unique_id=435467720]
+material = ExtResource("1_osdvf")
 emitting = false
 amount = 128
 texture = ExtResource("1_1gv7o")

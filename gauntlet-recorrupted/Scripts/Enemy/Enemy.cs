@@ -957,7 +957,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		if (state == Brain.State.Idle)
+		if (state == Brain.State.Idle || state == Brain.State.Defeat)
 		{
 			_dmgArea.SetDeferred("monitoring", false);
 			return;
