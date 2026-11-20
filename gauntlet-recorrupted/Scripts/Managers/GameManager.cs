@@ -179,7 +179,7 @@ public partial class GameManager : Node
 	{
 		if (_gameplayMusic != null)
 		{
-			if (_gameplayMusic.Playing == false)
+			if (_gameplayMusic.Playing == true)
 			{
 				_gameplayMusic.Stop();
 			}
