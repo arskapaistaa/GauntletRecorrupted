@@ -4,16 +4,33 @@ using System;
 public partial class MainMenu : Control
 {
 	[Export] private AnimationPlayer _animations = null;
+	[Export] private VideoStreamPlayer _video = null;
 	public override void _Ready()
 	{
 		GameManager.Instance.SetGameState(GameManager.GameState.Menu);
 
-		_animations.AnimationFinished += OnAnimationFinished;
+		if (_animations != null)
+		{
+			_animations.AnimationFinished += OnAnimationFinished;
+		}
+
+		if (_video != null)
+		{
+			_video.Finished += OnVideoFinished;
+		}
 	}
 
     public override void _ExitTree()
     {
-        _animations.AnimationFinished -= OnAnimationFinished;
+		if (_animations != null)
+		{
+			_animations.AnimationFinished -= OnAnimationFinished;
+		}
+
+		if (_video != null)
+		{
+			_video.Finished -= OnVideoFinished;
+		}
     }
 
     public override void _Input(InputEvent @event)
@@ -38,5 +55,10 @@ public partial class MainMenu : Control
 		{
 			GameManager.Instance.SetGameState(GameManager.GameState.Menu);
 		}
+    }
+
+	private void OnVideoFinished()
+    {
+
     }
 }

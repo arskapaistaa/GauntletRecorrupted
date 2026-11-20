@@ -31,7 +31,8 @@ public partial class DamageArea : Area2D
 
         if (body is DiggableTiles tile)
 		{
-			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), _enemy.Dmg);
+            int multiplier = 2;
+			tile.DamageTile(tile.LocalToMap(tile.ToLocal(GlobalPosition)), _enemy.Dmg * multiplier);
             EmitSignal(SignalName.AttackSucceed);
 		}
     }

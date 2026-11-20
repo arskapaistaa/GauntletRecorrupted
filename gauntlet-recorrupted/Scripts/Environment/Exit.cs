@@ -5,6 +5,7 @@ public partial class Exit : Area2D
 {
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private GpuParticles2D _exitOpenParticles = null;
+	[Export] private PointLight2D _exitLight = null;
 	[Export] private string _nextLevelPath;
 	[Export] private Level _currentLevel = null;
 	[Export(PropertyHint.Enum, "FadeInAndOut")]
@@ -31,6 +32,11 @@ public partial class Exit : Area2D
 		}
 
 		BodyEntered += OnBodyEntered;
+
+		if (_exitLight != null)
+		{
+			_exitLight.Enabled = false;
+		}
 
 		UpdateSpawnerCountLabel();
 	}
@@ -90,6 +96,11 @@ public partial class Exit : Area2D
 		if (_exitOpenParticles != null)
 		{
 			_exitOpenParticles.Emitting = true;
+		}
+
+		if (_exitLight != null)
+		{
+			_exitLight.Enabled = true;
 		}
     }
 

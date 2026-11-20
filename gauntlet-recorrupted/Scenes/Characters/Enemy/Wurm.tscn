@@ -287,9 +287,12 @@ _enemyType = 4
 _attackType = 3
 _health = 400.0
 _maxSpeed = 200.0
-_dmg = 40
+_dmg = 42
 _patrolDistance = 3000.0
 _patrolAtleastDistance = 1500.0
+_navigationLayer = 2
+_canMoveWhileDamaged = true
+_damagedSpeed = 200.0
 _canPatrol = true
 _minIdleTime = 2.0
 _maxIdleTime = 15.0
@@ -319,8 +322,10 @@ AfterNoticeState = 2
 NavigationFinishedState = 3
 AfterWakedUp = 2
 CantReachTargetState = 2
+FromIdleTo = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=106838091]
+z_index = 1
 material = ExtResource("3_gs6ov")
 sprite_frames = SubResource("SpriteFrames_gs6ov")
 animation = &"Idle"
@@ -355,6 +360,7 @@ radius = 128.0
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
 collision_layer = 0
+collision_mask = 5
 script = ExtResource("5_bq18e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=134463378]

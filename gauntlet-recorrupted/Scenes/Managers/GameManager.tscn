@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cfov4p4s08sr7"]
+
+[ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="1_ajldl"]
+[ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="2_3bpoc"]
+[ext_resource type="AudioStream" uid="uid://c3ayuna72gig5" path="res://Audio/Music/Ambience01.ogg" id="3_lyu6u"]
+[ext_resource type="AudioStream" uid="uid://b5atgpi6xqmym" path="res://Audio/SFX/ButtonClick.wav" id="4_3ns0j"]
+
+[node name="GameManager" type="Node" unique_id=583183097 node_paths=PackedStringArray("_buttonSFX", "_gameplayMusic")]
+script = ExtResource("1_ajldl")
+_buttonSFX = NodePath("GlobalAudio/ButtonSFX")
+_gameplayMusic = NodePath("GlobalAudio/GameplayMusic")
+
+[node name="GlobalAudio" type="Node" parent="." unique_id=1410556099]
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=678741953]
+stream = ExtResource("2_3bpoc")
+bus = &"Music"
+
+[node name="GameplayMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=135150392]
+stream = ExtResource("3_lyu6u")
+bus = &"Music"
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=125463350]
+stream = ExtResource("4_3ns0j")
+bus = &"SFX"
