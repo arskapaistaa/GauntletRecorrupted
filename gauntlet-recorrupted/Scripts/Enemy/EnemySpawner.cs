@@ -198,6 +198,7 @@ public partial class EnemySpawner : StaticBody2D
 		IsAlive = false;
         CurrentState = State.Defeat;
 		Level.Current.ChangeSpawnerCount();
+		GameManager.Instance.OnSpawnerDestroyedChanged();
     }
 
 	public void IncreaseActiveEnemiesCount()

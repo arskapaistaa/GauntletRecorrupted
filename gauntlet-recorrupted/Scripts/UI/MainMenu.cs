@@ -35,6 +35,21 @@ public partial class MainMenu : Control
 
     public override void _Input(InputEvent @event)
     {
+		if (_animations.IsPlaying())
+		{
+			return;
+		}
+
+		if (_video.IsPlaying())
+		{
+			if (@event.IsActionPressed("Menu"))
+			{
+				_video.Stop();
+				_animations.Play("Intro");
+				return;
+			}
+		}
+
         if (@event.IsActionPressed("Menu") && GameManager.Instance.CurrentGameState != GameManager.GameState.Settings)
 		{
 			if (_animations != null)
@@ -59,6 +74,9 @@ public partial class MainMenu : Control
 
 	private void OnVideoFinished()
     {
-
+		if (_animations != null)
+		{
+			_animations.Play("Intro");
+		}
     }
 }

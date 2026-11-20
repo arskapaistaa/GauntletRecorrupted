@@ -30,10 +30,12 @@ public partial class StatsManager : Node
 	private int _kills;
 	private int _deaths;
 	private int _shotsFired;
+	private int _spawnersDestroyed;
 
 	private string _statsString = "Stats";
 	private string _killsString = "Kills";
 	private string _deathString = "Deaths";
+	private string _spawnersString = "Spawners";
 	private string _shotsFiredString = "ShotsFired";
 	private string _roachKilledString = "RoachKilled";
 	private string _tickKilledString = "TickKilled";
@@ -74,6 +76,13 @@ public partial class StatsManager : Node
 		SaveStats();
 	}
 
+	public void OnSpawnerDestroyed()
+	{
+		_spawnersDestroyed++;
+		_statsConfig.SetValue(_statsString, _spawnersString, _spawnersDestroyed);
+		SaveStats();
+	}
+
 	public int GetKills()
 	{
 		return (int)_statsConfig.GetValue(_statsString, _killsString, 0);
@@ -87,6 +96,11 @@ public partial class StatsManager : Node
 	public int GetShotsFired()
 	{
 		return (int)_statsConfig.GetValue(_statsString, _shotsFiredString, 0);
+	}
+
+	public int GetSpawnersDestroyed()
+	{
+		return (int)_statsConfig.GetValue(_statsString, _spawnersString, 0);
 	}
 
 	public bool IsRoachKilled()
@@ -162,6 +176,7 @@ public partial class StatsManager : Node
 		_kills = (int)_statsConfig.GetValue(_statsString, _killsString, 0);
 		_deaths = (int)_statsConfig.GetValue(_statsString, _deathString, 0);
 		_shotsFired = (int)_statsConfig.GetValue(_statsString, _shotsFiredString, 0);
+		_spawnersDestroyed = (int)_statsConfig.GetValue(_statsString, _spawnersString, 0);
 
 		// Bestiary
 		_roachKilled = (bool)_statsConfig.GetValue(_statsString, _roachKilledString, false);
