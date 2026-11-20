@@ -22,7 +22,7 @@ modulate_color = Color(0.99607843, 0.99607843, 0.99607843, 0.4627451)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nglh5"]
 texture = ExtResource("2_wj1e5")
-region_rect = Rect2(22.176, 3.534, 109.408, 39.767)
+region_rect = Rect2(23, 4, 110, 40)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tm233"]
 content_margin_left = 10.0
@@ -34,7 +34,7 @@ region_rect = Rect2(29.100067, 11.645903, 97.73526, 25.719805)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbhxe"]
 texture = ExtResource("4_wj1e5")
-region_rect = Rect2(22.175507, 3.5342712, 109.40808, 39.766777)
+region_rect = Rect2(23, 4, 110, 40)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5w5s1"]
 content_margin_left = 8.0
