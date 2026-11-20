@@ -272,8 +272,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_linlh")
 _fpsLabel = NodePath("FPSContainer/FPS")
-_healthLabel = NodePath("Hearth/PlayerHealthLabel")
-_healthIndicator = NodePath("Hearth/HearthIndicator")
+_healthLabel = NodePath("Heart/PlayerHealthLabel")
+_healthIndicator = NodePath("Heart/HeartIndicator")
 _exitIndicator = NodePath("Exit/ExitIndicator")
 Revolver = NodePath("Revolver")
 Shotgun = NodePath("Shotgun")
@@ -303,7 +303,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.54901963)
 theme_override_font_sizes/font_size = 8
 text = "FPS"
 
-[node name="Hearth" type="TextureRect" parent="GUI" unique_id=537993845]
+[node name="Heart" type="TextureRect" parent="GUI" unique_id=537993845]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -313,12 +313,12 @@ offset_right = 64.0
 offset_bottom = -10.0
 grow_vertical = 0
 
-[node name="HearthIndicator" type="AnimatedSprite2D" parent="GUI/Hearth" unique_id=753294916]
+[node name="HeartIndicator" type="AnimatedSprite2D" parent="GUI/Heart" unique_id=753294916]
 position = Vector2(31, 31)
 sprite_frames = SubResource("SpriteFrames_bepdp")
 frame_progress = 0.05357385
 
-[node name="PlayerHealthLabel" type="Label" parent="GUI/Hearth" unique_id=1284538617]
+[node name="PlayerHealthLabel" type="Label" parent="GUI/Heart" unique_id=1284538617]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

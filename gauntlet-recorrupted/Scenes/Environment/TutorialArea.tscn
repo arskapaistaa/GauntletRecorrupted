@@ -3,13 +3,16 @@
 [ext_resource type="Script" uid="uid://dgo8wy26vmjua" path="res://Scripts/Environment/TutorialArea.cs" id="1_1suxu"]
 [ext_resource type="Texture2D" uid="uid://ccixxtby6xx0r" path="res://Art/UserInterface/WASD.png" id="2_jrnfu"]
 [ext_resource type="Texture2D" uid="uid://hdc7vj6pad4u" path="res://Art/UserInterface/MouseMovement.png" id="3_lsvc3"]
+[ext_resource type="Texture2D" uid="uid://c2ugtqmovp0nf" path="res://Art/UserInterface/LeftStick.png" id="4_xw5ks"]
+[ext_resource type="Texture2D" uid="uid://i4qyrfy4bx5u" path="res://Art/UserInterface/RightStick.png" id="5_8bys2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
-[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialPanel")]
+[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialPanelMK", "TutorialPanelController")]
 script = ExtResource("1_1suxu")
-TutorialPanel = NodePath("CanvasLayer/Container")
+TutorialPanelMK = NodePath("CanvasLayer/MouseAndKey")
+TutorialPanelController = NodePath("CanvasLayer/Controller")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1676742655]
 shape = SubResource("RectangleShape2D_sopei")
@@ -17,7 +20,7 @@ shape = SubResource("RectangleShape2D_sopei")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1706975120]
 layer = 2
 
-[node name="Container" type="HBoxContainer" parent="CanvasLayer" unique_id=1551314368]
+[node name="MouseAndKey" type="HBoxContainer" parent="CanvasLayer" unique_id=1551314368]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -29,10 +32,30 @@ grow_horizontal = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Texture" type="TextureRect" parent="CanvasLayer/Container" unique_id=82429987]
+[node name="Texture" type="TextureRect" parent="CanvasLayer/MouseAndKey" unique_id=82429987]
 layout_mode = 2
 texture = ExtResource("2_jrnfu")
 
-[node name="Texture2" type="TextureRect" parent="CanvasLayer/Container" unique_id=1732987967]
+[node name="Texture2" type="TextureRect" parent="CanvasLayer/MouseAndKey" unique_id=1732987967]
 layout_mode = 2
 texture = ExtResource("3_lsvc3")
+
+[node name="Controller" type="HBoxContainer" parent="CanvasLayer" unique_id=1129390021]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.0
+offset_top = 32.0
+offset_right = 108.0
+offset_bottom = 92.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="CanvasLayer/Controller" unique_id=1172967499]
+layout_mode = 2
+texture = ExtResource("4_xw5ks")
+
+[node name="Texture2" type="TextureRect" parent="CanvasLayer/Controller" unique_id=1186160792]
+layout_mode = 2
+texture = ExtResource("5_8bys2")

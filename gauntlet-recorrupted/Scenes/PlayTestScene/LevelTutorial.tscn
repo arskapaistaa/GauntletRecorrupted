@@ -23,9 +23,14 @@
 [ext_resource type="PackedScene" uid="uid://ch28284riawxa" path="res://Scenes/Environment/Fog.tscn" id="12_xsbsw"]
 [ext_resource type="Texture2D" uid="uid://cpodakdj6a6ff" path="res://Art/UserInterface/R.png" id="13_l5mvp"]
 [ext_resource type="Texture2D" uid="uid://cwxe3h8ebityw" path="res://Art/UserInterface/Shift.png" id="15_8tc7b"]
+[ext_resource type="Texture2D" uid="uid://2o8hog23im3k" path="res://Art/UserInterface/L2.png" id="17_wlbhj"]
 [ext_resource type="Texture2D" uid="uid://b1accmmgqw4ko" path="res://Art/UserInterface/Q.png" id="20_h2354"]
+[ext_resource type="Texture2D" uid="uid://bwk10pmv7hlhq" path="res://Art/UserInterface/R2.png" id="20_oprqm"]
+[ext_resource type="Texture2D" uid="uid://ds2hltdxfdpbx" path="res://Art/UserInterface/Square.png" id="21_k7xru"]
 [ext_resource type="Shader" uid="uid://3cxnjyced5ui" path="res://Materials/Shaders/PixelatedFog.gdshader" id="22_vopof"]
+[ext_resource type="Texture2D" uid="uid://da4a7n2an1bf2" path="res://Art/UserInterface/Triangle.png" id="23_76byb"]
 [ext_resource type="PackedScene" uid="uid://4gswrml3a4rk" path="res://Scenes/Environment/Destroyable/Barrel.tscn" id="24_4bxdr"]
+[ext_resource type="Texture2D" uid="uid://wkexx83jqt2g" path="res://Art/UserInterface/L1.png" id="25_rxg4t"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
 vertices = PackedVector2Array(-2477.6328, 7183.508, -2623.4688, 3648, 14098, 3648, 14248.523, 6975.4766, 14364.469, -1702.2891, 14098, -1710.9297, 9666, 1088, 9666, 2288, 8210, 2288, 8210, 1776, 7698, 1776, 7698, 1600, 8210, 1600, 8210, 1088, 4882, 1088, 4882, 576, 5826, 576, 5826, 1776, 4882, 1776, 4882, 1264, 4290, 1088, 4114, 1264, 4114, -528, 4290, -704, 2498, -704, 2498, -528, 2498, -16, 1042, -16, 1042, -528, 1042, -704, 274, -528, 274, -704, 2498, -1216, 1042, -1216, 7362, 1776, 7186, 1776, 7186, 1600, 7362, 1600, 10434, 1776, 10258, 1776, 10258, 1600, 10434, 1600, -574, -16, -2286, -16, -2286, -1216, -574, -1216, -62, -528, -238, -528, -238, -704, -62, -704, 12738, 832, 12738, 2544, 12692.867, 2267.3906, 12570.844, 2519.3906, 11026, 2544, 12318.844, 2397.3281, 11026, 1776, 12440.867, 2145.3281, 11026, 832, 11026, 1600, 10770, 1776, 10770, 1600, 12677.8125, -1251.6172, 12738, -1472, 12738, -16, 12538.82, -1008.5469, 12434.727, -1390.6094, 11026, -1472, 12295.75, -1147.5391, 11026, -16)
@@ -411,12 +416,18 @@ position = Vector2(-2313, -1359)
 position = Vector2(62.5, -46.5)
 shape = SubResource("RectangleShape2D_8tc7b")
 
-[node name="Texture" parent="Environment/TutorialAreaDigging/CanvasLayer/Container" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="0" unique_id=82429987]
+[node name="Texture" parent="Environment/TutorialAreaDigging/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="0" unique_id=82429987]
 texture = ExtResource("12_l5mvp")
 
-[node name="Texture2" parent="Environment/TutorialAreaDigging/CanvasLayer/Container" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="1" unique_id=1732987967]
+[node name="Texture2" parent="Environment/TutorialAreaDigging/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1257224739, 1551314368) index="1" unique_id=1732987967]
 visible = false
 texture = SubResource("CompressedTexture2D_r27b6")
+
+[node name="Texture" parent="Environment/TutorialAreaDigging/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1257224739, 1129390021) index="0" unique_id=1172967499]
+texture = ExtResource("17_wlbhj")
+
+[node name="Texture2" parent="Environment/TutorialAreaDigging/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1257224739, 1129390021) index="1" unique_id=1186160792]
+visible = false
 
 [node name="TutorialAreaShoot" parent="Environment" unique_id=1821799274 instance=ExtResource("11_3qguu")]
 position = Vector2(-140, -1399)
@@ -425,11 +436,17 @@ position = Vector2(-140, -1399)
 position = Vector2(90.5, -9)
 shape = SubResource("RectangleShape2D_xsbsw")
 
-[node name="Texture" parent="Environment/TutorialAreaShoot/CanvasLayer/Container" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="0" unique_id=82429987]
+[node name="Texture" parent="Environment/TutorialAreaShoot/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="0" unique_id=82429987]
 texture = ExtResource("12_tyw8m")
 
-[node name="Texture2" parent="Environment/TutorialAreaShoot/CanvasLayer/Container" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="1" unique_id=1732987967]
+[node name="Texture2" parent="Environment/TutorialAreaShoot/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1821799274, 1551314368) index="1" unique_id=1732987967]
 texture = ExtResource("13_l5mvp")
+
+[node name="Texture" parent="Environment/TutorialAreaShoot/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1821799274, 1129390021) index="0" unique_id=1172967499]
+texture = ExtResource("20_oprqm")
+
+[node name="Texture2" parent="Environment/TutorialAreaShoot/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1821799274, 1129390021) index="1" unique_id=1186160792]
+texture = ExtResource("21_k7xru")
 
 [node name="TutorialAreaShoot2" parent="Environment" unique_id=1844643408 instance=ExtResource("11_3qguu")]
 position = Vector2(367, -1399)
@@ -438,12 +455,18 @@ position = Vector2(367, -1399)
 position = Vector2(373.5, -9)
 shape = SubResource("RectangleShape2D_4bxdr")
 
-[node name="Texture" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1844643408, 1551314368) index="0" unique_id=82429987]
+[node name="Texture" parent="Environment/TutorialAreaShoot2/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1844643408, 1551314368) index="0" unique_id=82429987]
 texture = ExtResource("20_h2354")
 
-[node name="Texture2" parent="Environment/TutorialAreaShoot2/CanvasLayer/Container" parent_id_path=PackedInt32Array(1844643408, 1551314368) index="1" unique_id=1732987967]
+[node name="Texture2" parent="Environment/TutorialAreaShoot2/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1844643408, 1551314368) index="1" unique_id=1732987967]
 visible = false
 texture = ExtResource("13_l5mvp")
+
+[node name="Texture" parent="Environment/TutorialAreaShoot2/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1844643408, 1129390021) index="0" unique_id=1172967499]
+texture = ExtResource("23_76byb")
+
+[node name="Texture2" parent="Environment/TutorialAreaShoot2/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1844643408, 1129390021) index="1" unique_id=1186160792]
+visible = false
 
 [node name="TutorialAreaShift" parent="Environment" unique_id=1111604012 instance=ExtResource("11_3qguu")]
 position = Vector2(3702, 398)
@@ -452,8 +475,11 @@ position = Vector2(3702, 398)
 position = Vector2(143.5, -9)
 shape = SubResource("RectangleShape2D_r27b6")
 
-[node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/Container" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
+[node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
 texture = ExtResource("15_8tc7b")
+
+[node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1111604012, 1129390021) index="0" unique_id=1172967499]
+texture = ExtResource("25_rxg4t")
 
 [node name="Fog" parent="Environment" unique_id=699577285 instance=ExtResource("12_xsbsw")]
 material = SubResource("ShaderMaterial_tyw8m")

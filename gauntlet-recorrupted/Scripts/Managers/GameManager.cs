@@ -144,7 +144,7 @@ public partial class GameManager : Node
 			_usingController = true;
 			Input.MouseMode = Input.MouseModeEnum.Hidden;
 		}
-		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton)
+		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton || @event is InputEventKey)
 		{
 			_usingController = false;
 			Input.MouseMode = Input.MouseModeEnum.Visible;
