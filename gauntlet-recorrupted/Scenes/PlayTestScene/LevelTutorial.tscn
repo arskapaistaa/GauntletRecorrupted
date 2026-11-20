@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://b1accmmgqw4ko" path="res://Art/UserInterface/Q.png" id="20_h2354"]
 [ext_resource type="Shader" uid="uid://3cxnjyced5ui" path="res://Materials/Shaders/PixelatedFog.gdshader" id="22_vopof"]
 [ext_resource type="PackedScene" uid="uid://4gswrml3a4rk" path="res://Scenes/Environment/Destroyable/Barrel.tscn" id="24_4bxdr"]
+[ext_resource type="PackedScene" uid="uid://sh2l5n4u772q" path="res://Scenes/Environment/Destroyable/BarrelGoo.tscn" id="27_4bxdr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
 vertices = PackedVector2Array(-2477.6328, 7183.508, -2623.4688, 3648, 14098, 3648, 14248.523, 6975.4766, 14364.469, -1702.2891, 14098, -1710.9297, 9666, 1088, 9666, 2288, 8210, 2288, 8210, 1776, 7698, 1776, 7698, 1600, 8210, 1600, 8210, 1088, 4882, 1088, 4882, 576, 5826, 576, 5826, 1776, 4882, 1776, 4882, 1264, 4290, 1088, 4114, 1264, 4114, -528, 4290, -704, 2498, -704, 2498, -528, 2498, -16, 1042, -16, 1042, -528, 1042, -704, 274, -528, 274, -704, 2498, -1216, 1042, -1216, 7362, 1776, 7186, 1776, 7186, 1600, 7362, 1600, 10434, 1776, 10258, 1776, 10258, 1600, 10434, 1600, -574, -16, -2286, -16, -2286, -1216, -574, -1216, -62, -528, -238, -528, -238, -704, -62, -704, 12738, 832, 12738, 2544, 12692.867, 2267.3906, 12570.844, 2519.3906, 11026, 2544, 12318.844, 2397.3281, 11026, 1776, 12440.867, 2145.3281, 11026, 832, 11026, 1600, 10770, 1776, 10770, 1600, 12677.8125, -1251.6172, 12738, -1472, 12738, -16, 12538.82, -1008.5469, 12434.727, -1390.6094, 11026, -1472, 12295.75, -1147.5391, 11026, -16)
@@ -466,9 +467,6 @@ texture = SubResource("NoiseTexture2D_4bxdr")
 [node name="Barrel" parent="Environment/Destroyables" unique_id=1378513324 instance=ExtResource("24_4bxdr")]
 position = Vector2(-434, -1959)
 
-[node name="Barrel2" parent="Environment/Destroyables" unique_id=907886742 instance=ExtResource("24_4bxdr")]
-position = Vector2(-293, -1882)
-
 [node name="Barrel3" parent="Environment/Destroyables" unique_id=238785396 instance=ExtResource("24_4bxdr")]
 position = Vector2(236, -1555)
 
@@ -504,6 +502,12 @@ PlayerCharacter = NodePath("../Player")
 
 [node name="EventTimer" type="Timer" parent="." unique_id=475063518]
 wait_time = 5.0
+
+[node name="Barrel" parent="." unique_id=1254847722 instance=ExtResource("27_4bxdr")]
+position = Vector2(-215, -1813)
+
+[node name="Barrel2" parent="." unique_id=1502942474 instance=ExtResource("27_4bxdr")]
+position = Vector2(20, -1021)
 
 [editable path="Environment/TutorialAreaMovement"]
 [editable path="Environment/TutorialAreaDigging"]
