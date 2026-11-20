@@ -15,6 +15,7 @@ public partial class GameManager : Node
 	private int _kills;
 	private int _deaths;
 	private int _shotsFired;
+	private int _spawnersDestroyed;
 
 	private int _currentLevel;
 	private bool _usingController = false;
@@ -71,6 +72,12 @@ public partial class GameManager : Node
 		StatsManager.Instance.OnShotsFiredChanged();
 	}
 
+	public void OnSpawnerDestroyedChanged()
+	{
+		_spawnersDestroyed++;
+		StatsManager.Instance.OnSpawnerDestroyed();
+	}
+
 	/// <summary>
 	/// Use Get methods for UI etc.
 	/// </summary>
@@ -96,6 +103,11 @@ public partial class GameManager : Node
 	public int GetShotsFired()
 	{
 		return _shotsFired;
+	}
+
+	public int GetSpawner()
+	{
+		return _spawnersDestroyed;
 	}
 
 	/// <summary>
@@ -130,6 +142,7 @@ public partial class GameManager : Node
 		_kills = resetToZero;
 		_deaths = resetToZero;
 		_shotsFired = resetToZero;
+		_spawnersDestroyed = resetToZero;
 	}
 
 	public override void _Input(InputEvent @event)
