@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://ccmo7dj4cop0l"]
+
+[ext_resource type="Texture2D" uid="uid://brl14yt8ageqx" path="res://Materials/Particles/BloodSplatter.png" id="1_1gv7o"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_osdvf"]
+
+[sub_resource type="Gradient" id="Gradient_4s2xr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_4s2xr")
+
+[sub_resource type="Curve" id="Curve_wuu73"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.022151902, 1), 0.0, 0.0, 0, 0, Vector2(0.20886075, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e5fvg"]
+curve = SubResource("Curve_wuu73")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sopei"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 85.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+radial_velocity_min = 99.99998
+radial_velocity_max = 499.99997
+radial_velocity_curve = SubResource("CurveTexture_e5fvg")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.37254903, 0.29411766, 0.21176471, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")
+hue_variation_min = -0.100000024
+hue_variation_max = 0.09999997
+
+[node name="Barrelparticles" type="GPUParticles2D" unique_id=435467720]
+material = ExtResource("1_osdvf")
+emitting = false
+amount = 128
+texture = ExtResource("1_1gv7o")
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sopei")
