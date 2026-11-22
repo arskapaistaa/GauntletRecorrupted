@@ -9,10 +9,103 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(256, 256)
 
-[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialPanelMK", "TutorialPanelController")]
+[sub_resource type="Animation" id="Animation_2qwsu"]
+resource_name = "MouseMove"
+length = 1.5999999999999999
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MouseAndKey/Texture2:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(3, 3), Vector2(0, 5), Vector2(-3, 3), Vector2(-5, 0), Vector2(-3, -3), Vector2(0, -5), Vector2(3, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_xw5ks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Controller/Texture:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Controller/Texture2:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/MouseAndKey/Texture2:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8bys2"]
+resource_name = "StickMove"
+length = 2.4000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Controller/Texture:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(3, 3), Vector2(0, 5), Vector2(-3, 3), Vector2(-5, 0), Vector2(-3, -3), Vector2(0, -5), Vector2(3, -3), Vector2(5, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Controller/Texture2:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(3, 3), Vector2(0, 5), Vector2(-3, 3), Vector2(-5, 0), Vector2(-3, -3), Vector2(0, -5), Vector2(3, -2.5), Vector2(5, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2qwsu"]
+_data = {
+&"MouseMove": SubResource("Animation_2qwsu"),
+&"RESET": SubResource("Animation_xw5ks"),
+&"StickMove": SubResource("Animation_8bys2")
+}
+
+[node name="TutorialArea" type="Area2D" unique_id=355383656 node_paths=PackedStringArray("TutorialPanelMK", "TutorialPanelController", "_animations")]
 script = ExtResource("1_1suxu")
 TutorialPanelMK = NodePath("CanvasLayer/MouseAndKey")
 TutorialPanelController = NodePath("CanvasLayer/Controller")
+_animations = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1676742655]
 shape = SubResource("RectangleShape2D_sopei")
@@ -38,9 +131,11 @@ texture = ExtResource("2_jrnfu")
 
 [node name="Texture2" type="TextureRect" parent="CanvasLayer/MouseAndKey" unique_id=1732987967]
 layout_mode = 2
+offset_transform_enabled = true
 texture = ExtResource("3_lsvc3")
 
 [node name="Controller" type="HBoxContainer" parent="CanvasLayer" unique_id=1129390021]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -54,8 +149,14 @@ alignment = 1
 
 [node name="Texture" type="TextureRect" parent="CanvasLayer/Controller" unique_id=1172967499]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 0)
 texture = ExtResource("4_xw5ks")
 
 [node name="Texture2" type="TextureRect" parent="CanvasLayer/Controller" unique_id=1186160792]
 layout_mode = 2
+offset_transform_enabled = true
 texture = ExtResource("5_8bys2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1711095512]
+libraries/ = SubResource("AnimationLibrary_2qwsu")

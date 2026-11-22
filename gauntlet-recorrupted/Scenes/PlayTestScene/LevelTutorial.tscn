@@ -404,6 +404,10 @@ _currentLevel = NodePath("../..")
 
 [node name="TutorialAreaMovement" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
 position = Vector2(-3101, -1501)
+PlayMouseAndKeyboardAnimation = true
+PlayControllerAnimation = true
+MouseAndKeyboardAnimation = "MouseMove"
+ControllerAnimation = "StickMove"
 
 [node name="CollisionShape2D" parent="Environment/TutorialAreaMovement" index="0" unique_id=1676742655]
 position = Vector2(-37, -15)
@@ -476,6 +480,7 @@ position = Vector2(143.5, -9)
 shape = SubResource("RectangleShape2D_r27b6")
 
 [node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/MouseAndKey" parent_id_path=PackedInt32Array(1111604012, 1551314368) index="0" unique_id=82429987]
+offset_transform_enabled = true
 texture = ExtResource("15_8tc7b")
 
 [node name="Texture" parent="Environment/TutorialAreaShift/CanvasLayer/Controller" parent_id_path=PackedInt32Array(1111604012, 1129390021) index="0" unique_id=1172967499]
