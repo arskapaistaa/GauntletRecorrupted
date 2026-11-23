@@ -16,7 +16,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,10,0.1")] private float ShotgunCooldown = 1.0f;
 	[Export(PropertyHint.Range, "0,70,1.0")] private float ShotgunSpreadAngle = 15.0f;
 	[Export(PropertyHint.Range, "0,50,1")] private int ShotgunPelletCount = 10;
-	[Export(PropertyHint.Range, "0,10,0.1")] private float ShotgunReloadTime = 1.0f;
+	[Export(PropertyHint.Range, "0,10,0.01")] private float ShotgunReloadTime = 1.25f;
 	[Export(PropertyHint.Range, "0,50000,500")] private float RecoilForce = 1000.0f;
 	[Export(PropertyHint.Range, "0,50000,100")] private float KnockbackDecay = 12500.0f;
 	[Export(PropertyHint.Enum, "Revolver,Shotgun")] private int WeaponType = 0;
@@ -59,9 +59,8 @@ public partial class PlayerCharacter : CharacterBody2D
 	private float _shootTimer = 0;
 	private bool _canShoot = true;
 	private int _maxHealth = 100;
-	private Vector2I playerCell;
-	private bool isReloading = false;
-	private bool isLiving = true;
+	private bool _isReloading = false;
+	private bool _isLiving = true;
 	private float _meleeCooldown = 0;
 	private bool _isMoving = false;
 	private bool _isDigging = false;
@@ -69,10 +68,14 @@ public partial class PlayerCharacter : CharacterBody2D
 	private int _forceRevolverReloadCounter = 0;
 	private int _forceShotgunReloadCounter = 0;
 	private const String ANIMATION_DIG = "Dig";
-	private const String ANIMATION_IDLE = "Idle";
-	private const String ANIMATION_SHOOT_REVOLVER = "RevolverShoot";
-	private const String ANIMATION_SHOOT_SHOTGUN = "ShotgunShoot";
-	private const String ANIMATION_WALK = "Walk";
+	private const String ANIMATION_REVOLVER_IDLE = "RevolverIdle";
+	private const String ANIMATION_REVOLVER_WALK = "RevolverWalk";
+	private const String ANIMATION_REVOLVER_SHOOT = "RevolverShoot";
+	private const String ANIMATION_REVOLVER_RELOAD = "RevolverReload";
+	private const String ANIMATION_SHOTGUN_IDLE = "ShotgunIdle";
+	private const String ANIMATION_SHOTGUN_WALK = "ShotgunWalk";
+	private const String ANIMATION_SHOTGUN_SHOOT = "ShotgunShoot";
+	private const String ANIMATION_SHOTGUN_RELOAD = "ShotgunReload";
 
 	public enum FacingDirection
 	{
@@ -115,11 +118,11 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (WeaponType == 0)
 		{
-			MuzzlePoint.Position = new Vector2(148, 4);
+			MuzzlePoint.Position = new Vector2(156, 4);
 		}
 		else if (WeaponType == 1)
 		{
-			MuzzlePoint.Position = new Vector2(120, 10);
+			MuzzlePoint.Position = new Vector2(124, 12);
 		}
 		HandleTimers(delta);
 		HandleInputs();
@@ -148,13 +151,13 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			_shootTimer = 0;
 			_reloadSpeedMultiplier = 1.0f;
-			isReloading = false;
+			_isReloading = false;
 		}
 	}
 
 	private void HandleMovement(double delta)
 	{
-		if (isLiving)
+		if (_isLiving)
 		{
 			if (GameManager.Instance.IsUsingController())
 			{
@@ -187,7 +190,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		_moveVelocity = velocity;
 		Velocity = _moveVelocity + _knockback;
 		_knockback = _knockback.MoveToward(Vector2.Zero, KnockbackDecay * (float)delta);
-		if (isLiving)
+		if (_isLiving)
 		{
 			MoveAndSlide();
 		}
@@ -198,12 +201,26 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (PlayerSprite.Animation == ANIMATION_DIG)
 		{
 			_isDigging = false;
-			PlayerSprite.Play(ANIMATION_IDLE);
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
 		}
-		if (PlayerSprite.Animation == ANIMATION_SHOOT_REVOLVER || PlayerSprite.Animation == ANIMATION_SHOOT_SHOTGUN)
+		if (PlayerSprite.Animation == ANIMATION_REVOLVER_SHOOT || PlayerSprite.Animation == ANIMATION_SHOTGUN_SHOOT)
 		{
 			_isShooting = false;
-			PlayerSprite.Play(ANIMATION_IDLE);
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
+		}
+		if (PlayerSprite.Animation == ANIMATION_REVOLVER_RELOAD || PlayerSprite.Animation == ANIMATION_SHOTGUN_RELOAD)
+		{
+			_isReloading = false;
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
 		}
 	}
 
@@ -211,12 +228,12 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		if (Input.IsActionJustPressed("WeaponSwitch"))
 		{
-			if (!isLiving)
+			if (!_isLiving)
 			{
 				GD.Print("Cannot switch weapons while dead");
 				return;
 			}
-			if (isReloading)
+			if (_isReloading)
 			{
 				GD.Print("Cannot switch weapons while reloading");
 				return;
@@ -239,7 +256,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
 		{
-			if (!isLiving)
+			if (!_isLiving)
 			{
 				GD.Print("Cannot shoot while dead");
 				return;
@@ -306,7 +323,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Reload"))
 		{
-			if (!isLiving)
+			if (!_isLiving)
 			{
 				GD.Print("Cannot reload while dead");
 				return;
@@ -333,7 +350,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (Input.IsActionJustPressed("Dig"))
 		{
-			if (!isLiving)
+			if (!_isLiving)
 			{
 				GD.Print("Cannot dig while dead");
 				return;
@@ -389,7 +406,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	private void HandleAnimations()
 	{
-		if (!isLiving)
+		if (!_isLiving)
 		{
 			// Handle dead animation
 			return;
@@ -402,20 +419,34 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			if (WeaponType == 0)
 			{
-				PlayerSprite.Play(ANIMATION_SHOOT_REVOLVER);
+				PlayerSprite.Play(ANIMATION_REVOLVER_SHOOT);
 			}
 			else if (WeaponType == 1)
 			{
-				PlayerSprite.Play(ANIMATION_SHOOT_SHOTGUN);
+				PlayerSprite.Play(ANIMATION_SHOTGUN_SHOOT);
 			}
+		}
+		else if (_isReloading)
+		{
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_RELOAD);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_RELOAD);
 		}
 		else if (_isMoving)
 		{
-			PlayerSprite.Play(ANIMATION_WALK);
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_WALK);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_WALK);
 		}
+		
 		else
 		{
-			PlayerSprite.Play(ANIMATION_IDLE);
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
 		}
 	}
 
@@ -481,17 +512,23 @@ public partial class PlayerCharacter : CharacterBody2D
 			_currentAmmoShotgun = _maxAmmoShotgun;
 			_forceShotgunReloadCounter = 0;
 		}
-		_reloadSpeedMultiplier = 0.5f;
+		if (WeaponType == 0)
+			_reloadSpeedMultiplier = 0.5f;
+		else if (WeaponType == 1)
+			_reloadSpeedMultiplier = 0.0f;
 		_shootTimer = ReloadTime;
-		isReloading = true;
+		_isReloading = true;
 		EmitSignal(SignalName.Reload, WeaponType);
 	}
 
 	private void ForceShootingAnimationEnd()
 	{
-		if ((PlayerSprite.Animation == ANIMATION_SHOOT_REVOLVER || PlayerSprite.Animation == ANIMATION_SHOOT_SHOTGUN) && PlayerSprite.Frame == PlayerSprite.SpriteFrames.GetFrameCount(PlayerSprite.Animation) - 1)
+		if ((PlayerSprite.Animation == ANIMATION_REVOLVER_SHOOT || PlayerSprite.Animation == ANIMATION_SHOTGUN_SHOOT) && PlayerSprite.Frame == PlayerSprite.SpriteFrames.GetFrameCount(PlayerSprite.Animation) - 1)
 		{
-			PlayerSprite.Play(ANIMATION_IDLE);
+			if (WeaponType == 0)
+				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
+			else if (WeaponType == 1)
+				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
 			_isShooting = false;
 		}
 	}
@@ -524,7 +561,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			Health = 0;
 			GD.Print("Player is dead");
-			isLiving = false;
+			_isLiving = false;
 
 			// Tell Game Manager that player is dead -> Track deaths.
 			GameManager.Instance.OnDeathsChanged();
@@ -657,6 +694,6 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public bool IsAlive()
 	{
-		return isLiving;
+		return _isLiving;
 	}
 }
