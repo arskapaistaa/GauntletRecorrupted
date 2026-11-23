@@ -97,25 +97,29 @@ public partial class Brain : Node
 			// If enemy is in attack range and can see player, start Attacking.
 
 			if (_enemy.ThisAttackType == Enemy.AttackType.Static)
-				{
-					return;
-				}
+			{
+				return;
+			}
 
 			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
 			{
-				CurrentState = State.Attack;
+				if (_enemy.CanRangedAttack && _enemy.CanShoot)
+				{
+					double change = GD.Randf();
+					if (change > _enemy.RangedAttackChange)
+					{
+						CurrentState = State.Ranged;
+						return;
+					}
+				}
+				else
+				{
+					CurrentState = State.Attack;
 
-				if (_enemy.ThisAttackType == Enemy.AttackType.Dash)
+					if (_enemy.ThisAttackType == Enemy.AttackType.Dash)
 					{
 						_enemy.SetAttackDirection();
 					}
-			}
-
-			if (_enemy.Player != null && _enemy.CanRangedAttack)
-			{
-				if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) > _enemy.GetDetectionRange() && _enemy.HasLineOfSight())
-				{
-					CurrentState = State.Ranged;
 				}
 			}
 			break;
@@ -124,7 +128,14 @@ public partial class Brain : Node
 
 	public void Damaged()
 	{
-		CurrentState = State.Damaged;
+		if (_enemy.IgnoreStateChange && CurrentCombatState == CombatState.InCombat)
+		{
+			return;
+		}
+		else
+		{
+			CurrentState = State.Damaged;
+		}
 	}
 
 	public void Defeat()

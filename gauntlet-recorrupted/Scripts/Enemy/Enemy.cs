@@ -15,7 +15,7 @@ public partial class Enemy : CharacterBody2D
 
 	[Export(PropertyHint.Range, "0,1600,10,suffix:Pixels/s")] private float _attackSpeed;
 
-	[Export(PropertyHint.Range, "0,1500,100,suffix:Pixels")] public float DetectionRange;
+	[Export(PropertyHint.Range, "0,3000,100,suffix:Pixels")] public float DetectionRange;
 
 	[Export(PropertyHint.Range, "1, 100, 1")] private int _dmg;
 
@@ -32,6 +32,7 @@ public partial class Enemy : CharacterBody2D
 	[ExportSubgroup("Damaged movement")]
 	[Export] private bool _canMoveWhileDamaged = false;
 	[Export(PropertyHint.Range, "50,1000,10,suffix:Pixels/s")] private float _damagedSpeed = 100.0f;
+	[Export] public bool IgnoreStateChange = false;
 
 	[ExportSubgroup("Normal patrol (No Tick)")]
 	[Export] private bool _canPatrol = false;
@@ -41,9 +42,15 @@ public partial class Enemy : CharacterBody2D
 
 	[ExportSubgroup("Ranged Attack")]
 	[Export] public bool CanRangedAttack = false;
-	[Export(PropertyHint.Range, "0.1,5.0f,0.1,suffix:seconds")] private float _rangedCooldownTime = 1.0f;
+	[Export(PropertyHint.Range, "0.1,10.0f,0.1,suffix:seconds")] private float _rangedCooldownTime = 1.0f;
 	[Export] private PackedScene _projectileScene = null;
 	[Export] private Marker2D _projectileSpawnPoint = null;
+	[Export] private DamageArea _rangedDmgArea = null;
+	[Export] private AnimatedSprite2D _rangedSprite = null;
+	[Export] private int _rangedStartFrame;
+	[Export] private int _rangedEndFrame;
+	[Export(PropertyHint.Range, "1, 100, 1")] public int RangedDmg;
+	[Export(PropertyHint.Range, "0.0,1.0,0.1,suffix:* 100%")] public float RangedAttackChange = 0.5f;
 
 	[ExportSubgroup("Alarmed")]
 	[Export] private bool _canBeAlarmed = true;
@@ -84,7 +91,7 @@ public partial class Enemy : CharacterBody2D
 	[ExportGroup("Animations")]
 	[Export] private int[] _attackMovementFrames;
 	[Export] private int _attackStartFrame;
-	[Export] private int _attackEndFrames;
+	[Export] private int _attackEndFrame;
 
 	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
@@ -92,7 +99,7 @@ public partial class Enemy : CharacterBody2D
 	private float _navInterval = 0.25f;
 	private float _attackNavInterval = 0.5f;
 	private EnemySpawner _homeSpawner = null;
-	private bool _canShoot = true;
+	public bool CanShoot = true;
 
 	// PUBLIC, NO EXPORT
 	public bool AttackSucceed = false;
@@ -317,6 +324,11 @@ public partial class Enemy : CharacterBody2D
 
 		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPlayer();
+
+		if (CanRangedAttack)
+		{
+			UpdateDamageArea("Projectile", _rangedSprite, _rangedDmgArea, _rangedStartFrame, _rangedEndFrame);
+		}
 	}
 
 	private void UpdatePatrol(double delta)
@@ -469,7 +481,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void UpdateAttack(double delta)
 	{
-		UpdateDamageArea();
+		UpdateDamageArea("Attack", _sprite, _dmgArea, _attackStartFrame, _attackEndFrame);
 
 		if (ThisAttackType == AttackType.Dash)
 		{
@@ -532,23 +544,23 @@ public partial class Enemy : CharacterBody2D
 	/// <summary>
 	/// Method that checks if the Attack animation is currently on attack position.
 	/// </summary>
-	private void UpdateDamageArea()
+	private void UpdateDamageArea(string animation, AnimatedSprite2D sprite, DamageArea damageArea, int attackStartFrame, int attackEndFrame)
 	{
-		if (_sprite.Animation == "Attack")
+		if (sprite.Animation == animation)
         {
-			if (_sprite.Frame == _attackStartFrame)
+			if (sprite.Frame == attackStartFrame)
 			{
-				if (_dmgArea != null)
+				if (damageArea != null)
 				{
-					_dmgArea.Monitoring = true;
+					damageArea.Monitoring = true;
 				}
 			}
 
-			if (_sprite.Frame == _attackEndFrames)
+			if (sprite.Frame == attackEndFrame)
 			{
-				if (_dmgArea != null)
+				if (damageArea != null)
 				{
-					_dmgArea.Monitoring = false;
+					damageArea.Monitoring = false;
 				}
 			}
         }
@@ -578,15 +590,15 @@ public partial class Enemy : CharacterBody2D
 
 	private void UpdateRanged()
 	{
-		LookAtPlayer();
+		UpdateDamageArea("Projectile", _rangedSprite, _rangedDmgArea, _rangedStartFrame, _rangedEndFrame);
 
-		if (HasLineOfSight() && _canShoot)
-		{
-			Shoot();
-			_canShoot = false;
-		}
+		CanShoot = false;
 	}
 
+	/// <summary>
+	/// Spawns projectile.
+	/// Currently not in use.
+	/// </summary>
 	private void Shoot()
 	{
 		if (_projectileScene == null)
@@ -689,6 +701,11 @@ public partial class Enemy : CharacterBody2D
 				if (CanRangedAttack)
 				{
 					_sprite.Play("Ranged");
+
+					if (_rangedSprite != null)
+					{
+						_rangedSprite.Play("Projectile");
+					}
 				}
 				break;
 
@@ -1051,7 +1068,7 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnRangedCooldownTimerTimedOut()
     {
-        _canShoot = true;
+        CanShoot = true;
 		GD.Print("Can shoot");
     }
 
