@@ -59,8 +59,8 @@ public partial class DiggableTiles : TileMapLayer
 		}
 
 		Node2D effect = BreakEffectScene.Instantiate<Node2D>();
-		GetTree().CurrentScene.AddChild(effect);
 		effect.GlobalPosition = ToGlobal(MapToLocal(cell));
+		GetTree().CurrentScene.AddChild(effect);
 	}
 
 	private void SpawnEnemy(Vector2I cell)

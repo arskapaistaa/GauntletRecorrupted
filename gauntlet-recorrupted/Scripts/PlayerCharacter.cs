@@ -9,6 +9,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,100,1")] private int Health = 100;
 	[Export(PropertyHint.Range, "0,100,1")] private int MeleeDamage = 10;
 	[Export(PropertyHint.Range, "0,5,0.1")] private float MeleeCooldown = 0.5f;
+	[Export(PropertyHint.Range, "0,1000,10")] private float DigReach = 100.0f;
 	[ExportGroup("Weapon Stats")]
 	[Export(PropertyHint.Range, "0,10,0.1")] private float RevolverCooldown = 0.5f;
 	[Export(PropertyHint.Range, "0,10,0.1")] private float RevolverReloadTime = 2.0f;
@@ -29,6 +30,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private Area2D MeleeArea;
 	[Export] private Cursor CustomCursor;
 	[Export] private Sprite2D AimArrow;
+	[Export] private RayCast2D DigRay;
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSFX = null;
@@ -111,7 +113,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		else
 			AimArrow.Visible = false;
 
-		playerCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(GlobalPosition));
 		if (WeaponType == 0)
 		{
 			MuzzlePoint.Position = new Vector2(148, 4);
@@ -497,150 +498,24 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	private void Dig()
 	{
-		GD.Print($"Player's position in grid: {playerCell}");
-		GD.Print($"Player is facing: {GetFacingDirection()}");
-		Vector2I targetCell;
-		// no diagonal digging if there are walls in front of the diagonal direction
-		// so if there is wall north and east, you cannot dig northeast, etc.
-		switch (GetFacingDirection())
-		{
-			case FacingDirection.East:
-				targetCell = playerCell + new Vector2I(1, 0);
-				break;
-			case FacingDirection.SouthEast:
-				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 1)) != null)
-				{
-					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) == null)
-						targetCell = playerCell + new Vector2I(1, 1);
-					else if (GetNormalFacingDirection() == FacingDirection.East)
-						targetCell = playerCell + new Vector2I(1, 0);
-					else
-						targetCell = playerCell + new Vector2I(0, 1);
-				}
-				else
-				{
-					if (GetNormalFacingDirection() == FacingDirection.East)
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) != null)
-							targetCell = playerCell + new Vector2I(1, 0);
-						else
-							targetCell = playerCell + new Vector2I(0, 1);
-					}
-					else
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) != null)
-							targetCell = playerCell + new Vector2I(0, 1);
-						else
-							targetCell = playerCell + new Vector2I(1, 0);
-					}
-				}
-				break;
-			case FacingDirection.South:
-				targetCell = playerCell + new Vector2I(0, 1);
-				break;
-			case FacingDirection.SouthWest:
-				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 1)) != null)
-				{
-					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) == null)
-						targetCell = playerCell + new Vector2I(-1, 1);
-					else if (GetNormalFacingDirection() == FacingDirection.West)
-						targetCell = playerCell + new Vector2I(-1, 0);
-					else
-						targetCell = playerCell + new Vector2I(0, 1);
-				}
-				else
-				{
-					if (GetNormalFacingDirection() == FacingDirection.West)
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) != null)
-							targetCell = playerCell + new Vector2I(-1, 0);
-						else
-							targetCell = playerCell + new Vector2I(0, 1);
-					}
-					else
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, 1)) != null)
-							targetCell = playerCell + new Vector2I(0, 1);
-						else
-							targetCell = playerCell + new Vector2I(-1, 0);
-					}
-				}
-				break;
-			case FacingDirection.West:
-				targetCell = playerCell + new Vector2I(-1, 0);
-				break;
-			case FacingDirection.NorthWest:
-				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, -1)) != null)
-				{
-					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) == null)
-						targetCell = playerCell + new Vector2I(-1, -1);
-					else if (GetNormalFacingDirection() == FacingDirection.West)
-						targetCell = playerCell + new Vector2I(-1, 0);
-					else
-						targetCell = playerCell + new Vector2I(0, -1);
-				}
-				else
-				{
-					if (GetNormalFacingDirection() == FacingDirection.West)
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(-1, 0)) != null)
-							targetCell = playerCell + new Vector2I(-1, 0);
-						else
-							targetCell = playerCell + new Vector2I(0, -1);
-					}
-					else
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) != null)
-							targetCell = playerCell + new Vector2I(0, -1);
-						else
-							targetCell = playerCell + new Vector2I(-1, 0);
-					}
-				}
-				break;
-			case FacingDirection.North:
-				targetCell = playerCell + new Vector2I(0, -1);
-				break;
-			case FacingDirection.NorthEast:
-				if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, -1)) != null)
-				{
-					if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) == null || DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) == null)
-						targetCell = playerCell + new Vector2I(1, -1);
-					else if (GetNormalFacingDirection() == FacingDirection.East)
-						targetCell = playerCell + new Vector2I(1, 0);
-					else
-						targetCell = playerCell + new Vector2I(0, -1);
-				}
-				else
-				{
-					if (GetNormalFacingDirection() == FacingDirection.East)
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(1, 0)) != null)
-							targetCell = playerCell + new Vector2I(1, 0);
-						else
-							targetCell = playerCell + new Vector2I(0, -1);
-					}
-					else
-					{
-						if (DiggableTiles.GetCellTileData(playerCell + new Vector2I(0, -1)) != null)
-							targetCell = playerCell + new Vector2I(0, -1);
-						else
-							targetCell = playerCell + new Vector2I(1, 0);
-					}
-				}
-				break;
-			default:
-				return;
-		}
-		bool isEmpty = DiggableTiles.GetCellTileData(targetCell) == null;
-		if (isEmpty)
-		{
-			GD.Print("Cannot dig that tile.");
+		DigRay.TargetPosition = new Vector2(DigReach, 0);
+		DigRay.ForceRaycastUpdate();
+
+		if (!DigRay.IsColliding() || DigRay.GetCollider() != DiggableTiles)
 			return;
+		
+		// Ray hits the edge of the tile, so we move slightly inside the tile to get the correct target position.
+		Vector2 targetTileInside = DigRay.GetCollisionPoint() - DigRay.GetCollisionNormal() * 0.2f;
+		// Convert the target position to the cell in the tilemap
+		Vector2I targetCell = DiggableTiles.LocalToMap(DiggableTiles.ToLocal(targetTileInside));
+
+		if (DiggableTiles.GetCellTileData(targetCell) != null)
+		{
+			DiggableTiles.DeleteCell(targetCell);
+			PlayDiggingSfx();
 		}
-		DiggableTiles.DeleteCell(targetCell);
-		PlayDiggingSfx();
-		GD.Print($"Dug tile at {targetCell}");
 	}
+
 
 	public void TakeDmg(int damage)
 	{

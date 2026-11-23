@@ -7,6 +7,11 @@ public partial class TutorialArea : Area2D
 	// Controller = Game Controller
 	[Export] public Control TutorialPanelMK = null;
 	[Export] public Control TutorialPanelController = null;
+	[Export] private AnimationPlayer _animations = null;
+	[Export] private bool PlayMouseAndKeyboardAnimation = false;
+	[Export] private bool PlayControllerAnimation = false;
+	[Export] private String MouseAndKeyboardAnimation = "";
+	[Export] private String ControllerAnimation = "";
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
@@ -53,6 +58,7 @@ public partial class TutorialArea : Area2D
 				if (TutorialPanelController != null)
 				{
 					TutorialPanelController.Visible = true;
+					PlayAnimation(ControllerAnimation);
 				}
 			}
 			else
@@ -60,6 +66,7 @@ public partial class TutorialArea : Area2D
 				if (TutorialPanelMK != null)
 				{
 					TutorialPanelMK.Visible = true;
+					PlayAnimation(MouseAndKeyboardAnimation);
 				}
 			}
 		}
@@ -86,6 +93,7 @@ public partial class TutorialArea : Area2D
 			if (TutorialPanelController != null && (TutorialPanelController.Visible || TutorialPanelMK.Visible))
 			{
 				TutorialPanelController.Visible = true;
+				PlayAnimation(ControllerAnimation);
 			}
 			if (TutorialPanelMK != null)
 			{
@@ -97,11 +105,28 @@ public partial class TutorialArea : Area2D
 			if (TutorialPanelMK != null && (TutorialPanelController.Visible || TutorialPanelMK.Visible))
 			{
 				TutorialPanelMK.Visible = true;
+				PlayAnimation(MouseAndKeyboardAnimation);
 			}
 			if (TutorialPanelController != null)
 			{
 				TutorialPanelController.Visible = false;
 			}
+		}
+	}
+
+	private void PlayAnimation(string animationName)
+	{
+		if (_animations == null)
+			return;
+		if (TutorialPanelMK != null && TutorialPanelMK.Visible)
+		{
+			if (PlayMouseAndKeyboardAnimation)
+				_animations.Play(animationName);
+		}
+		if (TutorialPanelController != null && TutorialPanelController.Visible)
+		{
+			if (PlayControllerAnimation)
+				_animations.Play(animationName);
 		}
 	}
 }

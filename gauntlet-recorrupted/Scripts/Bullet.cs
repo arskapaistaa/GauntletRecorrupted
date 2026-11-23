@@ -113,8 +113,8 @@ public partial class Bullet : Area2D
 			return;
 		}
 		Node2D effect = _hitEffectScene.Instantiate<Node2D>();
-		GetTree().CurrentScene.AddChild(effect);
 		effect.GlobalPosition = position;
 		effect.Rotation = _direction.Angle() + Mathf.Pi;
+		GetTree().CurrentScene.AddChild(effect);
 	}
 }
