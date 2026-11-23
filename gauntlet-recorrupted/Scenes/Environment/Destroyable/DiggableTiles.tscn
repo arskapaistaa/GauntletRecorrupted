@@ -133,6 +133,7 @@ sources/0 = SubResource("TileSetAtlasSource_u5u3u")
 sources/1 = SubResource("TileSetAtlasSource_esh4x")
 
 [node name="DiggableTiles" type="TileMapLayer" unique_id=999643897]
+z_index = 5
 tile_set = SubResource("TileSet_rk2iv")
 script = ExtResource("3_fkq7d")
 TickScene = ExtResource("4_gibvn")
