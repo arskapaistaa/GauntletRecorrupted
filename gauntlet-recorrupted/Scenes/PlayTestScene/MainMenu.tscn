@@ -1,42 +1,42 @@
 [gd_scene format=3 uid="uid://cfmj0l8f6okh5"]
 
-[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_cg106"]
-[ext_resource type="Script" uid="uid://cwv474lclofjf" path="res://Scripts/UI/MainMenu.cs" id="1_t3rra"]
-[ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="2_ikpte"]
-[ext_resource type="Texture2D" uid="uid://0q6p3vlor8e1" path="res://Art/Title/HellsWellTitleBG.png" id="2_ux8os"]
-[ext_resource type="Texture2D" uid="uid://coodk017o2rqt" path="res://Art/Title/HellsWellTitle.png" id="3_p1vdu"]
-[ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="3_rth11"]
-[ext_resource type="Texture2D" uid="uid://b72oy80tbsjd3" path="res://Art/Title/HellsWellTitleBGAnim2.png" id="3_w2hh5"]
-[ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="4_5ve7l"]
-[ext_resource type="Theme" uid="uid://betifo50ocmef" path="res://Theme/Title.tres" id="4_811aa"]
-[ext_resource type="Texture2D" uid="uid://brt8oo38mtpfa" path="res://Art/Title/HellsWellTitleBGAnim3.png" id="4_ggudn"]
-[ext_resource type="Texture2D" uid="uid://oa5unipbw4fy" path="res://Art/Title/HellsWellTitleBGAnim4.png" id="5_2sxs1"]
-[ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="5_7512y"]
-[ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="5_ggxpc"]
-[ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="6_pwykd"]
-[ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="6_q8jds"]
-[ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="10_e76bc"]
-[ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="10_mwm07"]
-[ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_v0gyi"]
-[ext_resource type="PackedScene" uid="uid://dxw8eytk1bjph" path="res://Scenes/Particles/MainMenuParticles.tscn" id="11_j2dai"]
-[ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="11_ya24g"]
-[ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="12_4dvq8"]
-[ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="15_4dvq8"]
-[ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="17_ggudn"]
-[ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="17_ya24g"]
-[ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="23_3pkmq"]
-[ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="24_57vxl"]
-[ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_57vxl"]
-[ext_resource type="VideoStream" uid="uid://dfph2kcwtqj2s" path="res://Art/Cutscenes/HellsWellStartingAnimFinalNew.ogv" id="28_j2dai"]
+[ext_resource type="Script" uid="uid://cwv474lclofjf" path="res://Scripts/UI/MainMenu.cs" id="1_jpbx2"]
+[ext_resource type="Texture2D" uid="uid://0q6p3vlor8e1" path="res://Art/Title/HellsWellTitleBG.png" id="2_brte5"]
+[ext_resource type="Texture2D" uid="uid://coodk017o2rqt" path="res://Art/Title/HellsWellTitle.png" id="3_802bh"]
+[ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="4_kpkvq"]
+[ext_resource type="Theme" uid="uid://betifo50ocmef" path="res://Theme/Title.tres" id="5_dfk7v"]
+[ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="6_c3pg3"]
+[ext_resource type="Texture2D" uid="uid://bfrbax3fjllft" path="res://Art/UserInterface/StatsButton2.png" id="7_uy82s"]
+[ext_resource type="Texture2D" uid="uid://bl2tnj1hwmex1" path="res://Art/UserInterface/StatsButton.png" id="8_45f28"]
+[ext_resource type="Texture2D" uid="uid://dk0po0ge0owhk" path="res://Art/UserInterface/SettingsButton2.png" id="9_8ck4u"]
+[ext_resource type="Texture2D" uid="uid://c4tkrk668u3i7" path="res://Art/UserInterface/SettingsButton.png" id="10_523l8"]
+[ext_resource type="PackedScene" uid="uid://dxw8eytk1bjph" path="res://Scenes/Particles/MainMenuParticles.tscn" id="11_tmujx"]
+[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="12_ocx4m"]
+[ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="13_71420"]
+[ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="14_bajux"]
+[ext_resource type="PackedScene" uid="uid://dpyntayyrck00" path="res://Scenes/GUI/Bestiary.tscn" id="15_jpbx2"]
+[ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="16_8kyln"]
+[ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="17_kh5lv"]
+[ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="18_jj0ip"]
+[ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="19_f3lgg"]
+[ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="20_jwkeu"]
+[ext_resource type="Texture2D" uid="uid://b72oy80tbsjd3" path="res://Art/Title/HellsWellTitleBGAnim2.png" id="21_c11k8"]
+[ext_resource type="Texture2D" uid="uid://brt8oo38mtpfa" path="res://Art/Title/HellsWellTitleBGAnim3.png" id="22_avt3h"]
+[ext_resource type="Texture2D" uid="uid://oa5unipbw4fy" path="res://Art/Title/HellsWellTitleBGAnim4.png" id="23_dj18y"]
+[ext_resource type="Texture2D" uid="uid://blon1x2whcum4" path="res://Art/Title/HellsWellTitleBGAnim5.png" id="24_jrnor"]
+[ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_odhpo"]
+[ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="26_sov0p"]
+[ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="27_4rdmv"]
+[ext_resource type="VideoStream" uid="uid://dfph2kcwtqj2s" path="res://Art/Cutscenes/HellsWellStartingAnimFinalNew.ogv" id="28_dw7nr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
-texture = ExtResource("12_4dvq8")
+texture = ExtResource("7_uy82s")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dvq8"]
-texture = ExtResource("11_ya24g")
+texture = ExtResource("8_45f28")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e5fvg"]
-texture = ExtResource("11_ya24g")
+texture = ExtResource("8_45f28")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j2dai"]
 load_path = "res://.godot/imported/StatsButton2.png-c54386800dfba493b1e5f7916e202ef0.ctex"
@@ -52,13 +52,13 @@ Button/styles/normal = SubResource("StyleBoxTexture_e5fvg")
 Button/styles/pressed = SubResource("StyleBoxTexture_pvows")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3pel"]
-texture = ExtResource("10_mwm07")
+texture = ExtResource("9_8ck4u")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pkmq"]
-texture = ExtResource("10_v0gyi")
+texture = ExtResource("10_523l8")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwm07"]
-texture = ExtResource("10_v0gyi")
+texture = ExtResource("10_523l8")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57vxl"]
 load_path = "res://.godot/imported/SettingsButton2.png-6941e5d4ee61e2aaabe44fe843d9886e.ctex"
@@ -72,13 +72,6 @@ Button/styles/focus = SubResource("StyleBoxTexture_j3pel")
 Button/styles/hover = SubResource("StyleBoxTexture_3pkmq")
 Button/styles/normal = SubResource("StyleBoxTexture_mwm07")
 Button/styles/pressed = SubResource("StyleBoxTexture_e76bc")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sopei"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e76bc"]
 load_path = "res://.godot/imported/Base.png-f1644476d382ac70d9e0428565325d2f.ctex"
@@ -129,6 +122,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bestiary:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Buttons:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_j2dai"]
@@ -347,7 +364,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_ux8os")]
+"values": [ExtResource("2_brte5")]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -407,7 +424,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -432,6 +449,46 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Bestiary:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("TitleScreen/Buttons:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jpbx2"]
+resource_name = "Start"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Video:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_v40es"]
@@ -495,7 +552,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 2.4666667, 2.5666666, 2.6666667, 2.7666667, 2.8666668),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_ux8os"), ExtResource("2_ux8os"), ExtResource("3_w2hh5"), ExtResource("4_ggudn"), ExtResource("5_2sxs1"), ExtResource("6_pwykd")]
+"values": [ExtResource("2_brte5"), ExtResource("2_brte5"), ExtResource("21_c11k8"), ExtResource("22_avt3h"), ExtResource("23_dj18y"), ExtResource("24_jrnor")]
 }
 tracks/5/type = "audio"
 tracks/5/imported = false
@@ -507,7 +564,7 @@ tracks/5/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("25_57vxl")
+"stream": ExtResource("25_odhpo")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -569,6 +626,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bestiary:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Buttons:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
@@ -579,18 +660,19 @@ _data = {
 &"OpenExitPanel": SubResource("Animation_57vxl"),
 &"OpenSettings": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
+&"Start": SubResource("Animation_jpbx2"),
 &"StartPressed": SubResource("Animation_v40es"),
 &"StatsPressed": SubResource("Animation_4dvq8")
 }
 
-[node name="TestMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations", "_video")]
+[node name="MainMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations", "_video")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_t3rra")
+script = ExtResource("1_jpbx2")
 _animations = NodePath("AnimationPlayer")
 _video = NodePath("Video/VideoStreamPlayer")
 
@@ -609,7 +691,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ux8os")
+texture = ExtResource("2_brte5")
 
 [node name="Logo" type="TextureRect" parent="TitleScreen" unique_id=1086189945]
 layout_mode = 1
@@ -626,10 +708,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("3_p1vdu")
+texture = ExtResource("3_802bh")
 stretch_mode = 2
 
-[node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("10_e76bc")]
+[node name="MainMenuFog" parent="TitleScreen" unique_id=699577285 instance=ExtResource("4_kpkvq")]
 visible = false
 position = Vector2(320, 180)
 
@@ -646,12 +728,13 @@ offset_right = 75.0
 offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_811aa")
-script = ExtResource("2_ikpte")
+theme = ExtResource("5_dfk7v")
+script = ExtResource("6_c3pg3")
 _animations = NodePath("../../AnimationPlayer")
-_pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
+_pathToScene = "res://Scenes/PlayTestScene/LevelCorridors.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+_isStartButton = true
 _useFocusedStyle = false
 _isGrabFocus = true
 
@@ -674,7 +757,7 @@ offset_top = -64.0
 offset_right = 128.0
 grow_vertical = 0
 theme = SubResource("Theme_4dvq8")
-script = ExtResource("2_ikpte")
+script = ExtResource("6_c3pg3")
 _animations = NodePath("../../../AnimationPlayer")
 _pressedAnimName = "StatsPressed"
 _useFocusedStyle = false
@@ -688,40 +771,38 @@ offset_top = -64.0
 offset_right = 64.0
 grow_vertical = 0
 theme = SubResource("Theme_dxocv")
-script = ExtResource("2_ikpte")
+script = ExtResource("6_c3pg3")
 _animations = NodePath("../../../AnimationPlayer")
 _pressedAnimName = "OpenSettings"
 _useFocusedStyle = false
 
-[node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_j2dai")]
+[node name="Particles" parent="." unique_id=232401890 instance=ExtResource("11_tmujx")]
 position = Vector2(320, 180)
 amount = 10
 
-[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -230.0
+offset_left = 20.0
 offset_top = -160.0
-offset_right = 230.0
+offset_right = 220.0
 offset_bottom = 160.0
-grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_cg106")
-texture = ExtResource("15_4dvq8")
+theme = ExtResource("12_ocx4m")
+texture = ExtResource("13_71420")
 region_rect = Rect2(16, 16, 224, 224)
 patch_margin_left = 50
 patch_margin_top = 50
 patch_margin_right = 50
 patch_margin_bottom = 50
-script = ExtResource("4_5ve7l")
+script = ExtResource("14_bajux")
 _killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
 _shotsFiredLabel = NodePath("VBoxContainer/HBoxContainer/ShotsFired")
+_resetStatsButton = NodePath("Reset Stats")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Stats" unique_id=1164979888]
 layout_mode = 1
@@ -747,17 +828,17 @@ theme_override_constants/separation = 16
 
 [node name="KillsLabel" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=953255772]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "Kills"
 
 [node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=437821416]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "Deaths"
 
 [node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=1981950260]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "Shots fired"
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Stats/VBoxContainer" unique_id=905853011]
@@ -768,19 +849,19 @@ theme_override_constants/separation = 16
 
 [node name="Kills" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=390686524]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "0"
 horizontal_alignment = 2
 
 [node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=1560595271]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "0"
 horizontal_alignment = 2
 
 [node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=907336537]
 layout_mode = 2
-theme = ExtResource("1_cg106")
+theme = ExtResource("12_ocx4m")
 text = "0"
 horizontal_alignment = 2
 
@@ -812,100 +893,32 @@ offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
-script = ExtResource("2_ikpte")
+script = ExtResource("6_c3pg3")
 _animations = NodePath("../../AnimationPlayer")
 _pressedAnimName = "CloseStats"
 
-[node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
+[node name="Reset Stats" type="Button" parent="Stats" unique_id=317742265 node_paths=PackedStringArray("_animations")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 53.0
+offset_top = -65.0
+offset_right = 85.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "R"
+script = ExtResource("6_c3pg3")
+_animations = NodePath("../../AnimationPlayer")
+
+[node name="Bestiary" parent="." unique_id=1638658974 instance=ExtResource("15_jpbx2")]
 visible = false
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -220.0
-offset_top = -231.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 20
-script = ExtResource("5_7512y")
-_roachLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/RoachYesNo")
-_tickLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/TickYesNo")
-_babyLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/BabyYesNo")
 
-[node name="PanelContainer" type="Panel" parent="Bestiary" unique_id=1109178975]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("1_cg106")
-theme_override_styles/panel = SubResource("StyleBoxFlat_sopei")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Bestiary/PanelContainer" unique_id=814736784]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -79.0
-offset_top = -31.0
-offset_right = 79.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="Label" type="Label" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=1942649462]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Bestiary"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=803825904]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 32
-
-[node name="Roach" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1744741776]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "Roach"
-
-[node name="Tick" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1113705727]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "Tick"
-
-[node name="Baby" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1672198188]
-layout_mode = 2
-theme = ExtResource("1_cg106")
-text = "Baby"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Bestiary/PanelContainer/VBoxContainer" unique_id=746077657]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 50
-
-[node name="RoachYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=471874157]
-layout_mode = 2
-text = "No"
-
-[node name="TickYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=52754085]
-layout_mode = 2
-text = "No"
-
-[node name="BabyYesNo" type="Label" parent="Bestiary/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1638287457]
-layout_mode = 2
-text = "No"
-
-[node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("17_ya24g")]
+[node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("16_8kyln")]
 visible = false
 layout_mode = 1
 
@@ -975,45 +988,46 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 text = "yes"
-script = ExtResource("2_ikpte")
+script = ExtResource("6_c3pg3")
 _isExitButton = true
 
 [node name="NO" type="Button" parent="ExitPanel/NinePatchRect/Buttons" unique_id=1036419074 node_paths=PackedStringArray("_animations")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NO"
-script = ExtResource("2_ikpte")
+script = ExtResource("6_c3pg3")
 _animations = NodePath("../../../../AnimationPlayer")
 _pressedAnimName = "CloseExitPanel"
 
 [node name="Managers" type="Node" parent="." unique_id=2118495389]
 
 [node name="SettingsManager" type="Node" parent="Managers" unique_id=1623565682]
-script = ExtResource("3_rth11")
+script = ExtResource("17_kh5lv")
 
 [node name="StatsManager" type="Node" parent="Managers" unique_id=201767045]
-script = ExtResource("5_ggxpc")
+script = ExtResource("18_jj0ip")
 
 [node name="GameManager" type="Node" parent="Managers" unique_id=472901907]
-script = ExtResource("6_q8jds")
+script = ExtResource("19_f3lgg")
 
-[node name="TransitionController" parent="Managers" unique_id=1356249380 instance=ExtResource("17_ggudn")]
+[node name="TransitionController" parent="Managers" unique_id=1356249380 instance=ExtResource("20_jwkeu")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
 libraries/ = SubResource("AnimationLibrary_j8qme")
 
 [node name="Audios" type="Node" parent="." unique_id=423380486 node_paths=PackedStringArray("_music")]
-script = ExtResource("24_57vxl")
+script = ExtResource("26_sov0p")
 _music = NodePath("MainMenuMusic")
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="Audios" unique_id=925341035]
-stream = ExtResource("23_3pkmq")
+stream = ExtResource("27_4rdmv")
 volume_db = -80.0
 bus = &"Music"
 
 [node name="StartSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1276364434]
 
 [node name="Video" type="AspectRatioContainer" parent="." unique_id=1045937909]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1024,7 +1038,7 @@ ratio = 1.7778
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=455174047]
 layout_mode = 2
-stream = ExtResource("28_j2dai")
+stream = ExtResource("28_dw7nr")
 autoplay = true
 expand = true
 

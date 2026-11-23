@@ -137,7 +137,14 @@ public partial class BaseButton : Button
 
 		if (animName == _pressedAnimName && _pathToSceneMode == TriggerMode.AnimationFinished)
 		{
-			GetTree().CallDeferred("change_scene_to_file", _pathToScene);
+			if (_isStartButton && !StatsManager.Instance.IsTuotorialFinished())
+			{
+				GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/LevelTutorial.tscn");
+			}
+			else
+			{
+				GetTree().CallDeferred("change_scene_to_file", _pathToScene);
+			}
 		}
 	}
 

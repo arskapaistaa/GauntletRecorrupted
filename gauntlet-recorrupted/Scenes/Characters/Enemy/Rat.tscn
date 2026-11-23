@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://x1fn74y5s3ht"]
+
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_tp6bl"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_fq4lj"]
+[ext_resource type="Texture2D" uid="uid://b1bsujem5g6qv" path="res://Art/Environment/ArtEnvironmentRat.png" id="3_ms6oi"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="4_lvr6m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwkgd"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipeie"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7pv3"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_671ie"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06ka5"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bssr"]
+atlas = ExtResource("3_ms6oi")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihpo3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwkgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipeie")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7pv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_671ie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06ka5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bssr")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxocv"]
+radius = 200.0
+
+[node name="Rat" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer") groups=["Enemy", "Wurm"]]
+z_index = 1
+collision_layer = 32
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_tp6bl")
+_enemyType = 7
+_attackType = 3
+_health = 1000.0
+_maxSpeed = 500.0
+DetectionRange = 500.0
+_dmg = 10
+_navigationLayer = 2
+_canBeAlarmed = false
+_brain = NodePath("Brain")
+_sprite = NodePath("AnimatedSprite2D")
+_characterCollision = NodePath("")
+_detectionArea = NodePath("DetectionArea")
+_dmgArea = NodePath("")
+_detectionShape = NodePath("DetectionArea/DetectionShape")
+_agent = NodePath("NavigationAgent2D")
+_rayCast = NodePath("")
+_movementSfx = NodePath("Audios/MovementSFX")
+_noticeSfx = NodePath("Audios/NoticeSFX")
+_attackSfx = NodePath("")
+_damagedSfx = NodePath("")
+_defeatSfx = NodePath("")
+_damagedParticles = NodePath("")
+_destroyTimer = NodePath("")
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
+script = ExtResource("4_lvr6m")
+EntersAreaState = 2
+NavigationFinishedState = 3
+AfterBulledDetected = 2
+CantReachTargetState = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=986575111]
+material = ExtResource("2_fq4lj")
+sprite_frames = SubResource("SpriteFrames_ihpo3")
+animation = &"Walk"
+autoplay = "Idle"
+frame = 3
+frame_progress = 0.67732996
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
+collision_layer = 2
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
+shape = SubResource("CircleShape2D_dxocv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
+navigation_layers = 2
+avoidance_layers = 0
+avoidance_mask = 0
+
+[node name="Particles" type="Node2D" parent="." unique_id=1021599722]
+
+[node name="Audios" type="Node2D" parent="." unique_id=373545108]
+
+[node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=921413474]
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=898729808]
+max_distance = 1000.0
+max_polyphony = 2
+bus = &"SFX"

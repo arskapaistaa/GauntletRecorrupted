@@ -5,6 +5,8 @@ public partial class Level : Node2D
 {
 	public static Level Current;
 
+	[Export] public bool IsThisTutorialLevel = false;
+
 	[ExportCategory("Stats")]
 	[Export] private int _maxTotalEnemyCount;
 	/// <summary>
@@ -14,15 +16,12 @@ public partial class Level : Node2D
 	/// <summary>
 	/// What is the enemy count in Editor -> How many enemies there are at the beggining.
 	/// </summary>
-	[Export(PropertyHint.Range, "0,100,suffix:in editor")]
-	private int _presetEnemyCount;
+	[Export(PropertyHint.Range, "0,100,suffix:in editor")] private int _presetEnemyCount;
 	[ExportGroup("Conditions")]
 	[Export] private bool _isThereWurmInThisLevel = false;
-	[Export(PropertyHint.Range, "0,1.0,0.01,suffix:*100%")]
-	private float _wurmPatrolStartChange = 0.1f;
+	[Export(PropertyHint.Range, "0,1.0,0.01,suffix:*100%")] private float _wurmPatrolStartChange = 0.1f;
 
 	[ExportCategory("Node preferences")]
-	[Export] public AnimationPlayer AnimationPlayer = null;
 	[Export] public NavigationRegion2D _navRegion = null;
 	[Export] public PlayerCharacter Player = null;
 	[Export] private Timer _eventCheckTimer = null;
@@ -101,10 +100,6 @@ public partial class Level : Node2D
 		}
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-	}
-
 	public void ChangeEnemyCount(int amount)
 	{
 		CurrentTotalEnemyCount += amount;
@@ -130,7 +125,7 @@ public partial class Level : Node2D
 
 	public void UpdateNavRegion()
 	{
-		if (_navRegion != null)
+		if (_navRegion != null && !_navRegion.IsBaking())
 		{
 			_navRegion.BakeNavigationPolygon();
 		}

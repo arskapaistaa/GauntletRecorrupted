@@ -5,6 +5,8 @@ public partial class MainMenu : Control
 {
 	[Export] private AnimationPlayer _animations = null;
 	[Export] private VideoStreamPlayer _video = null;
+
+	public bool ComingFormInGameMenu = false;
 	public override void _Ready()
 	{
 		GameManager.Instance.SetGameState(GameManager.GameState.Menu);

@@ -278,7 +278,7 @@ motion_mode = 1
 script = ExtResource("1_ngyqg")
 _enemyType = 3
 _attackType = 3
-_health = 50.0
+_health = 70.0
 _maxSpeed = 200.0
 DetectionRange = 200.0
 _dmg = 20
@@ -305,7 +305,6 @@ _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _fromIdleToTimer = NodePath("Timers/FromIdleToAwakeTimer")
 _attackStartFrame = 2
-_attackEndFrames = 3
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_ncmjd")

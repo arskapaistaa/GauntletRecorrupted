@@ -45,7 +45,7 @@ radius = 85.0
 
 [node name="Barrel" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision")]
 z_index = 2
-collision_layer = 4
+collision_layer = 64
 collision_mask = 0
 script = ExtResource("2_tg5a2")
 _sprite = NodePath("AnimatedSprite2D")

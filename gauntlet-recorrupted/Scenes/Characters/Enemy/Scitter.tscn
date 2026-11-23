@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://qancgtj37kk8"]
+
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_dyn73"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_y7mb3"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_s3051"]
+[ext_resource type="Texture2D" uid="uid://bnxj4s8jsqu3" path="res://Art/Environment/ArtEnvironmentScitter.png" id="4_dyn73"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jru87"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xojt1"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u88m4"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2len"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qir8"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pubro"]
+atlas = ExtResource("4_dyn73")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y7mb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jru87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xojt1")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u88m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2len")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qir8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pubro")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxocv"]
+radius = 200.0
+
+[node name="Scitter" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_detectionArea", "_detectionShape", "_agent", "_movementSfx", "_noticeSfx") groups=["Enemy", "Wurm"]]
+z_index = 1
+collision_layer = 32
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_dyn73")
+_enemyType = 7
+_attackType = 3
+_health = 1000.0
+_maxSpeed = 500.0
+DetectionRange = 500.0
+_dmg = 10
+_navigationLayer = 2
+_canBeAlarmed = false
+_brain = NodePath("Brain")
+_sprite = NodePath("AnimatedSprite2D")
+_detectionArea = NodePath("DetectionArea")
+_detectionShape = NodePath("DetectionArea/DetectionShape")
+_agent = NodePath("NavigationAgent2D")
+_movementSfx = NodePath("Audios/MovementSFX")
+_noticeSfx = NodePath("Audios/NoticeSFX")
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
+script = ExtResource("2_y7mb3")
+EntersAreaState = 2
+NavigationFinishedState = 3
+AfterBulledDetected = 2
+CantReachTargetState = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=937110138]
+material = ExtResource("3_s3051")
+sprite_frames = SubResource("SpriteFrames_y7mb3")
+animation = &"Walk"
+autoplay = "Idle"
+frame_progress = 0.65762824
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
+collision_layer = 2
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
+shape = SubResource("CircleShape2D_dxocv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
+navigation_layers = 2
+avoidance_layers = 0
+avoidance_mask = 0
+
+[node name="Particles" type="Node2D" parent="." unique_id=1021599722]
+
+[node name="Audios" type="Node2D" parent="." unique_id=373545108]
+
+[node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=921413474]
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=898729808]
+max_distance = 1000.0
+max_polyphony = 2
+bus = &"SFX"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkd7earp367hu" path="res://Scripts/UI/PauseMenu.cs" id="1_lw475"]
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_uvqs0"]
-[ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/TestMenu.tscn" id="2_7xvl2"]
+[ext_resource type="PackedScene" uid="uid://cfmj0l8f6okh5" path="res://Scenes/PlayTestScene/MainMenu.tscn" id="2_7xvl2"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="4_qm8wn"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_w3cdy"]
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="6_saibd"]
@@ -138,22 +138,20 @@ grow_vertical = 0
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="SettingsBtn" type="Button" parent="HBoxContainer" unique_id=864964784 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+[node name="SettingsBtn" type="Button" parent="HBoxContainer" unique_id=864964784 node_paths=PackedStringArray("_animations")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_uvqs0")
 text = "Settings"
 script = ExtResource("4_w3cdy")
 _animations = NodePath("../../AnimationPlayer")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "OpenSettings"
 
-[node name="MainMenuBtn" type="Button" parent="HBoxContainer" unique_id=254443614 node_paths=PackedStringArray("_pressedSfx")]
+[node name="MainMenuBtn" type="Button" parent="HBoxContainer" unique_id=254443614]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
 script = ExtResource("4_w3cdy")
-_pressedSfx = NodePath("../../Audios/ButtonSFX")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1081524037]
 libraries/ = SubResource("AnimationLibrary_saibd")
