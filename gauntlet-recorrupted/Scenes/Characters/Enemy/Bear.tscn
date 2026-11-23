@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="4_17jru"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_0p4qj"]
 [ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_5shc7"]
+[ext_resource type="Texture2D" uid="uid://dvoasgu671x4h" path="res://Art/Environment/ArtEnemyBearSpit.png" id="6_17jru"]
 [ext_resource type="AudioStream" uid="uid://8yda6bixdgua" path="res://Audio/SFX/Roach/RoachNotice.wav" id="7_uof38"]
 [ext_resource type="AudioStream" uid="uid://6u60chiltksq" path="res://Audio/SFX/Roach/RoachAttack.wav" id="8_reijc"]
 [ext_resource type="AudioStream" uid="uid://duw2ig4orhg7d" path="res://Audio/SFX/Roach/RoachDamaged.wav" id="9_a6yt8"]
@@ -379,29 +380,116 @@ radius = 200.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(165, 164)
 
-[node name="Bear" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_projectileSpawnPoint", "_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToTimer", "_rangedCooldownTimer") groups=["Enemy"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17jru"]
+size = Vector2(908, 466)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7c1oh"]
+atlas = ExtResource("6_17jru")
+region = Rect2(0, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwqhp"]
+atlas = ExtResource("6_17jru")
+region = Rect2(496, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p4qj"]
+atlas = ExtResource("6_17jru")
+region = Rect2(992, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5shc7"]
+atlas = ExtResource("6_17jru")
+region = Rect2(1488, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uof38"]
+atlas = ExtResource("6_17jru")
+region = Rect2(1984, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reijc"]
+atlas = ExtResource("6_17jru")
+region = Rect2(2480, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6yt8"]
+atlas = ExtResource("6_17jru")
+region = Rect2(2976, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67bvd"]
+atlas = ExtResource("6_17jru")
+region = Rect2(3472, 1328, 496, 1328)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei2ap"]
+atlas = ExtResource("6_17jru")
+region = Rect2(3968, 1328, 496, 1328)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sopei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7c1oh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwqhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p4qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5shc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uof38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reijc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6yt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67bvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei2ap")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"Projectile",
+"speed": 5.0
+}]
+
+[node name="Bear" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_projectileSpawnPoint", "_rangedDmgArea", "_rangedSprite", "_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToTimer", "_rangedCooldownTimer") groups=["Enemy"]]
 z_index = 3
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_wbn85")
-_enemyType = 5
+_enemyType = 6
 _attackType = 2
-_health = 200.0
+_health = 300.0
 _maxSpeed = 200.0
 _attackSpeed = 800.0
-DetectionRange = 1500.0
+DetectionRange = 2000.0
 _dmg = 34
 _attackRange = 1000.0
 _canMoveWhileDamaged = true
-_damagedSpeed = 600.0
+_damagedSpeed = 400.0
+IgnoreStateChange = true
 _canPatrol = true
 _minIdleTime = 2.0
 _maxIdleTime = 10.0
 CanRangedAttack = true
-_rangedCooldownTime = 2.0
+_rangedCooldownTime = 5.0
 _projectileScene = ExtResource("2_wbn85")
 _projectileSpawnPoint = NodePath("ProjectileSpawnPoint")
+_rangedDmgArea = NodePath("RangedDamageArea")
+_rangedSprite = NodePath("RangedDamageArea/RangedAnimatedSprite2D")
+_rangedStartFrame = 3
+_rangedEndFrame = 8
+RangedDmg = 25
+RangedAttackChange = 0.6
 _canBeAlarmed = false
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
@@ -422,12 +510,11 @@ _fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
 _rangedCooldownTimer = NodePath("Timers/RangedCooldownTimer")
 _attackMovementFrames = PackedInt32Array(8, 9, 10, 11, 12, 13, 14, 15, 16)
 _attackStartFrame = 8
-_attackEndFrames = 16
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_17jru")
 EntersAreaState = 4
-InCombatState = 6
+InCombatState = 3
 OutOfCombatState = 4
 AfterNoticeState = 6
 AfterAttackState = 4
@@ -441,9 +528,10 @@ AfterRangedState = 6
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1314240996]
 material = ExtResource("4_17jru")
 sprite_frames = SubResource("SpriteFrames_wbn85")
-animation = &"Attack"
+animation = &"Ranged"
 autoplay = "Idle"
-frame = 14
+frame = 3
+frame_progress = 1.0
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -470,6 +558,24 @@ script = ExtResource("5_0p4qj")
 position = Vector2(90.5, 0)
 shape = SubResource("RectangleShape2D_sopei")
 debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
+
+[node name="RangedDamageArea" type="Area2D" parent="." unique_id=1278851864]
+collision_layer = 0
+monitoring = false
+script = ExtResource("5_0p4qj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangedDamageArea" unique_id=1692695973]
+position = Vector2(655, 0)
+shape = SubResource("RectangleShape2D_17jru")
+debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
+
+[node name="RangedAnimatedSprite2D" type="AnimatedSprite2D" parent="RangedDamageArea" unique_id=1120917226]
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_sopei")
+animation = &"Projectile"
+frame = 10
+frame_progress = 1.0
+offset = Vector2(0, 820)
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=140824790]
 target_position = Vector2(50, 0)

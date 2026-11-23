@@ -25,7 +25,15 @@ public partial class DamageArea : Area2D
         // Extra safety
         if (body is PlayerCharacter player)
         {
-            player.TakeDmg(_enemy.Dmg);
+            if (_enemy.Brain.CurrentState == Brain.State.Ranged)
+            {
+                player.TakeDmg(_enemy.RangedDmg);
+            }
+            else
+            {
+                player.TakeDmg(_enemy.Dmg);
+            }
+
             EmitSignal(SignalName.AttackSucceed);
         }
 

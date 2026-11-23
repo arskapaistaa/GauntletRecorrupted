@@ -1,0 +1,627 @@
+[gd_scene format=3 uid="uid://dpyntayyrck00"]
+
+[ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="1_bpnor"]
+[ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="2_7mk1x"]
+[ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="3_jl0s4"]
+[ext_resource type="Script" uid="uid://c5b8mhgjcoemr" path="res://Scripts/UI/BeastContainer.cs" id="4_00mgp"]
+[ext_resource type="Texture2D" uid="uid://cui8d2yrx2ial" path="res://Art/Portrait/ArtPortraitLiero.png" id="5_nsjki"]
+[ext_resource type="Texture2D" uid="uid://cw27v4xxl4rjb" path="res://Art/UserInterface/Scale1-5.png" id="6_jl0s4"]
+[ext_resource type="Texture2D" uid="uid://cw2udjenqujls" path="res://Art/UserInterface/Scale2-5.png" id="7_00mgp"]
+[ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="7_7mk1x"]
+
+[node name="Bestiary" type="NinePatchRect" unique_id=1638658974 node_paths=PackedStringArray("_beastContainers", "_leftBtn", "_rightBtn")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -160.0
+offset_right = -20.0
+offset_bottom = 160.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+texture = ExtResource("2_7mk1x")
+region_rect = Rect2(16, 16, 224, 224)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+script = ExtResource("3_jl0s4")
+_beastContainers = [NodePath("RoachContainer"), NodePath("TickContainer")]
+_leftBtn = NodePath("LeftBtn")
+_rightBtn = NodePath("RightBtn")
+
+[node name="BestiaryLabel" type="Label" parent="." unique_id=1887164041]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = 19.0
+offset_right = 55.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Bestiary"
+horizontal_alignment = 1
+
+[node name="RoachContainer" type="Control" parent="." unique_id=323397407 node_paths=PackedStringArray("_enemyUnknown")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_00mgp")
+_enemyUnknown = NodePath("UnknownEnemy")
+
+[node name="Name" type="Label" parent="RoachContainer" unique_id=1087700197]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 56.0
+offset_right = 26.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_colors/font_shadow_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "Liero"
+horizontal_alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="RoachContainer" unique_id=2003232028]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -75.0
+offset_right = -60.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_nsjki")
+
+[node name="Stats" type="VBoxContainer" parent="RoachContainer" unique_id=1828582878]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -75.0
+offset_right = 120.0
+offset_bottom = 75.0
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Health" type="VBoxContainer" parent="RoachContainer/Stats" unique_id=2095371718]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="RoachContainer/Stats/Health" unique_id=268019177]
+layout_mode = 2
+text = "Health"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="RoachContainer/Stats/Health" unique_id=1293991165]
+layout_mode = 2
+texture = ExtResource("6_jl0s4")
+
+[node name="Damage" type="VBoxContainer" parent="RoachContainer/Stats" unique_id=1836167849]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="RoachContainer/Stats/Damage" unique_id=1933953393]
+layout_mode = 2
+text = "Damage"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="RoachContainer/Stats/Damage" unique_id=945691848]
+layout_mode = 2
+texture = ExtResource("6_jl0s4")
+
+[node name="Speed" type="VBoxContainer" parent="RoachContainer/Stats" unique_id=251128119]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="RoachContainer/Stats/Speed" unique_id=454307943]
+layout_mode = 2
+text = "Speed"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="RoachContainer/Stats/Speed" unique_id=1418863508]
+layout_mode = 2
+texture = ExtResource("7_00mgp")
+
+[node name="InfoText" type="MarginContainer" parent="RoachContainer" unique_id=1387550797]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -87.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="RoachContainer/InfoText" unique_id=2001162004]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 10
+text = "Tässä vittu vähä runoillaa et mikä vitun homma et kuinka vitun boss enemy tää on ja et se syö kaikki jotka yrittää vastustaa sitä. Vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UnknownEnemy" type="Control" parent="RoachContainer" unique_id=250235238]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=779170208]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -75.0
+offset_right = 130.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel" unique_id=1115543288]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=1003410969]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -78.0
+offset_right = -71.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel2" unique_id=304426707]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=1344745981]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -21.0
+offset_right = -71.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel3" unique_id=1241189133]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel4" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=217379638]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 39.0
+offset_right = -71.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel4" unique_id=506743020]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel5" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=1713703683]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -108.0
+offset_right = 29.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel5" unique_id=278870880]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel6" type="PanelContainer" parent="RoachContainer/UnknownEnemy" unique_id=1226227428]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = 91.0
+offset_right = 158.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="RoachContainer/UnknownEnemy/Panel6" unique_id=391187071]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TickContainer" type="Control" parent="." unique_id=1622108612 node_paths=PackedStringArray("_enemyUnknown")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_00mgp")
+_enemyUnknown = NodePath("UnknownEnemy")
+
+[node name="Name" type="Label" parent="TickContainer" unique_id=1799745003]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 56.0
+offset_right = 26.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_colors/font_shadow_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
+theme_override_font_sizes/font_size = 18
+text = "Tick"
+horizontal_alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="TickContainer" unique_id=182429740]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -75.0
+offset_right = -60.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_nsjki")
+
+[node name="Stats" type="VBoxContainer" parent="TickContainer" unique_id=59234573]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -75.0
+offset_right = 120.0
+offset_bottom = 75.0
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Health" type="VBoxContainer" parent="TickContainer/Stats" unique_id=392249727]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="TickContainer/Stats/Health" unique_id=978039573]
+layout_mode = 2
+text = "Health"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TickContainer/Stats/Health" unique_id=1745518383]
+layout_mode = 2
+texture = ExtResource("6_jl0s4")
+
+[node name="Damage" type="VBoxContainer" parent="TickContainer/Stats" unique_id=268266437]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="TickContainer/Stats/Damage" unique_id=658756106]
+layout_mode = 2
+text = "Damage"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TickContainer/Stats/Damage" unique_id=2022157504]
+layout_mode = 2
+texture = ExtResource("6_jl0s4")
+
+[node name="Speed" type="VBoxContainer" parent="TickContainer/Stats" unique_id=1808454886]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="TickContainer/Stats/Speed" unique_id=655142484]
+layout_mode = 2
+text = "Speed"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TickContainer/Stats/Speed" unique_id=828303652]
+layout_mode = 2
+texture = ExtResource("7_00mgp")
+
+[node name="InfoText" type="MarginContainer" parent="TickContainer" unique_id=675834092]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -87.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TickContainer/InfoText" unique_id=1821731767]
+layout_mode = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 10
+text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="UnknownEnemy" type="Control" parent="TickContainer" unique_id=2059474085]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=286731118]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -75.0
+offset_right = 130.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel" unique_id=1620159522]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=1378174721]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -78.0
+offset_right = -71.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel2" unique_id=802028201]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=1290115987]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -21.0
+offset_right = -71.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel3" unique_id=2013466976]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel4" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=1085142147]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 39.0
+offset_right = -71.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel4" unique_id=671254288]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel5" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=999311261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -108.0
+offset_right = 29.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel5" unique_id=1456285084]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel6" type="PanelContainer" parent="TickContainer/UnknownEnemy" unique_id=269707013]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = 91.0
+offset_right = 158.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+
+[node name="Label" type="Label" parent="TickContainer/UnknownEnemy/Panel6" unique_id=831467200]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 12
+text = "UNKNOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftBtn" type="Button" parent="." unique_id=1487341425]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 17.0
+offset_top = -19.5
+offset_right = 46.0
+offset_bottom = 19.5
+grow_vertical = 2
+theme = ExtResource("1_bpnor")
+text = "<"
+script = ExtResource("7_7mk1x")
+
+[node name="RightBtn" type="Button" parent="." unique_id=1741031508]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -19.5
+offset_right = -17.0
+offset_bottom = 19.5
+grow_horizontal = 0
+grow_vertical = 2
+text = ">"
+script = ExtResource("7_7mk1x")

@@ -1,48 +1,103 @@
 using Godot;
 using System;
 
-public partial class Bestiary : MarginContainer
+public partial class Bestiary : NinePatchRect
 {
-	[Export] private Label _roachLabel = null;
-	[Export] private Label _tickLabel = null;
-	[Export] private Label _babyLabel = null;
+	[Export] private BeastContainer[] _beastContainers;
+	[Export] private Button _leftBtn = null;
+	[Export] private Button _rightBtn = null;
+
+	private int _currentContainer = 0;
 
 	public override void _Ready()
 	{
 		CheckBestiaryStatus();
+		UpdateCurrentContainer();
+
+		if (_leftBtn != null)
+		{
+			_leftBtn.Pressed += OnLeftBtnPressed;
+		}
+
+		if (_rightBtn != null)
+		{
+			_rightBtn.Pressed += OnRightBtnPressed;
+		}
 	}
 
-	public void CheckBestiaryStatus()
+    public void CheckBestiaryStatus()
 	{
 		// Roach
-		if (StatsManager.Instance.IsRoachKilled() && _roachLabel != null)
+		if (StatsManager.Instance.IsRoachKilled())
 		{
-			_roachLabel.Text = "Yes";
+			_beastContainers[0].EnemyKnown();
 		}
 		else
 		{
-			_roachLabel.Text = "No";
+			_beastContainers[0].EnemyUnknown();
 		}
 
 		// Tick
-		if (StatsManager.Instance.IsTickKilled() && _tickLabel != null)
+		if (StatsManager.Instance.IsTickKilled())
 		{
-			_tickLabel.Text = "Yes";
+			_beastContainers[1].EnemyKnown();
 		}
 		else
 		{
-			_tickLabel.Text = "No";
+			_beastContainers[1].EnemyUnknown();
 		}
 
 		//Baby
-		if (StatsManager.Instance.IsBabyKilled() && _babyLabel != null)
+		if (StatsManager.Instance.IsBabyKilled())
 		{
-			_babyLabel.Text = "Yes";
+
 		}
 		else
 		{
-			_babyLabel.Text = "No";
+
+		}
+	}
+
+	private void UpdateCurrentContainer()
+	{
+		foreach (BeastContainer beastContainer in _beastContainers)
+		{
+			if (beastContainer != _beastContainers[_currentContainer])
+			{
+				beastContainer.Hide();
+			}
+			else
+			{
+				_beastContainers[_currentContainer].Show();
+			}
+		}
+	}
+
+	private void OnLeftBtnPressed()
+    {
+        if (_currentContainer == 0)
+		{
+			_currentContainer = _beastContainers.Length - 1;
+		}
+		else
+		{
+			_currentContainer--;
 		}
 
-	}
+		UpdateCurrentContainer();
+    }
+
+	private void OnRightBtnPressed()
+    {
+        if (_currentContainer == _beastContainers.Length - 1)
+		{
+			_currentContainer = 0;
+		}
+		else
+		{
+			_currentContainer++;
+		}
+
+		UpdateCurrentContainer();
+    }
 }
