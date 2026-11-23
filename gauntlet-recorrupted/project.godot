@@ -157,6 +157,7 @@ AimLeft={
 2d_physics/layer_4="Projectile"
 2d_physics/layer_5="Exit"
 2d_physics/layer_6="Wurm"
+2d_physics/layer_7="Destroyable"
 
 [physics]
 

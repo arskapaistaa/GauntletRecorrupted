@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bk5d7hh0y4mx"]
+
+[ext_resource type="Script" uid="uid://cygf84bxxrug3" path="res://Scripts/Environment/ExplosiveArea.cs" id="1_qii2o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxa0r"]
+radius = 256.0
+
+[sub_resource type="Gradient" id="Gradient_4s2xr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_4s2xr")
+
+[sub_resource type="Curve" id="Curve_wuu73"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.022151902, 1), 0.0, 0.0, 0, 0, Vector2(0.20886075, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e5fvg"]
+curve = SubResource("Curve_wuu73")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qii2o"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 85.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+radial_velocity_min = 99.99998
+radial_velocity_max = 499.99997
+radial_velocity_curve = SubResource("CurveTexture_e5fvg")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")
+hue_variation_min = -0.100000024
+hue_variation_max = 0.09999997
+
+[node name="ExplosiveArea" type="Area2D" unique_id=90075508 node_paths=PackedStringArray("_particles", "_timer")]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_qii2o")
+_particles = NodePath("GPUParticles2D")
+_timer = NodePath("Timer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=939029704]
+shape = SubResource("CircleShape2D_vxa0r")
+
+[node name="Timer" type="Timer" parent="." unique_id=50076065]
+wait_time = 0.5
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1258518254]
+z_index = 2
+emitting = false
+amount = 128
+lifetime = 3.5
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_qii2o")
