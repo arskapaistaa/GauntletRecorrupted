@@ -225,7 +225,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"revolverReload",
-"speed": 10.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -301,6 +301,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mblnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mblnh")
 }],
 "loop": 0,
 "name": &"shotgunReload",
@@ -315,5 +318,7 @@ _cursorSprite = NodePath("AnimatedSprite2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=744672006]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_rk2iv")
-animation = &"revolverAmmo"
+animation = &"shotgunReload"
+frame = 20
+frame_progress = 1.0
 offset = Vector2(2, 2)

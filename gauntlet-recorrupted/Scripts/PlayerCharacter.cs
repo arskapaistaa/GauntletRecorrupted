@@ -29,7 +29,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private AnimatedSprite2D PlayerSprite;
 	[Export] private Area2D MeleeArea;
 	[Export] private Cursor CustomCursor;
-	[Export] private Sprite2D AimArrow;
+	[Export] private AnimatedSprite2D AimArrow;
 	[Export] private RayCast2D DigRay;
 
 	[ExportGroup("Audios")]
@@ -129,6 +129,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		HandleMovement(delta);
 		HandleAnimations();
 		UpdateAudio();
+		UpdateAimArrow();
 		ForceShootingAnimationEnd();
 	}
 
@@ -150,8 +151,10 @@ public partial class PlayerCharacter : CharacterBody2D
 		else
 		{
 			_shootTimer = 0;
-			_reloadSpeedMultiplier = 1.0f;
-			_isReloading = false;
+			if (_isReloading)
+			{
+				FinishReload();
+			}
 		}
 	}
 
@@ -214,14 +217,6 @@ public partial class PlayerCharacter : CharacterBody2D
 			else if (WeaponType == 1)
 				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
 		}
-		if (PlayerSprite.Animation == ANIMATION_REVOLVER_RELOAD || PlayerSprite.Animation == ANIMATION_SHOTGUN_RELOAD)
-		{
-			_isReloading = false;
-			if (WeaponType == 0)
-				PlayerSprite.Play(ANIMATION_REVOLVER_IDLE);
-			else if (WeaponType == 1)
-				PlayerSprite.Play(ANIMATION_SHOTGUN_IDLE);
-		}
 	}
 
 	public void HandleInputs()
@@ -235,8 +230,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			if (_isReloading)
 			{
-				GD.Print("Cannot switch weapons while reloading");
-				return;
+				CancelReload();
 			}
 			if (WeaponType == 0)
 			{
@@ -250,8 +244,9 @@ public partial class PlayerCharacter : CharacterBody2D
 				ReloadTime = RevolverReloadTime;
 				GD.Print("Switched to Revolver");
 			}
-			// Signal weapon switch event.
 			EmitSignal(SignalName.WeaponSwitched, WeaponType);
+			if ((WeaponType == 0 && _currentAmmoRevolver <= 0) || (WeaponType == 1 && _currentAmmoShotgun <= 0))
+				StartReload();
 		}
 
 		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
@@ -263,34 +258,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			if ((WeaponType == 0 && _currentAmmoRevolver <= 0) || (WeaponType == 1 && _currentAmmoShotgun <= 0))
 			{
-				if (WeaponType == 0)
-				{
-					GD.Print("Revolver out of ammo");
-					_forceRevolverReloadCounter++;
-					if (_forceRevolverReloadCounter >= 3)
-					{
-						GD.Print("Forcing revolver reload");
-						StartReload();
-					}
-					else
-					{
-						_shootTimer = RevolverCooldown;
-					}
-				}
-				else
-				{
-					GD.Print("Shotgun out of ammo");
-					_forceShotgunReloadCounter++;
-					if (_forceShotgunReloadCounter >= 3)
-					{
-						GD.Print("Forcing shotgun reload");
-						StartReload();
-					}
-					else
-					{
-						_shootTimer = ShotgunCooldown;
-					}
-				}
+				StartReload();
 				return;
 			}
 
@@ -300,24 +268,18 @@ public partial class PlayerCharacter : CharacterBody2D
 			if (WeaponType == 0)
 			{
 				_currentAmmoRevolver--;
-				if (_currentAmmoRevolver < 0)
-				{
-					_currentAmmoRevolver = 0;
-				}
 				EmitSignal(SignalName.UpdateRevolverAmmo, _currentAmmoRevolver);
 				_shootTimer = RevolverCooldown;
-				GD.Print($"Revolver Ammo: {_currentAmmoRevolver}");
+				if (_currentAmmoRevolver <= 0)
+					StartReload();   // after the cooldown line, so ReloadTime isn't overwritten
 			}
 			else
 			{
 				_currentAmmoShotgun--;
-				if (_currentAmmoShotgun < 0)
-				{
-					_currentAmmoShotgun = 0;
-				}
 				EmitSignal(SignalName.UpdateShotgunAmmo, _currentAmmoShotgun);
 				_shootTimer = ShotgunCooldown;
-				GD.Print($"Shotgun Ammo: {_currentAmmoShotgun}");
+				if (_currentAmmoShotgun <= 0)
+					StartReload();
 			}
 		}
 
@@ -429,9 +391,15 @@ public partial class PlayerCharacter : CharacterBody2D
 		else if (_isReloading)
 		{
 			if (WeaponType == 0)
+			{
 				PlayerSprite.Play(ANIMATION_REVOLVER_RELOAD);
+				AimArrow.Play("RevolverReload");
+			}
 			else if (WeaponType == 1)
+			{
 				PlayerSprite.Play(ANIMATION_SHOTGUN_RELOAD);
+				AimArrow.Play("ShotgunReload");
+			}
 		}
 		else if (_isMoving)
 		{
@@ -487,6 +455,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		_isShooting = true;
 
 		PlayGunSfx(WeaponType);
+		UpdateAimArrow();
 
 		// Tell GameManager that player shot.
 		GameManager.Instance.OnShotsFiredChanged();
@@ -503,22 +472,36 @@ public partial class PlayerCharacter : CharacterBody2D
 	private void StartReload()
 	{
 		if (WeaponType == 0)
+			_reloadSpeedMultiplier = 0.5f;
+		else if (WeaponType == 1)
+			_reloadSpeedMultiplier = 0.15f;
+		_shootTimer = ReloadTime;
+		_isReloading = true;
+		EmitSignal(SignalName.Reload, WeaponType);
+	}
+
+	private void FinishReload()
+	{
+		if (WeaponType == 0)
 		{
 			_currentAmmoRevolver = _maxAmmoRevolver;
-			_forceRevolverReloadCounter = 0;
+			EmitSignal(SignalName.UpdateRevolverAmmo, _currentAmmoRevolver);
 		}
 		else if (WeaponType == 1)
 		{
 			_currentAmmoShotgun = _maxAmmoShotgun;
-			_forceShotgunReloadCounter = 0;
+			EmitSignal(SignalName.UpdateShotgunAmmo, _currentAmmoShotgun);
 		}
-		if (WeaponType == 0)
-			_reloadSpeedMultiplier = 0.5f;
-		else if (WeaponType == 1)
-			_reloadSpeedMultiplier = 0.0f;
-		_shootTimer = ReloadTime;
-		_isReloading = true;
-		EmitSignal(SignalName.Reload, WeaponType);
+		_isReloading = false;
+		_reloadSpeedMultiplier = 1.0f;
+		UpdateAimArrow();
+	}
+
+	private void CancelReload()
+	{
+		_isReloading = false;
+		_shootTimer = 0;
+		_reloadSpeedMultiplier = 1.0f;
 	}
 
 	private void ForceShootingAnimationEnd()
@@ -614,6 +597,23 @@ public partial class PlayerCharacter : CharacterBody2D
 			tween.TweenInterval(0.08);
 			tween.TweenProperty(PlayerSprite, "visible", true, 0.0);
 			tween.TweenInterval(0.08);
+		}
+	}
+
+	private void UpdateAimArrow()
+	{
+		if (AimArrow == null || _isReloading)
+			return;
+		
+		if (WeaponType == 0)
+		{
+			AimArrow.Play("RevolverAmmo");
+			AimArrow.Frame = GetRevolverAmmo();
+		}
+		else if (WeaponType == 1)
+		{
+			AimArrow.Play("ShotgunAmmo");
+			AimArrow.Frame = GetShotgunAmmo();
 		}
 	}
 
