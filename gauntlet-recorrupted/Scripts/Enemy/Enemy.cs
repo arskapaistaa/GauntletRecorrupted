@@ -761,6 +761,11 @@ public partial class Enemy : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
+		if (!_isAlive)
+		{
+			return;
+		}
+
 		_brain.Damaged();
 
 		if (_damagedParticles != null)
@@ -768,7 +773,7 @@ public partial class Enemy : CharacterBody2D
 			_damagedParticles.Restart();
 		}
 
-		if (IsAlive)
+		if (_health > 0)
 		{
 			_health -= dmg;
 		}
@@ -788,6 +793,8 @@ public partial class Enemy : CharacterBody2D
 
 	private void Defeat()
 	{
+		_isAlive = false;
+
 		if (_characterCollision != null)
 		{
 			_characterCollision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);

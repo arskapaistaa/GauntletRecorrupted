@@ -69,12 +69,17 @@ public partial class Exit : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (body is PlayerCharacter player)
+        if (body is PlayerCharacter)
 		{
 			if (CurrentState == State.Ready)
 			{
 				if (_nextLevelPath != null)
 				{
+					if (_currentLevel.IsThisTutorialLevel)
+					{
+						GameManager.Instance.SetTutoriLevelComplited();
+					}
+
 					TransitionController.Instance.PlayTransition(_transitionName, _nextLevelPath);
 				}
 				else

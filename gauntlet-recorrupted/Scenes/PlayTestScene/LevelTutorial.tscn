@@ -235,6 +235,7 @@ seamless = true
 
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_vaf4p")
+IsThisTutorialLevel = true
 _maxTotalEnemyCount = 7
 _spawnerCount = 2
 _presetEnemyCount = 3

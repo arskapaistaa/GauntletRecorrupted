@@ -47,6 +47,8 @@ public partial class GameManager : Node
 			QueueFree();
 			return;
 		}
+
+		ResetStats();
     }
 
 	/// <summary>
@@ -130,6 +132,11 @@ public partial class GameManager : Node
 		{
 			StopGameplayMusic();
 		}
+	}
+
+	public void SetTutoriLevelComplited()
+	{
+		StatsManager.Instance.SetTutoriLevelComplited();
 	}
 
 	/// <summary>

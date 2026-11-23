@@ -40,11 +40,18 @@ public partial class StatsManager : Node
 	private string _roachKilledString = "RoachKilled";
 	private string _tickKilledString = "TickKilled";
 	private string _babyKilledString = "BabyKilled";
+	private string _adultKilledString = "AdultKilled";
+	private string _lieroKilledString = "LieroKilled";
+	private string _bearKilledString = "BearKilled";
 	private string _tutorialLevelComplitedString = "TutorialComplited";
 
 	private bool _roachKilled = false;
 	private bool _tickKilled = false;
 	private bool _babyKilled = false;
+	private bool _adultKilled = false;
+	private bool _wurmKilled = false;
+	private bool _lieroKilled = false;
+	private bool _bearKilled = false;
 
 	private bool _tutorialLevelComplited = false;
 
@@ -116,6 +123,26 @@ public partial class StatsManager : Node
 		return (bool)_statsConfig.GetValue(_statsString, _babyKilledString, false);
 	}
 
+	public bool IsAdultKilled()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _adultKilledString, false);
+	}
+
+	public bool IsLieroKilled()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _lieroKilledString, false);
+	}
+
+	public bool IsBearKilled()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _bearKilledString, false);
+	}
+
+	public bool IsTuotorialFinished()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _tutorialLevelComplitedString, false);
+	}
+
 	/// <summary>
 	/// Check if the player is killed this enemy type.
 	/// </summary>
@@ -145,6 +172,29 @@ public partial class StatsManager : Node
 				{
 					_babyKilled = true;
 					_statsConfig.SetValue(_statsString, _babyKilledString, _babyKilled);
+				}
+				break;
+
+			case "Adult":
+				if (!_adultKilled)
+				{
+					_adultKilled = true;
+					_statsConfig.SetValue(_statsString, _adultKilledString, _adultKilled);
+				}
+				break;
+
+			case "Liero":
+				if (!_lieroKilled)
+				{
+					_lieroKilled = true;
+					_statsConfig.SetValue(_statsString, _lieroKilledString, _lieroKilled);
+				}
+				break;
+			case "Bear":
+				if (!_bearKilled)
+				{
+					_bearKilled = true;
+					_statsConfig.SetValue(_statsString, _bearKilledString, _bearKilled);
 				}
 				break;
 		}
@@ -179,9 +229,12 @@ public partial class StatsManager : Node
 		_spawnersDestroyed = (int)_statsConfig.GetValue(_statsString, _spawnersString, 0);
 
 		// Bestiary
-		_roachKilled = (bool)_statsConfig.GetValue(_statsString, _roachKilledString, false);
-		_tickKilled = (bool)_statsConfig.GetValue(_statsString, _tickKilledString, false);
-		_babyKilled = (bool)_statsConfig.GetValue(_statsString, _babyKilledString, false);
+		_roachKilled = IsRoachKilled();
+		_tickKilled = IsTickKilled();
+		_babyKilled = IsBabyKilled();
+		_adultKilled = IsAdultKilled();
+		_lieroKilled = IsLieroKilled();
+		_bearKilled = IsBearKilled();
 
 		// Tutorial level
 		_tutorialLevelComplited = (bool)_statsConfig.GetValue(_statsString, _tutorialLevelComplitedString, false);

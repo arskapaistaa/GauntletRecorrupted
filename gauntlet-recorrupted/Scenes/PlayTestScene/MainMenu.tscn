@@ -14,7 +14,7 @@
 [ext_resource type="Theme" uid="uid://ds6x7gmdv38w1" path="res://Theme/DefaultTheme.tres" id="12_ocx4m"]
 [ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="13_71420"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="14_bajux"]
-[ext_resource type="Texture2D" uid="uid://dt8qi7je0by7j" path="res://Art/UserInterface/EscPause.png" id="15_jpbx2"]
+[ext_resource type="PackedScene" uid="uid://dpyntayyrck00" path="res://Scenes/GUI/Bestiary.tscn" id="15_jpbx2"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="16_8kyln"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="17_kh5lv"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="18_jj0ip"]
@@ -122,6 +122,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bestiary:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Buttons:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_j2dai"]
@@ -400,7 +424,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -425,6 +449,46 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Bestiary:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("TitleScreen/Buttons:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jpbx2"]
+resource_name = "Start"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Video:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_v40es"]
@@ -562,6 +626,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bestiary:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleScreen/Buttons:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qme"]
 _data = {
@@ -572,6 +660,7 @@ _data = {
 &"OpenExitPanel": SubResource("Animation_57vxl"),
 &"OpenSettings": SubResource("Animation_j8qme"),
 &"RESET": SubResource("Animation_ux8os"),
+&"Start": SubResource("Animation_jpbx2"),
 &"StartPressed": SubResource("Animation_v40es"),
 &"StatsPressed": SubResource("Animation_4dvq8")
 }
@@ -642,9 +731,10 @@ grow_vertical = 2
 theme = ExtResource("5_dfk7v")
 script = ExtResource("6_c3pg3")
 _animations = NodePath("../../AnimationPlayer")
-_pathToScene = "res://Scenes/PlayTestScene/LevelTutorial.tscn"
+_pathToScene = "res://Scenes/PlayTestScene/LevelCorridors.tscn"
 _pathToSceneMode = 1
 _pressedAnimName = "StartPressed"
+_isStartButton = true
 _useFocusedStyle = false
 _isGrabFocus = true
 
@@ -690,7 +780,7 @@ _useFocusedStyle = false
 position = Vector2(320, 180)
 amount = 10
 
-[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
+[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -712,6 +802,7 @@ script = ExtResource("14_bajux")
 _killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
 _deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
 _shotsFiredLabel = NodePath("VBoxContainer/HBoxContainer/ShotsFired")
+_resetStatsButton = NodePath("Reset Stats")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Stats" unique_id=1164979888]
 layout_mode = 1
@@ -806,150 +897,26 @@ script = ExtResource("6_c3pg3")
 _animations = NodePath("../../AnimationPlayer")
 _pressedAnimName = "CloseStats"
 
-[node name="Bestiary" type="NinePatchRect" parent="." unique_id=1091164706 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel")]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -160.0
-offset_right = -20.0
-offset_bottom = 160.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("12_ocx4m")
-texture = ExtResource("13_71420")
-region_rect = Rect2(16, 16, 224, 224)
-patch_margin_left = 50
-patch_margin_top = 50
-patch_margin_right = 50
-patch_margin_bottom = 50
-script = ExtResource("14_bajux")
-_killsLabel = NodePath("")
-_deathsLabel = NodePath("")
-_shotsFiredLabel = NodePath("")
-
-[node name="BestiaryLabel" type="Label" parent="Bestiary" unique_id=1757245416]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -55.0
-offset_top = 19.0
-offset_right = 55.0
-offset_bottom = 55.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "Beastiary"
-horizontal_alignment = 1
-
-[node name="BeastContainer" type="Control" parent="Bestiary" unique_id=1169101730]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Portrait" type="TextureRect" parent="Bestiary/BeastContainer" unique_id=1027895881]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -210.0
-offset_top = 60.0
-offset_right = -60.0
-offset_bottom = 210.0
-grow_horizontal = 0
-
-[node name="Stats" type="VBoxContainer" parent="Bestiary/BeastContainer" unique_id=1797366570]
-layout_mode = 0
-offset_left = 60.0
-offset_top = 60.0
-offset_right = 118.0
-offset_bottom = 218.0
-theme_override_constants/separation = 16
-
-[node name="Health" type="VBoxContainer" parent="Bestiary/BeastContainer/Stats" unique_id=1587979525]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Label" type="Label" parent="Bestiary/BeastContainer/Stats/Health" unique_id=292491895]
-layout_mode = 2
-text = "Health"
-
-[node name="TextureRect" type="TextureRect" parent="Bestiary/BeastContainer/Stats/Health" unique_id=1224408177]
-layout_mode = 2
-texture = ExtResource("15_jpbx2")
-
-[node name="Damage" type="VBoxContainer" parent="Bestiary/BeastContainer/Stats" unique_id=1923016548]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Label" type="Label" parent="Bestiary/BeastContainer/Stats/Damage" unique_id=1718624094]
-layout_mode = 2
-text = "Damage"
-
-[node name="TextureRect" type="TextureRect" parent="Bestiary/BeastContainer/Stats/Damage" unique_id=2031235390]
-layout_mode = 2
-texture = ExtResource("15_jpbx2")
-
-[node name="Speed" type="VBoxContainer" parent="Bestiary/BeastContainer/Stats" unique_id=1193406928]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Label" type="Label" parent="Bestiary/BeastContainer/Stats/Speed" unique_id=1935231270]
-layout_mode = 2
-text = "Speed"
-
-[node name="TextureRect" type="TextureRect" parent="Bestiary/BeastContainer/Stats/Speed" unique_id=1578011942]
-layout_mode = 2
-texture = ExtResource("15_jpbx2")
-
-[node name="Name" type="Label" parent="Bestiary/BeastContainer" unique_id=27154215]
+[node name="Reset Stats" type="Button" parent="Stats" unique_id=317742265 node_paths=PackedStringArray("_animations")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -71.0
-offset_top = -102.0
-offset_right = 71.0
-offset_bottom = -66.0
+offset_left = 53.0
+offset_top = -65.0
+offset_right = 85.0
+offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.50980395, 0.18039216, 0.15294118, 1)
-theme_override_colors/font_shadow_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
-theme_override_font_sizes/font_size = 18
-text = "Roach"
-horizontal_alignment = 1
+text = "R"
+script = ExtResource("6_c3pg3")
+_animations = NodePath("../../AnimationPlayer")
 
-[node name="InfoText" type="MarginContainer" parent="Bestiary/BeastContainer" unique_id=379674655]
+[node name="Bestiary" parent="." unique_id=1638658974 instance=ExtResource("15_jpbx2")]
+visible = false
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -103.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 20
-
-[node name="Label" type="Label" parent="Bestiary/BeastContainer/InfoText" unique_id=264465451]
-layout_mode = 2
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 10
-text = "Tässä vittu vähä runoillaa et mikä vitun homma et kuinka vitun boss enemy tää on ja et se syö kaikki jotka yrittää vastustaa sitä. Vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="Settings" parent="." unique_id=1309456819 instance=ExtResource("16_8kyln")]
 visible = false
@@ -1060,6 +1027,7 @@ bus = &"Music"
 [node name="StartSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1276364434]
 
 [node name="Video" type="AspectRatioContainer" parent="." unique_id=1045937909]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1071,7 +1039,6 @@ ratio = 1.7778
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=455174047]
 layout_mode = 2
 stream = ExtResource("28_dw7nr")
-autoplay = true
 expand = true
 
 [editable path="Settings"]
