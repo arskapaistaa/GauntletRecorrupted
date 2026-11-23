@@ -1039,6 +1039,7 @@ ratio = 1.7778
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=455174047]
 layout_mode = 2
 stream = ExtResource("28_dw7nr")
+autoplay = true
 expand = true
 
 [editable path="Settings"]
