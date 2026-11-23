@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b4e588opm2bn1"]
+
+[ext_resource type="Texture2D" uid="uid://cxmxymas5bgjs" path="res://Art/Environment/ArtTileStone.png" id="1_ctlaf"]
+[ext_resource type="Texture2D" uid="uid://dawid7ph0d2b7" path="res://Art/Environment/ArtTileFlesh.png" id="2_r3re8"]
+[ext_resource type="Script" uid="uid://cyblqv1lf4kxj" path="res://Scripts/Environment/DiggableTiles.cs" id="3_fkq7d"]
+[ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="4_gibvn"]
+[ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="5_i1bev"]
+[ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="6_3qwj4"]
+[ext_resource type="PackedScene" uid="uid://dagm27ahkj75g" path="res://Scenes/Particles/BreakEffect.tscn" id="7_ayxm2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5u3u"]
+texture = ExtResource("1_ctlaf")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, 0, 0, 0, 0, 128, -128, 128, -128, 0)
+0:0/0/custom_data_0 = 80
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, 128, 128, 128, 128, -128)
+1:0/0/custom_data_0 = 80
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 0, -128, 0, 0, 128, 0, 128, 128, -128, 128)
+2:0/0/custom_data_0 = 80
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, 0, 128, 0, 128, 128, -128, 128)
+3:0/0/custom_data_0 = 80
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 0, 0, 0, 0, 128, -128, 128)
+3:1/0/custom_data_0 = 80
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+2:1/0/custom_data_0 = 80
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, 0, -128, 0, -128, 128, 128, 128, 128, -128)
+1:1/0/custom_data_0 = 80
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 128, 0, 128, -128, 0, -128)
+0:2/0/custom_data_0 = 80
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 0, -128, 0)
+1:2/0/custom_data_0 = 80
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+1:3/0/custom_data_0 = 80
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, 0, 128, 0, 0, -128, 0)
+2:2/0/custom_data_0 = 80
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, 128, -128, 128, -128, -128)
+3:2/0/custom_data_0 = 80
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 0, -128, 0, 0, -128, 0)
+3:3/0/custom_data_0 = 80
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, -32, 32, 0, 128, 0, 128, 128, 0, 128, 0, 32, -32, 0, -128, 0, -128, -128)
+0:1/0/custom_data_0 = 80
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, -32, -32, 0, -128, 0, -128, 128, 0, 128, 0, 32, 32, 0, 128, 0, 128, -128)
+2:3/0/custom_data_0 = 80
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esh4x"]
+texture = ExtResource("2_r3re8")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 0, 128, -128, 128, -128, 0)
+0:0/0/custom_data_0 = 10
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(128, -128, 128, 128, 0, 128, 0, -128)
+1:0/0/custom_data_0 = 10
+1:0/0/custom_data_1 = true
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 0, -128, 0, 0, 128, 0, 128, 128, -128, 128)
+2:0/0/custom_data_0 = 10
+2:0/0/custom_data_1 = true
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(128, 0, 128, 128, -128, 128, -128, 0)
+3:0/0/custom_data_0 = 10
+3:0/0/custom_data_1 = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 0, 0, 0, 0, 128, -128, 128)
+3:1/0/custom_data_0 = 10
+3:1/0/custom_data_1 = true
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+2:1/0/custom_data_0 = 10
+2:1/0/custom_data_1 = true
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 0, -128, 128, -128, 128, 128, -128, 128, -128, 0)
+1:1/0/custom_data_0 = 10
+1:1/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 0, -128, 0, -32, 32, 0, 128, 0, 128, 128, 0, 128, 0, 32, -32, 0, -128, 0)
+0:1/0/custom_data_0 = 10
+0:1/0/custom_data_1 = true
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(128, -128, 128, 0, 0, 0, 0, -128)
+0:2/0/custom_data_0 = 10
+0:2/0/custom_data_1 = true
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(128, -128, 128, 0, -128, 0, -128, -128)
+1:2/0/custom_data_0 = 10
+1:2/0/custom_data_1 = true
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, 0, 128, 0, 0, -128, 0)
+2:2/0/custom_data_0 = 10
+2:2/0/custom_data_1 = true
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -128, 0, 128, -128, 128, -128, -128)
+3:2/0/custom_data_0 = 10
+3:2/0/custom_data_1 = true
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 0, -128, 0, 0, -128, 0)
+3:3/0/custom_data_0 = 10
+3:3/0/custom_data_1 = true
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, 0, -32, 0, -128, 128, -128, 128, 0, 32, 0, 0, 32, 0, 128, -128, 128, -128, 0)
+2:3/0/custom_data_0 = 10
+2:3/0/custom_data_1 = true
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(128, 128, 128, 0, 0, 0, 0, 128)
+1:3/0/custom_data_0 = 10
+1:3/0/custom_data_1 = true
+
+[sub_resource type="TileSet" id="TileSet_rk2iv"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 11
+custom_data_layer_0/name = "MaxHealth"
+custom_data_layer_0/type = 2
+custom_data_layer_1/name = "HasEnemy"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_u5u3u")
+sources/1 = SubResource("TileSetAtlasSource_esh4x")
+
+[node name="DiggableTiles" type="TileMapLayer" unique_id=999643897]
+tile_set = SubResource("TileSet_rk2iv")
+script = ExtResource("3_fkq7d")
+TickScene = ExtResource("4_gibvn")
+BabyScene = ExtResource("5_i1bev")
+RoachScene = ExtResource("6_3qwj4")
+BreakEffectScene = ExtResource("7_ayxm2")
