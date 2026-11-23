@@ -320,7 +320,7 @@ public partial class Brain : Node
 	{
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
-			CurrentState = EntersAreaState;
+			SetCurrentState(EntersAreaState);
 		}
 	}
 }

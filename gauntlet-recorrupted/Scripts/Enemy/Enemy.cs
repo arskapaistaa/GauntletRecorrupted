@@ -113,7 +113,8 @@ public partial class Enemy : CharacterBody2D
 		Adult,
 		Worm,
 		Liero,
-		Bear
+		Bear,
+		Coward
 	}
 
 	public enum AttackType
@@ -284,6 +285,11 @@ public partial class Enemy : CharacterBody2D
 
 	public void EnterIdle()
 	{
+		if (ThisEnemyType == EnemyType.Liero)
+		{
+			_characterCollision.SetDeferred("disabled", true);
+		}
+
 		if (_fromIdleToTimer != null)
 		{
 			if (_fromIdleToTimer.IsStopped() == true && _canPatrol)
@@ -350,6 +356,11 @@ public partial class Enemy : CharacterBody2D
 	public void EnterPatrol()
 	{
 		SetPatrolTarget();
+
+		if (ThisEnemyType == EnemyType.Liero)
+		{
+			_characterCollision.SetDeferred("disabled", false);
+		}
 	}
 
 	private void UpdateSpawn(double delta)
@@ -435,7 +446,6 @@ public partial class Enemy : CharacterBody2D
 	public void SetPatrolTarget()
 	{
 		// _agent.TargetPosition = GlobalPosition + RandomPosition(_patrolDistance, _patrolAtleastDistance);
-		// Currently hard coded on Layer 1 so WURM wont work.
 		Vector2 targetPosition = NavigationServer2D.MapGetRandomPoint(_agent.GetNavigationMap(), (uint)_navigationLayer, true);
 		CheckTargetReachable(targetPosition);
 	}
@@ -976,13 +986,20 @@ public partial class Enemy : CharacterBody2D
 
 		if (state == Brain.State.Idle || state == Brain.State.Defeat)
 		{
-			_dmgArea.SetDeferred("monitoring", false);
-			return;
+			if (_dmgArea != null)
+			{
+				_dmgArea.SetDeferred("monitoring", false);
+				return;
+			}
+
 		}
 
 		if (state == Brain.State.Patrol || state == Brain.State.Chase)
 		{
-			_dmgArea.SetDeferred("monitoring", true);
+			if (_dmgArea != null)
+			{
+				_dmgArea.SetDeferred("monitoring", true);
+			}
 		}
 	}
 
@@ -1014,6 +1031,11 @@ public partial class Enemy : CharacterBody2D
 		if (_dmgArea != null)
 		{
 			_dmgArea.Monitoring = false;
+		}
+
+		if (_agent != null)
+		{
+			_agent.NavigationLayers = (uint)_navigationLayer;
 		}
 
 		_navTimer = _navInterval;
