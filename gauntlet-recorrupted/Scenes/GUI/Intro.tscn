@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c07hgup0end72"]
+
+[ext_resource type="Script" uid="uid://dj0ueo02tlsje" path="res://Scripts/UI/Intro.cs" id="1_ug5lx"]
+[ext_resource type="VideoStream" uid="uid://dfph2kcwtqj2s" path="res://Art/Cutscenes/HellsWellStartingAnimFinalNew.ogv" id="1_w7sfs"]
+
+[node name="Intro" type="Control" unique_id=1925000030 node_paths=PackedStringArray("_video")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ug5lx")
+_video = NodePath("Video/VideoStreamPlayer")
+MainMenuScene = "uid://cfmj0l8f6okh5"
+
+[node name="Playcebo" type="Control" parent="." unique_id=1060264189]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Playcebo" unique_id=954916615]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Video" type="AspectRatioContainer" parent="." unique_id=1415966977]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=416937749]
+layout_mode = 2
+stream = ExtResource("1_w7sfs")
+autoplay = true
+expand = true

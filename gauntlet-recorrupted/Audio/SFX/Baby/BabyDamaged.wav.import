@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/BabyDamaged.wav-e78dbb59766cd7698836fc7385c5d
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

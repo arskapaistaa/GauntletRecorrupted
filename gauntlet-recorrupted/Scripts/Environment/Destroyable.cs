@@ -12,6 +12,7 @@ public partial class Destroyable : StaticBody2D
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private GpuParticles2D _particles = null;
 	[Export] private CollisionShape2D _collision = null;
+	[Export] private AudioStreamPlayer2D _destroyedSfx = null;
 	[Export] private ExplosiveArea _dmgArea = null;
 
 	// Called when the node enters the scene tree for the first time.
@@ -46,6 +47,11 @@ public partial class Destroyable : StaticBody2D
 		if (_particles != null)
 		{
 			_particles.Restart();
+		}
+
+		if (_destroyedSfx != null)
+		{
+			_destroyedSfx.Play();
 		}
 
 		UpdateSprite();

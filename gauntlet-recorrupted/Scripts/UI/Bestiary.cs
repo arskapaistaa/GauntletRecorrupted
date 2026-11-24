@@ -85,6 +85,8 @@ public partial class Bestiary : NinePatchRect
 		}
 
 		UpdateCurrentContainer();
+
+		GameManager.Instance.PlayButtonSFX();
     }
 
 	private void OnRightBtnPressed()
@@ -99,5 +101,7 @@ public partial class Bestiary : NinePatchRect
 		}
 
 		UpdateCurrentContainer();
+
+		GameManager.Instance.PlayButtonSFX();
     }
 }

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gauntlet Recorrupted"
-run/main_scene="uid://cfmj0l8f6okh5"
+run/main_scene="uid://c07hgup0end72"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="uid://cebip6ayp7bfe"
 
@@ -34,6 +34,7 @@ window/size/viewport_height=360
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="uid://caceh7ogx4f8x"
 
 [dotnet]
 

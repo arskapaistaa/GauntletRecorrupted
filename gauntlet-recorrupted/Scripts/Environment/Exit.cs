@@ -6,7 +6,7 @@ public partial class Exit : Area2D
 	[Export] private AnimatedSprite2D _sprite = null;
 	[Export] private GpuParticles2D _exitOpenParticles = null;
 	[Export] private PointLight2D _exitLight = null;
-	[Export] private string _nextLevelPath;
+	[Export(PropertyHint.File, "*.tscn")] private string NextLevelPath;
 	[Export] private Level _currentLevel = null;
 	[Export(PropertyHint.Enum, "FadeInAndOut")]
 	private string _transitionName;
@@ -73,14 +73,14 @@ public partial class Exit : Area2D
 		{
 			if (CurrentState == State.Ready)
 			{
-				if (_nextLevelPath != null)
+				if (NextLevelPath != null)
 				{
 					if (_currentLevel.IsThisTutorialLevel)
 					{
 						GameManager.Instance.SetTutoriLevelComplited();
 					}
 
-					TransitionController.Instance.PlayTransition(_transitionName, _nextLevelPath);
+					TransitionController.Instance.PlayTransition(_transitionName, NextLevelPath);
 				}
 				else
 				{

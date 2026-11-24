@@ -31,6 +31,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private Cursor CustomCursor;
 	[Export] private AnimatedSprite2D AimArrow;
 	[Export] private RayCast2D DigRay;
+	[Export] private AudioListener2D AudioListener;
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSFX = null;
@@ -131,6 +132,12 @@ public partial class PlayerCharacter : CharacterBody2D
 		UpdateAudio();
 		UpdateAimArrow();
 		ForceShootingAnimationEnd();
+
+		// To fix audio problem.
+		if (AudioListener != null)
+		{
+			AudioListener.GlobalRotation = 0;
+		}
 	}
 
 	private void HandleTimers(double delta)
@@ -408,7 +415,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			else if (WeaponType == 1)
 				PlayerSprite.Play(ANIMATION_SHOTGUN_WALK);
 		}
-		
+
 		else
 		{
 			if (WeaponType == 0)
@@ -523,7 +530,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 		if (!DigRay.IsColliding() || DigRay.GetCollider() != DiggableTiles)
 			return;
-		
+
 		// Ray hits the edge of the tile, so we move slightly inside the tile to get the correct target position.
 		Vector2 targetTileInside = DigRay.GetCollisionPoint() - DigRay.GetCollisionNormal() * 0.2f;
 		// Convert the target position to the cell in the tilemap
@@ -604,7 +611,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	{
 		if (AimArrow == null || _isReloading)
 			return;
-		
+
 		if (WeaponType == 0)
 		{
 			AimArrow.Play("RevolverAmmo");

@@ -27,7 +27,6 @@
 [ext_resource type="AudioStream" uid="uid://cex3qu6g5tr1l" path="res://Audio/SFX/UI/NewGame01.ogg" id="25_odhpo"]
 [ext_resource type="Script" uid="uid://nnk21t7nw3yl" path="res://Scripts/Audio/AudioControl.cs" id="26_sov0p"]
 [ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="27_4rdmv"]
-[ext_resource type="VideoStream" uid="uid://dfph2kcwtqj2s" path="res://Art/Cutscenes/HellsWellStartingAnimFinalNew.ogv" id="28_dw7nr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8r7k7"]
 texture = ExtResource("7_uy82s")
@@ -202,19 +201,19 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Video:visible")
+tracks/4/path = NodePath("TitleScreen/MainMenuFog:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("TitleScreen/MainMenuFog:visible")
+tracks/5/path = NodePath("Audios/MainMenuMusic:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -226,22 +225,10 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Audios/MainMenuMusic:playing")
+tracks/6/path = NodePath("Audios/MainMenuMusic:volume_db")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Audios/MainMenuMusic:volume_db")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -417,7 +404,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Video:visible")
+tracks/11/path = NodePath("TitleScreen/MainMenuFog:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -429,7 +416,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("TitleScreen/MainMenuFog:visible")
+tracks/12/path = NodePath("Audios/MainMenuMusic:playing")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -441,7 +428,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Audios/MainMenuMusic:playing")
+tracks/13/path = NodePath("Bestiary:visible")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -453,22 +440,10 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Bestiary:visible")
+tracks/14/path = NodePath("TitleScreen/Buttons:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("TitleScreen/Buttons:visible")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -478,18 +453,6 @@ tracks/15/keys = {
 [sub_resource type="Animation" id="Animation_jpbx2"]
 resource_name = "Start"
 length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Video:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_v40es"]
 resource_name = "StartPressed"
@@ -665,7 +628,7 @@ _data = {
 &"StatsPressed": SubResource("Animation_4dvq8")
 }
 
-[node name="MainMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations", "_video")]
+[node name="MainMenu" type="Control" unique_id=205651718 node_paths=PackedStringArray("_animations")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -674,7 +637,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jpbx2")
 _animations = NodePath("AnimationPlayer")
-_video = NodePath("Video/VideoStreamPlayer")
 
 [node name="TitleScreen" type="Control" parent="." unique_id=1340800981]
 layout_mode = 1
@@ -1014,6 +976,7 @@ script = ExtResource("19_f3lgg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1385316840]
 libraries/ = SubResource("AnimationLibrary_j8qme")
+autoplay = &"Intro"
 
 [node name="Audios" type="Node" parent="." unique_id=423380486 node_paths=PackedStringArray("_music")]
 script = ExtResource("26_sov0p")
@@ -1025,21 +988,5 @@ volume_db = -80.0
 bus = &"Music"
 
 [node name="StartSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1276364434]
-
-[node name="Video" type="AspectRatioContainer" parent="." unique_id=1045937909]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-ratio = 1.7778
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=455174047]
-layout_mode = 2
-stream = ExtResource("28_dw7nr")
-autoplay = true
-expand = true
 
 [editable path="Settings"]

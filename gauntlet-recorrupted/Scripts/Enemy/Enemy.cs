@@ -59,6 +59,8 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "200,2000,100,suffix:pixels")] public float AwakeDetectionRange = 200.0f;
 	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")] private float _minAwakeIntervalTime = 1.0f;
 	[Export(PropertyHint.Range, "2,30,1,suffix:seconds")] private float _maxAwakeIntervalTime = 1.0f;
+	[Export] private int _awakeStartFrame;
+	[Export] private int _awakeEndFrame;
 
 
 	[ExportGroup("Node References")]
@@ -74,10 +76,6 @@ public partial class Enemy : CharacterBody2D
 	[ExportSubgroup("Audios")]
 	[Export] private EnemyAudioPlayer _enemyAudioPlayer = null;
 	[Export] private AudioStreamPlayer2D _movementSfx = null;
-	[Export] private AudioStreamPlayer2D _noticeSfx = null;
-	[Export] private AudioStreamPlayer2D _attackSfx = null;
-	[Export] private AudioStreamPlayer2D _damagedSfx = null;
-	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
 	[ExportSubgroup("Particles")]
 	[Export] private GpuParticles2D _damagedParticles = null;
@@ -114,6 +112,7 @@ public partial class Enemy : CharacterBody2D
 		Worm,
 		Liero,
 		Bear,
+		Spider,
 		Coward
 	}
 
@@ -248,6 +247,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		StateMachine(delta);
 
+		Check();
+
 		UpdateAnimation();
 
 		UpdateAudio();
@@ -280,6 +281,47 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Damaged:
 				UpdateDamaged(delta);
 				break;
+
+			case Brain.State.Awake:
+				UpdateAwake();
+				break;
+		}
+	}
+
+	public void Check()
+	{
+		switch(_brain.CurrentState)
+		{
+			case Brain.State.Chase:
+			// If enemy is in attack range and can see player, start Attacking.
+
+			if (ThisAttackType == AttackType.Static)
+			{
+				return;
+			}
+
+			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
+			{
+				if (CanRangedAttack && CanShoot)
+				{
+					double change = GD.Randf();
+					if (change > RangedAttackChange)
+					{
+						_brain.CanRangedAttack();
+						return;
+					}
+				}
+				else
+				{
+					_brain.CanAttack();
+
+					if (ThisAttackType == AttackType.Dash)
+					{
+						SetAttackDirection();
+					}
+				}
+			}
+			break;
 		}
 	}
 
@@ -355,12 +397,14 @@ public partial class Enemy : CharacterBody2D
 
 	public void EnterPatrol()
 	{
-		SetPatrolTarget();
-
+		// Liero behaviour
 		if (ThisEnemyType == EnemyType.Liero)
 		{
 			_characterCollision.SetDeferred("disabled", false);
+			SetPlayerTarget();
 		}
+
+		SetPatrolTarget();
 	}
 
 	private void UpdateSpawn(double delta)
@@ -517,13 +561,13 @@ public partial class Enemy : CharacterBody2D
 			}
 		}
 
-		if (_sprite.Animation == "Attack")
+		/* if (_sprite.Animation == "Attack")
 		{
 			if (_attackSfx.Playing == false)
 			{
 				_attackSfx.Play();
 			}
-		}
+		 } */
 	}
 
 	public void DashAttackMovement(float speed)
@@ -644,6 +688,22 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	private void UpdateAwake()
+	{
+		if (Sprite.Animation == "Awake")
+		{
+			if (Sprite.Frame == _awakeStartFrame)
+			{
+				SetDetectionRange(AwakeDetectionRange);
+			}
+
+			if (Sprite.Frame == _awakeEndFrame)
+			{
+				SetDetectionRange(DetectionRange);
+			}
+		}
+	}
+
 	private void UpdateAnimation()
 	{
 		if (_sprite == null)
@@ -735,27 +795,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			if (_movementSfx.Playing == false)
 			{
-				_movementSfx.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-				_movementSfx.VolumeDb = (float)GD.RandRange(-1.0f, 0.0f);
 				_movementSfx.Play();
 			}
-		}
-
-		switch (_sprite.Animation)
-		{
-			case "Attack":
-				if (_attackSfx != null && _attackSfx.Playing == false)
-				{
-					_attackSfx.Play();
-				}
-				break;
-
-			case "Notice":
-				if (_noticeSfx != null && _noticeSfx.Playing == false)
-				{
-					_noticeSfx.Play();
-				}
-				break;
 		}
 	}
 
@@ -785,10 +826,10 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		if (_damagedSfx != null)
+		/* if (_damagedSfx != null)
 		{
 			_damagedSfx.Play();
-		}
+		} */
 	}
 
 	private void Defeat()
@@ -823,15 +864,6 @@ public partial class Enemy : CharacterBody2D
 			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
 
-		if (_defeatSfx != null)
-		{
-			_defeatSfx.Play();
-		}
-	}
-
-	public void PlaySingleAudio()
-	{
-
 	}
 
 	public void AlarmBuddies()
@@ -840,7 +872,7 @@ public partial class Enemy : CharacterBody2D
 		// OR IN SAME "FACTION"
 		foreach (Node enemy in GetTree().GetNodesInGroup("Enemy"))
 		{
-			if (enemy is Enemy enemyNode && enemy != this && enemyNode.ThisEnemyType == ThisEnemyType && enemyNode._canBeAlarmed)
+			if (enemy is Enemy enemyNode && enemy != this && enemyNode._canBeAlarmed)
 			{
 				if (GlobalPosition.DistanceTo(enemyNode.GlobalPosition) <= _alarmRange)
 				{
@@ -924,11 +956,62 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnAnimationFinished()
     {
-		_brain.AnimationFinished();
-
 		if (_sprite.Animation == "EnterIdle")
 		{
 			_sprite.Play("Idle");
+		}
+
+		if (Sprite.Animation == "Spawn")
+		{
+			_brain.AfterSpawn();
+		}
+
+		if (Sprite.Animation == "Notice")
+		{
+			AlarmBuddies();
+			_brain.AfterNotice();
+		}
+
+		if (Sprite.Animation == "Awake")
+		{
+			_brain.AfterAwake();
+		}
+
+		if (Sprite.Animation == "TakeDmg")
+		{
+			_brain.AfterDamaged();
+		}
+
+		if (Sprite.Animation == "Attack")
+		{
+			if (AttackSucceed == false && ThisEnemyType == EnemyType.Tick)
+			{
+				Sprite.Play("AttackFail");
+				return;
+			}
+
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "AttackFail")
+		{
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "AttackHit")
+		{
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "Ranged")
+		{
+			_brain.AfterRanged();
+
+			if (_rangedCooldownTimer != null)
+			{
+				_rangedCooldownTimer.WaitTime = _rangedCooldownTime;
+				_rangedCooldownTimer.Start();
+			}
 		}
     }
 
@@ -955,17 +1038,16 @@ public partial class Enemy : CharacterBody2D
 
 	public void OnStateChanged(Brain.State state)
 	{
-		// _enemyAudioPlayer.PlayAudioStream(state);
+		if (_enemyAudioPlayer != null)
+		{
+			_enemyAudioPlayer.PlayAudioStream(state);
+		}
 
 		switch (state)
 		{
 			case Brain.State.Idle:
 				EnterIdle();
 				SetDetectionRange(DetectionRange);
-				break;
-
-			case Brain.State.Awake:
-				SetDetectionRange(AwakeDetectionRange);
 				break;
 
 			case Brain.State.Patrol:
