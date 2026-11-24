@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://b460hp6jxp5qd" path="res://Scenes/Characters/Enemy/Tick.tscn" id="7_hfpqq"]
 [ext_resource type="PackedScene" uid="uid://dw87ycdqt76cg" path="res://Scenes/Characters/Enemy/Bear.tscn" id="7_wmri6"]
 [ext_resource type="PackedScene" uid="uid://gifefan8xsv7" path="res://Scenes/Characters/Enemy/Baby.tscn" id="8_6iyf1"]
-[ext_resource type="PackedScene" uid="uid://dfavr87xu6e8m" path="res://Scenes/Characters/Enemy/Adult.tscn" id="8_sngsp"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="9_7koen"]
 [ext_resource type="PackedScene" uid="uid://c83l7ond8lwpl" path="res://Scenes/Characters/Enemy/Roach.tscn" id="9_75pm7"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="10_77btd"]
@@ -219,10 +218,7 @@ navigation_layers = 2
 [node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]
 
 [node name="Bear" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_wmri6")]
-position = Vector2(2330, -1593)
-
-[node name="Adult" parent="Environment/Enemies" unique_id=1156803834 instance=ExtResource("8_sngsp")]
-position = Vector2(303, -1500)
+position = Vector2(-2753, -1549)
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_7koen")]
 position = Vector2(2983, -1960)
@@ -237,12 +233,12 @@ scale = Vector2(28.078125, 17.878906)
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("10_77btd")]
-position = Vector2(-3137, -1514)
+position = Vector2(-820, -1518)
 RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="7" unique_id=292159288]
 limit_left = -4057
 limit_top = -2793
 limit_right = 3571

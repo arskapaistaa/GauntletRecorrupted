@@ -76,10 +76,6 @@ public partial class Enemy : CharacterBody2D
 	[ExportSubgroup("Audios")]
 	[Export] private EnemyAudioPlayer _enemyAudioPlayer = null;
 	[Export] private AudioStreamPlayer2D _movementSfx = null;
-	[Export] private AudioStreamPlayer2D _noticeSfx = null;
-	[Export] private AudioStreamPlayer2D _attackSfx = null;
-	[Export] private AudioStreamPlayer2D _damagedSfx = null;
-	[Export] private AudioStreamPlayer2D _defeatSfx = null;
 
 	[ExportSubgroup("Particles")]
 	[Export] private GpuParticles2D _damagedParticles = null;
@@ -304,14 +300,14 @@ public partial class Enemy : CharacterBody2D
 				return;
 			}
 
-			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange &&  HasLineOfSight())
+			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
 			{
 				if (CanRangedAttack && CanShoot)
 				{
 					double change = GD.Randf();
 					if (change > RangedAttackChange)
 					{
-						_brain.CanAttack();
+						_brain.CanRangedAttack();
 						return;
 					}
 				}
@@ -565,13 +561,13 @@ public partial class Enemy : CharacterBody2D
 			}
 		}
 
-		if (_sprite.Animation == "Attack")
+		/* if (_sprite.Animation == "Attack")
 		{
 			if (_attackSfx.Playing == false)
 			{
 				_attackSfx.Play();
 			}
-		}
+		 } */
 	}
 
 	public void DashAttackMovement(float speed)
@@ -799,27 +795,8 @@ public partial class Enemy : CharacterBody2D
 		{
 			if (_movementSfx.Playing == false)
 			{
-				_movementSfx.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-				_movementSfx.VolumeDb = (float)GD.RandRange(-1.0f, 0.0f);
 				_movementSfx.Play();
 			}
-		}
-
-		switch (_sprite.Animation)
-		{
-			case "Attack":
-				if (_attackSfx != null && _attackSfx.Playing == false)
-				{
-					_attackSfx.Play();
-				}
-				break;
-
-			case "Notice":
-				if (_noticeSfx != null && _noticeSfx.Playing == false)
-				{
-					_noticeSfx.Play();
-				}
-				break;
 		}
 	}
 
@@ -849,10 +826,10 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		if (_damagedSfx != null)
+		/* if (_damagedSfx != null)
 		{
 			_damagedSfx.Play();
-		}
+		} */
 	}
 
 	private void Defeat()
@@ -887,15 +864,10 @@ public partial class Enemy : CharacterBody2D
 			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
 
-		if (_defeatSfx != null)
+		/* if (_defeatSfx != null)
 		{
 			_defeatSfx.Play();
-		}
-	}
-
-	public void PlaySingleAudio()
-	{
-
+		}*/
 	}
 
 	public void AlarmBuddies()
@@ -1064,7 +1036,10 @@ public partial class Enemy : CharacterBody2D
 
 	public void OnStateChanged(Brain.State state)
 	{
-		// _enemyAudioPlayer.PlayAudioStream(state);
+		if (_enemyAudioPlayer != null)
+		{
+			_enemyAudioPlayer.PlayAudioStream(state);
+		}
 
 		switch (state)
 		{

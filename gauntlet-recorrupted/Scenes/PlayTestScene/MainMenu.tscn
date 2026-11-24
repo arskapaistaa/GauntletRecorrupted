@@ -424,7 +424,7 @@ tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
@@ -1027,7 +1027,6 @@ bus = &"Music"
 [node name="StartSFX" type="AudioStreamPlayer" parent="Audios" unique_id=1276364434]
 
 [node name="Video" type="AspectRatioContainer" parent="." unique_id=1045937909]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -98,7 +98,7 @@ public partial class Brain : Node
 		}
 		else
 		{
-			CurrentState = State.Damaged;
+			SetCurrentState(State.Damaged);
 		}
 	}
 
@@ -107,7 +107,7 @@ public partial class Brain : Node
 		// Extra safety for Shotgun bullets
 		if (CurrentState != State.Defeat)
 		{
-			CurrentState = State.Defeat;
+			SetCurrentState(State.Defeat);
 
 			Level.Current.ChangeEnemyCount(-1);
 			GameManager.Instance.OnKillsChanged(_enemy.ThisEnemyType.ToString());

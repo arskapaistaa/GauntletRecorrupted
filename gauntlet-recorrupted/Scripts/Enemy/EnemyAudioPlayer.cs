@@ -4,48 +4,39 @@ using System;
 public partial class EnemyAudioPlayer : AudioStreamPlayer2D
 {
 	[Export] private AudioStreams _audioStreams = null;
-	private Level _level = null;
-	private const int _audioLimitAmount = 10;
+	[Export(PropertyHint.Range, "-24,0,1,suffix:db")] private float _maxVolume = 0.0f;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_level = Level.Current;
 
-		Finished += OnAudioFinished;
 	}
 
     public void PlayAudioStream(Brain.State state)
 	{
-		if (CheckPoolStatus())
+		AudioStream nextStream = GetStream(state);
+
+		if (nextStream == null)
 		{
-			SetAudioStream(state);
-			IntializeAudio();
-			Play();
+			return;
 		}
+		Stream = nextStream;
+
+		IntializeAudio();
+		Play();
 	}
 
 	public void IntializeAudio()
 	{
 		PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-		VolumeDb = (float)GD.RandRange(0.8f, 1.0f);
+		VolumeDb = (float)GD.RandRange(_maxVolume -2, _maxVolume);
 	}
-
-	public bool CheckPoolStatus()
-	{
-		if (_level.EnemyAudioCount == _audioLimitAmount)
-		{
-			return false;
-		}
-
-		_level.EnemyAudioCount++;
-		return true;
-	}
-	public void SetAudioStream(Brain.State state)
+	public AudioStream GetStream(Brain.State state)
 	{
 		if (_audioStreams == null)
 		{
 			GD.PrintErr("EnemyAudioPlayer is missing Streams");
-			return;
+			return null;
 		}
 
 		switch (state)
@@ -54,35 +45,37 @@ public partial class EnemyAudioPlayer : AudioStreamPlayer2D
 			case Brain.State.Attack:
 				if (_audioStreams.AttackStream != null)
 				{
-					Stream = _audioStreams.AttackStream;
+					return _audioStreams.AttackStream;
 				}
 				break;
 
 			case Brain.State.Notice:
 				if (_audioStreams.NoticeStream != null)
 				{
-					Stream = _audioStreams.NoticeStream;
+					return _audioStreams.NoticeStream;
 				}
 				break;
 
 			case Brain.State.Damaged:
 				if (_audioStreams.TakeDmgStream != null)
 				{
-					Stream = _audioStreams.TakeDmgStream;
+					return _audioStreams.TakeDmgStream;
 				}
 				break;
 
 			case Brain.State.Defeat:
 				if (_audioStreams.DefeatStream != null)
 				{
-					Stream = _audioStreams.DefeatStream;
+					return _audioStreams.DefeatStream;
+				}
+				break;
+			case Brain.State.Ranged:
+				if (_audioStreams.RangedStream != null)
+				{
+					return _audioStreams.RangedStream;
 				}
 				break;
 		}
+		return null;
 	}
-
-	private void OnAudioFinished()
-    {
-        throw new NotImplementedException();
-    }
 }
