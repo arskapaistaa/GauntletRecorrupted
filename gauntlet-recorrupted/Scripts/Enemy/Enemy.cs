@@ -114,6 +114,7 @@ public partial class Enemy : CharacterBody2D
 		Worm,
 		Liero,
 		Bear,
+		Spider,
 		Coward
 	}
 
@@ -355,12 +356,14 @@ public partial class Enemy : CharacterBody2D
 
 	public void EnterPatrol()
 	{
-		SetPatrolTarget();
-
+		// Liero behaviour
 		if (ThisEnemyType == EnemyType.Liero)
 		{
 			_characterCollision.SetDeferred("disabled", false);
+			SetPlayerTarget();
 		}
+
+		SetPatrolTarget();
 	}
 
 	private void UpdateSpawn(double delta)
@@ -840,7 +843,7 @@ public partial class Enemy : CharacterBody2D
 		// OR IN SAME "FACTION"
 		foreach (Node enemy in GetTree().GetNodesInGroup("Enemy"))
 		{
-			if (enemy is Enemy enemyNode && enemy != this && enemyNode.ThisEnemyType == ThisEnemyType && enemyNode._canBeAlarmed)
+			if (enemy is Enemy enemyNode && enemy != this && enemyNode._canBeAlarmed)
 			{
 				if (GlobalPosition.DistanceTo(enemyNode.GlobalPosition) <= _alarmRange)
 				{

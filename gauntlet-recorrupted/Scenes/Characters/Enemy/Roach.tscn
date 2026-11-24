@@ -259,7 +259,6 @@ _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
 _attackStartFrame = 2
-_attackEndFrames = 3
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")

@@ -58,5 +58,4 @@ sprite_frames = SubResource("SpriteFrames_dxocv")
 [node name="Barrelparticles" parent="." unique_id=435467720 instance=ExtResource("3_tg5a2")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568547445]
-visible = false
 shape = SubResource("CircleShape2D_sopei")

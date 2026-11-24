@@ -1,0 +1,311 @@
+[gd_scene format=3 uid="uid://1igvrbrju8vd"]
+
+[ext_resource type="Script" uid="uid://da0tlsff6kya1" path="res://Scripts/Enemy/Enemy.cs" id="1_13vbl"]
+[ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_j02g7"]
+[ext_resource type="Texture2D" uid="uid://c41oq6k6xi777" path="res://Art/Enemies/ArtEnemySpider.png" id="3_d0g75"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_tlmfb"]
+[ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_nxd1r"]
+[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_0g072"]
+[ext_resource type="AudioStream" uid="uid://dtpch8klq46xu" path="res://Audio/SFX/Tick/TickNotice.wav" id="7_sg5ei"]
+[ext_resource type="AudioStream" uid="uid://cirt7r8wcb5xd" path="res://Audio/SFX/Tick/TickAttack.wav" id="8_gjpul"]
+[ext_resource type="AudioStream" uid="uid://dacibpu5o2rlt" path="res://Audio/SFX/Tick/TickDamaged.wav" id="9_mow2u"]
+[ext_resource type="AudioStream" uid="uid://ds00xeb3xrp6m" path="res://Audio/SFX/Tick/TickDefeat.wav" id="10_8rbl6"]
+[ext_resource type="PackedScene" uid="uid://yx1vgqtq4v3r" path="res://Scenes/Particles/EnemyDamaged.tscn" id="11_0jkpl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voty8"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2352, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aaa5p"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2688, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8pic"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(0, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33gbp"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(336, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoevt"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(672, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0ymm"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1008, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uw7o"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1344, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar477"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1680, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt6c8"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2016, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoif8"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2352, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ehor"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2688, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnray"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1344, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6i4c"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1680, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmy1x"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(2016, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcf7w"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1008, 336, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnm34"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(0, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyce7"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(336, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lu0i"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(672, 0, 336, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvhsg"]
+atlas = ExtResource("3_d0g75")
+region = Rect2(1008, 0, 336, 336)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13vbl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voty8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aaa5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8pic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33gbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoevt")
+}],
+"loop": 0,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0ymm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uw7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt6c8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoif8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ehor")
+}],
+"loop": 0,
+"name": &"Defeat",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnray")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6i4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmy1x")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcf7w")
+}],
+"loop": 0,
+"name": &"TakeDmg",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnm34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyce7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lu0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvhsg")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_26j5x"]
+radius = 31.0
+height = 116.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0g75"]
+radius = 200.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13vbl"]
+size = Vector2(94, 78)
+
+[node name="Spider" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_movementSfx", "_noticeSfx", "_attackSfx", "_damagedSfx", "_defeatSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToTimer") groups=["Enemy"]]
+z_index = 3
+collision_layer = 2
+collision_mask = 15
+motion_mode = 1
+script = ExtResource("1_13vbl")
+_enemyType = 7
+_attackType = 1
+_health = 20.0
+_maxSpeed = 450.0
+_attackSpeed = 1100.0
+DetectionRange = 400.0
+_dmg = 8
+_attackRange = 600.0
+_alarmRange = 2000.0
+_canPatrol = true
+_maxIdleTime = 3.0
+_brain = NodePath("Brain")
+_sprite = NodePath("AnimatedSprite2D")
+_characterCollision = NodePath("CharacterCollision")
+_detectionArea = NodePath("DetectionArea")
+_dmgArea = NodePath("DamageArea")
+_detectionShape = NodePath("DetectionArea/DetectionShape")
+_agent = NodePath("NavigationAgent2D")
+_rayCast = NodePath("RayCast2D")
+_movementSfx = NodePath("Audios/MovementSFX")
+_noticeSfx = NodePath("Audios/NoticeSFX")
+_attackSfx = NodePath("Audios/AttackSFX")
+_damagedSfx = NodePath("Audios/DamagedSFX")
+_defeatSfx = NodePath("Audios/DefeatSFX")
+_damagedParticles = NodePath("Particles/EnemyDamaged")
+_destroyTimer = NodePath("Timers/DestroyTimer")
+_fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
+_attackMovementFrames = PackedInt32Array(3, 4)
+_attackStartFrame = 2
+_attackEndFrame = 4
+
+[node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
+script = ExtResource("2_j02g7")
+EntersAreaState = 6
+InCombatState = 6
+OutOfCombatState = 6
+AfterNoticeState = 6
+AfterAttackState = 6
+NavigationFinishedState = 3
+AfterSpawnState = 2
+AfterAlarmedState = 6
+AfterBulledDetected = 6
+CantReachTargetState = 2
+FromIdleTo = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624132966]
+material = ExtResource("3_tlmfb")
+sprite_frames = SubResource("SpriteFrames_13vbl")
+animation = &"Attack"
+autoplay = "Idle"
+frame = 4
+
+[node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_26j5x")
+debug_color = Color(0.5509443, 0.3997974, 1, 0.41960785)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1280153192]
+collision_layer = 2
+collision_mask = 9
+
+[node name="DetectionShape" type="CollisionShape2D" parent="DetectionArea" unique_id=1058006582]
+shape = SubResource("CircleShape2D_d0g75")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1684599709]
+target_desired_distance = 40.0
+avoidance_enabled = true
+radius = 128.0
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1242660766]
+target_position = Vector2(50, 0)
+collision_mask = 5
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=273824548]
+collision_layer = 0
+script = ExtResource("5_nxd1r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=134463378]
+position = Vector2(92, 0)
+shape = SubResource("RectangleShape2D_13vbl")
+debug_color = Color(0.8822755, 0.31091788, 0.34309763, 0.41960785)
+
+[node name="Audios" type="Node2D" parent="." unique_id=369409679]
+
+[node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=406446165]
+stream = ExtResource("6_0g072")
+bus = &"SFX"
+
+[node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1636719790]
+stream = ExtResource("7_sg5ei")
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="AttackSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1610055822]
+stream = ExtResource("8_gjpul")
+max_distance = 1000.0
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="DamagedSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=425719681]
+stream = ExtResource("9_mow2u")
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="DefeatSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=861492917]
+stream = ExtResource("10_8rbl6")
+bus = &"SFX"
+
+[node name="Particles" type="Node2D" parent="." unique_id=1186982179]
+
+[node name="EnemyDamaged" parent="Particles" unique_id=113120183 instance=ExtResource("11_0jkpl")]
+
+[node name="Timers" type="Node" parent="." unique_id=455720758]
+
+[node name="DestroyTimer" type="Timer" parent="Timers" unique_id=284314002]
+wait_time = 3.0
+one_shot = true
+
+[node name="FromIdleToPatrolTimer" type="Timer" parent="Timers" unique_id=1029667967]
+one_shot = true
