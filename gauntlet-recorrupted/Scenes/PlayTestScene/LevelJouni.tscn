@@ -1,0 +1,324 @@
+[gd_scene format=4 uid="uid://blkffjon5drjj"]
+
+[ext_resource type="Script" uid="uid://dq36a746bv5fg" path="res://Scripts/Level.cs" id="1_rmmtk"]
+[ext_resource type="Texture2D" uid="uid://jukmbnlgigvc" path="res://Art/Environment/ArtTileGround.png" id="3_10h8t"]
+[ext_resource type="Texture2D" uid="uid://bp0b87y8awcy7" path="res://Art/Environment/ArtTileGroundConnect.png" id="4_ce3uh"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="5_in5i0"]
+[ext_resource type="Texture2D" uid="uid://bf81rp0iksunx" path="res://Art/Environment/Skeleton.png" id="6_lyh3d"]
+[ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="7_nlvwu"]
+[ext_resource type="PackedScene" uid="uid://b4e588opm2bn1" path="res://Scenes/Environment/Destroyable/DiggableTiles.tscn" id="8_4doif"]
+[ext_resource type="PackedScene" uid="uid://x1fn74y5s3ht" path="res://Scenes/Characters/Enemy/Rat.tscn" id="10_7k0wf"]
+[ext_resource type="PackedScene" uid="uid://qancgtj37kk8" path="res://Scenes/Characters/Enemy/Scitter.tscn" id="11_bmcb2"]
+[ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="12_ydgnh"]
+[ext_resource type="PackedScene" uid="uid://ch28284riawxa" path="res://Scenes/Environment/Fog.tscn" id="24_igshh"]
+[ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="30_f1q6r"]
+[ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="31_tr5od"]
+[ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="32_qqwr0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2909, -2303, 4053, -1702, 4388, 2821, -2774, 2773)])
+agent_radius = 40.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivumw"]
+texture = ExtResource("3_10h8t")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pa0li"]
+tile_size = Vector2i(256, 256)
+sources/0 = SubResource("TileSetAtlasSource_ivumw")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3qguu"]
+texture = ExtResource("4_ce3uh")
+texture_region_size = Vector2i(256, 256)
+8:2/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+11:1/0 = 0
+10:1/0 = 0
+9:1/0 = 0
+8:1/0 = 0
+7:1/0 = 0
+6:1/0 = 0
+5:1/0 = 0
+4:1/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+0:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+11:3/0 = 0
+10:3/0 = 0
+9:3/0 = 0
+8:3/0 = 0
+7:3/0 = 0
+7:4/0 = 0
+6:4/0 = 0
+6:3/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+11:5/0 = 0
+10:5/0 = 0
+9:5/0 = 0
+8:5/0 = 0
+7:5/0 = 0
+6:5/0 = 0
+5:5/0 = 0
+4:5/0 = 0
+3:5/0 = 0
+2:5/0 = 0
+1:5/0 = 0
+0:5/0 = 0
+0:4/0 = 0
+0:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+4:3/0 = 0
+3:3/0 = 0
+2:3/0 = 0
+1:3/0 = 0
+5:3/0 = 0
+5:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_80cxc"]
+tile_size = Vector2i(256, 256)
+sources/0 = SubResource("TileSetAtlasSource_3qguu")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_76byb"]
+texture = ExtResource("6_lyh3d")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_oprqm"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_76byb")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvt2s"]
+polygon = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0jcpq"]
+texture = ExtResource("7_nlvwu")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_fvt2s")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+
+[sub_resource type="TileSet" id="TileSet_sopei"]
+tile_size = Vector2i(256, 256)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 11
+sources/0 = SubResource("TileSetAtlasSource_0jcpq")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rxg4t"]
+vertices = PackedVector2Array(4452.8594, 1322.5703, -1909.4766, 1392.5313, -1856.4922, -47.8125, 4976.4063, 158.84375, 5046.4688, 2045.3516, 4522.867, 3766.4219, 13212.32, 3862.5625, 11378, 1988.6406, 13348.617, -229.42188, 11378, -202.53125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 5, 4, 7), PackedInt32Array(8, 6, 7, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1895, -89, 5015, 120, 5085, 2005, 11338, 1949, 11338, -242, 13390, -270, 13251, 3903, 4484, 3806, 4414, 1363, -1951, 1433)])
+agent_radius = 40.0
+
+[sub_resource type="Shader" id="Shader_jrnry"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D noise_tex : repeat_enable, filter_linear_mipmap;
+uniform vec4 fog_color : source_color = vec4(0.8, 0.85, 0.9, 1.0);
+uniform float density : hint_range(0.0, 1.0) = 0.6;
+uniform vec2 tiling = vec2(2.0, 2.0);
+uniform vec2 speed_a = vec2(0.02, 0.01);
+uniform vec2 speed_b = vec2(-0.015, 0.008);
+uniform float edge_low : hint_range(0.0, 1.0) = 0.3;
+uniform float edge_high : hint_range(0.0, 1.0) = 0.8;
+
+group_uniforms pixelation;
+uniform bool pixelate = false;
+// Number of \"pixels\" across / down the node's rect
+uniform vec2 pixel_grid = vec2(160.0, 90.0);
+group_uniforms;
+
+void fragment() {
+	vec2 uv = UV;
+	if (pixelate) {
+		// Snap to the center of the grid cell
+		uv = (floor(UV * pixel_grid) + 0.5) / pixel_grid;
+	}
+
+	// Derivatives from the *unsnapped* UV, so mip selection doesn't
+	// break at cell borders (snapped UVs have zero/huge derivatives)
+	vec2 dx = dFdx(UV * tiling);
+	vec2 dy = dFdy(UV * tiling);
+
+	// Two samples of the same texture, different scale and direction
+	float a = textureGrad(noise_tex, uv * tiling + TIME * speed_a, dx, dy).r;
+	float b = textureGrad(noise_tex, uv * tiling * 1.7 + TIME * speed_b, dx * 1.7, dy * 1.7).r;
+
+	float n = (a + b) * 0.5;
+	n = smoothstep(edge_low, edge_high, n);
+
+	COLOR = vec4(fog_color.rgb, n * density * fog_color.a);
+}"
+
+[sub_resource type="Gradient" id="Gradient_e5fvg"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sopei"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_dxocv")
+color_ramp = SubResource("Gradient_e5fvg")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyw8m"]
+shader = SubResource("Shader_jrnry")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_sopei")
+shader_parameter/fog_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+shader_parameter/density = 0.10000000475
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/speed_a = Vector2(-0.03, 0.05)
+shader_parameter/speed_b = Vector2(0.05, -0.03)
+shader_parameter/edge_low = 0.3
+shader_parameter/edge_high = 0.8
+shader_parameter/pixelate = true
+shader_parameter/pixel_grid = Vector2(160, 90)
+
+[sub_resource type="Gradient" id="Gradient_vopof"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2354"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4bxdr"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_h2354")
+color_ramp = SubResource("Gradient_vopof")
+seamless = true
+
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+script = ExtResource("1_rmmtk")
+IsThisTutorialLevel = true
+_maxTotalEnemyCount = 7
+_spawnerCount = 2
+_presetEnemyCount = 3
+_wurmPatrolStartChange = 0.5
+_navRegion = NodePath("Environment/NavigationRegionBasic")
+Player = NodePath("Player")
+_eventCheckTimer = NodePath("EventTimer")
+
+[node name="Environment" type="Node2D" parent="." unique_id=1396569795]
+
+[node name="NavigationRegionBasic" type="NavigationRegion2D" parent="Environment" unique_id=1034927120]
+navigation_polygon = SubResource("NavigationPolygon_lpo5v")
+
+[node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
+position = Vector2(1514, 792)
+format = 2
+
+[node name="Ground" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1469804445]
+tile_set = SubResource("TileSet_pa0li")
+
+[node name="Ground Connect" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1049948724]
+tile_set = SubResource("TileSet_80cxc")
+
+[node name="Props" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1382459935]
+z_index = 1
+material = ExtResource("5_in5i0")
+tile_set = SubResource("TileSet_oprqm")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Environment/NavigationRegionBasic/TileMap" unique_id=733672253]
+z_index = 5
+tile_map_data = PackedByteArray("AAD4//r/AAAAAAAAAAD3//v/AAAAAAAAAAD3//r/AAAAAAAAAAD2//z/AAAAAAAAAAD2//3/AAAAAAAAAAD3//7/AAAAAAAAAAD4//7/AAAAAAAAAAD5////AAAAAAAAAAD6////AAAAAAAAAAD7////AAAAAAAAAAD8////AAAAAAAAAAD9//7/AAAAAAAAAAD5//n/AAAAAAAAAAD6//n/AAAAAAAAAAD7//r/AAAAAAAAAAD8//r/AAAAAAAAAAD9//r/AAAAAAAAAAD9//v/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_sopei")
+
+[node name="DiggableTiles" parent="Environment/NavigationRegionBasic/TileMap" unique_id=999643897 instance=ExtResource("8_4doif")]
+
+[node name="NavigationRegionWurm" type="NavigationRegion2D" parent="Environment" unique_id=1225948905]
+visible = false
+position = Vector2(-2044, -2090)
+navigation_polygon = SubResource("NavigationPolygon_rxg4t")
+navigation_layers = 2
+
+[node name="Cowards" type="Node2D" parent="Environment/NavigationRegionWurm" unique_id=1115287362]
+position = Vector2(2044, 2090)
+
+[node name="Rat" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1021385741 instance=ExtResource("10_7k0wf")]
+position = Vector2(717, -1063)
+
+[node name="Scitter" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1765397949 instance=ExtResource("11_bmcb2")]
+position = Vector2(-3662, -932)
+
+[node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
+
+[node name="Fog" parent="Environment" unique_id=699577285 instance=ExtResource("24_igshh")]
+material = SubResource("ShaderMaterial_tyw8m")
+position = Vector2(5871.5, 3544.0002)
+scale = Vector2(45.808594, 27.453125)
+texture = SubResource("NoiseTexture2D_4bxdr")
+
+[node name="Destroyables" type="Node2D" parent="Environment" unique_id=508917312]
+
+[node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]
+
+[node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("12_ydgnh")]
+position = Vector2(7419.9995, 901.9997)
+rotation = 3.139592
+scale = Vector2(0.99999994, 0.99999994)
+_currentLevel = NodePath("../..")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
+color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+
+[node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("30_f1q6r")]
+RecoilForce = 1000.0
+DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
+CustomCursor = NodePath("../Cursor")
+
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
+limit_left = -4057
+limit_top = -2793
+limit_right = 11714
+limit_bottom = 6885
+
+[node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("31_tr5od")]
+PlayerCharacter = NodePath("../Player")
+
+[node name="CanvasLayer" parent="." unique_id=1183544404 instance=ExtResource("32_qqwr0")]
+visible = false
+
+[node name="EventTimer" type="Timer" parent="." unique_id=475063518]
+wait_time = 5.0
+
+[editable path="Player"]
+[editable path="CanvasLayer"]

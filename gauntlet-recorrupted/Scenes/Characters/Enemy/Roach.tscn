@@ -261,7 +261,8 @@ _movementSfx = NodePath("Audios/MovementSFX")
 _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
-_attackStartFrame = 2
+_attackStartFrame = 3
+_attackEndFrame = 4
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
@@ -283,7 +284,7 @@ FromIdleToState = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 material = ExtResource("3_yb4cs")
 sprite_frames = SubResource("SpriteFrames_26j5x")
-animation = &"TakeDmg"
+animation = &"Attack"
 autoplay = "Idle"
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]

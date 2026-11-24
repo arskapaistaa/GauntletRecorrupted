@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c0g0adlynj64m" path="res://Art/Environment/BarrelSpritesheet.png" id="1_3lhxn"]
 [ext_resource type="Script" uid="uid://chc4ebnnhaukj" path="res://Scripts/Environment/Destroyable.cs" id="2_tg5a2"]
 [ext_resource type="PackedScene" uid="uid://ccmo7dj4cop0l" path="res://Scenes/Particles/BarrelParticles.tscn" id="3_tg5a2"]
+[ext_resource type="AudioStream" uid="uid://dd7ygupxdbi0r" path="res://Audio/SFX/Environment/Destroyables/Damage2.ogg" id="4_48ej3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3lhxn"]
 atlas = ExtResource("1_3lhxn")
@@ -43,7 +44,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
 radius = 85.0
 
-[node name="Barrel" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tg5a2"]
+random_pitch = 1.2599211
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("4_48ej3")
+
+[node name="Barrel" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision", "_destroyedSfx")]
 z_index = 2
 collision_layer = 64
 collision_mask = 0
@@ -51,6 +58,7 @@ script = ExtResource("2_tg5a2")
 _sprite = NodePath("AnimatedSprite2D")
 _particles = NodePath("Barrelparticles")
 _collision = NodePath("CollisionShape2D")
+_destroyedSfx = NodePath("DestroySfx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240006552]
 sprite_frames = SubResource("SpriteFrames_dxocv")
@@ -59,3 +67,8 @@ sprite_frames = SubResource("SpriteFrames_dxocv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568547445]
 shape = SubResource("CircleShape2D_sopei")
+
+[node name="DestroySfx" type="AudioStreamPlayer2D" parent="." unique_id=788042082]
+stream = SubResource("AudioStreamRandomizer_tg5a2")
+volume_db = -3.0
+bus = &"SFX"

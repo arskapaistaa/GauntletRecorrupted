@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Bear1.wav-08bba5375f2a0e83d9b09fe0bf91d210.sa
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

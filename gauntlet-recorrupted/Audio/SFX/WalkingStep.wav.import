@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/WalkingStep.wav-6a771b82d77d04154b327bc90ed85
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

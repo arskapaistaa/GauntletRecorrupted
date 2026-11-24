@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_17jru"]
 [ext_resource type="PackedScene" uid="uid://cac5cd8v1rsjc" path="res://Scenes/Projectile.tscn" id="2_wbn85"]
 [ext_resource type="Texture2D" uid="uid://bh1olfn0v3x84" path="res://Art/Enemies/ArtEnemyBear.png" id="3_34kni"]
+[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="4_0p4qj"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_0p4qj"]
 [ext_resource type="Texture2D" uid="uid://dvoasgu671x4h" path="res://Art/Environment/ArtEnemyBearSpit.png" id="6_17jru"]
 [ext_resource type="AudioStream" uid="uid://bkw6h4pkg10q2" path="res://Audio/SFX/Bear/BearWalk.wav" id="7_34kni"]
@@ -475,8 +476,8 @@ motion_mode = 1
 script = ExtResource("1_wbn85")
 _enemyType = 6
 _attackType = 2
-_health = 300.0
-_maxSpeed = 200.0
+_health = 500.0
+_maxSpeed = 250.0
 _attackSpeed = 800.0
 DetectionRange = 2000.0
 _dmg = 34
@@ -492,7 +493,7 @@ _projectileScene = ExtResource("2_wbn85")
 _projectileSpawnPoint = NodePath("ProjectileSpawnPoint")
 _rangedDmgArea = NodePath("RangedDamageArea")
 _rangedSprite = NodePath("RangedDamageArea/RangedAnimatedSprite2D")
-_rangedStartFrame = 3
+_rangedStartFrame = 4
 _rangedEndFrame = 8
 RangedDmg = 25
 RangedAttackChange = 0.6
@@ -512,6 +513,7 @@ _destroyTimer = NodePath("Timers/DestroyTimer")
 _rangedCooldownTimer = NodePath("Timers/RangedCooldownTimer")
 _attackMovementFrames = PackedInt32Array(8, 9, 10, 11, 12, 13, 14, 15, 16)
 _attackStartFrame = 8
+_attackEndFrame = 15
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_17jru")
@@ -530,6 +532,7 @@ CantReachTargetState = 3
 AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1314240996]
+material = ExtResource("4_0p4qj")
 sprite_frames = SubResource("SpriteFrames_wbn85")
 animation = &"Attack"
 autoplay = "Idle"

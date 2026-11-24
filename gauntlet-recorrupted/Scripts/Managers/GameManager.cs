@@ -123,8 +123,7 @@ public partial class GameManager : Node
 		if (CurrentGameState != GameState.Game && !_usingController)
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 
-
-		if (CurrentGameState == GameState.Game)
+		if (state == GameState.Game)
 		{
 			PlayGameplayMusic();
 		}

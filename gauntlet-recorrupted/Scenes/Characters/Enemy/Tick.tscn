@@ -416,6 +416,7 @@ _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _attackMovementFrames = PackedInt32Array(3, 4, 5, 6)
 _attackStartFrame = 3
+_attackEndFrame = 6
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_4fpts")
@@ -430,7 +431,6 @@ OutOfCombatDamagedState = 4
 AfterBulledDetectedState = 4
 AfterNoticeState = 6
 AfterAttackState = 2
-AfterAttackCombatState = 0
 NavigationFinishedState = 3
 CantReachTargetState = 2
 AfterSpawnState = 2
@@ -439,10 +439,8 @@ AfterAlarmedState = 6
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=373766187]
 material = ExtResource("2_bmxul")
 sprite_frames = SubResource("SpriteFrames_4fpts")
-animation = &"AttackFail"
+animation = &"Attack"
 autoplay = "Idle"
-frame = 9
-frame_progress = 1.0
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964

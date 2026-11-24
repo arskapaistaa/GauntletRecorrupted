@@ -307,12 +307,6 @@ position = Vector2(717, -1063)
 [node name="Scitter" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1765397949 instance=ExtResource("17_or3j3")]
 position = Vector2(-3662, -932)
 
-[node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
-position = Vector2(7419.9995, 901.9997)
-rotation = 3.139592
-_nextLevelPath = "res://Scenes/PlayTestScene/LevelCorridors.tscn"
-_currentLevel = NodePath("../..")
-
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
 
 [node name="TutorialAreaMovement" parent="Environment" unique_id=355383656 instance=ExtResource("11_3qguu")]
@@ -443,6 +437,13 @@ rotation = 0.48373985
 position = Vector2(8817, 900.9999)
 rotation = 3.1404202
 _canPatrol = false
+
+[node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("8_tyw8m")]
+position = Vector2(7419.9995, 901.9997)
+rotation = 3.139592
+scale = Vector2(0.99999994, 0.99999994)
+NextLevelPath = "uid://uh4eqalsq8fh"
+_currentLevel = NodePath("../..")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)

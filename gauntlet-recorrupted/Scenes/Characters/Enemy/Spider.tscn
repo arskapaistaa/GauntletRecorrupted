@@ -240,7 +240,7 @@ material = ExtResource("3_tlmfb")
 sprite_frames = SubResource("SpriteFrames_13vbl")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 4
+frame = 1
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964

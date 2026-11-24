@@ -218,7 +218,7 @@ navigation_layers = 2
 [node name="Enemies" type="Node2D" parent="Environment" unique_id=560303521]
 
 [node name="Bear" parent="Environment/Enemies" unique_id=1765397949 instance=ExtResource("7_wmri6")]
-position = Vector2(-2753, -1549)
+position = Vector2(1866, -1553)
 
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("9_7koen")]
 position = Vector2(2983, -1960)
@@ -238,7 +238,7 @@ RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="7" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -4057
 limit_top = -2793
 limit_right = 3571

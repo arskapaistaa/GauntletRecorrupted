@@ -71,14 +71,13 @@ AR: 0.0
 ALR: 0.0
 
 ### Bear
-S: 300.0
-H: 200
+S: 250.0
+H: 500
 DMG: 34
 AS: 800.0
 DR: 2000.0
 AR: 1000.0
 ALR: 0.0
-
 
 ## Guns
 - A = Ammo capacity

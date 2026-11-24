@@ -864,10 +864,6 @@ public partial class Enemy : CharacterBody2D
 			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
 		}
 
-		/* if (_defeatSfx != null)
-		{
-			_defeatSfx.Play();
-		}*/
 	}
 
 	public void AlarmBuddies()
@@ -1010,6 +1006,12 @@ public partial class Enemy : CharacterBody2D
 		if (Sprite.Animation == "Ranged")
 		{
 			_brain.AfterRanged();
+
+			if (_rangedCooldownTimer != null)
+			{
+				_rangedCooldownTimer.WaitTime = _rangedCooldownTime;
+				_rangedCooldownTimer.Start();
+			}
 		}
     }
 
