@@ -477,7 +477,6 @@ _attackRange = 1000.0
 _canMoveWhileDamaged = true
 _damagedSpeed = 400.0
 IgnoreStateChange = true
-_canPatrol = true
 _minIdleTime = 2.0
 _maxIdleTime = 10.0
 CanRangedAttack = true
@@ -506,32 +505,32 @@ _damagedSfx = NodePath("Audios/DamagedSFX")
 _defeatSfx = NodePath("Audios/DefeatSFX")
 _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
-_fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
+_fromIdleToTimer = NodePath("")
 _rangedCooldownTimer = NodePath("Timers/RangedCooldownTimer")
 _attackMovementFrames = PackedInt32Array(8, 9, 10, 11, 12, 13, 14, 15, 16)
 _attackStartFrame = 8
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_17jru")
-EntersAreaState = 4
-InCombatState = 3
-OutOfCombatState = 4
+_isBehaviourRandomized = true
+AfterThisStateGetRandomizedList = Array[int]([7, 8])
+NextRandomStateList = Array[int]([4, 6])
+PlayerEntersAreaState = 4
+CanAttackThePlayerState = 7
+CanRangedAttackState = 8
+OutOfCombatDamagedState = 4
+AfterBulledDetectedState = 4
 AfterNoticeState = 6
 AfterAttackState = 4
-NavigationFinishedState = 3
-AfterAlarmedState = 4
-AfterBulledDetected = 4
-CantReachTargetState = 3
-FromIdleTo = 2
 AfterRangedState = 6
+CantReachTargetState = 3
+AfterAlarmedState = 4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1314240996]
 material = ExtResource("4_17jru")
 sprite_frames = SubResource("SpriteFrames_wbn85")
-animation = &"Ranged"
+animation = &"Notice"
 autoplay = "Idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -615,9 +614,6 @@ bus = &"SFX"
 
 [node name="DestroyTimer" type="Timer" parent="Timers" unique_id=552070090]
 wait_time = 3.0
-one_shot = true
-
-[node name="FromIdleToPatrolTimer" type="Timer" parent="Timers" unique_id=1376134820]
 one_shot = true
 
 [node name="RangedCooldownTimer" type="Timer" parent="Timers" unique_id=671791147]

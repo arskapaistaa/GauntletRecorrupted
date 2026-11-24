@@ -262,16 +262,20 @@ _attackStartFrame = 2
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_yb4cs")
-EntersAreaState = 4
-InCombatState = 6
-OutOfCombatState = 4
+_isBehaviourRandomized = true
+AfterThisStateGetRandomizedList = Array[int]([7])
+NextRandomStateList = Array[int]([4, 6])
+PlayerEntersAreaState = 4
+CanAttackThePlayerState = 7
+InCombatDamagedState = 6
+OutOfCombatDamagedState = 4
+AfterBulledDetectedState = 4
 AfterNoticeState = 6
 AfterAttackState = 4
 NavigationFinishedState = 3
-AfterAlarmedState = 4
-AfterBulledDetected = 4
 CantReachTargetState = 3
-FromIdleTo = 2
+AfterAlarmedState = 4
+FromIdleToState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1490266327]
 material = ExtResource("3_yb4cs")

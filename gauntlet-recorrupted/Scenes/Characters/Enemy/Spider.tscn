@@ -222,17 +222,17 @@ _attackEndFrame = 4
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_j02g7")
-EntersAreaState = 6
-InCombatState = 6
-OutOfCombatState = 6
+PlayerEntersAreaState = 6
+CanAttackThePlayerState = 7
+InCombatDamagedState = 6
+OutOfCombatDamagedState = 6
+AfterBulledDetectedState = 6
 AfterNoticeState = 6
 AfterAttackState = 6
 NavigationFinishedState = 3
-AfterSpawnState = 2
-AfterAlarmedState = 6
-AfterBulledDetected = 6
 CantReachTargetState = 2
-FromIdleTo = 2
+AfterAlarmedState = 6
+FromIdleToState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624132966]
 material = ExtResource("3_tlmfb")

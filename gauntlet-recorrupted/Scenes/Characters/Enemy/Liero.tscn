@@ -283,13 +283,12 @@ frame_progress = 0.21402755
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_udk3s")
-EntersAreaState = 2
-InCombatState = 2
-OutOfCombatState = 2
+PlayerEntersAreaState = 2
+InCombatDamagedState = 2
+OutOfCombatDamagedState = 2
 AfterAttackCombatState = 0
 NavigationFinishedState = 3
-AfterWakedUp = 2
-CantReachTargetState = 2
+CantReachTargetState = 3
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964

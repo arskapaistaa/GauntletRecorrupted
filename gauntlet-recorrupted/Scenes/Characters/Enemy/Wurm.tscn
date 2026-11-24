@@ -292,7 +292,7 @@ _patrolDistance = 3000.0
 _patrolAtleastDistance = 1500.0
 _navigationLayer = 2
 _canMoveWhileDamaged = true
-_damagedSpeed = 200.0
+IgnoreStateChange = true
 _canPatrol = true
 _minIdleTime = 2.0
 _maxIdleTime = 15.0
@@ -316,20 +316,21 @@ _fromIdleToTimer = NodePath("Timers/FromIdleToPatrolTimer")
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_36dg4")
-InCombatState = 2
-OutOfCombatState = 2
+OutOfCombatDamagedState = 2
 AfterNoticeState = 2
 NavigationFinishedState = 3
-AfterWakedUp = 2
 CantReachTargetState = 2
-FromIdleTo = 2
+AfterWakedUpState = 2
+FromIdleToState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=106838091]
 z_index = 1
 material = ExtResource("3_gs6ov")
 sprite_frames = SubResource("SpriteFrames_gs6ov")
-animation = &"Idle"
+animation = &"TakeDmg"
 autoplay = "Idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="ShadowSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1444355218]
 modulate = Color(0, 0, 0, 0.34509805)

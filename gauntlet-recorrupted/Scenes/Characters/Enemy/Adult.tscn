@@ -288,6 +288,8 @@ _canAwake = true
 AwakeDetectionRange = 1000.0
 _minAwakeIntervalTime = 5.0
 _maxAwakeIntervalTime = 30.0
+_awakeStartFrame = 6
+_awakeEndFrame = 9
 _brain = NodePath("Brain")
 _sprite = NodePath("AnimatedSprite2D")
 _characterCollision = NodePath("CharacterCollision")
@@ -304,20 +306,18 @@ _defeatSfx = NodePath("Audios/DefeatSFX")
 _damagedParticles = NodePath("Particles/EnemyDamaged")
 _destroyTimer = NodePath("Timers/DestroyTimer")
 _fromIdleToTimer = NodePath("Timers/FromIdleToAwakeTimer")
-_attackStartFrame = 2
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378]
 script = ExtResource("2_ncmjd")
-EntersAreaState = 6
-InCombatState = 6
-OutOfCombatState = 6
+PlayerEntersAreaState = 6
+InCombatDamagedState = 6
+OutOfCombatDamagedState = 6
+AfterBulledDetectedState = 6
 AfterNoticeState = 6
-AfterAwakeState = 3
-AfterAttackState = 4
-AfterAlarmedState = 6
-AfterBulledDetected = 6
 CantReachTargetState = 3
-FromIdleTo = 5
+AfterAlarmedState = 6
+AfterAwakeState = 3
+FromIdleToState = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=792108335]
 material = ExtResource("3_b76up")

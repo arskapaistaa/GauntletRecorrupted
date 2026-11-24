@@ -59,6 +59,8 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "200,2000,100,suffix:pixels")] public float AwakeDetectionRange = 200.0f;
 	[Export(PropertyHint.Range, "1,20,1,suffix:seconds")] private float _minAwakeIntervalTime = 1.0f;
 	[Export(PropertyHint.Range, "2,30,1,suffix:seconds")] private float _maxAwakeIntervalTime = 1.0f;
+	[Export] private int _awakeStartFrame;
+	[Export] private int _awakeEndFrame;
 
 
 	[ExportGroup("Node References")]
@@ -249,6 +251,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		StateMachine(delta);
 
+		Check();
+
 		UpdateAnimation();
 
 		UpdateAudio();
@@ -281,6 +285,47 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Damaged:
 				UpdateDamaged(delta);
 				break;
+
+			case Brain.State.Awake:
+				UpdateAwake();
+				break;
+		}
+	}
+
+	public void Check()
+	{
+		switch(_brain.CurrentState)
+		{
+			case Brain.State.Chase:
+			// If enemy is in attack range and can see player, start Attacking.
+
+			if (ThisAttackType == AttackType.Static)
+			{
+				return;
+			}
+
+			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange &&  HasLineOfSight())
+			{
+				if (CanRangedAttack && CanShoot)
+				{
+					double change = GD.Randf();
+					if (change > RangedAttackChange)
+					{
+						_brain.CanAttack();
+						return;
+					}
+				}
+				else
+				{
+					_brain.CanAttack();
+
+					if (ThisAttackType == AttackType.Dash)
+					{
+						SetAttackDirection();
+					}
+				}
+			}
+			break;
 		}
 	}
 
@@ -647,6 +692,22 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	private void UpdateAwake()
+	{
+		if (Sprite.Animation == "Awake")
+		{
+			if (Sprite.Frame == _awakeStartFrame)
+			{
+				SetDetectionRange(AwakeDetectionRange);
+			}
+
+			if (Sprite.Frame == _awakeEndFrame)
+			{
+				SetDetectionRange(DetectionRange);
+			}
+		}
+	}
+
 	private void UpdateAnimation()
 	{
 		if (_sprite == null)
@@ -927,11 +988,56 @@ public partial class Enemy : CharacterBody2D
 
 	private void OnAnimationFinished()
     {
-		_brain.AnimationFinished();
-
 		if (_sprite.Animation == "EnterIdle")
 		{
 			_sprite.Play("Idle");
+		}
+
+		if (Sprite.Animation == "Spawn")
+		{
+			_brain.AfterSpawn();
+		}
+
+		if (Sprite.Animation == "Notice")
+		{
+			AlarmBuddies();
+			_brain.AfterNotice();
+		}
+
+		if (Sprite.Animation == "Awake")
+		{
+			_brain.AfterAwake();
+		}
+
+		if (Sprite.Animation == "TakeDmg")
+		{
+			_brain.AfterDamaged();
+		}
+
+		if (Sprite.Animation == "Attack")
+		{
+			if (AttackSucceed == false && ThisEnemyType == EnemyType.Tick)
+			{
+				Sprite.Play("AttackFail");
+				return;
+			}
+
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "AttackFail")
+		{
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "AttackHit")
+		{
+			_brain.AfterAttack();
+		}
+
+		if (Sprite.Animation == "Ranged")
+		{
+			_brain.AfterRanged();
 		}
     }
 
@@ -965,10 +1071,6 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Idle:
 				EnterIdle();
 				SetDetectionRange(DetectionRange);
-				break;
-
-			case Brain.State.Awake:
-				SetDetectionRange(AwakeDetectionRange);
 				break;
 
 			case Brain.State.Patrol:
