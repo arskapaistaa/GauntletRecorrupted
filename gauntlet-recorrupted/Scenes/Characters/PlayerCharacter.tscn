@@ -17,6 +17,10 @@
 [ext_resource type="AudioStream" uid="uid://b0tdwm4jdc17n" path="res://Audio/PrototypeOnly/RevolverSound.wav" id="14_i7eac"]
 [ext_resource type="AudioStream" uid="uid://cep54664cckgc" path="res://Audio/PrototypeOnly/ShotgunSound.wav" id="14_nwqxr"]
 [ext_resource type="AudioStream" uid="uid://bmwks7d35c0ln" path="res://Audio/SFX/Player/Digging.wav" id="16_40gda"]
+[ext_resource type="AudioStream" uid="uid://dsboetmgw407c" path="res://Audio/SFX/Guns/RevolverReload.ogg" id="18_1ht1w"]
+[ext_resource type="AudioStream" uid="uid://ct6xuwyy75acc" path="res://Audio/SFX/Guns/ReloadShotgun.ogg" id="19_ettjf"]
+[ext_resource type="AudioStream" uid="uid://b1ixjmtyjpmhu" path="res://Audio/SFX/Guns/Equip.ogg" id="20_j3py3"]
+[ext_resource type="AudioStream" uid="uid://d3vgdm4xt82" path="res://Audio/SFX/Guns/Equip2.ogg" id="21_3rlv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lhk5l"]
 atlas = ExtResource("3_4t8qp")
@@ -667,7 +671,7 @@ streams_count = 2
 stream_0/stream = ExtResource("13_lhk5l")
 stream_1/stream = ExtResource("14_1ht1w")
 
-[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow", "DigRay", "AudioListener", "_movementSFX", "_revolverSFX", "_shotgunSFX", "_diggingSFX")]
+[node name="Player" type="CharacterBody2D" unique_id=1111194495 node_paths=PackedStringArray("MuzzlePoint", "PlayerSprite", "MeleeArea", "AimArrow", "DigRay", "_movementSFX", "_diggingSFX", "_revolverSFX", "_shotgunSFX", "_reloadRevolverSFX", "_reloadShotgunSFX", "_switchToRevolverSFX", "_switchToShotgunSFX")]
 z_index = 3
 collision_mask = 70
 script = ExtResource("1_nu4k2")
@@ -686,11 +690,14 @@ PlayerSprite = NodePath("AnimatedSprite2D")
 MeleeArea = NodePath("MeleeArea")
 AimArrow = NodePath("AimArrow")
 DigRay = NodePath("RayCast2D")
-AudioListener = NodePath("AudioListener2D")
 _movementSFX = NodePath("Audios/MovementSFX")
+_diggingSFX = NodePath("Audios/DiggingSFX")
 _revolverSFX = NodePath("Audios/RevolverSFX")
 _shotgunSFX = NodePath("Audios/ShotgunSFX")
-_diggingSFX = NodePath("Audios/DiggingSFX")
+_reloadRevolverSFX = NodePath("Audios/RevolverReloadSFX")
+_reloadShotgunSFX = NodePath("Audios/ShotgunReloadSFX")
+_switchToRevolverSFX = NodePath("Audios/SwitchToRevolverSFX")
+_switchToShotgunSFX = NodePath("Audios/SwitchToShotgunSFX")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724770627]
 light_mask = 4
@@ -767,17 +774,33 @@ bus = &"SFX"
 
 [node name="ShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1590027372]
 stream = ExtResource("14_nwqxr")
-volume_db = -6.0
+volume_db = -2.0
 
 [node name="RevolverSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1428008129]
 stream = ExtResource("14_i7eac")
-volume_db = -6.0
+volume_db = -2.0
 bus = &"SFX"
 
 [node name="DiggingSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1569544295]
 stream = ExtResource("16_40gda")
-volume_db = -6.0
+volume_db = -4.0
 bus = &"SFX"
+
+[node name="RevolverReloadSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1658917524]
+stream = ExtResource("18_1ht1w")
+bus = &"SFX"
+
+[node name="ShotgunReloadSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1990822873]
+stream = ExtResource("19_ettjf")
+volume_db = -6.0
+
+[node name="SwitchToRevolverSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1519346907]
+stream = ExtResource("21_3rlv1")
+volume_db = -4.0
+
+[node name="SwitchToShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1736989762]
+stream = ExtResource("20_j3py3")
+volume_db = -4.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=348875303]
 collision_mask = 4
