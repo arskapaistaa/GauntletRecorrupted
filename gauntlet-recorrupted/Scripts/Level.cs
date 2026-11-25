@@ -6,6 +6,7 @@ public partial class Level : Node2D
 	public static Level Current;
 
 	[Export] public bool IsThisTutorialLevel = false;
+	[Export] public bool IsThisFinalLevel = false;
 
 	[ExportCategory("Stats")]
 	[Export] private int _maxTotalEnemyCount;

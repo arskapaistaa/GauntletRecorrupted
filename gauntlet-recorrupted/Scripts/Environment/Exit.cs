@@ -80,6 +80,11 @@ public partial class Exit : Area2D
 						GameManager.Instance.SetTutoriLevelComplited();
 					}
 
+					if (_currentLevel.IsThisFinalLevel)
+					{
+						GameManager.Instance.SetGameFinished();
+					}
+
 					TransitionController.Instance.PlayTransition(_transitionName, NextLevelPath);
 				}
 				else

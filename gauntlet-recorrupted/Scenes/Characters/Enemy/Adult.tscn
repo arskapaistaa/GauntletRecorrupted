@@ -292,6 +292,7 @@ DetectionRange = 200.0
 _dmg = 20
 _alarmRange = 2000.0
 _canMoveWhileDamaged = true
+_canBeAlarmed = false
 _canAwake = true
 AwakeDetectionRange = 1000.0
 _minAwakeIntervalTime = 5.0
