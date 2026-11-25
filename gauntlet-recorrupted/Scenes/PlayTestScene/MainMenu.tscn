@@ -15,9 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="13_71420"]
 [ext_resource type="Script" uid="uid://c00y3bvsjgrxv" path="res://Scripts/UI/StatsMenu.cs" id="14_bajux"]
 [ext_resource type="PackedScene" uid="uid://dpyntayyrck00" path="res://Scenes/GUI/Bestiary.tscn" id="15_jpbx2"]
+[ext_resource type="Texture2D" uid="uid://y6gj40nhkjik" path="res://Art/UserInterface/Kills.png" id="15_kpkvq"]
 [ext_resource type="PackedScene" uid="uid://bltehx55p6bk" path="res://Scenes/GUI/Settings.tscn" id="16_8kyln"]
+[ext_resource type="Texture2D" uid="uid://b6nja4vs0fqha" path="res://Art/UserInterface/Deaths.png" id="16_dfk7v"]
+[ext_resource type="Texture2D" uid="uid://byo2amqvsggq8" path="res://Art/UserInterface/ShotsFired.png" id="17_c3pg3"]
 [ext_resource type="Script" uid="uid://1gg23oi4avl6" path="res://Scripts/Managers/SettingsManager.cs" id="17_kh5lv"]
 [ext_resource type="Script" uid="uid://bne4y1cor6ls0" path="res://Scripts/Managers/StatsManager.cs" id="18_jj0ip"]
+[ext_resource type="Texture2D" uid="uid://dytar1s41c2gc" path="res://Art/UserInterface/Time.png" id="18_uy82s"]
 [ext_resource type="Script" uid="uid://cgbixfwr50b4" path="res://Scripts/Managers/GameManager.cs" id="19_f3lgg"]
 [ext_resource type="PackedScene" uid="uid://cdoi22w881ase" path="res://Scenes/GUI/TransitionController.tscn" id="20_jwkeu"]
 [ext_resource type="Texture2D" uid="uid://b72oy80tbsjd3" path="res://Art/Title/HellsWellTitleBGAnim2.png" id="21_c11k8"]
@@ -742,7 +746,7 @@ _useFocusedStyle = false
 position = Vector2(320, 180)
 amount = 10
 
-[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_resetStatsButton")]
+[node name="Stats" type="NinePatchRect" parent="." unique_id=1089811778 node_paths=PackedStringArray("_killsLabel", "_deathsLabel", "_shotsFiredLabel", "_fastestPlayTimeLabel", "_resetStatsButton")]
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -761,71 +765,84 @@ patch_margin_top = 50
 patch_margin_right = 50
 patch_margin_bottom = 50
 script = ExtResource("14_bajux")
-_killsLabel = NodePath("VBoxContainer/HBoxContainer/Kills")
-_deathsLabel = NodePath("VBoxContainer/HBoxContainer/Deaths")
-_shotsFiredLabel = NodePath("VBoxContainer/HBoxContainer/ShotsFired")
+_killsLabel = NodePath("StatsContainer/Kills/Kills2")
+_deathsLabel = NodePath("StatsContainer/Deaths/Deaths")
+_shotsFiredLabel = NodePath("StatsContainer/ShotsFired/ShotsFired")
+_fastestPlayTimeLabel = NodePath("StatsContainer/Time/Time2")
 _resetStatsButton = NodePath("Reset Stats")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Stats" unique_id=1164979888]
+[node name="StatsContainer" type="VBoxContainer" parent="Stats" unique_id=702806671]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -97.0
-offset_right = 82.0
-offset_bottom = 97.0
+offset_left = -76.5
+offset_top = -116.0
+offset_right = 76.5
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="HBoxContainer2" type="VBoxContainer" parent="Stats/VBoxContainer" unique_id=702806671]
-layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 16
+theme_override_constants/separation = -10
 
-[node name="KillsLabel" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=953255772]
+[node name="Kills" type="HBoxContainer" parent="Stats/StatsContainer" unique_id=1172233542]
 layout_mode = 2
-theme = ExtResource("12_ocx4m")
-text = "Kills"
+theme_override_constants/separation = 32
 
-[node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=437821416]
+[node name="Kills" type="TextureRect" parent="Stats/StatsContainer/Kills" unique_id=1482580843]
 layout_mode = 2
-theme = ExtResource("12_ocx4m")
-text = "Deaths"
+texture = ExtResource("15_kpkvq")
 
-[node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer2" unique_id=1981950260]
-layout_mode = 2
-theme = ExtResource("12_ocx4m")
-text = "Shots fired"
-
-[node name="HBoxContainer" type="VBoxContainer" parent="Stats/VBoxContainer" unique_id=905853011]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 16
-
-[node name="Kills" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=390686524]
+[node name="Kills2" type="Label" parent="Stats/StatsContainer/Kills" unique_id=390686524]
 layout_mode = 2
 theme = ExtResource("12_ocx4m")
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="Deaths" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=1560595271]
+[node name="Deaths" type="HBoxContainer" parent="Stats/StatsContainer" unique_id=1422887776]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Deaths2" type="TextureRect" parent="Stats/StatsContainer/Deaths" unique_id=934638843]
+layout_mode = 2
+texture = ExtResource("16_dfk7v")
+
+[node name="Deaths" type="Label" parent="Stats/StatsContainer/Deaths" unique_id=1560595271]
 layout_mode = 2
 theme = ExtResource("12_ocx4m")
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="ShotsFired" type="Label" parent="Stats/VBoxContainer/HBoxContainer" unique_id=907336537]
+[node name="ShotsFired" type="HBoxContainer" parent="Stats/StatsContainer" unique_id=1852584503]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="ShotsFired2" type="TextureRect" parent="Stats/StatsContainer/ShotsFired" unique_id=1403455901]
+layout_mode = 2
+texture = ExtResource("17_c3pg3")
+
+[node name="ShotsFired" type="Label" parent="Stats/StatsContainer/ShotsFired" unique_id=907336537]
 layout_mode = 2
 theme = ExtResource("12_ocx4m")
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
+
+[node name="Time" type="HBoxContainer" parent="Stats/StatsContainer" unique_id=589851443]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Time" type="TextureRect" parent="Stats/StatsContainer/Time" unique_id=1946926332]
+layout_mode = 2
+texture = ExtResource("18_uy82s")
+
+[node name="Time2" type="Label" parent="Stats/StatsContainer/Time" unique_id=1620091439]
+layout_mode = 2
+theme = ExtResource("12_ocx4m")
+text = "00:00:00"
+horizontal_alignment = 1
 
 [node name="StatsLabel" type="Label" parent="Stats" unique_id=395449144]
 layout_mode = 1
@@ -848,10 +865,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -38.5
-offset_top = -65.0
-offset_right = 38.5
-offset_bottom = -23.0
+offset_left = -28.0
+offset_top = -50.0
+offset_right = 28.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
@@ -867,9 +884,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 53.0
-offset_top = -65.0
+offset_top = -51.0
 offset_right = 85.0
-offset_bottom = -26.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "R"

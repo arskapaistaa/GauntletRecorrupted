@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://ccmo7dj4cop0l"]
 
 [ext_resource type="Texture2D" uid="uid://brl14yt8ageqx" path="res://Materials/Particles/BloodSplatter.png" id="1_1gv7o"]
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="1_osdvf"]
 [ext_resource type="Material" uid="uid://ba83lxgicuhpr" path="res://Materials/Particles/Destroyable.tres" id="3_x1x1r"]
 
 [node name="Barrelparticles" type="GPUParticles2D" unique_id=435467720]
-material = ExtResource("1_osdvf")
 emitting = false
 amount = 128
 texture = ExtResource("1_1gv7o")

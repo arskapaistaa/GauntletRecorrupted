@@ -6,6 +6,7 @@ public partial class StatsMenu : Control
 	[Export] private Label _killsLabel = null;
 	[Export] private Label _deathsLabel = null;
 	[Export] private Label _shotsFiredLabel = null;
+	[Export] private Label _fastestPlayTimeLabel = null;
 	[Export] private Button _resetStatsButton = null;
 
 	public override void _Ready()
@@ -48,6 +49,16 @@ public partial class StatsMenu : Control
 		else
 		{
 			GD.PrintErr("Missing ShotsFired label");
+		}
+
+		if (_fastestPlayTimeLabel != null)
+		{
+			TimeSpan time = TimeSpan.FromSeconds(StatsManager.Instance.GetFastestPlayTime());
+			_fastestPlayTimeLabel.Text = time.ToString();
+		}
+		else
+		{
+			GD.PrintErr("Missing FastestPlayTime label");
 		}
 	}
 

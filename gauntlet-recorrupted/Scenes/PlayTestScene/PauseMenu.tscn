@@ -62,7 +62,7 @@ _data = {
 &"RESET": SubResource("Animation_qm8wn")
 }
 
-[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton", "_animationPlayer")]
+[node name="PauseMenu" type="Control" unique_id=1923251465 node_paths=PackedStringArray("ResumeButton", "MainMenuButton", "_playTimeLabel", "_animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,6 +73,7 @@ theme = ExtResource("1_uvqs0")
 script = ExtResource("1_lw475")
 ResumeButton = NodePath("ResumeBtn")
 MainMenuButton = NodePath("HBoxContainer/MainMenuBtn")
+_playTimeLabel = NodePath("PlayTimeLabel")
 MainMenuScene = ExtResource("2_7xvl2")
 _animationPlayer = NodePath("AnimationPlayer")
 metadata/_edit_use_anchors_ = true
@@ -98,9 +99,28 @@ offset_top = 78.0
 offset_right = 92.0
 offset_bottom = 153.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8352941, 0.80784315, 0.75686276, 1)
 theme_override_font_sizes/font_size = 32
 text = "Game
 Paused"
+horizontal_alignment = 1
+
+[node name="PlayTimeLabel" type="Label" parent="." unique_id=406647473]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -33.5
+offset_top = -51.0
+offset_right = 33.5
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9019608, 0.8745098, 0.8156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "00:00:00"
 horizontal_alignment = 1
 
 [node name="ResumeBtn" type="Button" parent="." unique_id=1126346849 node_paths=PackedStringArray("_pressedSfx")]

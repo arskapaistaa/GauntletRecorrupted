@@ -31,11 +31,13 @@ public partial class StatsManager : Node
 	private int _deaths;
 	private int _shotsFired;
 	private int _spawnersDestroyed;
+	private int _fastestPlayTime;
 
 	private string _statsString = "Stats";
 	private string _killsString = "Kills";
 	private string _deathString = "Deaths";
 	private string _spawnersString = "Spawners";
+	private string _fastestPlayTimeString = "FastestPlayTime";
 	private string _shotsFiredString = "ShotsFired";
 	private string _roachKilledString = "RoachKilled";
 	private string _tickKilledString = "TickKilled";
@@ -90,6 +92,13 @@ public partial class StatsManager : Node
 		SaveStats();
 	}
 
+	public void OnGameFinished()
+	{
+		_fastestPlayTime = GameManager.Instance.GetPlayTime();
+		_statsConfig.SetValue(_statsString, _fastestPlayTimeString, _fastestPlayTime);
+		SaveStats();
+	}
+
 	public int GetKills()
 	{
 		return (int)_statsConfig.GetValue(_statsString, _killsString, 0);
@@ -108,6 +117,11 @@ public partial class StatsManager : Node
 	public int GetSpawnersDestroyed()
 	{
 		return (int)_statsConfig.GetValue(_statsString, _spawnersString, 0);
+	}
+
+	public int GetFastestPlayTime()
+	{
+		return (int)_statsConfig.GetValue(_statsString, _fastestPlayTimeString, 0);
 	}
 
 	public bool IsRoachKilled()
@@ -227,6 +241,7 @@ public partial class StatsManager : Node
 		_deaths = (int)_statsConfig.GetValue(_statsString, _deathString, 0);
 		_shotsFired = (int)_statsConfig.GetValue(_statsString, _shotsFiredString, 0);
 		_spawnersDestroyed = (int)_statsConfig.GetValue(_statsString, _spawnersString, 0);
+		_fastestPlayTime = (int)_statsConfig.GetValue(_statsString, _fastestPlayTimeString, 0);
 
 		// Bestiary
 		_roachKilled = IsRoachKilled();

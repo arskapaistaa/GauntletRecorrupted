@@ -402,6 +402,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			_characterCollision.SetDeferred("disabled", false);
 			SetPlayerTarget();
+			return;
 		}
 
 		SetPatrolTarget();
@@ -937,7 +938,10 @@ public partial class Enemy : CharacterBody2D
     {
         if (body is PlayerCharacter)
 		{
+			if (CheckTargetReachable(body.GlobalPosition))
+			{
 			_brain.PlayerEntered();
+			}
 		}
     }
 
@@ -1080,7 +1084,6 @@ public partial class Enemy : CharacterBody2D
 				_dmgArea.SetDeferred("monitoring", false);
 				return;
 			}
-
 		}
 
 		if (state == Brain.State.Patrol || state == Brain.State.Chase)

@@ -34,8 +34,12 @@ content_margin_right = 20.0
 content_margin_bottom = 20.0
 texture = SubResource("CompressedTexture2D_iej2m")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkxkw"]
+bg_color = Color(0.03529412, 0.0627451, 0.12941177, 1)
+
 [resource]
 Button/styles/focus = SubResource("StyleBoxTexture_ih4tk")
 Button/styles/hover = SubResource("StyleBoxTexture_kdj2n")
 Button/styles/normal = SubResource("StyleBoxTexture_s8g82")
 Button/styles/pressed = SubResource("StyleBoxTexture_xo7s2")
+Panel/styles/panel = SubResource("StyleBoxFlat_xkxkw")

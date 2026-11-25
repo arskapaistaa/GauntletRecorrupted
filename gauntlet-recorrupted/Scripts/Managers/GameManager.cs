@@ -20,6 +20,8 @@ public partial class GameManager : Node
 	private int _currentLevel;
 	private bool _usingController = false;
 
+	private double _playTime = 0.0;
+
 	public int CurrentLevel
 	{
 		set { _currentLevel = Mathf.Clamp(_currentLevel, 1, 10); }
@@ -49,6 +51,14 @@ public partial class GameManager : Node
 		}
 
 		ResetStats();
+    }
+
+    public override void _Process(double delta)
+    {
+        if (CurrentGameState == GameState.Game)
+		{
+			_playTime += delta;
+		}
     }
 
 	/// <summary>
@@ -112,6 +122,11 @@ public partial class GameManager : Node
 		return _spawnersDestroyed;
 	}
 
+	public int GetPlayTime()
+	{
+		return (int)_playTime;
+	}
+
 	/// <summary>
 	/// Set current game state with this method.
 	/// </summary>
@@ -138,6 +153,11 @@ public partial class GameManager : Node
 		StatsManager.Instance.SetTutoriLevelComplited();
 	}
 
+	public void SetGameFinished()
+	{
+		StatsManager.Instance.OnGameFinished();
+	}
+
 	/// <summary>
 	/// Call this method from main menu or restart button.
 	/// </summary>
@@ -149,6 +169,8 @@ public partial class GameManager : Node
 		_deaths = resetToZero;
 		_shotsFired = resetToZero;
 		_spawnersDestroyed = resetToZero;
+
+		_playTime = resetToZero;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -174,6 +196,8 @@ public partial class GameManager : Node
 	{
 		return _usingController;
 	}
+
+
 
 	public void PlayButtonSFX()
 	{
