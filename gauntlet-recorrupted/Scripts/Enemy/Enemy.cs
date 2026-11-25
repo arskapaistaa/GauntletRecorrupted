@@ -1084,7 +1084,6 @@ public partial class Enemy : CharacterBody2D
 				_dmgArea.SetDeferred("monitoring", false);
 				return;
 			}
-
 		}
 
 		if (state == Brain.State.Patrol || state == Brain.State.Chase)
