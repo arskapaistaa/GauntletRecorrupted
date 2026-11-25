@@ -14,10 +14,12 @@ _gameplayMusic = NodePath("GlobalAudio/GameplayMusic")
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=678741953]
 stream = ExtResource("2_3bpoc")
+volume_db = -6.0
 bus = &"Music"
 
 [node name="GameplayMusic" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=135150392]
 stream = ExtResource("3_lyu6u")
+volume_db = -24.0
 bus = &"Music"
 
 [node name="ButtonSFX" type="AudioStreamPlayer" parent="GlobalAudio" unique_id=125463350]

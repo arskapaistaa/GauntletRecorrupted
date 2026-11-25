@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://b1i01plpso6s3"]
+
+[ext_resource type="Script" uid="uid://chc4ebnnhaukj" path="res://Scripts/Environment/Destroyable.cs" id="1_nacd4"]
+[ext_resource type="Texture2D" uid="uid://bc7fkppt3xcqy" path="res://Art/Environment/BottleSpritesheet.png" id="2_nacd4"]
+[ext_resource type="PackedScene" uid="uid://ccmo7dj4cop0l" path="res://Scenes/Particles/BarrelParticles.tscn" id="3_2dafu"]
+[ext_resource type="PackedScene" uid="uid://bk5d7hh0y4mx" path="res://Scenes/Environment/Destroyable/ExplosiveArea.tscn" id="4_jmocm"]
+[ext_resource type="AudioStream" uid="uid://dd7ygupxdbi0r" path="res://Audio/SFX/Environment/Destroyables/Damage2.ogg" id="4_xqj2t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmocm"]
+atlas = ExtResource("2_nacd4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dafu"]
+atlas = ExtResource("2_nacd4")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqj2t"]
+atlas = ExtResource("2_nacd4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkgc"]
+atlas = ExtResource("2_nacd4")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_52d5m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmocm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dafu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqj2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xkgc")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nacd4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jmocm"]
+load_path = "res://.godot/imported/BloodSplatter.png-5f7759f6973562ed9f7ed0f5353c2f65.ctex"
+
+[sub_resource type="Gradient" id="Gradient_4s2xr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_4s2xr")
+
+[sub_resource type="Curve" id="Curve_wuu73"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.022151902, 1), 0.0, 0.0, 0, 0, Vector2(0.05181347, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e5fvg"]
+curve = SubResource("Curve_wuu73")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2dafu"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.06
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+radial_velocity_min = 99.99998
+radial_velocity_max = 499.99997
+radial_velocity_curve = SubResource("CurveTexture_e5fvg")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.3882353, 0.53333336, 0.5803922, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")
+hue_variation_min = -0.050000023
+hue_variation_max = 0.049999975
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2dafu"]
+radius = 192.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tg5a2"]
+random_pitch = 1.2599211
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("4_xqj2t")
+
+[node name="Bottle" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision", "_destroyedSfx", "_dmgArea")]
+z_index = 2
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_nacd4")
+_explosive = true
+Dmg = 50
+_sprite = NodePath("AnimatedSprite2D")
+_particles = NodePath("GlassParticles")
+_collision = NodePath("CollisionShape2D")
+_destroyedSfx = NodePath("DestroySfx")
+_dmgArea = NodePath("ExplosiveArea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240006552]
+sprite_frames = SubResource("SpriteFrames_52d5m")
+
+[node name="GlassParticles" parent="." unique_id=435467720 instance=ExtResource("3_2dafu")]
+material = SubResource("CanvasItemMaterial_nacd4")
+amount = 64
+texture = SubResource("CompressedTexture2D_jmocm")
+process_material = SubResource("ParticleProcessMaterial_2dafu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568547445]
+shape = SubResource("CircleShape2D_sopei")
+
+[node name="ExplosiveArea" parent="." unique_id=90075508 instance=ExtResource("4_jmocm")]
+
+[node name="CollisionShape2D" parent="ExplosiveArea" index="0" unique_id=939029704]
+shape = SubResource("CircleShape2D_2dafu")
+
+[node name="DestroySfx" type="AudioStreamPlayer2D" parent="." unique_id=788042082]
+stream = SubResource("AudioStreamRandomizer_tg5a2")
+volume_db = -3.0
+bus = &"SFX"
+
+[editable path="ExplosiveArea"]

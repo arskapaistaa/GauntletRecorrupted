@@ -5,6 +5,7 @@ public partial class PauseMenu : Control
 {
 	[Export] private Button ResumeButton;
 	[Export] private Button MainMenuButton;
+	[Export] private Label _playTimeLabel = null;
 	[Export(PropertyHint.File, "*.tscn")] private PackedScene MainMenuScene;
 	[Export] private AnimationPlayer _animationPlayer = null;
 	// Called when the node enters the scene tree for the first time.
@@ -21,6 +22,7 @@ public partial class PauseMenu : Control
 		Visible = true;
 		ResumeButton.GrabFocus();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
+		UpdatePlayTimeLabel();
 	}
 
 	private void OnResumeButtonPressed()
@@ -57,6 +59,15 @@ public partial class PauseMenu : Control
 		if (!Visible)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Hidden;
+		}
+	}
+
+	private void UpdatePlayTimeLabel()
+	{
+		if (_playTimeLabel != null)
+		{
+			TimeSpan time = TimeSpan.FromSeconds(GameManager.Instance.GetPlayTime());
+			_playTimeLabel.Text = time.ToString();
 		}
 	}
 }

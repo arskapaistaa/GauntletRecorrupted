@@ -6,48 +6,47 @@ public partial class Brain : Node
 	[ExportCategory("States")]
 	[Export] public State StartingState = State.Idle;
 
-	[ExportGroup("Randomization")]
+	[ExportGroup("Randomized behaviour")]
 	[Export] public bool _isBehaviourRandomized = false;
-	[Export] public Godot.Collections.Array<State> RandomStateList { get; set; }
+	[Export] public Godot.Collections.Array<State> AfterThisStateGetRandomizedList { get; set; }
 	[Export] public Godot.Collections.Array<State> NextRandomStateList { get; set; }
 
 	[ExportGroup("Interaction with Player")]
-	[Export] public State EntersAreaState = State.None;
+	[Export] public State PlayerEntersAreaState = State.None;
+	[Export] public State CanAttackThePlayerState = State.None;
+	[ExportSubgroup("If enemy can Ranged Attack")]
+	[Export] public State CanRangedAttackState = State.None;
 
-	[ExportGroup("After Damaged")]
-	[Export] public State InCombatState = State.None;
-	[Export] public State OutOfCombatState = State.None;
+	[ExportSubgroup("After Damaged")]
+	[Export] public State InCombatDamagedState = State.None;
+	[Export] public State OutOfCombatDamagedState = State.None;
+	[ExportSubgroup("Detect Bullet")]
+	[Export] public State AfterBulledDetectedState = State.None;
 
-	[ExportGroup("Notice")]
+	[ExportGroup("Own behaviour")]
+	[ExportSubgroup("Notice")]
 	[Export] public State AfterNoticeState = State.None;
 
-	[ExportGroup("Awake")]
-	[Export] public State AfterAwakeState = State.None;
-
-	[ExportGroup("Attack")]
+	[ExportSubgroup("Attack & Ranged")]
 	[Export] public State AfterAttackState = State.None;
-	[Export] public CombatState AfterAttackCombatState = CombatState.InCombat;
+	[Export] public State AfterRangedState = State.None;
 
-	[ExportGroup("Patrol")]
+	[ExportSubgroup("Movement")]
 	[Export] public State NavigationFinishedState = State.None;
+	[Export] public State CantReachTargetState = State.None;
 
-	[ExportGroup("Spawn")]
+	[ExportSubgroup("Spawn")]
 	[Export] public State AfterSpawnState = State.None;
 
-	[ExportGroup("Alarmed")]
+	[ExportSubgroup("Alarmed")]
 	[Export] public State AfterAlarmedState = State.None;
-	[ExportGroup("Waked Up")]
-	[Export] public State AfterWakedUp = State.None;
-	[ExportGroup("Detect Bullet")]
-	[Export] public State AfterBulledDetected = State.None;
+	[ExportSubgroup("Waked Up")]
+	[Export] public State AfterWakedUpState = State.None;
+	[ExportSubgroup("Awake")]
+	[Export] public State AfterAwakeState = State.None;
 
-	[ExportGroup("Can't Reach the Target")]
-	[Export] public State CantReachTargetState = State.None;
-	[ExportGroup("After Idle timer timeout")]
-	[Export] public State FromIdleTo = State.None;
-
-	[ExportGroup("Ranged")]
-	[Export] public State AfterRangedState = State.None;
+	[ExportSubgroup("After Idle timer timeout")]
+	[Export] public State FromIdleToState = State.None;
 
 	private Enemy _enemy;
 	public enum State
@@ -70,62 +69,39 @@ public partial class Brain : Node
 		InCombat
 	}
 
+	#region Currents
 	public State CurrentState = State.Idle;
 	public CombatState CurrentCombatState = CombatState.OutOfCombat;
+	#endregion Currents
 	public override void _Ready()
 	{
 		_enemy = (Enemy)GetParent();
 
-		CurrentState = StartingState;
-
-		if (StartingState == State.Idle)
-		{
-			_enemy.EnterIdle();
-		}
+		SetCurrentState(StartingState);
 	}
 
-	public override void _Process(double delta)
+	#region Called from Enemy's _Process
+	/// <summary>
+	/// What to do when player is in attack distance.
+	/// </summary>
+	public void CanAttack()
 	{
-		Check();
+		SetCurrentState(CanAttackThePlayerState);
 	}
 
-	public void Check()
+	/// <summary>
+	/// What to do when player is in ranged attack distance.
+	/// </summary>
+	public void CanRangedAttack()
 	{
-		switch(CurrentState)
-		{
-			case State.Chase:
-			// If enemy is in attack range and can see player, start Attacking.
-
-			if (_enemy.ThisAttackType == Enemy.AttackType.Static)
-			{
-				return;
-			}
-
-			if (_enemy.GlobalPosition.DistanceTo(_enemy.PlayerPosition) < _enemy.AttackRange && _enemy.HasLineOfSight())
-			{
-				if (_enemy.CanRangedAttack && _enemy.CanShoot)
-				{
-					double change = GD.Randf();
-					if (change > _enemy.RangedAttackChange)
-					{
-						CurrentState = State.Ranged;
-						return;
-					}
-				}
-				else
-				{
-					CurrentState = State.Attack;
-
-					if (_enemy.ThisAttackType == Enemy.AttackType.Dash)
-					{
-						_enemy.SetAttackDirection();
-					}
-				}
-			}
-			break;
-		}
+		SetCurrentState(CanRangedAttackState);
 	}
+	#endregion Called from Enemy's _Process
 
+	#region Called from enemy's methods
+	/// <summary>
+	/// What happens after enemy gets damaged
+	/// </summary>
 	public void Damaged()
 	{
 		if (_enemy.IgnoreStateChange && CurrentCombatState == CombatState.InCombat)
@@ -134,77 +110,29 @@ public partial class Brain : Node
 		}
 		else
 		{
-			CurrentState = State.Damaged;
+			SetCurrentState(State.Damaged);
 		}
 	}
 
+	/// <summary>
+	/// What happens when enemy dies.
+	/// Also tell for Level and Gamemanager that enemy is died.
+	/// </summary>
 	public void Defeat()
 	{
 		// Extra safety for Shotgun bullets
 		if (CurrentState != State.Defeat)
 		{
-			CurrentState = State.Defeat;
+			SetCurrentState(State.Defeat);
 
 			Level.Current.ChangeEnemyCount(-1);
 			GameManager.Instance.OnKillsChanged(_enemy.ThisEnemyType.ToString());
 		}
 	}
 
-	public void AfterDamaged()
-	{
-		if (CurrentCombatState == CombatState.OutOfCombat)
-		{
-			SetCurrentState(OutOfCombatState);
-
-			CurrentCombatState = CombatState.InCombat;
-		}
-		else if (CurrentCombatState == CombatState.InCombat)
-		{
-			SetCurrentState(InCombatState);
-		}
-	}
-
-	public void AfterNotice()
-	{
-		CurrentCombatState = CombatState.InCombat;
-
-		_enemy.AlarmBuddies();
-
-		if (_enemy.Player != null)
-		{
-			SetCurrentState(AfterNoticeState);
-		}
-		else
-		{
-			CurrentState = State.Idle;
-		}
-	}
-
-	public void AfterAwake()
-	{
-		CurrentState = AfterAwakeState;
-	}
-
-	public void AfterAttack()
-	{
-		if (_enemy.Player != null)
-		{
-			SetCurrentState(AfterAttackState);
-
-			CurrentCombatState = AfterAttackCombatState;
-		}
-	}
-
-	public void AfterRanged()
-	{
-		SetCurrentState(AfterRangedState);
-	}
-
-	public void AfterSpawn()
-	{
-		SetCurrentState(AfterSpawnState);
-	}
-
+	/// <summary>
+	/// What happens when enemy get alarmed.
+	/// </summary>
 	public void Alarmed()
 	{
 		if (CurrentCombatState == CombatState.OutOfCombat)
@@ -213,76 +141,39 @@ public partial class Brain : Node
 		}
 	}
 
+	/// <summary>
+	/// What happens when enemy detects a bullet.
+	/// </summary>
 	public void BulletDetected()
 	{
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
-			SetCurrentState(AfterBulledDetected);
+			SetCurrentState(AfterBulledDetectedState);
 		}
 	}
 
+	/// <summary>
+	/// If enemy haves idle timer, what happens when it's timedout.
+	/// </summary>
 	public void IdleTimerTimedOut()
 	{
 		if (CurrentCombatState == CombatState.OutOfCombat)
 		{
-			SetCurrentState(FromIdleTo);
+			SetCurrentState(FromIdleToState);
 		}
 	}
 
+	/// <summary>
+	/// If enemy can be waked up, what happens then.
+	/// </summary>
 	public void GetWakedUp()
 	{
-		SetCurrentState(AfterWakedUp);
+		SetCurrentState(AfterWakedUpState);
 	}
 
-	public void AnimationFinished()
-	{
-		if (_enemy.Sprite.Animation == "Spawn")
-		{
-			AfterSpawn();
-		}
-
-		if (_enemy.Sprite.Animation == "Notice")
-		{
-			AfterNotice();
-		}
-
-		if (_enemy.Sprite.Animation == "Awake")
-		{
-			AfterAwake();
-		}
-
-		if (_enemy.Sprite.Animation == "TakeDmg")
-		{
-			AfterDamaged();
-		}
-
-		if (_enemy.Sprite.Animation == "Attack")
-		{
-			if (_enemy.AttackSucceed == false && _enemy.ThisEnemyType == Enemy.EnemyType.Tick)
-			{
-				_enemy.Sprite.Play("AttackFail");
-				return;
-			}
-
-			AfterAttack();
-		}
-
-		if (_enemy.Sprite.Animation == "AttackFail")
-		{
-			AfterAttack();
-		}
-
-		if (_enemy.Sprite.Animation == "AttackHit")
-		{
-			AfterAttack();
-		}
-
-		if (_enemy.Sprite.Animation == "Ranged")
-		{
-			AfterRanged();
-		}
-	}
-
+	/// <summary>
+	/// What to do when enemy reaches the navigation target.
+	/// </summary>
 	public void NavigationFinished()
 	{
 		if (CurrentState == State.Patrol)
@@ -291,16 +182,97 @@ public partial class Brain : Node
 		}
 	}
 
+	/// <summary>
+	/// What to do if target (Player or patrol target) can't be reached.
+	/// </summary>
 	public void TargetIsNotReachable()
 	{
-		CurrentState = CantReachTargetState;
+		SetCurrentState(CantReachTargetState);
 	}
 
+	/// <summary>
+	/// What happens when player enters the detection area.
+	/// Change state only if enemy is out of the combat.
+	/// </summary>
+	public void PlayerEntered()
+	{
+		if (CurrentCombatState == CombatState.OutOfCombat)
+		{
+			SetCurrentState(PlayerEntersAreaState);
+		}
+	}
+
+	#endregion Called from enemy's methods
+
+	#region After animation is finished
+	/// <summary>
+	/// What happens when enemy gets damaged.
+	/// </summary>
+	public void AfterDamaged()
+	{
+		if (CurrentCombatState == CombatState.OutOfCombat)
+		{
+			SetCurrentState(OutOfCombatDamagedState);
+		}
+		else if (CurrentCombatState == CombatState.InCombat)
+		{
+			SetCurrentState(InCombatDamagedState);
+		}
+	}
+
+	/// <summary>
+	/// What happens after enemy is noticed the player.
+	/// </summary>
+	public void AfterNotice()
+	{
+		SetCurrentState(AfterNoticeState);
+	}
+
+	/// <summary>
+	/// What happens after enemy lefts awake state.
+	/// </summary>
+	public void AfterAwake()
+	{
+		SetCurrentState(AfterAwakeState);
+	}
+
+	/// <summary>
+	/// What to do after attack state.
+	/// </summary>
+	public void AfterAttack()
+	{
+		SetCurrentState(AfterAttackState);
+	}
+
+	/// <summary>
+	/// What to do after ranged attack state.
+	/// </summary>
+	public void AfterRanged()
+	{
+		SetCurrentState(AfterRangedState);
+	}
+
+	/// <summary>
+	/// What to do after spawning is finished.
+	/// </summary>
+	public void AfterSpawn()
+	{
+		SetCurrentState(AfterSpawnState);
+	}
+
+	#endregion After animation is finished
+
+	#region Set new State
+	/// <summary>
+	/// Changes the current state to new state.
+	/// Handles also the Combat state.
+	/// </summary>
+	/// <param name="state">The next state</param>
 	public void SetCurrentState(State state)
 	{
 		if (_isBehaviourRandomized)
 		{
-			if (RandomStateList.Contains(CurrentState))
+			if (AfterThisStateGetRandomizedList.Contains(CurrentState))
 			{
 				state = RandomizedState();
 			}
@@ -312,19 +284,25 @@ public partial class Brain : Node
 
 			_enemy.OnStateChanged(CurrentState);
 		}
+
+		if (state == State.Chase || state == State.Notice || state == State.Damaged)
+		{
+			CurrentCombatState = CombatState.InCombat;
+		}
+		else if (state == State.Idle || state == State.Patrol)
+		{
+			CurrentCombatState = CombatState.OutOfCombat;
+		}
 	}
 
+	/// <summary>
+	/// Takes random state from the random state list.
+	/// </summary>
+	/// <returns>Random state</returns>
 	private State RandomizedState()
 	{
 		State state = NextRandomStateList.PickRandom();
 		return state;
 	}
-
-	public void PlayerEntered()
-	{
-		if (CurrentCombatState == CombatState.OutOfCombat)
-		{
-			SetCurrentState(EntersAreaState);
-		}
-	}
+	#endregion Set new State
 }

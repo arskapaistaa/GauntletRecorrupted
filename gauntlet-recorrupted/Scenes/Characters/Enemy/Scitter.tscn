@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cp0e0xk7g2pj8" path="res://Scripts/Enemy/Brain.cs" id="2_y7mb3"]
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_s3051"]
 [ext_resource type="Texture2D" uid="uid://bnxj4s8jsqu3" path="res://Art/Environment/ArtEnvironmentScitter.png" id="4_dyn73"]
+[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="5_y7mb3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jru87"]
 atlas = ExtResource("4_dyn73")
@@ -63,13 +64,18 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxocv"]
 radius = 200.0
 
-[node name="Scitter" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_detectionArea", "_detectionShape", "_agent", "_movementSfx", "_noticeSfx") groups=["Enemy", "Wurm"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dyn73"]
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("5_y7mb3")
+
+[node name="Scitter" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_detectionArea", "_detectionShape", "_agent", "_movementSfx") groups=["Enemy", "Wurm"]]
 z_index = 1
 collision_layer = 32
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_dyn73")
-_enemyType = 7
+_enemyType = 8
 _attackType = 3
 _health = 1000.0
 _maxSpeed = 500.0
@@ -83,13 +89,11 @@ _detectionArea = NodePath("DetectionArea")
 _detectionShape = NodePath("DetectionArea/DetectionShape")
 _agent = NodePath("NavigationAgent2D")
 _movementSfx = NodePath("Audios/MovementSFX")
-_noticeSfx = NodePath("Audios/NoticeSFX")
 
 [node name="Brain" type="Node" parent="." unique_id=1975405378 groups=["Enemy"]]
 script = ExtResource("2_y7mb3")
-EntersAreaState = 2
+PlayerEntersAreaState = 2
 NavigationFinishedState = 3
-AfterBulledDetected = 2
 CantReachTargetState = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=937110138]
@@ -116,7 +120,9 @@ avoidance_mask = 0
 [node name="Audios" type="Node2D" parent="." unique_id=373545108]
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=921413474]
-pitch_scale = 0.9
+stream = SubResource("AudioStreamRandomizer_dyn73")
+volume_db = -24.0
+pitch_scale = 2.0
 bus = &"SFX"
 
 [node name="NoticeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=898729808]

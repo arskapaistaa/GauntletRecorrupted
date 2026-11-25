@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/RoachDamaged.wav-4dc91cf2d793f5f53b24a62d5d43
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false

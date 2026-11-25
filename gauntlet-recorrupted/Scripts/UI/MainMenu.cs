@@ -4,7 +4,6 @@ using System;
 public partial class MainMenu : Control
 {
 	[Export] private AnimationPlayer _animations = null;
-	[Export] private VideoStreamPlayer _video = null;
 
 	public bool ComingFormInGameMenu = false;
 	public override void _Ready()
@@ -15,11 +14,6 @@ public partial class MainMenu : Control
 		{
 			_animations.AnimationFinished += OnAnimationFinished;
 		}
-
-		if (_video != null)
-		{
-			_video.Finished += OnVideoFinished;
-		}
 	}
 
     public override void _ExitTree()
@@ -28,11 +22,6 @@ public partial class MainMenu : Control
 		{
 			_animations.AnimationFinished -= OnAnimationFinished;
 		}
-
-		if (_video != null)
-		{
-			_video.Finished -= OnVideoFinished;
-		}
     }
 
     public override void _Input(InputEvent @event)
@@ -40,16 +29,6 @@ public partial class MainMenu : Control
 		if (_animations.IsPlaying())
 		{
 			return;
-		}
-
-		if (_video.IsPlaying())
-		{
-			if (@event.IsActionPressed("Menu"))
-			{
-				_video.Stop();
-				_animations.Play("Intro");
-				return;
-			}
 		}
 
         if (@event.IsActionPressed("Menu") && GameManager.Instance.CurrentGameState != GameManager.GameState.Settings)
@@ -71,14 +50,6 @@ public partial class MainMenu : Control
 		if (animName == "CloseSettings")
 		{
 			GameManager.Instance.SetGameState(GameManager.GameState.Menu);
-		}
-    }
-
-	private void OnVideoFinished()
-    {
-		if (_animations != null)
-		{
-			_animations.Play("Intro");
 		}
     }
 }

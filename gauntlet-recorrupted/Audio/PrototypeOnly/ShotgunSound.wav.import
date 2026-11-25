@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/ShotgunSound.wav-2d4f0ab5613b2032f4142e06ba82
 [params]
 
 force/8_bit=false
-force/mono=false
+force/mono=true
 force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
