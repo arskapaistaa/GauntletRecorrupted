@@ -937,7 +937,10 @@ public partial class Enemy : CharacterBody2D
     {
         if (body is PlayerCharacter)
 		{
+			if (CheckTargetReachable(body.GlobalPosition))
+			{
 			_brain.PlayerEntered();
+			}
 		}
     }
 
