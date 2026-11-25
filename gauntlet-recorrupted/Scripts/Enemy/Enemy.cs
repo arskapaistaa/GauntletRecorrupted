@@ -402,6 +402,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			_characterCollision.SetDeferred("disabled", false);
 			SetPlayerTarget();
+			return;
 		}
 
 		SetPatrolTarget();
