@@ -11,6 +11,7 @@ public partial class GameManager : Node
 
 	[Export] private AudioStreamPlayer _buttonSFX;
 	[Export] private AudioStreamPlayer _gameplayMusic;
+	[Signal] public delegate void SkipLevelEventHandler();
 
 	private int _kills;
 	private int _deaths;
@@ -188,7 +189,11 @@ public partial class GameManager : Node
 		else if (@event is InputEventMouseMotion || @event is InputEventMouseButton || @event is InputEventKey)
 		{
 			_usingController = false;
-			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+
+		if (Input.IsActionJustPressed("SkipLevel"))
+		{
+			EmitSignal(SignalName.SkipLevel);
 		}
 	}
 
