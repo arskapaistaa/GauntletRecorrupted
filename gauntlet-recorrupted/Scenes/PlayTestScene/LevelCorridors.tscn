@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://4gswrml3a4rk" path="res://Scenes/Environment/Destroyable/Barrel.tscn" id="16_emdry"]
 [ext_resource type="PackedScene" uid="uid://sh2l5n4u772q" path="res://Scenes/Environment/Destroyable/BarrelGoo.tscn" id="17_tvors"]
 [ext_resource type="PackedScene" uid="uid://b1i01plpso6s3" path="res://Scenes/Environment/Destroyable/Bottle.tscn" id="18_vvxap"]
+[ext_resource type="PackedScene" uid="uid://cwjmukqrwluuh" path="res://Scenes/Environment/Destroyable/Eye.tscn" id="19_tvors"]
 [ext_resource type="PackedScene" uid="uid://bxvvl8lu0mqvs" path="res://Scenes/Characters/Enemy/Wurm.tscn" id="20_7omew"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lpo5v"]
@@ -401,8 +402,103 @@ position = Vector2(5273, 186)
 position = Vector2(5756, -102)
 
 [node name="BarrelGoo5" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1109325862 instance=ExtResource("17_tvors")]
-position = Vector2(-1928, -3940)
+position = Vector2(7453, -1944)
 rotation = -2.2479842
+
+[node name="Eye" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=28593022 instance=ExtResource("19_tvors")]
+position = Vector2(4341, -1796)
+
+[node name="Barrel6" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=408083492 instance=ExtResource("16_emdry")]
+position = Vector2(7863, 71)
+rotation = 3.0246556
+
+[node name="BarrelGoo" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=996621445 instance=ExtResource("17_tvors")]
+position = Vector2(8012, 434)
+rotation = -1.8622663
+
+[node name="Barrel7" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1773135311 instance=ExtResource("16_emdry")]
+position = Vector2(8071, -61)
+
+[node name="BarrelGoo2" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=293540578 instance=ExtResource("17_tvors")]
+position = Vector2(8161, -1224)
+
+[node name="Bottle4" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1639502562 instance=ExtResource("18_vvxap")]
+position = Vector2(9323, -894)
+
+[node name="Bottle5" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=299827400 instance=ExtResource("18_vvxap")]
+position = Vector2(9285, -745)
+
+[node name="Barrel8" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1951292507 instance=ExtResource("16_emdry")]
+position = Vector2(8087, 2262)
+
+[node name="BarrelGoo6" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1926899007 instance=ExtResource("17_tvors")]
+position = Vector2(8198, 2052)
+
+[node name="Barrel9" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=205827502 instance=ExtResource("16_emdry")]
+position = Vector2(8255, 1781)
+
+[node name="Eye2" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=2082533527 instance=ExtResource("19_tvors")]
+position = Vector2(4773, 4833)
+rotation = 1.3962634
+
+[node name="Eye3" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=418243034 instance=ExtResource("19_tvors")]
+position = Vector2(3813, 5563)
+rotation = 2.560398
+
+[node name="BarrelGoo7" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=8491907 instance=ExtResource("17_tvors")]
+position = Vector2(4631, 5320)
+rotation = 2.443461
+
+[node name="BarrelGoo8" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1634209312 instance=ExtResource("17_tvors")]
+position = Vector2(3879, 4719)
+
+[node name="Barrel10" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1528159846 instance=ExtResource("16_emdry")]
+position = Vector2(3757, 4969)
+rotation = -1.6283922
+
+[node name="Bottle6" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=497477880 instance=ExtResource("18_vvxap")]
+position = Vector2(2135, 5815)
+
+[node name="Bottle7" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=657301971 instance=ExtResource("18_vvxap")]
+position = Vector2(3435, 5275)
+
+[node name="Bottle8" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1998956370 instance=ExtResource("18_vvxap")]
+position = Vector2(5522, 3746)
+
+[node name="Barrel11" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=78442327 instance=ExtResource("16_emdry")]
+position = Vector2(7437, 4923)
+rotation = -2.5743606
+
+[node name="BarrelGoo9" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1258971008 instance=ExtResource("17_tvors")]
+position = Vector2(5551, 1102)
+rotation = 5.1190505
+
+[node name="BarrelGoo10" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=877461567 instance=ExtResource("17_tvors")]
+position = Vector2(4571, -956)
+rotation = -2.211332
+
+[node name="BarrelGoo11" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1388570759 instance=ExtResource("17_tvors")]
+position = Vector2(8232, 5460)
+rotation = -4.4628067
+
+[node name="Barrel12" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1609409925 instance=ExtResource("16_emdry")]
+position = Vector2(8065, 5240)
+
+[node name="Bottle9" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1271448115 instance=ExtResource("18_vvxap")]
+position = Vector2(8298, 4274)
+
+[node name="Bottle10" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1249481773 instance=ExtResource("18_vvxap")]
+position = Vector2(8244, 4409)
+
+[node name="Bottle11" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1189051138 instance=ExtResource("18_vvxap")]
+position = Vector2(8828, 3703)
+
+[node name="Eye4" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=45808807 instance=ExtResource("19_tvors")]
+position = Vector2(8423, 3090)
+
+[node name="Eye5" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1532689629 instance=ExtResource("19_tvors")]
+position = Vector2(5850, 2849)
+rotation = -2.3561945
 
 [node name="NavigationRegionForWurm" type="NavigationRegion2D" parent="Environment" unique_id=375523845]
 position = Vector2(-1514, -792)
