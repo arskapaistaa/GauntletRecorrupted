@@ -116,6 +116,11 @@ public partial class GUI : Control
 			}
 		}
 		UpdateWeaponVisibility();
+		if (_revolverAmmoSprite.Frame != _player.GetRevolverAmmo() || _shotgunAmmoSprite.Frame != _player.GetShotgunAmmo())
+		{
+			UpdateRevolverAmmo(_player.GetRevolverAmmo());
+			UpdateShotgunAmmo(_player.GetShotgunAmmo());
+		}
 	}
 
 	private void UpdateWeaponVisibility()

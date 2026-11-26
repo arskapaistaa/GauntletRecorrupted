@@ -5,10 +5,11 @@ public partial class OptionsMenu : Control
 {
 	[Export] private OptionButton _displayModeBtn;
 	[Export] private OptionButton _resolutionBtn;
-	[Export] private Button _removeScreenShakeBtn;
 	[Export] private HSlider _masterVolumeSlider;
 	[Export] private HSlider _sfxVolumeSlider;
 	[Export] private HSlider _musicVolumeSlider;
+	[Export] private Button _creditsBtn = null;
+	[Export] private Button _playTutorialLevel = null;
 
 	public override void _EnterTree()
 	{
@@ -17,11 +18,20 @@ public partial class OptionsMenu : Control
 		_displayModeBtn.ItemSelected += OnDisplayModeSelected;
 		_resolutionBtn.ItemSelected += OnResolutionSelected;
 
-		_removeScreenShakeBtn.Toggled += OnScreenShakeBtnToggled;
-
 		_masterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 		_sfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
 		_musicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
+
+		if (_creditsBtn != null)
+		{
+			_creditsBtn.Pressed += OnCreditsButtonPressed;
+		}
+
+		if (_playTutorialLevel != null)
+		{
+			_playTutorialLevel.Pressed += OnTutorialLevelPressed;
+		}
+
 
 		UpdateResolutionButton();
 	}
@@ -31,11 +41,19 @@ public partial class OptionsMenu : Control
 		_displayModeBtn.ItemSelected -= OnDisplayModeSelected;
 		_resolutionBtn.ItemSelected -= OnResolutionSelected;
 
-		_removeScreenShakeBtn.Toggled -= OnScreenShakeBtnToggled;
-
 		_masterVolumeSlider.ValueChanged -= OnMasterVolumeChanged;
 		_sfxVolumeSlider.ValueChanged -= OnSfxVolumeChanged;
 		_musicVolumeSlider.ValueChanged -= OnMusicVolumeChanged;
+
+		if (_creditsBtn != null)
+		{
+			_creditsBtn.Pressed -= OnCreditsButtonPressed;
+		}
+
+		if (_playTutorialLevel != null)
+		{
+			_playTutorialLevel.Pressed -= OnTutorialLevelPressed;
+		}
     }
 
     private void OnDisplayModeSelected(long index)
@@ -92,4 +110,15 @@ public partial class OptionsMenu : Control
 			_resolutionBtn.Disabled = false;
 		}
 	}
+
+	private void OnCreditsButtonPressed()
+    {
+        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/LevelTutorial.tscn");
+    }
+
+    private void OnTutorialLevelPressed()
+    {
+        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/LevelTutorial.tscn");
+    }
+
 }
