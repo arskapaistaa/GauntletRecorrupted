@@ -858,6 +858,11 @@ public partial class Enemy : CharacterBody2D
 			_destroyTimer.Start();
 		}
 
+		if (_movementSfx != null)
+		{
+			_movementSfx.Stop();
+		}
+
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)
 		{
@@ -1056,6 +1061,10 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Idle:
 				EnterIdle();
 				SetDetectionRange(DetectionRange);
+				break;
+
+			case Brain.State.Attack:
+				AttackSucceed = false;
 				break;
 
 			case Brain.State.Patrol:

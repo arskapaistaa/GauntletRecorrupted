@@ -8,7 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_0g072"]
 [ext_resource type="Script" uid="uid://dd727ltsfisn0" path="res://Scripts/Enemy/EnemyAudioPlayer.cs" id="7_tlmfb"]
 [ext_resource type="Script" uid="uid://y0oem8u8mduo" path="res://Scripts/Enemy/AudioStreams.cs" id="8_js25i"]
+[ext_resource type="AudioStream" uid="uid://bfs2gayn7lfva" path="res://Audio/SFX/Spider/SpiderDamaged.wav" id="9_j02g7"]
+[ext_resource type="AudioStream" uid="uid://cmnvxhvwe228i" path="res://Audio/SFX/Spider/SpiderDefeat.wav" id="10_tlmfb"]
 [ext_resource type="PackedScene" uid="uid://yx1vgqtq4v3r" path="res://Scenes/Particles/EnemyDamaged.tscn" id="11_0jkpl"]
+[ext_resource type="AudioStream" uid="uid://bmve1d0k7wsps" path="res://Audio/SFX/Spider/SpiderAttack.wav" id="11_js25i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_voty8"]
 atlas = ExtResource("3_d0g75")
@@ -240,7 +243,8 @@ material = ExtResource("3_tlmfb")
 sprite_frames = SubResource("SpriteFrames_13vbl")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 1
+frame = 4
+frame_progress = 1.0
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="." unique_id=1210553099]
 rotation = -1.5707964
@@ -284,9 +288,13 @@ bus = &"SFX"
 bus = &"SFX"
 script = ExtResource("7_tlmfb")
 _audioStreams = NodePath("../Streams")
+_maxVolume = -6.0
 
 [node name="Streams" type="Node2D" parent="Audios" unique_id=90930389]
 script = ExtResource("8_js25i")
+TakeDmgStream = ExtResource("9_j02g7")
+DefeatStream = ExtResource("10_tlmfb")
+AttackStream = ExtResource("11_js25i")
 
 [node name="Particles" type="Node2D" parent="." unique_id=1186982179]
 
