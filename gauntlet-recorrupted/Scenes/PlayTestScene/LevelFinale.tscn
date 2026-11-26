@@ -268,7 +268,6 @@ seamless = true
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_vv14j")
 _maxTotalEnemyCount = 20
-_spawnerCount = 1
 _presetEnemyCount = 1
 _isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
@@ -383,8 +382,8 @@ CustomCursor = NodePath("../Cursor")
 
 [node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -4039
-limit_top = -6136
-limit_right = 12244
+limit_top = -9142
+limit_right = 13518
 limit_bottom = 7221
 
 [node name="RayCast2D" parent="Player" index="9" unique_id=348875303]

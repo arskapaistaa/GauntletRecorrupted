@@ -305,6 +305,7 @@ z_index = 4
 position = Vector2(-3086, 4880.0005)
 rotation = 3.5918877
 _maxActiveEnemiesCount = 2
+_playerDistanceTreshold = 1000.0
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("3_5y76b")]
 z_index = 4
@@ -312,6 +313,7 @@ position = Vector2(-6502, 703.99976)
 rotation = -0.89709926
 _spawningCooldown = 7.0
 _maxActiveEnemiesCount = 1
+_playerDistanceTreshold = 1000.0
 
 [node name="TileMap" type="TileMap" parent="Environment" unique_id=1968180934]
 format = 2
