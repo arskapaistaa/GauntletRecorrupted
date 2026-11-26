@@ -73,6 +73,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool _isShooting = false;
 	private int _forceRevolverReloadCounter = 0;
 	private int _forceShotgunReloadCounter = 0;
+	private bool _diggingSuccessful = false;
 	private const String ANIMATION_DIG = "Dig";
 	private const String ANIMATION_REVOLVER_IDLE = "RevolverIdle";
 	private const String ANIMATION_REVOLVER_WALK = "RevolverWalk";
@@ -334,10 +335,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				foreach (Node2D node in MeleeArea.GetOverlappingBodies())
 				{
 					if (node is Enemy e)
-					{
-						PlayMeleeSfx();
 						return;
-					}
 				}
 				Dig();
 				return;
@@ -360,13 +358,15 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			if (hitEnemy)
 			{
-				PlayMeleeSfx();
 				_meleeCooldown = MeleeCooldown;
 			}
 			else
 			{
 				Dig();
 			}
+			if (!_diggingSuccessful)
+				PlayMeleeSfx();
+			_diggingSuccessful = false; // Reset for next dig attempt
 		}
 
 		if (Input.IsActionJustPressed("Peek"))
@@ -551,6 +551,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			DiggableTiles.DeleteCell(targetCell);
 			PlayDiggingSfx();
+			_diggingSuccessful = true;
 		}
 	}
 
