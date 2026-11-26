@@ -44,6 +44,8 @@ public partial class StatsManager : Node
 	private string _babyKilledString = "BabyKilled";
 	private string _adultKilledString = "AdultKilled";
 	private string _lieroKilledString = "LieroKilled";
+	private string _spiderKilledString = "SpiderKilled";
+	private string _wurmKilledString = "WurmKilled";
 	private string _bearKilledString = "BearKilled";
 	private string _tutorialLevelComplitedString = "TutorialComplited";
 
@@ -51,8 +53,9 @@ public partial class StatsManager : Node
 	private bool _tickKilled = false;
 	private bool _babyKilled = false;
 	private bool _adultKilled = false;
-	private bool _wurmKilled = false;
 	private bool _lieroKilled = false;
+	private bool _spiderKilled = false;
+	private bool _wurmKilled = false;
 	private bool _bearKilled = false;
 
 	private bool _tutorialLevelComplited = false;
@@ -142,9 +145,19 @@ public partial class StatsManager : Node
 		return (bool)_statsConfig.GetValue(_statsString, _adultKilledString, false);
 	}
 
+	public bool IsSpiderKilled()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _spiderKilledString, false);
+	}
+
 	public bool IsLieroKilled()
 	{
 		return (bool)_statsConfig.GetValue(_statsString, _lieroKilledString, false);
+	}
+
+	public bool IsWurmKilled()
+	{
+		return (bool)_statsConfig.GetValue(_statsString, _wurmKilledString, false);
 	}
 
 	public bool IsBearKilled()
@@ -197,6 +210,14 @@ public partial class StatsManager : Node
 				}
 				break;
 
+			case "Spider":
+				if (!_spiderKilled)
+				{
+					_spiderKilled = true;
+					_statsConfig.SetValue(_statsString, _spiderKilledString, _spiderKilled);
+				}
+				break;
+
 			case "Liero":
 				if (!_lieroKilled)
 				{
@@ -204,6 +225,7 @@ public partial class StatsManager : Node
 					_statsConfig.SetValue(_statsString, _lieroKilledString, _lieroKilled);
 				}
 				break;
+
 			case "Bear":
 				if (!_bearKilled)
 				{

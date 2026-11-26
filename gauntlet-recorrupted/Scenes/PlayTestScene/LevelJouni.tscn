@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b1i01plpso6s3" path="res://Scenes/Environment/Destroyable/Bottle.tscn" id="10_63qqf"]
 [ext_resource type="PackedScene" uid="uid://qancgtj37kk8" path="res://Scenes/Characters/Enemy/Scitter.tscn" id="11_bmcb2"]
 [ext_resource type="PackedScene" uid="uid://sh2l5n4u772q" path="res://Scenes/Environment/Destroyable/BarrelGoo.tscn" id="11_ovtp8"]
+[ext_resource type="PackedScene" uid="uid://cwjmukqrwluuh" path="res://Scenes/Environment/Destroyable/Eye.tscn" id="11_qw685"]
 [ext_resource type="PackedScene" uid="uid://dfavr87xu6e8m" path="res://Scenes/Characters/Enemy/Adult.tscn" id="12_dlqid"]
 [ext_resource type="PackedScene" uid="uid://b3rbnnkywu7gn" path="res://Scenes/Spawners/TickSpawner.tscn" id="12_ifowk"]
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="12_ydgnh"]
@@ -321,6 +322,18 @@ position = Vector2(2505, -353)
 [node name="BarrelGoo5" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1770889408 instance=ExtResource("11_ovtp8")]
 position = Vector2(-1928, -3940)
 rotation = -2.2479842
+
+[node name="Eye" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=2140477789 instance=ExtResource("11_qw685")]
+position = Vector2(-606, 108)
+
+[node name="Eye2" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=990843111 instance=ExtResource("11_qw685")]
+position = Vector2(3160, -867)
+
+[node name="Eye3" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=464086098 instance=ExtResource("11_qw685")]
+position = Vector2(1195, -4655)
+
+[node name="Eye4" parent="Environment/NavigationRegionBasic/Destroyables" unique_id=1078052925 instance=ExtResource("11_qw685")]
+position = Vector2(-663, 1454)
 
 [node name="Spawners" type="Node2D" parent="Environment/NavigationRegionBasic" unique_id=1028981518]
 
