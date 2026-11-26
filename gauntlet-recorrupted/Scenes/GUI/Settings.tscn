@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_frjq8"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_fwhe4"]
 
-[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider")]
+[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider", "_creditsBtn", "_playTutorialLevel")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,6 +30,8 @@ _resolutionBtn = NodePath("VideoOptions/VBoxContainer/Resolution")
 _masterVolumeSlider = NodePath("AudioOptions/VBoxContainer/HSlider")
 _sfxVolumeSlider = NodePath("AudioOptions/VBoxContainer3/HSlider3")
 _musicVolumeSlider = NodePath("AudioOptions/VBoxContainer2/HSlider2")
+_creditsBtn = NodePath("Buttons/CreditsBtn")
+_playTutorialLevel = NodePath("Buttons/PlayTutorialBtn")
 
 [node name="SettingsLabel" type="Label" parent="." unique_id=1068753432]
 layout_mode = 1
@@ -183,7 +185,7 @@ offset_right = 128.0
 offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="CreditsBtn" type="Button" parent="Buttons" unique_id=1939657063]
