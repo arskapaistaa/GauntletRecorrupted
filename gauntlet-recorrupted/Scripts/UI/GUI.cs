@@ -6,7 +6,7 @@ public partial class GUI : Control
 	[Export] private Label _fpsLabel = null;
 	[Export] private Label _healthLabel = null;
 	[Export] private AnimatedSprite2D _healthIndicator = null;
-	[Export] private AnimatedSprite2D _exitIndicator = null;
+	[Export] private AnimatedSprite2D _exitIndicatorBumped = null;
 	[Export] private TextureRect Revolver = null;
 	[Export] private TextureRect Shotgun = null;
 	[Export] private AnimatedSprite2D _revolverAmmoSprite = null;
@@ -41,10 +41,10 @@ public partial class GUI : Control
 			UpdateHealthIndicators();
 		}
 
-		if (_exitIndicator != null)
+		if (_exitIndicatorBumped != null)
 		{
-			_exitIndicator.Play("Closed");
-			_exitIndicator.AnimationFinished += OnExitIndicatorAnimationFinished;
+			_exitIndicatorBumped.Play("Closed");
+			_exitIndicatorBumped.AnimationFinished += OnExitIndicatorBumpedAnimationFinished;
 		}
 
 		if (_exitOpenParticles != null)
@@ -78,9 +78,9 @@ public partial class GUI : Control
 			_player.Reload -= ReloadAnimation;
 		}
 
-		if (_exitIndicator != null)
+		if (_exitIndicatorBumped != null)
 		{
-			_exitIndicator.AnimationFinished -= OnExitIndicatorAnimationFinished;
+			_exitIndicatorBumped.AnimationFinished -= OnExitIndicatorBumpedAnimationFinished;
 		}
 
 		if (_exitOpenParticles != null)
@@ -218,7 +218,7 @@ public partial class GUI : Control
 
 	private void OnZeroSpawnerLeft()
     {
-		if (_exitIndicator == null)
+		if (_exitIndicatorBumped == null)
 		{
 			GD.PrintErr("GUI is missing Exit Indicator");
 		}
@@ -228,7 +228,7 @@ public partial class GUI : Control
 			GD.PrintErr("GUI is missing Exit particles");
 		}
 
-		_exitIndicator.Play("Opening");
+		_exitIndicatorBumped.Play("Opening");
 		_exitOpenParticles.Restart();
     }
 
@@ -240,14 +240,14 @@ public partial class GUI : Control
 		}
     }
 
-	private void OnExitIndicatorAnimationFinished()
+	private void OnExitIndicatorBumpedAnimationFinished()
     {
-        if (_exitIndicator == null)
+        if (_exitIndicatorBumped == null)
 		{
 			GD.PrintErr("GUI is missing Exit Indicator");
 			return;
 		}
 
-		_exitIndicator.Play("Open");
+		_exitIndicatorBumped.Play("Open");
     }
 }

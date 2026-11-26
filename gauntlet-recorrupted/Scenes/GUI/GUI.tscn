@@ -162,28 +162,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_1vt16"]
-offsets = PackedFloat32Array(0, 0.10070671, 0.88869256, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
-gradient = SubResource("Gradient_1vt16")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bbnj7"]
-particle_flag_disable_z = true
-angle_min = 1.0728835e-05
-angle_max = 1.0728835e-05
-direction = Vector3(0, 0, 0)
-spread = 180.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -2.2351742e-06
-radial_accel_max = 49.999996
-color_ramp = SubResource("GradientTexture1D_dxocv")
-turbulence_enabled = true
-turbulence_noise_strength = 0.3
-turbulence_influence_min = 0.05
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fgtr8"]
 atlas = ExtResource("7_em2lx")
 region = Rect2(0, 0, 94, 94)
@@ -383,6 +361,28 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_1vt16"]
+offsets = PackedFloat32Array(0, 0.10070671, 0.88869256, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_1vt16")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bbnj7"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 49.999996
+color_ramp = SubResource("GradientTexture1D_dxocv")
+turbulence_enabled = true
+turbulence_noise_strength = 0.3
+turbulence_influence_min = 0.05
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ol1bw"]
 atlas = ExtResource("6_jwth5")
 region = Rect2(384, 0, 64, 64)
@@ -464,7 +464,7 @@ animations = [{
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 process_mode = 3
 
-[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel", "_healthLabel", "_healthIndicator", "_exitIndicator", "Revolver", "Shotgun", "_revolverAmmoSprite", "_shotgunAmmoSprite", "_exitOpenParticles", "_exitOpenParticlesSmall")]
+[node name="GUI" type="Control" parent="." unique_id=691931920 node_paths=PackedStringArray("_fpsLabel", "_healthLabel", "_healthIndicator", "_exitIndicatorBumped", "Revolver", "Shotgun", "_revolverAmmoSprite", "_shotgunAmmoSprite", "_exitOpenParticles", "_exitOpenParticlesSmall")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,13 +475,13 @@ script = ExtResource("1_linlh")
 _fpsLabel = NodePath("FPSContainer/FPS")
 _healthLabel = NodePath("Heart/PlayerHealthLabel")
 _healthIndicator = NodePath("Heart/HeartIndicator")
-_exitIndicator = NodePath("Exit/ExitIndicator")
+_exitIndicatorBumped = NodePath("Exit/ExitIndicatorBumped")
 Revolver = NodePath("Revolver")
 Shotgun = NodePath("Shotgun")
 _revolverAmmoSprite = NodePath("Revolver/TextureRect/RevolverAmmo")
 _shotgunAmmoSprite = NodePath("Shotgun/TextureRect/ShotgunAmmo")
-_exitOpenParticles = NodePath("Exit/ExitIndicator/Particles")
-_exitOpenParticlesSmall = NodePath("Exit/ExitIndicator/ParticlesSmall")
+_exitOpenParticles = NodePath("")
+_exitOpenParticlesSmall = NodePath("")
 
 [node name="TextureRect" type="TextureRect" parent="GUI" unique_id=2073629210]
 layout_mode = 0
@@ -553,24 +553,25 @@ position = Vector2(148, 38)
 sprite_frames = SubResource("SpriteFrames_dxocv")
 animation = &"Opening"
 
-[node name="Particles" parent="GUI/Exit/ExitIndicator" unique_id=662982838 instance=ExtResource("6_bbnj7")]
+[node name="ExitIndicatorBumped" type="AnimatedSprite2D" parent="GUI/Exit" unique_id=1636551941]
+position = Vector2(24, 45)
+sprite_frames = SubResource("SpriteFrames_b8td4")
+animation = &"Closed"
+frame = 2
+frame_progress = 0.07924901
 
-[node name="ParticlesSmall" type="GPUParticles2D" parent="GUI/Exit/ExitIndicator" unique_id=2089034507]
+[node name="GoosebumpEyes" type="AnimatedSprite2D" parent="GUI/Exit/ExitIndicatorBumped" unique_id=882886170]
+sprite_frames = SubResource("SpriteFrames_0bbjp")
+animation = &"Default"
+
+[node name="Particles" parent="GUI/Exit/ExitIndicatorBumped" unique_id=662982838 instance=ExtResource("6_bbnj7")]
+
+[node name="ParticlesSmall" type="GPUParticles2D" parent="GUI/Exit/ExitIndicatorBumped" unique_id=1304715471]
 emitting = false
 amount = 10
 lifetime = 5.0
 explosiveness = 0.7
 process_material = SubResource("ParticleProcessMaterial_bbnj7")
-
-[node name="ExitIndicatorBumped" type="AnimatedSprite2D" parent="GUI/Exit" unique_id=1636551941]
-position = Vector2(24, 45)
-sprite_frames = SubResource("SpriteFrames_b8td4")
-animation = &"Opening"
-
-[node name="GoosebumpEyes" type="AnimatedSprite2D" parent="GUI/Exit/ExitIndicatorBumped" unique_id=882886170]
-sprite_frames = SubResource("SpriteFrames_0bbjp")
-animation = &"Scared"
-frame_progress = 0.17870133
 
 [node name="Revolver" type="TextureRect" parent="GUI" unique_id=1145253756]
 layout_mode = 1
