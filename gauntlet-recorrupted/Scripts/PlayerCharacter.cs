@@ -35,9 +35,14 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSFX = null;
+	[Export] private AudioStreamPlayer2D _diggingSFX = null;
+	[Export] private AudioStreamPlayer2D _meleeSFX = null;
 	[Export] private AudioStreamPlayer2D _revolverSFX = null;
 	[Export] private AudioStreamPlayer2D _shotgunSFX = null;
-	[Export] private AudioStreamPlayer2D _diggingSFX = null;
+	[Export] private AudioStreamPlayer2D _reloadRevolverSFX = null;
+	[Export] private AudioStreamPlayer2D _reloadShotgunSFX = null;
+	[Export] private AudioStreamPlayer2D _switchToRevolverSFX = null;
+	[Export] private AudioStreamPlayer2D _switchToShotgunSFX = null;
 
 	// Signals
 	[Signal] public delegate void WeaponSwitchedEventHandler(int newWeaponType);
@@ -251,6 +256,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				ReloadTime = RevolverReloadTime;
 				GD.Print("Switched to Revolver");
 			}
+			PlayWeaponSwitchSfx(WeaponType);
 			EmitSignal(SignalName.WeaponSwitched, WeaponType);
 			if ((WeaponType == 0 && _currentAmmoRevolver <= 0) || (WeaponType == 1 && _currentAmmoShotgun <= 0))
 				StartReload();
@@ -324,6 +330,8 @@ public partial class PlayerCharacter : CharacterBody2D
 				GD.Print("Cannot dig while dead");
 				return;
 			}
+			if (_isReloading)
+				return;
 			_isDigging = true;
 			if (_meleeCooldown > 0)
 			{
@@ -331,6 +339,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				{
 					if (node is Enemy e)
 					{
+						PlayMeleeSfx();
 						return;
 					}
 				}
@@ -355,6 +364,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			if (hitEnemy)
 			{
+				PlayMeleeSfx();
 				_meleeCooldown = MeleeCooldown;
 			}
 			else
@@ -484,6 +494,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			_reloadSpeedMultiplier = 0.15f;
 		_shootTimer = ReloadTime;
 		_isReloading = true;
+		PlayReloadSfx(WeaponType);
 		EmitSignal(SignalName.Reload, WeaponType);
 	}
 
@@ -509,6 +520,10 @@ public partial class PlayerCharacter : CharacterBody2D
 		_isReloading = false;
 		_shootTimer = 0;
 		_reloadSpeedMultiplier = 1.0f;
+		if (_reloadRevolverSFX.IsPlaying())
+			_reloadRevolverSFX.Stop();
+		if (_reloadShotgunSFX.IsPlaying())
+			_reloadShotgunSFX.Stop();
 	}
 
 	private void ForceShootingAnimationEnd()
@@ -656,12 +671,55 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 	}
 
+	private void PlayReloadSfx(int weaponType)
+	{
+		if (weaponType == 0)
+		{
+			if (_reloadRevolverSFX != null)
+			{
+				_reloadRevolverSFX.Play();
+			}
+		}
+		else
+		{
+			if (_reloadShotgunSFX != null)
+			{
+				_reloadShotgunSFX.Play();
+			}
+		}
+	}
+
+	private void PlayWeaponSwitchSfx(int weaponType)
+	{
+		if (weaponType == 0)
+		{
+			if (_switchToRevolverSFX != null)
+			{
+				_switchToRevolverSFX.Play();
+			}
+		}
+		else
+		{
+			if (_switchToShotgunSFX != null)
+			{
+				_switchToShotgunSFX.Play();
+			}
+		}
+	}
+
 	private void PlayDiggingSfx()
 	{
 		if (_diggingSFX != null)
 		{
 			_diggingSFX.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
 			_diggingSFX.Play();
+		}
+	}
+	private void PlayMeleeSfx()
+	{
+		if (_meleeSFX != null)
+		{
+			_meleeSFX.Play();
 		}
 	}
 	public int GetRevolverAmmo()
