@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://chc4ebnnhaukj" path="res://Scripts/Environment/Destroyable.cs" id="1_41x6r"]
 [ext_resource type="Texture2D" uid="uid://chqhf6s0cee5g" path="res://Art/Environment/BarrelGooSpritesheet.png" id="2_41x6r"]
-[ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="2_vxa0r"]
 [ext_resource type="PackedScene" uid="uid://ccmo7dj4cop0l" path="res://Scenes/Particles/BarrelParticles.tscn" id="3_uk0dr"]
 [ext_resource type="PackedScene" uid="uid://bk5d7hh0y4mx" path="res://Scenes/Environment/Destroyable/ExplosiveArea.tscn" id="4_nprya"]
 [ext_resource type="AudioStream" uid="uid://dd7ygupxdbi0r" path="res://Audio/SFX/Environment/Destroyables/Damage2.ogg" id="6_iy5d4"]
@@ -66,7 +65,6 @@ _destroyedSfx = NodePath("DestroySfx")
 _dmgArea = NodePath("ExplosiveArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240006552]
-material = ExtResource("2_vxa0r")
 sprite_frames = SubResource("SpriteFrames_x16ry")
 
 [node name="Barrelparticles" parent="." unique_id=435467720 instance=ExtResource("3_uk0dr")]

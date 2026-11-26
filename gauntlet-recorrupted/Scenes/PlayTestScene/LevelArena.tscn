@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="24_0firu"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vibt6"]
-outlines = Array[PackedVector2Array]([PackedVector2Array(-2742, -5080, 13542, -4702, 13565, 8121, -2647, 8397)])
+vertices = PackedVector2Array(4034, 1520, 4034, 2368, 3346, 2112, 3346, 1520, 6594, 576, 6594, 1088, 3346, 832, 6338, 576, 6338, 320, 3346, 496, 5826, 320, 4882, 1856, 4882, 1520, 6338, 1776, 6338, 2032, 6082, 2032, 4034, -448, 4802, -448, 4802, -192, 5570, -192, 5570, 64, 5826, 64, 6850, 1088, 6850, 1264, 6594, 1264, 6594, 1776, 4370, 2368, 4370, 1856, 5826, 2288, 5314, 2800, 4802, 3056, 6082, 2288, 5826, 2800, 5314, 3056, 4802, 3312, 4546, 3312, 4546, 3568, 4034, 3568, 4034, 3824, 3778, 3824, 3778, 4080, 3346, 4080, 3346, 3824, 2834, 3824, 2834, 3568, 2578, 3568, 2578, 3312, 2754, 2112, 2322, 3312, 2322, 3056, 1810, 3056, 1810, 2800, 1298, 2800, 1298, 2544, 1042, 2544, 1042, 2288, 786, 2288, 786, 2032, 1042, 1088, 530, 2032, 530, 1776, 274, 1776, 274, 1344, 530, 1344, 530, 1088, 1042, 576, 1298, 576, 2754, 1520, 1298, 320, 1554, 320, 3010, 832, 1554, 64, 1810, 64, 3010, 496, 1810, -192, 2066, -192, 2066, -448, 2834, -448, 2834, -704, 4034, -704)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 7, 6, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 9), PackedInt32Array(18, 19, 20, 9), PackedInt32Array(20, 21, 10, 9), PackedInt32Array(5, 22, 23, 24), PackedInt32Array(6, 24, 25, 13, 12), PackedInt32Array(26, 27, 11, 28, 29, 30), PackedInt32Array(15, 31, 28, 11), PackedInt32Array(28, 32, 29), PackedInt32Array(29, 33, 30), PackedInt32Array(26, 30, 34, 35, 1), PackedInt32Array(1, 35, 36, 37, 2), PackedInt32Array(37, 38, 39, 2), PackedInt32Array(39, 40, 41, 42), PackedInt32Array(42, 43, 44, 2), PackedInt32Array(2, 44, 45, 46, 47), PackedInt32Array(46, 48, 49, 47), PackedInt32Array(49, 50, 51, 47), PackedInt32Array(51, 52, 53), PackedInt32Array(53, 54, 55), PackedInt32Array(55, 56, 57, 58), PackedInt32Array(57, 59, 60), PackedInt32Array(60, 61, 62, 63), PackedInt32Array(63, 64, 58, 57), PackedInt32Array(58, 65, 66, 67, 47, 51, 53), PackedInt32Array(66, 68, 69, 67), PackedInt32Array(70, 67, 69, 71, 72, 73), PackedInt32Array(72, 74, 75, 73), PackedInt32Array(73, 75, 76, 77, 9), PackedInt32Array(77, 78, 79, 16, 9), PackedInt32Array(6, 5, 24), PackedInt32Array(6, 12, 0), PackedInt32Array(6, 0, 3, 70), PackedInt32Array(70, 3, 67), PackedInt32Array(2, 39, 42), PackedInt32Array(58, 53, 55), PackedInt32Array(63, 57, 60)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2742, -5080, 13579, -5083, 13565, 8121, -2647, 8397)])
 agent_radius = 40.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivumw"]
@@ -245,9 +247,9 @@ seamless = true
 
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_byvwr")
-_maxTotalEnemyCount = 60
-_spawnerCount = 3
-_presetEnemyCount = 45
+_maxTotalEnemyCount = 20
+_spawnerCount = 1
+_presetEnemyCount = 1
 _isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
@@ -327,7 +329,6 @@ position = Vector2(3120, 1873)
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("11_o3h13")]
 position = Vector2(4685, 466.99997)
 rotation = 3.139592
-_nextLevelPath = "res://Scenes/PlayTestScene/LevelCorridors.tscn"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
@@ -361,7 +362,7 @@ limit_top = -6136
 limit_right = 12244
 limit_bottom = 7221
 
-[node name="RayCast2D" parent="Player" index="10" unique_id=348875303]
+[node name="RayCast2D" parent="Player" index="9" unique_id=348875303]
 target_position = Vector2(9, 135)
 
 [node name="Cursor" parent="." unique_id=318096938 node_paths=PackedStringArray("PlayerCharacter") instance=ExtResource("23_0ufs7")]
