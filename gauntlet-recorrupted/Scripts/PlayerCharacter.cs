@@ -258,8 +258,6 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 			PlayWeaponSwitchSfx(WeaponType);
 			EmitSignal(SignalName.WeaponSwitched, WeaponType);
-			if ((WeaponType == 0 && _currentAmmoRevolver <= 0) || (WeaponType == 1 && _currentAmmoShotgun <= 0))
-				StartReload();
 		}
 
 		if (Input.IsActionJustPressed("Shoot") && _shootTimer <= 0)
@@ -283,16 +281,12 @@ public partial class PlayerCharacter : CharacterBody2D
 				_currentAmmoRevolver--;
 				EmitSignal(SignalName.UpdateRevolverAmmo, _currentAmmoRevolver);
 				_shootTimer = RevolverCooldown;
-				if (_currentAmmoRevolver <= 0)
-					StartReload();   // after the cooldown line, so ReloadTime isn't overwritten
 			}
 			else
 			{
 				_currentAmmoShotgun--;
 				EmitSignal(SignalName.UpdateShotgunAmmo, _currentAmmoShotgun);
 				_shootTimer = ShotgunCooldown;
-				if (_currentAmmoShotgun <= 0)
-					StartReload();
 			}
 		}
 
@@ -303,6 +297,8 @@ public partial class PlayerCharacter : CharacterBody2D
 				GD.Print("Cannot reload while dead");
 				return;
 			}
+			if (_isReloading)
+				return;
 			if (WeaponType == 0)
 			{
 				if (_currentAmmoRevolver == _maxAmmoRevolver)
