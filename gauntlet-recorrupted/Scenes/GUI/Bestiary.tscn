@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dyeo3c4ow8gh3" path="res://Art/Portrait/ArtPortraitAdult.png" id="11_btbcw"]
 [ext_resource type="Texture2D" uid="uid://vffclkdihnak" path="res://Art/Portrait/ArtPortraitSpider.png" id="13_4ookp"]
 [ext_resource type="Texture2D" uid="uid://cy3p0wnonudbh" path="res://Art/Portrait/ArtPortraitWurm.png" id="14_mpywm"]
+[ext_resource type="Texture2D" uid="uid://4w77aau4rqcx" path="res://Art/Portrait/ArtPortraitBear.png" id="15_btbcw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btbcw"]
+load_path = "res://.godot/imported/ArtPortraitBaby.png-0f5b1668dc6b78a81389358a0459f0cc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdyef"]
 load_path = "res://.godot/imported/Scale1-5.png-0df4543ba53b3ccfadd1f81c93f1a742.ctex"
@@ -687,7 +691,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = SubResource("CompressedTexture2D_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BabyContainer" unique_id=307186007]
 layout_mode = 1
@@ -2062,7 +2066,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("15_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BearContainer" unique_id=440915112]
 layout_mode = 1
