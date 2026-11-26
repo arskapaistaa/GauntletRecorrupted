@@ -836,10 +836,16 @@ public partial class Enemy : CharacterBody2D
 	private void Defeat()
 	{
 		_isAlive = false;
+		_brain.Defeat();
 
 		if (_characterCollision != null)
 		{
 			_characterCollision.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		}
+
+		if (_agent != null)
+		{
+			_agent.SetDeferred(NavigationAgent2D.PropertyName.AvoidanceEnabled, false);
 		}
 
 		if (_homeSpawner != null)
@@ -851,8 +857,6 @@ public partial class Enemy : CharacterBody2D
 		{
 			_destroyTimer.Start();
 		}
-
-		_brain.Defeat();
 
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)

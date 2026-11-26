@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cwjmukqrwluuh"]
+
+[ext_resource type="Script" uid="uid://chc4ebnnhaukj" path="res://Scripts/Environment/Destroyable.cs" id="1_aaljp"]
+[ext_resource type="Texture2D" uid="uid://dx4h0boca2wvm" path="res://Art/Environment/EyeSpritesheet.png" id="2_aaljp"]
+[ext_resource type="PackedScene" uid="uid://ccmo7dj4cop0l" path="res://Scenes/Particles/BarrelParticles.tscn" id="3_yg0sl"]
+[ext_resource type="AudioStream" uid="uid://cjms0m212spja" path="res://Audio/SFX/Spawner/SpawnerSFX.wav" id="4_aaljp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5f61"]
+atlas = ExtResource("2_aaljp")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg0sl"]
+atlas = ExtResource("2_aaljp")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmyy7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5f61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg0sl")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aaljp"]
+load_path = "res://.godot/imported/BloodSplatter.png-5f7759f6973562ed9f7ed0f5353c2f65.ctex"
+
+[sub_resource type="Gradient" id="Gradient_4s2xr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxocv"]
+gradient = SubResource("Gradient_4s2xr")
+
+[sub_resource type="Curve" id="Curve_wuu73"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.022151902, 1), 0.0, 0.0, 0, 0, Vector2(0.20886075, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e5fvg"]
+curve = SubResource("Curve_wuu73")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q5f61"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 85.0
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+radial_velocity_min = 99.99998
+radial_velocity_max = 499.99997
+radial_velocity_curve = SubResource("CurveTexture_e5fvg")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.50980395, 0.18039216, 0.15294118, 1)
+color_ramp = SubResource("GradientTexture1D_dxocv")
+hue_variation_min = -0.100000024
+hue_variation_max = 0.09999997
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
+radius = 102.0784
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q5f61"]
+random_pitch = 1.2599211
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("4_aaljp")
+
+[node name="Eye" type="StaticBody2D" unique_id=1254847722 node_paths=PackedStringArray("_sprite", "_particles", "_collision", "_destroyedSfx")]
+z_index = 2
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_aaljp")
+_sprite = NodePath("AnimatedSprite2D")
+_particles = NodePath("Barrelparticles")
+_collision = NodePath("CollisionShape2D")
+_destroyedSfx = NodePath("DestroySfx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1240006552]
+sprite_frames = SubResource("SpriteFrames_wmyy7")
+
+[node name="Barrelparticles" parent="." unique_id=435467720 instance=ExtResource("3_yg0sl")]
+texture = SubResource("CompressedTexture2D_aaljp")
+process_material = SubResource("ParticleProcessMaterial_q5f61")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=568547445]
+shape = SubResource("CircleShape2D_sopei")
+
+[node name="DestroySfx" type="AudioStreamPlayer2D" parent="." unique_id=788042082]
+stream = SubResource("AudioStreamRandomizer_q5f61")
+volume_db = -3.0
+bus = &"SFX"
