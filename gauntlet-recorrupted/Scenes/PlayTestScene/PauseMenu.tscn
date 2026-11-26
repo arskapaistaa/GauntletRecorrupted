@@ -181,7 +181,10 @@ process_mode = 3
 visible = false
 layout_mode = 1
 
-[node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
+[node name="Buttons" parent="Settings" index="3" unique_id=1138296487]
+visible = false
+
+[node name="CloseBtn" parent="Settings" index="4" unique_id=246201653 node_paths=PackedStringArray("_animations", "_pressedSfx")]
 _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "CloseSettings"

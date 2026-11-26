@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cdiyy0fchy0wm" path="res://Scripts/UI/OptionsMenu.cs" id="3_frjq8"]
 [ext_resource type="Script" uid="uid://bgoylf36s0f1w" path="res://Scripts/UI/BaseButton.cs" id="4_fwhe4"]
 
-[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_removeScreenShakeBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider")]
+[node name="Settings" type="NinePatchRect" unique_id=1309456819 node_paths=PackedStringArray("_displayModeBtn", "_resolutionBtn", "_masterVolumeSlider", "_sfxVolumeSlider", "_musicVolumeSlider")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,12 +25,11 @@ patch_margin_top = 60
 patch_margin_right = 50
 patch_margin_bottom = 60
 script = ExtResource("3_frjq8")
-_displayModeBtn = NodePath("VideoOptions/DisplayMode")
-_resolutionBtn = NodePath("VideoOptions/Resolution")
-_removeScreenShakeBtn = NodePath("VideoOptions/ScreenShakeBtn")
-_masterVolumeSlider = NodePath("AudioOptions/HSlider")
-_sfxVolumeSlider = NodePath("AudioOptions/HSlider3")
-_musicVolumeSlider = NodePath("AudioOptions/HSlider2")
+_displayModeBtn = NodePath("VideoOptions/VBoxContainer2/DisplayMode")
+_resolutionBtn = NodePath("VideoOptions/VBoxContainer/Resolution")
+_masterVolumeSlider = NodePath("AudioOptions/VBoxContainer/HSlider")
+_sfxVolumeSlider = NodePath("AudioOptions/VBoxContainer3/HSlider3")
+_musicVolumeSlider = NodePath("AudioOptions/VBoxContainer2/HSlider2")
 
 [node name="SettingsLabel" type="Label" parent="." unique_id=1068753432]
 layout_mode = 1
@@ -52,14 +51,25 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 26.0
-offset_top = -43.000008
+offset_top = -75.00001
 offset_right = 224.0
-offset_bottom = 43.674988
+offset_bottom = 11.674988
 grow_vertical = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 
-[node name="DisplayMode" type="OptionButton" parent="VideoOptions" unique_id=1129266693]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VideoOptions" unique_id=30909733]
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="VideoOptions/VBoxContainer2" unique_id=1531231348]
+layout_mode = 2
+text = "Display Mode"
+horizontal_alignment = 1
+
+[node name="DisplayMode" type="OptionButton" parent="VideoOptions/VBoxContainer2" unique_id=1129266693]
+layout_mode = 2
+focus_neighbor_right = NodePath("../../../AudioOptions/VBoxContainer/HSlider")
+focus_neighbor_bottom = NodePath("../../VBoxContainer/Resolution")
 alignment = 1
 selected = 1
 item_count = 2
@@ -68,8 +78,20 @@ popup/item_0/id = 0
 popup/item_1/text = "Fullscreen"
 popup/item_1/id = 1
 
-[node name="Resolution" type="OptionButton" parent="VideoOptions" unique_id=1096953162]
+[node name="VBoxContainer" type="VBoxContainer" parent="VideoOptions" unique_id=363189492]
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VideoOptions/VBoxContainer" unique_id=547281977]
+layout_mode = 2
+text = "Resolution"
+horizontal_alignment = 1
+
+[node name="Resolution" type="OptionButton" parent="VideoOptions/VBoxContainer" unique_id=1096953162]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../VBoxContainer2/DisplayMode")
+focus_neighbor_right = NodePath("../../../AudioOptions/VBoxContainer3/HSlider3")
+focus_neighbor_bottom = NodePath("../../../Buttons/CreditsBtn")
 alignment = 1
 selected = 1
 item_count = 2
@@ -77,13 +99,6 @@ popup/item_0/text = "1280 x 720"
 popup/item_0/id = 0
 popup/item_1/text = "1920 x 1080"
 popup/item_1/id = 1
-
-[node name="ScreenShakeBtn" type="Button" parent="VideoOptions" unique_id=2080002038]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_un12u")
-toggle_mode = true
-text = "Screen shake"
 
 [node name="AudioOptions" type="VBoxContainer" parent="." unique_id=2107351994]
 layout_mode = 1
@@ -93,50 +108,101 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -209.0
-offset_top = -62.0
+offset_top = -94.0
 offset_right = -29.0
-offset_bottom = 63.0
+offset_bottom = 31.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_un12u")
-theme_override_constants/separation = 1
+theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Master" type="Label" parent="AudioOptions" unique_id=659851445]
+[node name="VBoxContainer" type="VBoxContainer" parent="AudioOptions" unique_id=782268060]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Master" type="Label" parent="AudioOptions/VBoxContainer" unique_id=659851445]
 layout_mode = 2
 text = "Master"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="AudioOptions" unique_id=919517646]
+[node name="HSlider" type="HSlider" parent="AudioOptions/VBoxContainer" unique_id=919517646]
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../../VBoxContainer2/HSlider2")
 theme = ExtResource("1_un12u")
 max_value = 1.0
 step = 0.1
 
-[node name="Music" type="Label" parent="AudioOptions" unique_id=1038580915]
+[node name="VBoxContainer2" type="VBoxContainer" parent="AudioOptions" unique_id=483384879]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Music" type="Label" parent="AudioOptions/VBoxContainer2" unique_id=1038580915]
 layout_mode = 2
 text = "Music"
 horizontal_alignment = 1
 
-[node name="HSlider2" type="HSlider" parent="AudioOptions" unique_id=172127301]
+[node name="HSlider2" type="HSlider" parent="AudioOptions/VBoxContainer2" unique_id=172127301]
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../VBoxContainer/HSlider")
+focus_neighbor_bottom = NodePath("../../VBoxContainer3/HSlider3")
 theme = ExtResource("1_un12u")
 max_value = 1.0
 step = 0.1
 
-[node name="SFX" type="Label" parent="AudioOptions" unique_id=449254999]
+[node name="VBoxContainer3" type="VBoxContainer" parent="AudioOptions" unique_id=1617983259]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SFX" type="Label" parent="AudioOptions/VBoxContainer3" unique_id=449254999]
 layout_mode = 2
 text = "SFX"
 horizontal_alignment = 1
 
-[node name="HSlider3" type="HSlider" parent="AudioOptions" unique_id=1585915008]
+[node name="HSlider3" type="HSlider" parent="AudioOptions/VBoxContainer3" unique_id=1585915008]
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../VBoxContainer2/HSlider2")
+focus_neighbor_bottom = NodePath("../../../Buttons/CreditsBtn")
 theme = ExtResource("1_un12u")
 max_value = 1.0
 step = 0.1
+
+[node name="Buttons" type="HBoxContainer" parent="." unique_id=1138296487]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="CreditsBtn" type="Button" parent="Buttons" unique_id=1939657063]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../PlayTutorialBtn")
+focus_neighbor_top = NodePath("../../VideoOptions/VBoxContainer/Resolution")
+focus_neighbor_bottom = NodePath("../../CloseBtn")
+text = "Credits"
+script = ExtResource("4_fwhe4")
+
+[node name="PlayTutorialBtn" type="Button" parent="Buttons" unique_id=228565467]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_top = NodePath("../../AudioOptions/VBoxContainer3/HSlider3")
+focus_neighbor_right = NodePath("../CreditsBtn")
+focus_neighbor_bottom = NodePath("../../CloseBtn")
+text = "Play Tutorial"
+script = ExtResource("4_fwhe4")
 
 [node name="CloseBtn" type="Button" parent="." unique_id=246201653]
 layout_mode = 1
@@ -145,11 +211,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -38.5
-offset_top = -65.0
-offset_right = 38.5
-offset_bottom = -23.0
+offset_left = -40.0
+offset_top = -49.0
+offset_right = 40.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_left = NodePath("../Buttons/CreditsBtn")
+focus_neighbor_right = NodePath("../Buttons/PlayTutorialBtn")
 text = "Close"
 script = ExtResource("4_fwhe4")
