@@ -865,10 +865,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -50.0
-offset_right = 28.0
-offset_bottom = -11.0
+offset_left = -40.0
+offset_top = -51.0
+offset_right = 40.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
@@ -901,7 +901,7 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="CloseBtn" parent="Settings" index="3" unique_id=246201653 node_paths=PackedStringArray("_animations")]
+[node name="CloseBtn" parent="Settings" index="4" unique_id=246201653 node_paths=PackedStringArray("_animations")]
 _animations = NodePath("../../AnimationPlayer")
 _pressedAnimName = "CloseSettings"
 
