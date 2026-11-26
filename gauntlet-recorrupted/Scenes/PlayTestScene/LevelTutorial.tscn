@@ -131,7 +131,7 @@ texture_region_size = Vector2i(256, 256)
 tile_size = Vector2i(256, 256)
 sources/0 = SubResource("TileSetAtlasSource_3qguu")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_76byb"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oprqm"]
 texture = ExtResource("5_k7xru")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
@@ -141,7 +141,7 @@ texture_region_size = Vector2i(256, 256)
 
 [sub_resource type="TileSet" id="TileSet_oprqm"]
 tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_76byb")
+sources/0 = SubResource("TileSetAtlasSource_oprqm")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvt2s"]
 polygon = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
@@ -294,6 +294,7 @@ tile_map_data = PackedByteArray("AAD3//v/AAAAAAIAAAD3//n/AAABAAMAAAD3//r/AAABAAA
 tile_set = SubResource("TileSet_3vko6")
 
 [node name="NavigationRegionWurm" type="NavigationRegion2D" parent="Environment" unique_id=1225948905]
+visible = false
 position = Vector2(-2044, -2090)
 navigation_polygon = SubResource("NavigationPolygon_rxg4t")
 navigation_layers = 2
