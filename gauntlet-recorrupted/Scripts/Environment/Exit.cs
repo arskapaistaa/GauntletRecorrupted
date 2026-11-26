@@ -32,6 +32,7 @@ public partial class Exit : Area2D
 		}
 
 		BodyEntered += OnBodyEntered;
+		GameManager.Instance.SkipLevel += OnSkipLevel;
 
 		if (_exitLight != null)
 		{
@@ -46,6 +47,7 @@ public partial class Exit : Area2D
     {
         BodyEntered -= OnBodyEntered;
 		_currentLevel.OnZeroSpawnerLeft -= OnZeroSpawnerLeft;
+		GameManager.Instance.SkipLevel -= OnSkipLevel;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -121,4 +123,11 @@ public partial class Exit : Area2D
 		//	_spawnerCountLabel.Text = Level.Current.CurrentSpawnerCount.ToString() + "/" + Level.Current.SpawnerCount.ToString();
 		// }
 	}
+
+#if DEBUG
+	public void OnSkipLevel()
+	{
+		TransitionController.Instance.PlayTransition(_transitionName, NextLevelPath);
+	}
+#endif
 }

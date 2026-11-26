@@ -260,6 +260,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_bbnj7"]
+file = "res://Art/Cutscenes/HellsWellStartingIntroFinalFinal.ogv"
+
 [node name="GUI" type="CanvasLayer" unique_id=1183544404]
 process_mode = 3
 
@@ -289,6 +292,7 @@ offset_bottom = 360.0
 texture = ExtResource("2_7fy40")
 
 [node name="FPSContainer" type="MarginContainer" parent="GUI" unique_id=1924964740]
+visible = false
 layout_mode = 1
 offset_right = 80.0
 offset_bottom = 80.0
@@ -431,6 +435,57 @@ animation = &"Ammo"
 frame = 2
 frame_progress = 1.0
 centered = false
+
+[node name="Animations" type="Control" parent="." unique_id=1911091305]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FinalScene" type="Control" parent="Animations" unique_id=332544422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Video" type="AspectRatioContainer" parent="Animations/FinalScene" unique_id=252396184]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Animations/FinalScene/Video" unique_id=682740811]
+layout_mode = 2
+stream = SubResource("VideoStreamTheora_bbnj7")
+expand = true
+
+[node name="AfterPlayerCloneIsKilled" type="Control" parent="Animations" unique_id=67906501]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Video" type="AspectRatioContainer" parent="Animations/AfterPlayerCloneIsKilled" unique_id=1413388393]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Animations/AfterPlayerCloneIsKilled/Video" unique_id=1095189164]
+layout_mode = 2
+expand = true
 
 [node name="PauseMenu" parent="." unique_id=1923251465 instance=ExtResource("2_17j7b")]
 visible = false

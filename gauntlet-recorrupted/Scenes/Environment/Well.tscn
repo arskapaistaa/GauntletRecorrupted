@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://e0oqgvlqd6hk"]
+
+[ext_resource type="Texture2D" uid="uid://d1k6rc3mridyu" path="res://Art/Environment/Well.png" id="1_kub80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bepdp"]
+radius = 103.66
+
+[node name="Node2D" type="StaticBody2D" unique_id=300489115]
+z_index = 2
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=250702600]
+texture = ExtResource("1_kub80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=606609614]
+shape = SubResource("CircleShape2D_bepdp")
