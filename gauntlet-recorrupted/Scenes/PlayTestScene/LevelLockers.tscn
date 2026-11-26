@@ -597,7 +597,6 @@ position = Vector2(8460, 4340)
 rotation = 3.1404202
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1322107412]
-visible = false
 color = Color(0.48178947, 0.48178947, 0.48178947, 1)
 
 [node name="Player" parent="." unique_id=1111194495 node_paths=PackedStringArray("DiggableTiles", "CustomCursor") instance=ExtResource("29_gdjf7")]
