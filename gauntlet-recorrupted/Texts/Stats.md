@@ -22,62 +22,80 @@ SC - Spawning cooldown
 MAX - Max active enemies at the same time
 
 ### Roach
-S: 500.0
 H: 40
-DMG: 20
+S: 400.0
 AS: NONE
 DR: 600.0
+DMG: 20
 AR: 200.0
 ALR: 2000.0
 
 ### Tick
-S: 400.0
 H: 20
-DMG: 15
+S: 400.0
 AS: 1000.0
-DR: 200.0
+DR: 300.0
+DMG: 15
 AR: 600.0
-ALR: 1500.0
+ALR: 2000.0
 
 #### Tick spawner
-H: 15
+H: 100
 SC: 15.0
 
 ### Baby
-S: 500.0
 H: 30
-DMG: 25
+S: 500.0
 AS: NONE
 DR: 700.0
-AR: 100.0
-ALR: 2000.0
+DMG: 33
+AR: 150.0
+ALR: NONE
 
 ### Adult
-S: 200.0
 H: 70
-DMG: 20
+S: 200.0
 AS: NONE
-DR: 200.0
-AR: 100.0
-ALR: 2000.0
+DR: 200.0, 1000,0
+DMG: 20
+AR: STATIC
+ALR: NONE
 
-### Worm
-S: 0.0
-H: 0
-DMG: 0
-AS: 0.0
-DR: 0.0
-AR: 0.0
-ALR: 0.0
+### Liero
+H: 10
+S: 580.0
+AS: NONE
+DR: 300.0
+DMG: 10
+AR: STATIC
+ALR: NONE
+
+### Spider
+H: 20
+S: 450.0
+AS: 1100.0
+DR: 500.0
+DMG: 8
+AR: 600.0
+ALR: NONE
+
+### Wurm
+H: 400
+S: 200.0
+AS: NONE
+DR: NONE
+DMG: 42
+AR: STATIC
+ALR: NONE
 
 ### Bear
-S: 250.0
 H: 500
-DMG: 34
+S: 250.0
 AS: 800.0
 DR: 2000.0
+DMG: 34/25
 AR: 1000.0
-ALR: 0.0
+ALR: NONE
 
 ## Guns
 - A = Ammo capacity

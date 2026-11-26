@@ -56,6 +56,51 @@ public partial class Bestiary : NinePatchRect
 		{
 
 		}
+
+		if (StatsManager.Instance.IsAdultKilled())
+		{
+
+		}
+		else
+		{
+
+		}
+
+		if (StatsManager.Instance.IsLieroKilled())
+		{
+
+		}
+		else
+		{
+
+		}
+
+		if (StatsManager.Instance.IsSpiderKilled())
+		{
+
+		}
+		else
+		{
+
+		}
+
+		if (StatsManager.Instance.IsWurmKilled())
+		{
+
+		}
+		else
+		{
+
+		}
+
+		if (StatsManager.Instance.IsBearKilled())
+		{
+
+		}
+		else
+		{
+
+		}
 	}
 
 	private void UpdateCurrentContainer()
