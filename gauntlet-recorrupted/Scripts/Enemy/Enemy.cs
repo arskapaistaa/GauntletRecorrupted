@@ -100,6 +100,7 @@ public partial class Enemy : CharacterBody2D
 	private float _navInterval = 0.25f;
 	private float _attackNavInterval = 0.5f;
 	private DiggableTiles _diggableTiles = null;
+	private Level _currentLevel = null;
 	private EnemySpawner _homeSpawner = null;
 	public bool CanShoot = true;
 
@@ -117,7 +118,8 @@ public partial class Enemy : CharacterBody2D
 		Liero,
 		Bear,
 		Spider,
-		Coward
+		Coward,
+		PlayerClone
 	}
 
 	public enum AttackType
@@ -481,8 +483,6 @@ public partial class Enemy : CharacterBody2D
 
 	public void SetPlayerTarget()
 	{
-		Level.Current.IncreaseIntensity(Config.EnemyNoticeValue);
-
 		CheckTargetReachable(PlayerPosition);
 	}
 
@@ -891,11 +891,10 @@ public partial class Enemy : CharacterBody2D
 			_dmgArea.Monitoring = false;
 		}
 
-		if (Player != null)
+		if (ThisEnemyType == EnemyType.Bear)
 		{
-			Level.Current.DecreaseIntensity(Config.EnemyDeathValue);
+			Level.Current.BearKilled();
 		}
-
 	}
 
 	public void AlarmBuddies()

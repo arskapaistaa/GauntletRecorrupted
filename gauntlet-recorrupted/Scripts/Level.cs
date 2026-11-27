@@ -9,6 +9,7 @@ public partial class Level : Node2D
 	[Export] public bool IsThisFinalLevel = false;
 
 	[ExportCategory("Stats")]
+	[Export] public EndingCondition CurrentEndingCondition = EndingCondition.SpawnersDestroyed;
 	[Export] private int _maxTotalEnemyCount;
 	/// <summary>
 	/// How many spawners there are in the level.
@@ -28,28 +29,14 @@ public partial class Level : Node2D
 	[Export] public DiggableTiles DiggableTiles = null;
 	[Export] private Timer _eventCheckTimer = null;
 
-	private bool _wurmAweken = false;
-
-	/// <summary>
-	/// Intensity level indicates how intensive the level is currently.
-	/// 0.0f - 2.5f LOW
-	/// 2.6f - 5.0f MID
-	/// 5.1f - 7.5f HIGH
-	/// 7.6f - 10.0f INSANE
-	/// </summary>
-	private float _intensityLevel = 0.0f;
-	public float IntensityLevel
+	public enum EndingCondition
 	{
-		get
-		{
-			// GD.Print("Intensity level: " + _intensityLevel);
-			return _intensityLevel;
-		}
-		private set
-		{
-			Mathf.Clamp(_intensityLevel, 0.0f, 10.0f);
-		}
+		SpawnersDestroyed,
+		BearKilled,
+		PlayerCloneKilled
 	}
+
+	private bool _wurmAweken = false;
 
 	public int MaxTotalEnemyCount
 	{
@@ -72,7 +59,9 @@ public partial class Level : Node2D
 	public int CurrentSpawnerCount = 0;
 	public int CurrentTotalEnemyCount = 0;
 
+	[Signal] public delegate void ExitReadyEventHandler();
 	[Signal] public delegate void OnZeroSpawnerLeftEventHandler();
+	[Signal] public delegate void OnBearKilledEventHandler();
 	[Signal] public delegate void EnemyCountChangedEventHandler();
 
 	public override void _EnterTree()
@@ -118,11 +107,18 @@ public partial class Level : Node2D
 
 		if (CurrentSpawnerCount == 0)
 		{
+			EmitSignal(SignalName.ExitReady);
 			EmitSignal(SignalName.OnZeroSpawnerLeft);
-
-			IncreaseIntensity(Config.ZeroSpawnerLeft);
 		}
+	}
 
+	public void BearKilled()
+	{
+		if (CurrentEndingCondition == EndingCondition.BearKilled)
+		{
+			EmitSignal(SignalName.ExitReady);
+			EmitSignal(SignalName.OnBearKilled);
+		}
 	}
 
 	public void UpdateNavRegion()
@@ -134,38 +130,6 @@ public partial class Level : Node2D
 		else
 		{
 			GD.PrintErr("Level is missing NavRegion");
-		}
-	}
-
-	public void IncreaseIntensity(float value)
-	{
-		if (value > 0.0f)
-		{
-			_intensityLevel += value;
-		}
-
-		// Limit level to 10.0f
-		if (IntensityLevel > 10.0f)
-		{
-			_intensityLevel = 10.0f;
-		}
-	}
-
-	/// <summary>
-	/// Decrease current Intensity.
-	/// </summary>
-	/// <param name="value">Use values form Config</param>
-	public void DecreaseIntensity(float value)
-	{
-		if (value > 0.0f)
-		{
-			_intensityLevel -= value;
-		}
-
-		// Limit level to 0.0f;
-		if (IntensityLevel < 0.0f)
-		{
-			_intensityLevel = 0.0f;
 		}
 	}
 

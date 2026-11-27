@@ -152,9 +152,9 @@ physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rxg4t"]
-vertices = PackedVector2Array(4452.8594, 1322.5703, -1909.4766, 1392.5313, -1856.4922, -47.8125, 4976.4063, 158.84375, 5046.4688, 2045.3516, 4522.867, 3766.4219, 13212.32, 3862.5625, 11378, 1988.6406, 13348.617, -229.42188, 11378, -202.53125)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 5, 4, 7), PackedInt32Array(8, 6, 7, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1895, -89, 5015, 120, 5085, 2005, 11338, 1949, 11338, -242, 13390, -270, 13251, 3903, 4484, 3806, 4414, 1363, -1951, 1433)])
+vertices = PackedVector2Array(6783.828, -3215.0078, 6750.1484, 5079.578, -834.9375, 5192.3906, -823.0469, -3216.9766)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-863, -3257, 6824, -3255, 6790, 5119, -875, 5233)])
 agent_radius = 40.0
 
 [sub_resource type="Shader" id="Shader_jrnry"]

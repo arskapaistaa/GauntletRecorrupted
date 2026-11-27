@@ -229,20 +229,6 @@ public partial class EnemySpawner : StaticBody2D
 		_currentActiveEnemiesCount--;
 	}
 
-	private void SetSpawningCooldown(float multiplier)
-	{
-		if (Level.Current.IntensityLevel < Config.LowIntensityMax)
-		{
-			CurrentSpawningCooldown = _spawningCooldown ;
-		}
-		else
-		{
-			CurrentSpawningCooldown = _spawningCooldown * multiplier;
-		}
-
-		_spawnTimer.WaitTime = CurrentSpawningCooldown;
-	}
-
 	private void UpdateAnimation()
 	{
 		if (_sprite == null)
