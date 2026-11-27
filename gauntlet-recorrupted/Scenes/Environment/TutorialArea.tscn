@@ -11,7 +11,7 @@ size = Vector2(256, 256)
 
 [sub_resource type="Animation" id="Animation_2qwsu"]
 resource_name = "MouseMove"
-length = 1.5999999999999999
+length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -24,6 +24,40 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(5, 0), Vector2(3, 3), Vector2(0, 5), Vector2(-3, 3), Vector2(-5, 0), Vector2(-3, -3), Vector2(0, -5), Vector2(3, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_v8frw"]
+resource_name = "PeekMouse"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MouseAndKey/Texture2:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(10, 0), Vector2(15, 0), Vector2(20, 0), Vector2(25, 0), Vector2(30, 0), Vector2(35, 0), Vector2(40, 0), Vector2(45, 0), Vector2(50, 0), Vector2(50, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3i43y"]
+resource_name = "PeekStick"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Controller/Texture2:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(2, 0), Vector2(3, 0), Vector2(4, 0), Vector2(5, 0), Vector2(5, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_xw5ks"]
@@ -97,6 +131,8 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2qwsu"]
 _data = {
 &"MouseMove": SubResource("Animation_2qwsu"),
+&"PeekMouse": SubResource("Animation_v8frw"),
+&"PeekStick": SubResource("Animation_3i43y"),
 &"RESET": SubResource("Animation_xw5ks"),
 &"StickMove": SubResource("Animation_8bys2")
 }

@@ -13,6 +13,7 @@ public partial class DiggableTiles : TileMapLayer
 	[Export] public string MaxHealthDataString = "MaxHealth";
 	[Export] public PackedScene BreakEffectScene;
 	private readonly Dictionary<Vector2I, int> _tileHealth = new Dictionary<Vector2I, int>();
+	[Signal] public delegate void TileDestroyedEventHandler(Vector2I coords);
 
 	public void DamageTile(Vector2I coords, int damage)
 	{
@@ -90,6 +91,7 @@ public partial class DiggableTiles : TileMapLayer
 		if (hasEnemy)
 			SpawnEnemy(coords);
 		SpawnBreakEffect(coords);
+		EmitSignal(SignalName.TileDestroyed, coords);
 		Level.Current.UpdateNavRegion();
 	}
 }

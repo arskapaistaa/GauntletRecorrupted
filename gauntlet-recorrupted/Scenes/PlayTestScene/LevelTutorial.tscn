@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://fpolu3ovr3ti" path="res://Scenes/Environment/Exit.tscn" id="8_tyw8m"]
 [ext_resource type="PackedScene" uid="uid://bsdr5k6msb208" path="res://Scenes/Characters/PlayerCharacter.tscn" id="9_l5mvp"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="10_8tc7b"]
+[ext_resource type="PackedScene" uid="uid://djpak7hkkrvkp" path="res://Scenes/Environment/TileBorders.tscn" id="10_or3j3"]
 [ext_resource type="PackedScene" uid="uid://dpdpro6v125u1" path="res://Scenes/Environment/TutorialArea.tscn" id="11_3qguu"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="11_r27b6"]
 [ext_resource type="Texture2D" uid="uid://cuvwpq0akwtdb" path="res://Art/UserInterface/Space.png" id="12_l5mvp"]
@@ -32,7 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://4gswrml3a4rk" path="res://Scenes/Environment/Destroyable/Barrel.tscn" id="24_4bxdr"]
 [ext_resource type="Texture2D" uid="uid://wkexx83jqt2g" path="res://Art/UserInterface/L1.png" id="25_rxg4t"]
 [ext_resource type="PackedScene" uid="uid://sh2l5n4u772q" path="res://Scenes/Environment/Destroyable/BarrelGoo.tscn" id="27_4bxdr"]
-[ext_resource type="PackedScene" uid="uid://dfavr87xu6e8m" path="res://Scenes/Characters/Enemy/Adult.tscn" id="28_oprqm"]
 [ext_resource type="PackedScene" uid="uid://b1i01plpso6s3" path="res://Scenes/Environment/Destroyable/Bottle.tscn" id="28_rxg4t"]
 [ext_resource type="PackedScene" uid="uid://cwjmukqrwluuh" path="res://Scenes/Environment/Destroyable/Eye.tscn" id="29_or3j3"]
 [ext_resource type="Texture2D" uid="uid://caceh7ogx4f8x" path="res://Art/Screenshot 2026-09-29 142148.png" id="33_k7xru"]
@@ -297,7 +297,6 @@ _eventCheckTimer = NodePath("EventTimer")
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
 
 [node name="NavigationRegionBasic" type="NavigationRegion2D" parent="Environment" unique_id=1034927120]
-visible = false
 position = Vector2(-1514, -792)
 navigation_polygon = SubResource("NavigationPolygon_lpo5v")
 
@@ -341,11 +340,17 @@ tile_set = SubResource("TileSet_sopei")
 [node name="DiggableTiles" parent="Environment/TileMap" unique_id=999643897 instance=ExtResource("8_hcqfa")]
 tile_map_data = PackedByteArray("AAAHAAkAAAACAAEAAAAHAAoAAAACAAEAAAAHAAsAAAACAAEAAAAHAAwAAAACAAEAAAAHAA0AAAACAAEAAAAJAAkAAAACAAEAAAAJAAoAAAACAAEAAAAJAAsAAAACAAEAAAAJAAwAAAACAAEAAAAJAA0AAAACAAEAAAALAAkAAAACAAEAAAALAAoAAAACAAEAAAALAAsAAAACAAEAAAALAAwAAAACAAEAAAALAA0AAAACAAEAAAALAA4AAAACAAEAAAANAAkAAAACAAEAAAANAAoAAAACAAEAAAANAAsAAAACAAEAAAANAAwAAAACAAEAAAANAA0AAAACAAEAAAD5/w8AAAACAAEAAAD4/w8AAAACAAEAAAD1/w8AAAACAAEAAADr/woAAAACAAEAAADr/wkAAAACAAEAAADs/wkAAAACAAEAAADs/wgAAAACAAEAAADt/wgAAAACAAEAAADt/wcAAAACAAEAAADu/wcAAAACAAEAAADv/wcAAAACAAEAAADw/wcAAAACAAEAAADw/wYAAAACAAEAAADx/wYAAAACAAEAAADx/wcAAAACAAEAAADy/wcAAAACAAEAAADz/wcAAAACAAEAAADz/wgAAAACAAEAAAD0/wgAAAACAAEAAAD1/wgAAAACAAEAAAD1/wkAAAACAAEAAAD2/wkAAAACAAEAAADr/wsAAAACAAEAAADr/wwAAAACAAEAAADr/wgAAAACAAEAAADs/wcAAAACAAEAAADs/wYAAAACAAEAAADt/wYAAAACAAEAAADu/wYAAAACAAEAAADv/wYAAAACAAEAAADv/wUAAAACAAEAAADu/wUAAAACAAEAAADt/wUAAAACAAEAAADu/wQAAAACAAEAAADv/wQAAAACAAEAAADw/wQAAAACAAEAAADv/wMAAAACAAEAAADw/wMAAAACAAEAAADw/wIAAAACAAEAAADx/wIAAAACAAEAAADx/wMAAAACAAEAAADw/wUAAAACAAEAAADx/wUAAAACAAEAAADx/wQAAAACAAEAAADy/wMAAAACAAEAAADz/wMAAAACAAEAAADz/wQAAAACAAEAAAD0/wQAAAACAAEAAAD0/wUAAAACAAEAAADz/wUAAAACAAEAAADy/wUAAAACAAEAAADy/wQAAAACAAEAAAD0/wMAAAACAAEAAAD1/wQAAAACAAEAAAD1/wUAAAACAAEAAAD2/wUAAAACAAEAAAD2/wYAAAACAAEAAAD2/wcAAAACAAEAAAD3/wcAAAACAAEAAAD3/wgAAAACAAEAAAD2/wgAAAACAAEAAAD1/wcAAAACAAEAAAD0/wcAAAACAAEAAAD0/wYAAAACAAEAAADz/wYAAAACAAEAAADy/wYAAAACAAEAAAD1/wYAAAACAAEAAADt/wQAAAACAAEAAADs/wQAAAACAAEAAADs/wMAAAACAAEAAADt/wMAAAACAAEAAADr/wMAAAACAAEAAADr/wIAAAACAAEAAADs/wIAAAACAAEAAADs/wEAAAACAAEAAADr/wEAAAACAAEAAADq/wEAAAACAAEAAADq/wIAAAACAAEAAADp/wEAAAACAAEAAAD4//r/AAACAAEAAAD5//r/AAACAAEAAAD6//r/AAACAAEAAAAEAPr/AAACAAEAAAAFAPr/AAACAAEAAAAGAPr/AAACAAEAAAA=")
 
+[node name="TileBorders" parent="Environment/TileMap" unique_id=1130507526 node_paths=PackedStringArray("_tileset") instance=ExtResource("10_or3j3")]
+_tileset = NodePath("../DiggableTiles")
+
+[node name="TileBorders2" parent="Environment/TileMap" unique_id=1937509411 node_paths=PackedStringArray("_tileset") instance=ExtResource("10_or3j3")]
+_tileset = NodePath("../DiggableTiles")
+_tileMaterial = 1
+
 [node name="NonDiggableTiles" type="TileMapLayer" parent="Environment/TileMap" unique_id=1163171344]
 tile_set = SubResource("TileSet_3vko6")
 
 [node name="NavigationRegionWurm" type="NavigationRegion2D" parent="Environment" unique_id=1225948905]
-visible = false
 position = Vector2(-2044, -2090)
 navigation_polygon = SubResource("NavigationPolygon_rxg4t")
 navigation_layers = 2
@@ -433,6 +438,10 @@ visible = false
 
 [node name="TutorialAreaShift" parent="Environment" unique_id=1111604012 instance=ExtResource("11_3qguu")]
 position = Vector2(3702, 398)
+PlayMouseAndKeyboardAnimation = true
+PlayControllerAnimation = true
+MouseAndKeyboardAnimation = "PeekMouse"
+ControllerAnimation = "PeekStick"
 
 [node name="CollisionShape2D" parent="Environment/TutorialAreaShift" index="0" unique_id=1676742655]
 position = Vector2(-1006, 1026)
@@ -470,9 +479,6 @@ position = Vector2(-118, -1783)
 
 [node name="BarrelGoo2" parent="Environment/Destroyables" unique_id=1502942474 instance=ExtResource("27_4bxdr")]
 position = Vector2(20, -1021)
-
-[node name="Adult" parent="Environment/Destroyables" unique_id=1328871222 instance=ExtResource("28_oprqm")]
-position = Vector2(141, -1376)
 
 [node name="Bottle" parent="Environment/Destroyables" unique_id=434042929 instance=ExtResource("28_rxg4t")]
 position = Vector2(3569, -129)
