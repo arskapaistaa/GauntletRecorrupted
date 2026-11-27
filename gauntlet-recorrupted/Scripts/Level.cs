@@ -25,6 +25,7 @@ public partial class Level : Node2D
 	[ExportCategory("Node preferences")]
 	[Export] public NavigationRegion2D _navRegion = null;
 	[Export] public PlayerCharacter Player = null;
+	[Export] public DiggableTiles DiggableTiles = null;
 	[Export] private Timer _eventCheckTimer = null;
 
 	private bool _wurmAweken = false;

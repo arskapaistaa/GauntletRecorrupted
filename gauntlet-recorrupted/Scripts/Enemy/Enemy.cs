@@ -61,7 +61,9 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "2,30,1,suffix:seconds")] private float _maxAwakeIntervalTime = 1.0f;
 	[Export] private int _awakeStartFrame;
 	[Export] private int _awakeEndFrame;
-
+	[ExportSubgroup("Wurm (Destroy walls)")]
+	[Export] private bool _canDestroyWalls = false;
+	[Export] private RayCast2D _wallDestroyRayCast = null;
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
@@ -97,6 +99,7 @@ public partial class Enemy : CharacterBody2D
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
 	private float _attackNavInterval = 0.5f;
+	private DiggableTiles _diggableTiles = null;
 	private EnemySpawner _homeSpawner = null;
 	public bool CanShoot = true;
 
@@ -196,6 +199,11 @@ public partial class Enemy : CharacterBody2D
 		if (Player == null)
 		{
 			Player = Level.Current.Player;
+		}
+
+		if (_diggableTiles == null && _canDestroyWalls)
+		{
+			_diggableTiles = Level.Current.DiggableTiles;
 		}
 
 		Reset();
@@ -398,6 +406,11 @@ public partial class Enemy : CharacterBody2D
 		if (_agent.IsNavigationFinished())
 		{
 			return;
+		}
+
+		if (_canDestroyWalls)
+		{
+			DestroyWalls();
 		}
 
 		Navigation(delta, _maxSpeed, _navInterval);
@@ -898,6 +911,31 @@ public partial class Enemy : CharacterBody2D
 					enemyNode.Alarmed();
 				}
 			}
+		}
+	}
+
+	private void DestroyWalls()
+	{
+		if (_wallDestroyRayCast == null)
+		{
+			GD.PrintErr("WallDestroyRayCast is missing");
+			return;
+		}
+
+		_wallDestroyRayCast.ForceRaycastUpdate();
+
+		if (!_wallDestroyRayCast.IsColliding() || _wallDestroyRayCast.GetCollider() != _diggableTiles)
+			return;
+
+		// Ray hits the edge of the tile, so we move slightly inside the tile to get the correct target position.
+		Vector2 targetTileInside = _wallDestroyRayCast.GetCollisionPoint() - _wallDestroyRayCast.GetCollisionNormal() * 0.2f;
+		// Convert the target position to the cell in the tilemap
+		Vector2I targetCell = _diggableTiles.LocalToMap(_diggableTiles.ToLocal(targetTileInside));
+
+		if (_diggableTiles.GetCellTileData(targetCell) != null)
+		{
+			_diggableTiles.DeleteCell(targetCell);
+			// _diggingSuccessful = true;
 		}
 	}
 
