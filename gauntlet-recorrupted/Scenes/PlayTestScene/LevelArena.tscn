@@ -245,7 +245,7 @@ noise = SubResource("FastNoiseLite_h2354")
 color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
 script = ExtResource("1_byvwr")
 _maxTotalEnemyCount = 20
 _spawnerCount = 1
@@ -253,6 +253,7 @@ _presetEnemyCount = 1
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")
+DiggableTiles = NodePath("Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 _eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]

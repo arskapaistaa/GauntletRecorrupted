@@ -61,7 +61,9 @@ public partial class Enemy : CharacterBody2D
 	[Export(PropertyHint.Range, "2,30,1,suffix:seconds")] private float _maxAwakeIntervalTime = 1.0f;
 	[Export] private int _awakeStartFrame;
 	[Export] private int _awakeEndFrame;
-
+	[ExportSubgroup("Wurm (Destroy walls)")]
+	[Export] private bool _canDestroyWalls = false;
+	[Export] private RayCast2D _wallDestroyRayCast = null;
 
 	[ExportGroup("Node References")]
 	[Export] private Brain _brain = null;
@@ -93,9 +95,11 @@ public partial class Enemy : CharacterBody2D
 
 	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
+	private bool _isPlayerAlive = true;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
 	private float _attackNavInterval = 0.5f;
+	private DiggableTiles _diggableTiles = null;
 	private EnemySpawner _homeSpawner = null;
 	public bool CanShoot = true;
 
@@ -197,6 +201,11 @@ public partial class Enemy : CharacterBody2D
 			Player = Level.Current.Player;
 		}
 
+		if (_diggableTiles == null && _canDestroyWalls)
+		{
+			_diggableTiles = Level.Current.DiggableTiles;
+		}
+
 		Reset();
 
 		ConnectSignals();
@@ -290,38 +299,41 @@ public partial class Enemy : CharacterBody2D
 
 	public void Check()
 	{
-		switch(_brain.CurrentState)
+		if (_isPlayerAlive)
 		{
-			case Brain.State.Chase:
-			// If enemy is in attack range and can see player, start Attacking.
-
-			if (ThisAttackType == AttackType.Static)
+			switch(_brain.CurrentState)
 			{
-				return;
-			}
+				case Brain.State.Chase:
+				// If enemy is in attack range and can see player, start Attacking.
 
-			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
-			{
-				if (CanRangedAttack && CanShoot)
+				if (ThisAttackType == AttackType.Static)
 				{
-					double change = GD.Randf();
-					if (change > RangedAttackChange)
+					return;
+				}
+
+				if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
+				{
+					if (CanRangedAttack && CanShoot)
 					{
-						_brain.CanRangedAttack();
-						return;
+						double change = GD.Randf();
+						if (change > RangedAttackChange)
+						{
+							_brain.CanRangedAttack();
+							return;
+						}
+					}
+					else
+					{
+						_brain.CanAttack();
+
+						if (ThisAttackType == AttackType.Dash)
+						{
+							SetAttackDirection();
+						}
 					}
 				}
-				else
-				{
-					_brain.CanAttack();
-
-					if (ThisAttackType == AttackType.Dash)
-					{
-						SetAttackDirection();
-					}
-				}
+				break;
 			}
-			break;
 		}
 	}
 
@@ -370,6 +382,11 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
+		if (!_isPlayerAlive)
+		{
+			return;
+		}
+
 		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPlayer();
 
@@ -389,6 +406,11 @@ public partial class Enemy : CharacterBody2D
 		if (_agent.IsNavigationFinished())
 		{
 			return;
+		}
+
+		if (_canDestroyWalls)
+		{
+			DestroyWalls();
 		}
 
 		Navigation(delta, _maxSpeed, _navInterval);
@@ -892,6 +914,31 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
+	private void DestroyWalls()
+	{
+		if (_wallDestroyRayCast == null)
+		{
+			GD.PrintErr("WallDestroyRayCast is missing");
+			return;
+		}
+
+		_wallDestroyRayCast.ForceRaycastUpdate();
+
+		if (!_wallDestroyRayCast.IsColliding() || _wallDestroyRayCast.GetCollider() != _diggableTiles)
+			return;
+
+		// Ray hits the edge of the tile, so we move slightly inside the tile to get the correct target position.
+		Vector2 targetTileInside = _wallDestroyRayCast.GetCollisionPoint() - _wallDestroyRayCast.GetCollisionNormal() * 0.2f;
+		// Convert the target position to the cell in the tilemap
+		Vector2I targetCell = _diggableTiles.LocalToMap(_diggableTiles.ToLocal(targetTileInside));
+
+		if (_diggableTiles.GetCellTileData(targetCell) != null)
+		{
+			_diggableTiles.DeleteCell(targetCell);
+			// _diggingSuccessful = true;
+		}
+	}
+
 	private void Alarmed()
 	{
 		_brain.Alarmed();
@@ -1186,9 +1233,19 @@ public partial class Enemy : CharacterBody2D
 		{
 			_rangedCooldownTimer.Timeout += OnRangedCooldownTimerTimedOut;
 		}
+
+		if (Player != null)
+		{
+			Player.PlayerDied += OnPlayerDied;
+		}
 	}
 
-	private void OnIdleTimerTimedOut()
+    private void OnPlayerDied()
+    {
+		_isPlayerAlive = false;
+    }
+
+    private void OnIdleTimerTimedOut()
 	{
 		_brain.IdleTimerTimedOut();
 	}
