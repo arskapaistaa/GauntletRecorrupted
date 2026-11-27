@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://djpak7hkkrvkp"]
+
+[ext_resource type="Texture2D" uid="uid://crnv81yxgwcd1" path="res://Art/Environment/ArtConnectStone.png" id="1_2i6hx"]
+[ext_resource type="Script" uid="uid://dts3oop1j41qd" path="res://Scripts/Environment/TileBorders.cs" id="2_2i6hx"]
+[ext_resource type="Texture2D" uid="uid://bc6emidjwf54s" path="res://Art/Environment/ArtConnectFlesh.png" id="2_jhj86"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lx172"]
+texture = ExtResource("1_2i6hx")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhj86"]
+texture = ExtResource("2_jhj86")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rk2iv"]
+tile_size = Vector2i(256, 256)
+sources/1 = SubResource("TileSetAtlasSource_jhj86")
+sources/0 = SubResource("TileSetAtlasSource_lx172")
+
+[node name="TileBorders" type="TileMapLayer" unique_id=1130507526]
+tile_set = SubResource("TileSet_rk2iv")
+script = ExtResource("2_2i6hx")
