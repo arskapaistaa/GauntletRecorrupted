@@ -50,56 +50,56 @@ public partial class Bestiary : NinePatchRect
 		//Baby
 		if (StatsManager.Instance.IsBabyKilled())
 		{
-
+			_beastContainers[2].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[2].EnemyUnknown();
 		}
 
 		if (StatsManager.Instance.IsAdultKilled())
 		{
-
+			_beastContainers[3].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[3].EnemyUnknown();
 		}
 
 		if (StatsManager.Instance.IsLieroKilled())
 		{
-
+			_beastContainers[4].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[4].EnemyUnknown();
 		}
 
 		if (StatsManager.Instance.IsSpiderKilled())
 		{
-
+			_beastContainers[5].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[5].EnemyUnknown();
 		}
 
 		if (StatsManager.Instance.IsWurmKilled())
 		{
-
+			_beastContainers[6].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[6].EnemyUnknown();
 		}
 
 		if (StatsManager.Instance.IsBearKilled())
 		{
-
+			_beastContainers[7].EnemyKnown();
 		}
 		else
 		{
-
+			_beastContainers[7].EnemyUnknown();
 		}
 	}
 

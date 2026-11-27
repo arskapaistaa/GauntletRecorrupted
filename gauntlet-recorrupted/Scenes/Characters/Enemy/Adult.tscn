@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://cd5bsk8pw12ms" path="res://Materials/UseThisMaterialForThingsThatMustRenderInLight.tres" id="3_b76up"]
 [ext_resource type="Texture2D" uid="uid://dciwi6vj26yeh" path="res://Art/Enemies/ArtEnemyAdult.png" id="3_nepj2"]
 [ext_resource type="Script" uid="uid://dqvnfp17pafmk" path="res://Scripts/Enemy/DamageArea.cs" id="5_w0b3p"]
-[ext_resource type="AudioStream" uid="uid://bd83rfcydy5oc" path="res://Audio/SFX/WalkingStep.wav" id="6_urfi1"]
+[ext_resource type="AudioStream" uid="uid://cy2j546wvrxuv" path="res://Audio/SFX/Adult/AdultWalk.wav" id="6_ngyqg"]
 [ext_resource type="AudioStream" uid="uid://b4e0q5tqiqtm5" path="res://Audio/SFX/Adult/AdultTakeDmg.wav" id="7_ifcqm"]
 [ext_resource type="Script" uid="uid://dd727ltsfisn0" path="res://Scripts/Enemy/EnemyAudioPlayer.cs" id="7_ngyqg"]
 [ext_resource type="Script" uid="uid://y0oem8u8mduo" path="res://Scripts/Enemy/AudioStreams.cs" id="8_ncmjd"]
@@ -276,7 +276,7 @@ size = Vector2(88, 112)
 random_pitch = 1.0594631
 random_volume_offset_db = 2.0
 streams_count = 1
-stream_0/stream = ExtResource("6_urfi1")
+stream_0/stream = ExtResource("6_ngyqg")
 
 [node name="Adult" type="CharacterBody2D" unique_id=1765397949 node_paths=PackedStringArray("_brain", "_sprite", "_characterCollision", "_detectionArea", "_dmgArea", "_detectionShape", "_agent", "_rayCast", "_enemyAudioPlayer", "_movementSfx", "_damagedParticles", "_destroyTimer", "_fromIdleToTimer") groups=["Enemy"]]
 z_index = 4
@@ -367,7 +367,7 @@ collision_mask = 5
 
 [node name="MovementSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=765843710]
 stream = SubResource("AudioStreamRandomizer_b76up")
-volume_db = -12.0
+volume_db = -6.0
 max_polyphony = 2
 bus = &"SFX"
 

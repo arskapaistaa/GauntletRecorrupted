@@ -4,12 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://dk0mlf6nyor8o" path="res://Art/UserInterface/Base.png" id="2_7mk1x"]
 [ext_resource type="Script" uid="uid://c4ftiyl6rb6pr" path="res://Scripts/UI/Bestiary.cs" id="3_jl0s4"]
 [ext_resource type="Script" uid="uid://c5b8mhgjcoemr" path="res://Scripts/UI/BeastContainer.cs" id="4_00mgp"]
+[ext_resource type="Texture2D" uid="uid://tmcht3b216jr" path="res://Art/Portrait/ArtPortraitRoach.png" id="5_i13mg"]
 [ext_resource type="Texture2D" uid="uid://cui8d2yrx2ial" path="res://Art/Portrait/ArtPortraitLiero.png" id="5_nsjki"]
 [ext_resource type="Texture2D" uid="uid://cw27v4xxl4rjb" path="res://Art/UserInterface/Scale1-5.png" id="6_jl0s4"]
 [ext_resource type="Texture2D" uid="uid://ce5himjry2nib" path="res://Art/UserInterface/Scale3-5.png" id="6_nsjki"]
 [ext_resource type="Texture2D" uid="uid://cw2udjenqujls" path="res://Art/UserInterface/Scale2-5.png" id="7_00mgp"]
 [ext_resource type="Texture2D" uid="uid://wcje7oe5binf" path="res://Art/UserInterface/BestiaryArrow.png" id="8_00mgp"]
+[ext_resource type="Texture2D" uid="uid://cy1boieiva85" path="res://Art/Portrait/ArtPortraitTick.png" id="8_mpywm"]
 [ext_resource type="Texture2D" uid="uid://c237y0lc0ldmd" path="res://Art/UserInterface/Scale4-5.png" id="8_nsjki"]
+[ext_resource type="Texture2D" uid="uid://dyeo3c4ow8gh3" path="res://Art/Portrait/ArtPortraitAdult.png" id="11_btbcw"]
+[ext_resource type="Texture2D" uid="uid://vffclkdihnak" path="res://Art/Portrait/ArtPortraitSpider.png" id="13_4ookp"]
+[ext_resource type="Texture2D" uid="uid://cy3p0wnonudbh" path="res://Art/Portrait/ArtPortraitWurm.png" id="14_mpywm"]
+[ext_resource type="Texture2D" uid="uid://4w77aau4rqcx" path="res://Art/Portrait/ArtPortraitBear.png" id="15_btbcw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btbcw"]
+load_path = "res://.godot/imported/ArtPortraitBaby.png-0f5b1668dc6b78a81389358a0459f0cc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdyef"]
 load_path = "res://.godot/imported/Scale1-5.png-0df4543ba53b3ccfadd1f81c93f1a742.ctex"
@@ -132,7 +141,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("5_i13mg")
 
 [node name="Stats" type="VBoxContainer" parent="RoachContainer" unique_id=1828582878]
 layout_mode = 1
@@ -407,7 +416,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("8_mpywm")
 
 [node name="Stats" type="VBoxContainer" parent="TickContainer" unique_id=59234573]
 layout_mode = 1
@@ -682,7 +691,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = SubResource("CompressedTexture2D_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BabyContainer" unique_id=307186007]
 layout_mode = 1
@@ -957,7 +966,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("11_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="AdultContainer" unique_id=1739929053]
 layout_mode = 1
@@ -1507,7 +1516,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("13_4ookp")
 
 [node name="Stats" type="VBoxContainer" parent="SpiderContainer" unique_id=501376971]
 layout_mode = 1
@@ -1743,6 +1752,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WurmContainer" type="Control" parent="." unique_id=1743075214 node_paths=PackedStringArray("_enemyUnknown")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1781,7 +1791,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("14_mpywm")
 
 [node name="Stats" type="VBoxContainer" parent="WurmContainer" unique_id=936547549]
 layout_mode = 1
@@ -2056,7 +2066,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("15_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BearContainer" unique_id=440915112]
 layout_mode = 1

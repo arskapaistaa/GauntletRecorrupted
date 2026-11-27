@@ -202,9 +202,9 @@ public partial class Enemy : CharacterBody2D
 		ConnectSignals();
 	}
 
-    public override void _ExitTree()
-    {
-        if (_detectionArea != null)
+	public override void _ExitTree()
+	{
+		if (_detectionArea != null)
 		{
 			_detectionArea.BodyEntered -= OnBodyEntered;
 			_detectionArea.BodyExited -= OnBodyExited;
@@ -242,7 +242,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			_rangedCooldownTimer.Timeout -= OnRangedCooldownTimerTimedOut;
 		}
-    }
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		StateMachine(delta);
@@ -357,7 +357,7 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-    public void UpdateChase(double delta)
+	public void UpdateChase(double delta)
 	{
 		if (_agent == null)
 		{
@@ -380,8 +380,8 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	private void UpdatePatrol(double delta)
-    {
-        if (_agent == null)
+	{
+		if (_agent == null)
 		{
 			return;
 		}
@@ -393,7 +393,7 @@ public partial class Enemy : CharacterBody2D
 
 		Navigation(delta, _maxSpeed, _navInterval);
 		LookAtPosition();
-    }
+	}
 
 	public void EnterPatrol()
 	{
@@ -602,7 +602,7 @@ public partial class Enemy : CharacterBody2D
 	private void UpdateDamageArea(string animation, AnimatedSprite2D sprite, DamageArea damageArea, int attackStartFrame, int attackEndFrame)
 	{
 		if (sprite.Animation == animation)
-        {
+		{
 			if (sprite.Frame == attackStartFrame)
 			{
 				if (damageArea != null)
@@ -618,7 +618,7 @@ public partial class Enemy : CharacterBody2D
 					damageArea.Monitoring = false;
 				}
 			}
-        }
+		}
 	}
 
 	/// <summary>
@@ -629,7 +629,7 @@ public partial class Enemy : CharacterBody2D
 	private bool CheckAttackAnimation()
 	{
 		if (_sprite.Animation == "Attack")
-        {
+		{
 			for (int x = 0; x < _attackMovementFrames.Length; x++)
 			{
 				if (_sprite.Frame == _attackMovementFrames[x])
@@ -638,7 +638,7 @@ public partial class Enemy : CharacterBody2D
 				}
 			}
 			return false;
-        }
+		}
 		return false;
 
 	}
@@ -858,6 +858,11 @@ public partial class Enemy : CharacterBody2D
 			_destroyTimer.Start();
 		}
 
+		if (_movementSfx != null)
+		{
+			_movementSfx.Stop();
+		}
+
 		// Stop monitoring the damage area to prevent bugs.
 		if (ThisEnemyType != EnemyType.Worm)
 		{
@@ -938,32 +943,32 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-    private void OnBodyEntered(Node2D body)
-    {
-        if (body is PlayerCharacter)
+	private void OnBodyEntered(Node2D body)
+	{
+		if (body is PlayerCharacter)
 		{
 			if (CheckTargetReachable(body.GlobalPosition))
 			{
 			_brain.PlayerEntered();
 			}
 		}
-    }
+	}
 
 	private void OnAreaEntered(Area2D area)
-    {
-        if (area is Bullet)
+	{
+		if (area is Bullet)
 		{
 			_brain.BulletDetected();
 		}
-    }
+	}
 
 	private void OnBodyExited(Node2D body)
-    {
+	{
 		// Hmmm...
-    }
+	}
 
 	private void OnAnimationFinished()
-    {
+	{
 		if (_sprite.Animation == "EnterIdle")
 		{
 			_sprite.Play("Idle");
@@ -1021,28 +1026,28 @@ public partial class Enemy : CharacterBody2D
 				_rangedCooldownTimer.Start();
 			}
 		}
-    }
+	}
 
 	private void OnVelocityComputed(Vector2 safeVelocity)
-    {
-        Velocity = safeVelocity;
+	{
+		Velocity = safeVelocity;
 		MoveAndSlide();
-    }
+	}
 
 	private void OnNavigationFinished()
-    {
-        _brain.NavigationFinished();
-    }
+	{
+		_brain.NavigationFinished();
+	}
 
 	private void OnSpawnerDamaged()
-    {
-        Alarmed();
-    }
+	{
+		Alarmed();
+	}
 
 	private void OnAttackSucceed()
-    {
-        AttackSucceed = true;
-    }
+	{
+		AttackSucceed = true;
+	}
 
 	public void OnStateChanged(Brain.State state)
 	{
@@ -1056,6 +1061,10 @@ public partial class Enemy : CharacterBody2D
 			case Brain.State.Idle:
 				EnterIdle();
 				SetDetectionRange(DetectionRange);
+				break;
+
+			case Brain.State.Attack:
+				AttackSucceed = false;
 				break;
 
 			case Brain.State.Patrol:
@@ -1179,16 +1188,16 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-    private void OnIdleTimerTimedOut()
-    {
+	private void OnIdleTimerTimedOut()
+	{
 		_brain.IdleTimerTimedOut();
-    }
+	}
 
 	private void OnRangedCooldownTimerTimedOut()
-    {
-        CanShoot = true;
+	{
+		CanShoot = true;
 		GD.Print("Can shoot");
-    }
+	}
 
 	private double RandomWaitTime(float min, float max)
 	{
@@ -1196,8 +1205,8 @@ public partial class Enemy : CharacterBody2D
 		return waitTime;
 	}
 
-    private void OnDestroyTimerTimedOut()
-    {
-        QueueFree();
-    }
+	private void OnDestroyTimerTimedOut()
+	{
+		QueueFree();
+	}
 }

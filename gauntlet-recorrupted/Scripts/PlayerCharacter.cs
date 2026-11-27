@@ -20,6 +20,8 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,50000,500")] private float RecoilForce = 1000.0f;
 	[Export(PropertyHint.Range, "0,50000,100")] private float KnockbackDecay = 12500.0f;
 	[Export(PropertyHint.Enum, "Revolver,Shotgun")] private int WeaponType = 0;
+	[ExportGroup("Particles")]
+	[Export(PropertyHint.Range, "0.0,1.0,0.1")] public float BaseParticleAmountRatio = 0.1f;
 
 	[ExportCategory("Node References")]
 	[Export] private PackedScene BulletScene;
@@ -32,6 +34,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private AnimatedSprite2D AimArrow;
 	[Export] private RayCast2D DigRay;
 	[Export] private AudioListener2D AudioListener;
+	[Export] private GpuParticles2D _dustParticles;
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSFX = null;
@@ -114,6 +117,8 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		_currentAmmoRevolver = _maxAmmoRevolver;
 		_currentAmmoShotgun = _maxAmmoShotgun;
+
+		SetDustParticlesEmittingAmountRatio(BaseParticleAmountRatio);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -647,6 +652,14 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (_isMoving && _movementSFX.Playing == false)
 		{
 			_movementSFX.Play();
+		}
+	}
+
+	public void SetDustParticlesEmittingAmountRatio(float amount)
+	{
+		if (_dustParticles != null)
+		{
+			_dustParticles.AmountRatio = amount;
 		}
 	}
 

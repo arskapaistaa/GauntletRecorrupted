@@ -276,32 +276,33 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sopei"]
 size = Vector2(200, 200)
 
-[node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_timer", "_sprite", "_takeDmgParticles", "_takeDmgSFX", "_spawnPoint")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sopei"]
+radius = 2500.0
+
+[node name="TickSpawner" type="StaticBody2D" unique_id=1930281201 node_paths=PackedStringArray("_spawnTimer", "_sprite", "_takeDmgParticles", "_takeDmgSFX", "_spawnPoint", "_playerDetectionArea")]
 z_index = 3
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_p1ylh")
 _enemyScene = ExtResource("4_p13av")
 _spawningCooldown = 15.0
-_cooldownMultiplier = PackedFloat32Array(1.25, 1.5, 1.75, 2)
-_health = 100
 _maxActiveEnemiesCount = 7
-_timer = NodePath("Timer")
+_playerDistanceTreshold = 2500.0
+_spawnTimer = NodePath("SpawnTimer")
 _sprite = NodePath("AnimatedSprite2D")
 _takeDmgParticles = NodePath("EnemyDamaged")
 _takeDmgSFX = NodePath("TakeDmgSFX")
 _spawnPoint = NodePath("SpawnPoint")
+_playerDetectionArea = NodePath("PlayerDetectionArea")
 _spawnFrame = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2011952128]
 material = ExtResource("3_omace")
 sprite_frames = SubResource("SpriteFrames_fgwj2")
-animation = &"Spawn"
-frame = 6
-frame_progress = 1.0
+animation = &"Idle"
+frame_progress = 0.21837014
 
 [node name="EnemyDamaged" parent="." unique_id=113120183 instance=ExtResource("5_x6gt1")]
-emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1600586051]
 position = Vector2(0, -39.835)
@@ -310,9 +311,17 @@ shape = SubResource("RectangleShape2D_sopei")
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1509596477]
 position = Vector2(0, 768)
 
-[node name="Timer" type="Timer" parent="." unique_id=1461182379]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1461182379]
+
+[node name="CheckPlayerTimer" type="Timer" parent="." unique_id=1692878067]
+wait_time = 2.0
 
 [node name="TakeDmgSFX" type="AudioStreamPlayer2D" parent="." unique_id=403530022]
 stream = ExtResource("6_x6gt1")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=393377432]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=2003211640]
+shape = SubResource("CircleShape2D_sopei")
