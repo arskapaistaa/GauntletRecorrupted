@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://brep1isixgf8w"]
+
+[ext_resource type="Texture2D" uid="uid://0q6p3vlor8e1" path="res://Art/Title/HellsWellTitleBG.png" id="1_a8cdk"]
+
+[node name="CreditsScene" type="Control" unique_id=1225045951]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGroundTexture" type="TextureRect" parent="." unique_id=2056354831]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_a8cdk")
+
+[node name="NamesLabel" type="Label" parent="." unique_id=520488072]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -9.5
+offset_right = 20.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=683463644]

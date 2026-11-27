@@ -55,6 +55,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Signal] public delegate void ShotCameraShakeEventHandler(int weaponType);
 	[Signal] public delegate void PeekCameraMovementEventHandler(bool isPeeking);
 	[Signal] public delegate void PlayerHealthChangedEventHandler();
+	[Signal] public delegate void PlayerDiedEventHandler();
 	private Vector2 _knockback = Vector2.Zero;
 	private Vector2 _moveVelocity = Vector2.Zero;
 	private float ReloadTime;
@@ -563,7 +564,11 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public void TakeDmg(int damage)
 	{
-		Health -= damage;
+		if (Health > 0 && _isLiving)
+		{
+			Health -= damage;
+		}
+
 		if (Health <= 0)
 		{
 			Health = 0;
@@ -572,6 +577,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 			// Tell Game Manager that player is dead -> Track deaths.
 			GameManager.Instance.OnDeathsChanged();
+			EmitSignal(SignalName.PlayerDied);
 		}
 		FlashSprite();
 
