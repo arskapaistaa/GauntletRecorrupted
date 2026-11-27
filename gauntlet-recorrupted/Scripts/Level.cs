@@ -62,6 +62,7 @@ public partial class Level : Node2D
 	[Signal] public delegate void ExitReadyEventHandler();
 	[Signal] public delegate void OnZeroSpawnerLeftEventHandler();
 	[Signal] public delegate void OnBearKilledEventHandler();
+	[Signal] public delegate void OnPlayerCloneKilledEventHandler();
 	[Signal] public delegate void EnemyCountChangedEventHandler();
 
 	public override void _EnterTree()
@@ -78,6 +79,11 @@ public partial class Level : Node2D
 		{
 			_eventCheckTimer.Start();
 			_eventCheckTimer.Timeout += OnTimerTimeOut;
+		}
+
+		if (IsThisFinalLevel)
+		{
+			EmitSignal(SignalName.ExitReady);
 		}
 
 		CurrentSpawnerCount = SpawnerCount;
@@ -118,6 +124,14 @@ public partial class Level : Node2D
 		{
 			EmitSignal(SignalName.ExitReady);
 			EmitSignal(SignalName.OnBearKilled);
+		}
+	}
+
+	public void PlayerCloneKilled()
+	{
+		if (CurrentEndingCondition == EndingCondition.PlayerCloneKilled)
+		{
+			GetTree().CallDeferred("change_scene_to_file", "res://Scenes/GUI/PlayerCloneDiedScene.tscn");
 		}
 	}
 

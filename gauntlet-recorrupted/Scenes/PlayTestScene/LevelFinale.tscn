@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cewpyolgacg1d" path="res://Scenes/Environment/Bed.tscn" id="15_oat1a"]
 [ext_resource type="PackedScene" uid="uid://cwpccqdv8gmmx" path="res://Scenes/Cursor.tscn" id="16_1f7y3"]
 [ext_resource type="PackedScene" uid="uid://dlx6idtihed6y" path="res://Scenes/GUI/GUI.tscn" id="17_5idux"]
+[ext_resource type="PackedScene" uid="uid://daincwb71bucj" path="res://Scenes/Characters/Enemy/PlayerClone.tscn" id="19_f7c0f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vv14j"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-2807, -6402, 13821, -6436, 13889, 9138, -2671, 9240)])
@@ -267,6 +268,7 @@ seamless = true
 
 [node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
 script = ExtResource("1_vv14j")
+CurrentEndingCondition = 2
 _maxTotalEnemyCount = 20
 _presetEnemyCount = 1
 _isThereWurmInThisLevel = true
@@ -397,6 +399,9 @@ PlayerCharacter = NodePath("../Player")
 
 [node name="EventTimer" type="Timer" parent="." unique_id=475063518]
 wait_time = 5.0
+
+[node name="Roach" parent="." unique_id=1788290980 instance=ExtResource("19_f7c0f")]
+position = Vector2(4594, -203)
 
 [editable path="Player"]
 [editable path="CanvasLayer"]

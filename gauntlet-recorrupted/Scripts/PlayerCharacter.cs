@@ -361,6 +361,11 @@ public partial class PlayerCharacter : CharacterBody2D
 					hitEnemy = true;
 					GD.Print("Hit enemy spawner with melee attack");
 				}
+				else if (node is Destroyable destroyable)
+				{
+					destroyable.TakeDmg(MeleeDamage);
+					hitEnemy = true;
+				}
 			}
 			if (hitEnemy)
 			{

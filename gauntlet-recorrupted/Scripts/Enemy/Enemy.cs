@@ -895,6 +895,11 @@ public partial class Enemy : CharacterBody2D
 		{
 			Level.Current.BearKilled();
 		}
+
+		if (ThisEnemyType == EnemyType.PlayerClone)
+		{
+			Level.Current.PlayerCloneKilled();
+		}
 	}
 
 	public void AlarmBuddies()

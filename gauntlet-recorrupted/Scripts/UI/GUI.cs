@@ -221,7 +221,7 @@ public partial class GUI : Control
 
 	private void OnExitReady()
     {
-       		if (_exitIndicator == null)
+       	if (_exitIndicator == null)
 		{
 			GD.PrintErr("GUI is missing Exit Indicator");
 		}
