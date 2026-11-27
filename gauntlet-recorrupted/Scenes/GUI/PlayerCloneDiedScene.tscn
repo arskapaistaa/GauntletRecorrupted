@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5j8lr")
 _video = NodePath("Video/VideoStreamPlayer")
+_nextScene = "uid://ba3derbdyvkj"
 
 [node name="Video" type="AspectRatioContainer" parent="." unique_id=1344979006]
 layout_mode = 1

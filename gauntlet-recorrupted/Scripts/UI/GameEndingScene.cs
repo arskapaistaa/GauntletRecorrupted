@@ -16,6 +16,11 @@ public partial class GameEndingScene : Control
 			_video.Finished += OnVideoFinished;
 		}
 
+		if (_animation != null)
+		{
+			_animation.AnimationFinished += OnAnimationFinished;
+		}
+
 		if (_killsLabel != null)
 		{
 			_killsLabel.Text = GameManager.Instance.GetKills().ToString();
@@ -28,12 +33,18 @@ public partial class GameEndingScene : Control
 		}
 	}
 
+    private void OnAnimationFinished(StringName animName)
+    {
+        GetTree().CallDeferred("change_scene_to_file", _nextScene);
+    }
+
     private void OnVideoFinished()
     {
         if (_animation != null)
 		{
 			_animation.Play("Start");
 		}
+
     }
 
 }

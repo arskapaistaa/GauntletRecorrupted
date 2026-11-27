@@ -33,7 +33,8 @@ public partial class Level : Node2D
 	{
 		SpawnersDestroyed,
 		BearKilled,
-		PlayerCloneKilled
+		PlayerCloneKilled,
+		None
 	}
 
 	private bool _wurmAweken = false;
@@ -68,6 +69,8 @@ public partial class Level : Node2D
 	public override void _EnterTree()
 	{
 		Current = this;
+
+
 	}
 	public override void _Ready()
 	{
@@ -79,11 +82,6 @@ public partial class Level : Node2D
 		{
 			_eventCheckTimer.Start();
 			_eventCheckTimer.Timeout += OnTimerTimeOut;
-		}
-
-		if (IsThisFinalLevel)
-		{
-			EmitSignal(SignalName.ExitReady);
 		}
 
 		CurrentSpawnerCount = SpawnerCount;
@@ -162,6 +160,11 @@ public partial class Level : Node2D
 					GD.Print("Wurm wake");
 				}
 			}
+		}
+
+		if (CurrentEndingCondition == EndingCondition.None)
+		{
+			EmitSignal(SignalName.ExitReady);
 		}
 	}
 

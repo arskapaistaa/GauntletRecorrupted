@@ -47,7 +47,7 @@ public partial class EnemySpawner : StaticBody2D
 	private double _playerCheckInterval = 1.0;
 	private double _playerCheckTimer = 0.0;
 
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		if (_spawnTimer == null)
@@ -256,6 +256,9 @@ public partial class EnemySpawner : StaticBody2D
 		}
 	}
 
+	/// <summary>
+	/// Checks current distance between this spawner and Player.
+	/// </summary>
 	private void CheckDistanceToPlayer()
 	{
 		float distance;
@@ -282,6 +285,10 @@ public partial class EnemySpawner : StaticBody2D
 		}
 	}
 
+	/// <summary>
+	/// Set Player dust particle amount ratio.
+	/// </summary>
+	/// <param name="amount">Amount ratio/Multiplier</param>
 	private void SetParticleAmountRatio(float amount)
 	{
 		Level.Current.Player.SetDustParticlesEmittingAmountRatio(amount);

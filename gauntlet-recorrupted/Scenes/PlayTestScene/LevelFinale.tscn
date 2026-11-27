@@ -268,7 +268,7 @@ noise = SubResource("FastNoiseLite_h2354")
 color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="LevelFinale" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_vv14j")
 CurrentEndingCondition = 2
 _maxTotalEnemyCount = 20

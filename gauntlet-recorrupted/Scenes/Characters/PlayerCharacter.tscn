@@ -779,6 +779,7 @@ bus = &"SFX"
 [node name="ShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1590027372]
 stream = ExtResource("14_nwqxr")
 volume_db = -2.0
+bus = &"SFX"
 
 [node name="RevolverSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1428008129]
 stream = ExtResource("14_i7eac")
@@ -787,27 +788,33 @@ bus = &"SFX"
 
 [node name="DiggingSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1569544295]
 stream = ExtResource("16_40gda")
-volume_db = -4.0
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="RevolverReloadSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1658917524]
 stream = ExtResource("18_1ht1w")
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="ShotgunReloadSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1990822873]
 stream = ExtResource("19_ettjf")
 volume_db = -6.0
+bus = &"SFX"
 
 [node name="SwitchToRevolverSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1519346907]
 stream = ExtResource("21_3rlv1")
-volume_db = -4.0
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="SwitchToShotgunSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=1736989762]
 stream = ExtResource("20_j3py3")
-volume_db = -4.0
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="MeleeSFX" type="AudioStreamPlayer2D" parent="Audios" unique_id=367072882]
 stream = ExtResource("22_3rlv1")
+volume_db = -6.0
+bus = &"SFX"
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=348875303]
 collision_mask = 4
