@@ -7,15 +7,31 @@ public partial class DeathMenu : Control
 	[Export] private Button MainMenuButton;
 	[Export] private Label _killsLabel = null;
 	[Export(PropertyHint.File, "*.tscn")] private string MainMenuScene;
+
+	private PlayerCharacter _player = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Visible = false;
 		RestartButton.Pressed += OnRestartButtonPressed;
 		MainMenuButton.Pressed += OnMainMenuButtonPressed;
+
+		if (_player == null)
+		{
+			_player = Level.Current.Player;
+			_player.PlayerDied += OnPlayerDied;
+		}
 	}
 
-	public void ShowDeathMenu()
+    public override void _ExitTree()
+    {
+    	if (_player != null)
+		{
+			_player.PlayerDied -= OnPlayerDied;
+		}
+    }
+
+    public void ShowDeathMenu()
 	{
 		Visible = true;
 		RestartButton.GrabFocus();
@@ -51,11 +67,11 @@ public partial class DeathMenu : Control
 		}
 	}
 
-	public override void _Process(double delta)
-	{
-		if (!Level.Current.Player.IsAlive() && !Visible)
+	private void OnPlayerDied()
+    {
+		if (!Visible)
 		{
 			ShowDeathMenu();
 		}
-	}
+    }
 }
