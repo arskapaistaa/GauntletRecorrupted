@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cy3p0wnonudbh" path="res://Art/Portrait/ArtPortraitWurm.png" id="14_mpywm"]
 [ext_resource type="Texture2D" uid="uid://358g1kepxadv" path="res://Art/UserInterface/Scale5-5.png" id="15_4ookp"]
 [ext_resource type="Texture2D" uid="uid://4w77aau4rqcx" path="res://Art/Portrait/ArtPortraitBear.png" id="15_btbcw"]
+[ext_resource type="Texture2D" uid="uid://0v6eb5nuly8s" path="res://Art/UserInterface/ArtUiPortraitBorder.png" id="18_l2l3p"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btbcw"]
 load_path = "res://.godot/imported/ArtPortraitBaby.png-0f5b1668dc6b78a81389358a0459f0cc.ctex"
@@ -2338,3 +2339,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_i13mg")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mpywm")
 text = "
 "
+
+[node name="ArtUiPortraitBorder" type="Sprite2D" parent="." unique_id=423164388]
+position = Vector2(245, 160)
+texture = ExtResource("18_l2l3p")
