@@ -35,7 +35,6 @@ window/size/viewport_height=360
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
-mouse_cursor/custom_image="uid://caceh7ogx4f8x"
 
 [dotnet]
 

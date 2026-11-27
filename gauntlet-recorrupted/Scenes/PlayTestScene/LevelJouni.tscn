@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bf81rp0iksunx" path="res://Art/Environment/Skeleton.png" id="6_lyh3d"]
 [ext_resource type="Texture2D" uid="uid://bh6qw36ltps2c" path="res://Art/Environment/Underground_Repeatable_Tile.png" id="7_nlvwu"]
 [ext_resource type="PackedScene" uid="uid://b4e588opm2bn1" path="res://Scenes/Environment/Destroyable/DiggableTiles.tscn" id="8_4doif"]
+[ext_resource type="PackedScene" uid="uid://djpak7hkkrvkp" path="res://Scenes/Environment/TileBorders.tscn" id="8_e0qsn"]
 [ext_resource type="PackedScene" uid="uid://4gswrml3a4rk" path="res://Scenes/Environment/Destroyable/Barrel.tscn" id="9_jddka"]
 [ext_resource type="PackedScene" uid="uid://x1fn74y5s3ht" path="res://Scenes/Characters/Enemy/Rat.tscn" id="10_7k0wf"]
 [ext_resource type="PackedScene" uid="uid://b1i01plpso6s3" path="res://Scenes/Environment/Destroyable/Bottle.tscn" id="10_63qqf"]
@@ -152,9 +153,9 @@ physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rxg4t"]
-vertices = PackedVector2Array(4452.8594, 1322.5703, -1909.4766, 1392.5313, -1856.4922, -47.8125, 4976.4063, 158.84375, 5046.4688, 2045.3516, 4522.867, 3766.4219, 13212.32, 3862.5625, 11378, 1988.6406, 13348.617, -229.42188, 11378, -202.53125)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 5, 4, 7), PackedInt32Array(8, 6, 7, 9)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1895, -89, 5015, 120, 5085, 2005, 11338, 1949, 11338, -242, 13390, -270, 13251, 3903, 4484, 3806, 4414, 1363, -1951, 1433)])
+vertices = PackedVector2Array(-196.67969, -3056.6875, 6773.8438, -3213.8516, 6328.797, -1218.4063, 5561.883, -1204.2734, -167.84375, 518.1719, -754.8906, -853.28125, 5569.008, 1208.0703, -218.71094, 3156.2031, 5812.3516, 3623.6016, 5321.8984, 5121.328, -834.27344, 5192.5234, -798.65625, 3199.1875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3, 6), PackedInt32Array(7, 4, 6, 8, 9), PackedInt32Array(7, 9, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-228, -3096, 6824, -3255, 6361, -1179, 5602, -1165, 5609, 1206, 5853, 3628, 5351, 5161, -875, 5233, -838, 3162, -258, 3119, -208, 526, -797, -850)])
 agent_radius = 40.0
 
 [sub_resource type="Shader" id="Shader_jrnry"]
@@ -237,7 +238,7 @@ noise = SubResource("FastNoiseLite_h2354")
 color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
 script = ExtResource("1_rmmtk")
 _maxTotalEnemyCount = 25
 _spawnerCount = 4
@@ -245,7 +246,6 @@ _presetEnemyCount = 8
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")
-DiggableTiles = NodePath("Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 _eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
@@ -277,6 +277,13 @@ tile_set = SubResource("TileSet_sopei")
 
 [node name="DiggableTiles" parent="Environment/NavigationRegionBasic/TileMap" unique_id=999643897 instance=ExtResource("8_4doif")]
 tile_map_data = PackedByteArray("AAD9//z/AAACAAEAAAD9//3/AAACAAEAAAD+//3/AAACAAEAAAD///3/AAACAAEAAAD///z/AAACAAEAAAD+//7/AAACAAEAAAD/////AAACAAEAAAD///7/AAACAAEAAAD9////AAACAAEAAAAAAPz/AAACAAEAAAADAPz/AAACAAEAAAAFAOv/AAACAAEAAAABAO3/AAACAAEAAAAAAO7/AAACAAEAAAABAO7/AAACAAEAAAAEAOz/AQACAAEAAAAAAPv/AQACAAEAAAAIAPv/AQACAAEAAAAIAP3/AQACAAEAAAAIAPz/AAACAAEAAAADAAQAAAACAAEAAAAEAAMAAAACAAEAAAAFAAMAAAACAAEAAAADAAMAAAACAAEAAAAEAAQAAAACAAEAAAACAAIAAAACAAEAAAABAAEAAAACAAEAAAACAAEAAAACAAEAAAAGAAIAAQACAAEAAAD1//v/AAACAAEAAAD0//v/AQACAAEAAAD2//v/AAACAAEAAAD1//X/AAACAAEAAAD8//T/AAACAAEAAAD9//X/AAACAAEAAAD+/wQAAQACAAEAAAD4/wcAAQACAAEAAAD2/wUAAQACAAEAAADy/wEAAAACAAEAAADy/wIAAAACAAEAAAD9/+3/AAACAAEAAAD+/+3/AAACAAEAAAD+/+7/AAACAAEAAAD9/+7/AAACAAEAAAD9/+//AAACAAEAAAD8/+//AAACAAEAAAD8/+7/AAACAAEAAAD7/+7/AAACAAEAAAD7/+//AAACAAEAAAD//+3/AAACAAEAAAAAAO3/AAACAAEAAAAEAOr/AAACAAEAAAAEAOv/AAACAAEAAAAGAOz/AAACAAEAAAAGAOv/AAACAAEAAAAGAOr/AAACAAEAAAAGAO3/AQACAAEAAAD9/wYAAAACAAEAAAD9/wcAAAACAAEAAAA=")
+
+[node name="StoneBorders" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1130507526 node_paths=PackedStringArray("_tileset") instance=ExtResource("8_e0qsn")]
+_tileset = NodePath("../DiggableTiles")
+
+[node name="FleshBorders" parent="Environment/NavigationRegionBasic/TileMap" unique_id=1641689754 node_paths=PackedStringArray("_tileset") instance=ExtResource("8_e0qsn")]
+_tileset = NodePath("../DiggableTiles")
+_tileMaterial = 1
 
 [node name="Destroyables" type="Node2D" parent="Environment/NavigationRegionBasic" unique_id=508917312]
 
@@ -369,10 +376,10 @@ navigation_layers = 2
 position = Vector2(2044, 2090)
 
 [node name="Rat" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1021385741 instance=ExtResource("10_7k0wf")]
-position = Vector2(717, -1063)
+position = Vector2(2542, 199)
 
 [node name="Scitter" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1765397949 instance=ExtResource("11_bmcb2")]
-position = Vector2(-3662, -932)
+position = Vector2(2585, 2270)
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
 
