@@ -226,6 +226,14 @@ public partial class StatsManager : Node
 				}
 				break;
 
+			case "Wurm":
+				if (!_wurmKilled)
+				{
+					_wurmKilled = true;
+					_statsConfig.SetValue(_statsString, _wurmKilledString, _wurmKilled);
+				}
+				break;
+
 			case "Bear":
 				if (!_bearKilled)
 				{

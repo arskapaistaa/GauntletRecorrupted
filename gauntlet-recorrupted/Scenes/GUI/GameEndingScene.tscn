@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://b83ewn235dcs8"]
+
+[ext_resource type="Script" uid="uid://e7qyydfprrjg" path="res://Scripts/UI/GameEndingScene.cs" id="1_clk65"]
+[ext_resource type="VideoStream" uid="uid://bsakkoweke3qj" path="res://Art/Cutscenes/HellsWellStartingIntroFinalFinal.ogv" id="2_v81n3"]
+[ext_resource type="PackedScene" uid="uid://brep1isixgf8w" path="res://Scenes/GUI/CreditsScene.tscn" id="3_a8355"]
+[ext_resource type="Texture2D" uid="uid://y6gj40nhkjik" path="res://Art/UserInterface/Kills.png" id="4_b1317"]
+[ext_resource type="Texture2D" uid="uid://dytar1s41c2gc" path="res://Art/UserInterface/Time.png" id="5_mlb4t"]
+
+[node name="GameEndingScene" type="Control" unique_id=960816294 node_paths=PackedStringArray("_video", "_animation")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_clk65")
+_video = NodePath("Video/VideoStreamPlayer")
+_animation = NodePath("AnimationPlayer")
+
+[node name="Video" type="AspectRatioContainer" parent="." unique_id=300961195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=1867128672]
+layout_mode = 2
+stream = ExtResource("2_v81n3")
+autoplay = true
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=973946991]
+
+[node name="GameEnding" type="Control" parent="." unique_id=1413744742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsScene" parent="GameEnding" unique_id=1225045951 instance=ExtResource("3_a8355")]
+layout_mode = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameEnding" unique_id=1135171286]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -74.0
+offset_right = 128.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameEnding/HBoxContainer2" unique_id=2010174535]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Kills" type="TextureRect" parent="GameEnding/HBoxContainer2/HBoxContainer" unique_id=1494542366]
+layout_mode = 2
+texture = ExtResource("4_b1317")
+
+[node name="KillsLabel" type="Label" parent="GameEnding/HBoxContainer2/HBoxContainer" unique_id=1395449122]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9019608, 0.8745098, 0.8156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "120"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameEnding/HBoxContainer2" unique_id=993832599]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time" type="TextureRect" parent="GameEnding/HBoxContainer2/HBoxContainer2" unique_id=1182861298]
+layout_mode = 2
+texture = ExtResource("5_mlb4t")
+
+[node name="PlayTimeLabel" type="Label" parent="GameEnding/HBoxContainer2/HBoxContainer2" unique_id=1963852372]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9019608, 0.8745098, 0.8156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "00:00:00"
+horizontal_alignment = 1
