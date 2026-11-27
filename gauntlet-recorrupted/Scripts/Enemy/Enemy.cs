@@ -93,6 +93,7 @@ public partial class Enemy : CharacterBody2D
 
 	// PRIVATE, NO EXPORT
 	private bool _isAlive = true;
+	private bool _isPlayerAlive = true;
 	private float _navTimer = 0;
 	private float _navInterval = 0.25f;
 	private float _attackNavInterval = 0.5f;
@@ -290,38 +291,41 @@ public partial class Enemy : CharacterBody2D
 
 	public void Check()
 	{
-		switch(_brain.CurrentState)
+		if (_isPlayerAlive)
 		{
-			case Brain.State.Chase:
-			// If enemy is in attack range and can see player, start Attacking.
-
-			if (ThisAttackType == AttackType.Static)
+			switch(_brain.CurrentState)
 			{
-				return;
-			}
+				case Brain.State.Chase:
+				// If enemy is in attack range and can see player, start Attacking.
 
-			if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
-			{
-				if (CanRangedAttack && CanShoot)
+				if (ThisAttackType == AttackType.Static)
 				{
-					double change = GD.Randf();
-					if (change > RangedAttackChange)
+					return;
+				}
+
+				if (GlobalPosition.DistanceTo(PlayerPosition) < AttackRange && HasLineOfSight())
+				{
+					if (CanRangedAttack && CanShoot)
 					{
-						_brain.CanRangedAttack();
-						return;
+						double change = GD.Randf();
+						if (change > RangedAttackChange)
+						{
+							_brain.CanRangedAttack();
+							return;
+						}
+					}
+					else
+					{
+						_brain.CanAttack();
+
+						if (ThisAttackType == AttackType.Dash)
+						{
+							SetAttackDirection();
+						}
 					}
 				}
-				else
-				{
-					_brain.CanAttack();
-
-					if (ThisAttackType == AttackType.Dash)
-					{
-						SetAttackDirection();
-					}
-				}
+				break;
 			}
-			break;
 		}
 	}
 
@@ -367,6 +371,11 @@ public partial class Enemy : CharacterBody2D
 		if (_agent.IsNavigationFinished())
 		{
 			// TODO: Call brain.
+			return;
+		}
+
+		if (!_isPlayerAlive)
+		{
 			return;
 		}
 
@@ -1186,9 +1195,19 @@ public partial class Enemy : CharacterBody2D
 		{
 			_rangedCooldownTimer.Timeout += OnRangedCooldownTimerTimedOut;
 		}
+
+		if (Player != null)
+		{
+			Player.PlayerDied += OnPlayerDied;
+		}
 	}
 
-	private void OnIdleTimerTimedOut()
+    private void OnPlayerDied()
+    {
+		_isPlayerAlive = false;
+    }
+
+    private void OnIdleTimerTimedOut()
 	{
 		_brain.IdleTimerTimedOut();
 	}

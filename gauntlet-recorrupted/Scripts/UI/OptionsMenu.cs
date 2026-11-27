@@ -32,7 +32,6 @@ public partial class OptionsMenu : Control
 			_playTutorialLevel.Pressed += OnTutorialLevelPressed;
 		}
 
-
 		UpdateResolutionButton();
 	}
 
