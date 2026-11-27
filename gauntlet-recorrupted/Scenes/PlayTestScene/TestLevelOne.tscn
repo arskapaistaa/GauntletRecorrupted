@@ -90,7 +90,7 @@ color = Color(0.62384886, 0.5371237, 0.1692642, 1)
 turbulence_enabled = true
 turbulence_influence_max = 0.5
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
 script = ExtResource("1_wmulu")
 _maxTotalEnemyCount = 10
 _spawnerCount = 2
@@ -99,6 +99,7 @@ _isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.3
 _navRegion = NodePath("Environment/NavigationRegion2D")
 Player = NodePath("Player")
+DiggableTiles = NodePath("Environment/NavigationRegion2D/TileMap/DiggableTiles")
 _eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
@@ -178,7 +179,7 @@ position = Vector2(-3087, -1797)
 DiggableTiles = NodePath("../Environment/NavigationRegion2D/TileMap/DiggableTiles")
 CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -4057
 limit_top = -2793
 limit_right = 3571
