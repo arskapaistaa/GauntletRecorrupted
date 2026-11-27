@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://brep1isixgf8w"]
 
 [ext_resource type="Texture2D" uid="uid://bjmajh6e25jkx" path="res://Art/CreditsScreen.png" id="1_a8cdk"]
+[ext_resource type="Script" uid="uid://d3j4tr4qve26" path="res://Scripts/UI/CreditsScene.cs" id="1_lx1ko"]
+[ext_resource type="AudioStream" uid="uid://g7bfwfp5qc3n" path="res://Audio/Music/Suspense01.ogg" id="2_7dqbj"]
+[ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="3_tqsv4"]
 
 [sub_resource type="Animation" id="Animation_a8cdk"]
 length = 0.001
@@ -30,7 +33,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 60),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(224, -990), Vector2(224, 361)]
+"values": [Vector2(224, 361), Vector2(224, -990)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tqsv4"]
@@ -39,13 +42,29 @@ _data = {
 &"Start": SubResource("Animation_7dqbj")
 }
 
-[node name="CreditsScene" type="Control" unique_id=1225045951]
+[sub_resource type="Gradient" id="Gradient_e5fvg"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dxocv"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tqsv4"]
+width = 360
+height = 310
+noise = SubResource("FastNoiseLite_dxocv")
+color_ramp = SubResource("Gradient_e5fvg")
+seamless = true
+
+[node name="CreditsScene" type="Control" unique_id=1225045951 node_paths=PackedStringArray("_animation")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lx1ko")
+_animation = NodePath("AnimationPlayer")
+_mainMenuScene = "uid://cfmj0l8f6okh5"
 
 [node name="BackGroundTexture" type="TextureRect" parent="." unique_id=2056354831]
 layout_mode = 1
@@ -60,6 +79,12 @@ expand_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=683463644]
 libraries/ = SubResource("AnimationLibrary_tqsv4")
 autoplay = &"Start"
+
+[node name="MainMenuFog" parent="." unique_id=699577285 instance=ExtResource("3_tqsv4")]
+position = Vector2(320, 180)
+rotation = -1.5707964
+scale = Vector2(1, 0.886377)
+texture = SubResource("NoiseTexture2D_tqsv4")
 
 [node name="Names" type="VBoxContainer" parent="." unique_id=667341912]
 layout_mode = 1
@@ -76,6 +101,245 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 32
 
+[node name="3" type="VBoxContainer" parent="Names" unique_id=1519738167]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What" type="Label" parent="Names/3" unique_id=2088879197]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Player programmer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who" type="Label" parent="Names/3" unique_id=2137626159]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Arska Koskinen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="5" type="VBoxContainer" parent="Names" unique_id=671571336]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What" type="Label" parent="Names/5" unique_id=369496492]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Systems programmer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who" type="Label" parent="Names/5" unique_id=286624040]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Joonas Björninen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="VBoxContainer" parent="Names" unique_id=965698859]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What" type="Label" parent="Names/2" unique_id=174605162]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Enemy Behaviour Specialist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who" type="Label" parent="Names/2" unique_id=1064731631]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Joonas Björninen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="VBoxContainer" parent="Names" unique_id=1374034563]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/4" unique_id=583055008]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Digging specialist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/4" unique_id=618808699]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Arska Koskinen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="1" type="VBoxContainer" parent="Names" unique_id=616192140]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/1" unique_id=1942247256]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "UI programmer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/1" unique_id=1492133658]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Joonas Björninen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who3" type="Label" parent="Names/1" unique_id=757739243]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Arska Koskinen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="6" type="VBoxContainer" parent="Names" unique_id=932980425]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/6" unique_id=1104993461]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Character Artist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/6" unique_id=1960310704]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Otso Jämbäck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who3" type="Label" parent="Names/6" unique_id=342889621]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Yulyan Möschl"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="7" type="VBoxContainer" parent="Names" unique_id=893627125]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/7" unique_id=222063985]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Environment artist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/7" unique_id=138157809]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Otso Jämbäck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who3" type="Label" parent="Names/7" unique_id=701867869]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Valtteri Nissinen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="10" type="VBoxContainer" parent="Names" unique_id=1126881887]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/10" unique_id=978738488]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "UI artist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/10" unique_id=1416615461]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Veera Niemi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who3" type="Label" parent="Names/10" unique_id=313462485]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Otso Jämbäck"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="9" type="VBoxContainer" parent="Names" unique_id=1472173946]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="What2" type="Label" parent="Names/9" unique_id=365939539]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 16
+text = "Prop artist"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Who2" type="Label" parent="Names/9" unique_id=933103215]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_font_sizes/font_size = 20
+text = "Veera Niemi"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="8" type="VBoxContainer" parent="Names" unique_id=759027479]
 layout_mode = 2
 theme_override_constants/separation = 4
@@ -83,7 +347,7 @@ alignment = 1
 
 [node name="What2" type="Label" parent="Names/8" unique_id=69335259]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
+theme_override_colors/font_color = Color(0.5845201, 0.21349213, 0.18226218, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 16
@@ -139,241 +403,8 @@ text = "Paavo"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="10" type="VBoxContainer" parent="Names" unique_id=1126881887]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/10" unique_id=978738488]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "UI artist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/10" unique_id=1416615461]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Veera Niemi"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who3" type="Label" parent="Names/10" unique_id=313462485]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Otso Jämbäck"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="9" type="VBoxContainer" parent="Names" unique_id=1472173946]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/9" unique_id=365939539]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Prop artist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/9" unique_id=933103215]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Veera Niemi"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="6" type="VBoxContainer" parent="Names" unique_id=932980425]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/6" unique_id=1104993461]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Character Artist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/6" unique_id=1960310704]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Otso Jämbäck"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who3" type="Label" parent="Names/6" unique_id=342889621]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Yulyan Möschl"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="7" type="VBoxContainer" parent="Names" unique_id=893627125]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/7" unique_id=222063985]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Environment artist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/7" unique_id=138157809]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Yulyan Jämbäck"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who3" type="Label" parent="Names/7" unique_id=701867869]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Valtteri Nissinen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="1" type="VBoxContainer" parent="Names" unique_id=616192140]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/1" unique_id=1942247256]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "UI programmer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/1" unique_id=1492133658]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Joonas Björninen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who3" type="Label" parent="Names/1" unique_id=757739243]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Arska Koskinen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="4" type="VBoxContainer" parent="Names" unique_id=1374034563]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What2" type="Label" parent="Names/4" unique_id=583055008]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Digging specialist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who2" type="Label" parent="Names/4" unique_id=618808699]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Arska Koskinen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="2" type="VBoxContainer" parent="Names" unique_id=965698859]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What" type="Label" parent="Names/2" unique_id=174605162]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Enemy Behaviour Specialist"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who" type="Label" parent="Names/2" unique_id=1064731631]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Joonas Björninen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="5" type="VBoxContainer" parent="Names" unique_id=671571336]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What" type="Label" parent="Names/5" unique_id=369496492]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Systems programmer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who" type="Label" parent="Names/5" unique_id=286624040]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Joonas Björninen"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="3" type="VBoxContainer" parent="Names" unique_id=1519738167]
-layout_mode = 2
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="What" type="Label" parent="Names/3" unique_id=2088879197]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_font_sizes/font_size = 16
-text = "Player programmer"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Who" type="Label" parent="Names/3" unique_id=2137626159]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.92729557, 0.81704146, 0.7774709, 1)
-theme_override_font_sizes/font_size = 20
-text = "Arska Koskinen"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=698407931]
+stream = ExtResource("2_7dqbj")
+volume_db = -6.0
+autoplay = true
+bus = &"Music"

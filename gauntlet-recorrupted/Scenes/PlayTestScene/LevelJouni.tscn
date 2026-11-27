@@ -152,9 +152,9 @@ physics_layer_0/collision_mask = 11
 sources/0 = SubResource("TileSetAtlasSource_0jcpq")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rxg4t"]
-vertices = PackedVector2Array(6783.828, -3215.0078, 6750.1484, 5079.578, -834.9375, 5192.3906, -823.0469, -3216.9766)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-863, -3257, 6824, -3255, 6790, 5119, -875, 5233)])
+vertices = PackedVector2Array(-196.67969, -3056.6875, 6773.8438, -3213.8516, 6328.797, -1218.4063, 5561.883, -1204.2734, -167.84375, 518.1719, -754.8906, -853.28125, 5569.008, 1208.0703, -218.71094, 3156.2031, 5812.3516, 3623.6016, 5321.8984, 5121.328, -834.27344, 5192.5234, -798.65625, 3199.1875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3, 6), PackedInt32Array(7, 4, 6, 8, 9), PackedInt32Array(7, 9, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-228, -3096, 6824, -3255, 6361, -1179, 5602, -1165, 5609, 1206, 5853, 3628, 5351, 5161, -875, 5233, -838, 3162, -258, 3119, -208, 526, -797, -850)])
 agent_radius = 40.0
 
 [sub_resource type="Shader" id="Shader_jrnry"]
@@ -369,10 +369,10 @@ navigation_layers = 2
 position = Vector2(2044, 2090)
 
 [node name="Rat" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1021385741 instance=ExtResource("10_7k0wf")]
-position = Vector2(717, -1063)
+position = Vector2(2542, 199)
 
 [node name="Scitter" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1765397949 instance=ExtResource("11_bmcb2")]
-position = Vector2(-3662, -932)
+position = Vector2(2585, 2270)
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
 
