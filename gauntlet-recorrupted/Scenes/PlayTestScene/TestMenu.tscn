@@ -668,7 +668,7 @@ _animations = NodePath("../../AnimationPlayer")
 _pressedSfx = NodePath("../../Audios/ButtonSFX")
 _pressedAnimName = "CloseStats"
 
-[node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_roachLabel", "_tickLabel", "_babyLabel")]
+[node name="Bestiary" type="MarginContainer" parent="." unique_id=1308192480 node_paths=PackedStringArray("_beastContainers")]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -685,9 +685,7 @@ theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 20
 script = ExtResource("5_7512y")
-_roachLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/RoachYesNo")
-_tickLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/TickYesNo")
-_babyLabel = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/BabyYesNo")
+_beastContainers = []
 
 [node name="PanelContainer" type="Panel" parent="Bestiary" unique_id=1109178975]
 layout_mode = 2
