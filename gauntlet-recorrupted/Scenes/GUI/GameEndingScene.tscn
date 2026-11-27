@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://b83ewn235dcs8"]
+
+[ext_resource type="Script" uid="uid://e7qyydfprrjg" path="res://Scripts/UI/GameEndingScene.cs" id="1_clk65"]
+[ext_resource type="VideoStream" uid="uid://bsakkoweke3qj" path="res://Art/Cutscenes/HellsWellStartingIntroFinalFinal.ogv" id="2_v81n3"]
+[ext_resource type="Theme" uid="uid://betifo50ocmef" path="res://Theme/Title.tres" id="3_b1317"]
+[ext_resource type="Texture2D" uid="uid://y6gj40nhkjik" path="res://Art/UserInterface/Kills.png" id="4_b1317"]
+[ext_resource type="PackedScene" uid="uid://cletpwf7c6kab" path="res://Scenes/GUI/MainMenuFog.tscn" id="5_a8355"]
+[ext_resource type="Texture2D" uid="uid://dytar1s41c2gc" path="res://Art/UserInterface/Time.png" id="5_mlb4t"]
+
+[sub_resource type="Animation" id="Animation_a8355"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Video:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameEnding:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameEnding:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b1317"]
+resource_name = "Start"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Video:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameEnding:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameEnding:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlb4t"]
+_data = {
+&"RESET": SubResource("Animation_a8355"),
+&"Start": SubResource("Animation_b1317")
+}
+
+[node name="GameEndingScene" type="Control" unique_id=960816294 node_paths=PackedStringArray("_video", "_animation", "_killsLabel", "_timeLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_clk65")
+_video = NodePath("Video/VideoStreamPlayer")
+_animation = NodePath("AnimationPlayer")
+_nextScene = "uid://brep1isixgf8w"
+_killsLabel = NodePath("GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer/KillsLabel")
+_timeLabel = NodePath("GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer2/PlayTimeLabel")
+
+[node name="Video" type="AspectRatioContainer" parent="." unique_id=300961195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Video" unique_id=1867128672]
+layout_mode = 2
+stream = ExtResource("2_v81n3")
+autoplay = true
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=973946991]
+libraries/ = SubResource("AnimationLibrary_mlb4t")
+
+[node name="GameEnding" type="Control" parent="." unique_id=1413744742]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameEnding" unique_id=281061505]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_b1317")
+
+[node name="MainMenuFog" parent="GameEnding" unique_id=699577285 instance=ExtResource("5_a8355")]
+position = Vector2(320, 180)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameEnding" unique_id=2023979162]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -66.0
+offset_right = 128.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameEnding/VBoxContainer" unique_id=944737458]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8352941, 0.80784315, 0.75686276, 1)
+theme_override_font_sizes/font_size = 32
+text = "GOOD JOB"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameEnding/VBoxContainer" unique_id=388791728]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameEnding/VBoxContainer/HBoxContainer2" unique_id=2010174535]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Kills" type="TextureRect" parent="GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=1494542366]
+layout_mode = 2
+texture = ExtResource("4_b1317")
+
+[node name="KillsLabel" type="Label" parent="GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer" unique_id=1395449122]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9019608, 0.8745098, 0.8156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "120"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameEnding/VBoxContainer/HBoxContainer2" unique_id=993832599]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time" type="TextureRect" parent="GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1182861298]
+layout_mode = 2
+texture = ExtResource("5_mlb4t")
+
+[node name="PlayTimeLabel" type="Label" parent="GameEnding/VBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1963852372]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9019608, 0.8745098, 0.8156863, 1)
+theme_override_font_sizes/font_size = 16
+text = "00:00:00"
+horizontal_alignment = 1
