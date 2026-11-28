@@ -556,6 +556,7 @@ grow_horizontal = 0
 position = Vector2(148, 38)
 sprite_frames = SubResource("SpriteFrames_dxocv")
 animation = &"Opening"
+<<<<<<< Updated upstream
 
 [node name="ExitIndicatorBumped" type="AnimatedSprite2D" parent="GUI/Exit" unique_id=1636551941]
 position = Vector2(24, 45)
@@ -563,6 +564,8 @@ sprite_frames = SubResource("SpriteFrames_b8td4")
 animation = &"Closed"
 frame = 2
 frame_progress = 0.07924901
+=======
+>>>>>>> Stashed changes
 
 [node name="GoosebumpEyes" type="AnimatedSprite2D" parent="GUI/Exit/ExitIndicatorBumped" unique_id=882886170]
 sprite_frames = SubResource("SpriteFrames_0bbjp")
