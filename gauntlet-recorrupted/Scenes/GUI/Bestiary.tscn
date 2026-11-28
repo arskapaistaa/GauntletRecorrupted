@@ -65,7 +65,7 @@ modulate_color = Color(1, 1, 1, 0.5882353)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mpywm"]
 
-[node name="Bestiary" type="NinePatchRect" unique_id=1638658974 node_paths=PackedStringArray("_beastContainers", "_leftBtn", "_rightBtn")]
+[node name="Bestiary" type="NinePatchRect" unique_id=1638658974 node_paths=PackedStringArray("_leftBtn", "_rightBtn")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -85,7 +85,6 @@ patch_margin_top = 50
 patch_margin_right = 50
 patch_margin_bottom = 50
 script = ExtResource("3_jl0s4")
-_beastContainers = [NodePath("RoachContainer"), NodePath("TickContainer"), NodePath("BabyContainer"), NodePath("AdultContainer"), NodePath("LieroContainer"), NodePath("SpiderContainer"), NodePath("WurmContainer"), NodePath("BearContainer")]
 _leftBtn = NodePath("LeftBtn")
 _rightBtn = NodePath("RightBtn")
 
@@ -215,7 +214,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tässä vittu vähä runoillaa et mikä vitun homma et kuinka vitun boss enemy tää on ja et se syö kaikki jotka yrittää vastustaa sitä. Vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu vittu"
+text = "So these are the filthy bastards that can survive anything? Not anymore. Not when I show up. They have a distorted, agonizing face but it's only good for screaming. They always do when they smell the fear around."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -490,7 +489,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "In another life, these would be the perfect pets. They expose their belly all the time when they're around. But what is that disgusting tube they crawl out of? I can not believe life would choose to be born from that."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -765,7 +764,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "Killer babies? I thought this shit was supposed to be serious. Okay, they can be, they got bite...when they come close, they swipe. They know what they want. Impressive at that age honestly. Or does everyone want to grow up?"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1040,7 +1039,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "They think they can be like me, but they're slow, simple-minded hedonists. Are they hunting me for my smarts, my heart, my voice? They will get nothing. I will shoot through their heads and leave them in the dust."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1315,7 +1314,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "Even though they barely pack a bite, and even though I don't even hear anything, I have the urge to cover my ears around these things. Grip onto my bowels and keep them in place. The smallest things set of panic."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1590,7 +1589,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "These fuckers don't know how good they have it, they can flash around like the wind, unbothered, they can fit in just fine. I need to keep my eyes on them once I've spotted them, but it's so difficult. They move on and trap me..."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1865,7 +1864,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "How...can I...not kill it...? They can tear apart the earth like me...I don't know if they have a mind. By far, the scariest entity down here, I don't know why when they don't even come after me. Because I can't come after them..?"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -2139,7 +2138,7 @@ layout_mode = 2
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 10
-text = "Tää vitun kyrpä lentää aina jostai hevon perseestä ja perus vanha kunnon nilkki et lähtee hanettii enne ku kerkee antaa takasi..."
+text = "Big and fat. Slow, but far. When I first spat at it, it spat back. With my trusty shovel, escape from them seems too possible. And if I can get away from those things, I can get out of this place entirely."
 horizontal_alignment = 1
 autowrap_mode = 2
 
