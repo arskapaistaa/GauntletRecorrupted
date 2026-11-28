@@ -285,12 +285,14 @@ position = Vector2(2039.9998, 4771)
 rotation = 3.3623564
 _spawningCooldown = 20.0
 _maxActiveEnemiesCount = 13
+_playerDistanceTreshold = 1000.0
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("2_sp5nc")]
 z_index = 4
 position = Vector2(9926.001, 4387)
 rotation = 2.036867
 _spawningCooldown = 20.0
+_playerDistanceTreshold = 1000.0
 
 [node name="TickSpawner3" parent="Environment/NavigationRegionBasic" unique_id=1279463094 instance=ExtResource("2_sp5nc")]
 z_index = 4
@@ -298,6 +300,7 @@ position = Vector2(6237, -2847)
 rotation = 0.084421635
 _spawningCooldown = 6.0
 _maxActiveEnemiesCount = 2
+_playerDistanceTreshold = 1000.0
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 position = Vector2(1514, 792)
@@ -359,6 +362,7 @@ position = Vector2(3120, 1873)
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("12_prm0w")]
 position = Vector2(5119, -245.99998)
 rotation = 3.139592
+NextLevelPath = "uid://c54l0gba8reeq"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]

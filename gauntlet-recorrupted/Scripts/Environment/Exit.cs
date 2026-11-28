@@ -25,6 +25,8 @@ public partial class Exit : Area2D
 		if (_currentLevel != null)
 		{
 			_currentLevel.OnZeroSpawnerLeft += OnZeroSpawnerLeft;
+			_currentLevel.OnBearKilled += OnBearKilled;
+			_currentLevel.ExitReady += OnExitReady;
 		}
 		else
 		{
@@ -41,7 +43,6 @@ public partial class Exit : Area2D
 
 		UpdateSpawnerCountLabel();
 	}
-
 
     public override void _ExitTree()
     {
@@ -103,7 +104,28 @@ public partial class Exit : Area2D
 	/// </summary>
 	private void OnZeroSpawnerLeft()
     {
-        CurrentState = State.Ready;
+		if (_currentLevel.CurrentEndingCondition == Level.EndingCondition.SpawnersDestroyed)
+		{
+			SetExitReady();
+		}
+    }
+
+	private void OnBearKilled()
+    {
+        if (_currentLevel.CurrentEndingCondition == Level.EndingCondition.BearKilled)
+		{
+			SetExitReady();
+		}
+    }
+
+	private void OnExitReady()
+    {
+        SetExitReady();
+    }
+
+	private void SetExitReady()
+	{
+		CurrentState = State.Ready;
 
 		if (_exitOpenParticles != null)
 		{
@@ -114,7 +136,7 @@ public partial class Exit : Area2D
 		{
 			_exitLight.Enabled = true;
 		}
-    }
+	}
 
 	public void UpdateSpawnerCountLabel()
 	{

@@ -15,6 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://dyeo3c4ow8gh3" path="res://Art/Portrait/ArtPortraitAdult.png" id="11_btbcw"]
 [ext_resource type="Texture2D" uid="uid://vffclkdihnak" path="res://Art/Portrait/ArtPortraitSpider.png" id="13_4ookp"]
 [ext_resource type="Texture2D" uid="uid://cy3p0wnonudbh" path="res://Art/Portrait/ArtPortraitWurm.png" id="14_mpywm"]
+[ext_resource type="Texture2D" uid="uid://358g1kepxadv" path="res://Art/UserInterface/Scale5-5.png" id="15_4ookp"]
+[ext_resource type="Texture2D" uid="uid://4w77aau4rqcx" path="res://Art/Portrait/ArtPortraitBear.png" id="15_btbcw"]
+[ext_resource type="Texture2D" uid="uid://0v6eb5nuly8s" path="res://Art/UserInterface/ArtUiPortraitBorder.png" id="18_l2l3p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_btbcw"]
+load_path = "res://.godot/imported/ArtPortraitBaby.png-0f5b1668dc6b78a81389358a0459f0cc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdyef"]
 load_path = "res://.godot/imported/Scale1-5.png-0df4543ba53b3ccfadd1f81c93f1a742.ctex"
@@ -687,7 +693,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = SubResource("CompressedTexture2D_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BabyContainer" unique_id=307186007]
 layout_mode = 1
@@ -1812,7 +1818,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="WurmContainer/Stats/Health" unique_id=550524015]
 layout_mode = 2
-texture = ExtResource("6_jl0s4")
+texture = ExtResource("15_4ookp")
 
 [node name="Damage" type="VBoxContainer" parent="WurmContainer/Stats" unique_id=942019196]
 layout_mode = 2
@@ -1825,7 +1831,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="WurmContainer/Stats/Damage" unique_id=896646869]
 layout_mode = 2
-texture = ExtResource("6_jl0s4")
+texture = ExtResource("15_4ookp")
 
 [node name="Speed" type="VBoxContainer" parent="WurmContainer/Stats" unique_id=1534353844]
 layout_mode = 2
@@ -1838,7 +1844,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="WurmContainer/Stats/Speed" unique_id=1810644740]
 layout_mode = 2
-texture = ExtResource("7_00mgp")
+texture = ExtResource("6_jl0s4")
 
 [node name="InfoText" type="MarginContainer" parent="WurmContainer" unique_id=81301506]
 layout_mode = 1
@@ -2023,7 +2029,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BearContainer" type="Control" parent="." unique_id=2126281036 node_paths=PackedStringArray("_enemyUnknown")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2062,7 +2067,7 @@ offset_right = -60.0
 offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("5_nsjki")
+texture = ExtResource("15_btbcw")
 
 [node name="Stats" type="VBoxContainer" parent="BearContainer" unique_id=440915112]
 layout_mode = 1
@@ -2087,7 +2092,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BearContainer/Stats/Health" unique_id=1857594505]
 layout_mode = 2
-texture = ExtResource("6_jl0s4")
+texture = ExtResource("15_4ookp")
 
 [node name="Damage" type="VBoxContainer" parent="BearContainer/Stats" unique_id=1343474429]
 layout_mode = 2
@@ -2100,7 +2105,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BearContainer/Stats/Damage" unique_id=1562487776]
 layout_mode = 2
-texture = ExtResource("6_jl0s4")
+texture = ExtResource("8_nsjki")
 
 [node name="Speed" type="VBoxContainer" parent="BearContainer/Stats" unique_id=308452904]
 layout_mode = 2
@@ -2113,7 +2118,7 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BearContainer/Stats/Speed" unique_id=1900841990]
 layout_mode = 2
-texture = ExtResource("7_00mgp")
+texture = ExtResource("15_4ookp")
 
 [node name="InfoText" type="MarginContainer" parent="BearContainer" unique_id=600498117]
 layout_mode = 1
@@ -2334,3 +2339,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_i13mg")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mpywm")
 text = "
 "
+
+[node name="ArtUiPortraitBorder" type="Sprite2D" parent="." unique_id=423164388]
+position = Vector2(245, 160)
+texture = ExtResource("18_l2l3p")

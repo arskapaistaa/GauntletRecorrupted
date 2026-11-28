@@ -20,6 +20,8 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export(PropertyHint.Range, "0,50000,500")] private float RecoilForce = 1000.0f;
 	[Export(PropertyHint.Range, "0,50000,100")] private float KnockbackDecay = 12500.0f;
 	[Export(PropertyHint.Enum, "Revolver,Shotgun")] private int WeaponType = 0;
+	[ExportGroup("Particles")]
+	[Export(PropertyHint.Range, "0.0,1.0,0.1")] public float BaseParticleAmountRatio = 0.1f;
 
 	[ExportCategory("Node References")]
 	[Export] private PackedScene BulletScene;
@@ -32,6 +34,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Export] private AnimatedSprite2D AimArrow;
 	[Export] private RayCast2D DigRay;
 	[Export] private AudioListener2D AudioListener;
+	[Export] private GpuParticles2D _dustParticles;
 
 	[ExportGroup("Audios")]
 	[Export] private AudioStreamPlayer2D _movementSFX = null;
@@ -52,6 +55,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	[Signal] public delegate void ShotCameraShakeEventHandler(int weaponType);
 	[Signal] public delegate void PeekCameraMovementEventHandler(bool isPeeking);
 	[Signal] public delegate void PlayerHealthChangedEventHandler();
+	[Signal] public delegate void PlayerDiedEventHandler();
 	private Vector2 _knockback = Vector2.Zero;
 	private Vector2 _moveVelocity = Vector2.Zero;
 	private float ReloadTime;
@@ -73,6 +77,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	private bool _isShooting = false;
 	private int _forceRevolverReloadCounter = 0;
 	private int _forceShotgunReloadCounter = 0;
+	private bool _diggingSuccessful = false;
 	private const String ANIMATION_DIG = "Dig";
 	private const String ANIMATION_REVOLVER_IDLE = "RevolverIdle";
 	private const String ANIMATION_REVOLVER_WALK = "RevolverWalk";
@@ -113,6 +118,8 @@ public partial class PlayerCharacter : CharacterBody2D
 		}
 		_currentAmmoRevolver = _maxAmmoRevolver;
 		_currentAmmoShotgun = _maxAmmoShotgun;
+
+		SetDustParticlesEmittingAmountRatio(BaseParticleAmountRatio);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -334,10 +341,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				foreach (Node2D node in MeleeArea.GetOverlappingBodies())
 				{
 					if (node is Enemy e)
-					{
-						PlayMeleeSfx();
 						return;
-					}
 				}
 				Dig();
 				return;
@@ -357,16 +361,23 @@ public partial class PlayerCharacter : CharacterBody2D
 					hitEnemy = true;
 					GD.Print("Hit enemy spawner with melee attack");
 				}
+				else if (node is Destroyable destroyable)
+				{
+					destroyable.TakeDmg(MeleeDamage);
+					hitEnemy = true;
+				}
 			}
 			if (hitEnemy)
 			{
-				PlayMeleeSfx();
 				_meleeCooldown = MeleeCooldown;
 			}
 			else
 			{
 				Dig();
 			}
+			if (!_diggingSuccessful)
+				PlayMeleeSfx();
+			_diggingSuccessful = false; // Reset for next dig attempt
 		}
 
 		if (Input.IsActionJustPressed("Peek"))
@@ -551,13 +562,18 @@ public partial class PlayerCharacter : CharacterBody2D
 		{
 			DiggableTiles.DeleteCell(targetCell);
 			PlayDiggingSfx();
+			_diggingSuccessful = true;
 		}
 	}
 
 
 	public void TakeDmg(int damage)
 	{
-		Health -= damage;
+		if (Health > 0 && _isLiving)
+		{
+			Health -= damage;
+		}
+
 		if (Health <= 0)
 		{
 			Health = 0;
@@ -566,6 +582,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 			// Tell Game Manager that player is dead -> Track deaths.
 			GameManager.Instance.OnDeathsChanged();
+			EmitSignal(SignalName.PlayerDied);
 		}
 		FlashSprite();
 
@@ -646,6 +663,14 @@ public partial class PlayerCharacter : CharacterBody2D
 		if (_isMoving && _movementSFX.Playing == false)
 		{
 			_movementSFX.Play();
+		}
+	}
+
+	public void SetDustParticlesEmittingAmountRatio(float amount)
+	{
+		if (_dustParticles != null)
+		{
+			_dustParticles.AmountRatio = amount;
 		}
 	}
 

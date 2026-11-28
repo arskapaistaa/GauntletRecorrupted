@@ -32,7 +32,6 @@ public partial class OptionsMenu : Control
 			_playTutorialLevel.Pressed += OnTutorialLevelPressed;
 		}
 
-
 		UpdateResolutionButton();
 	}
 
@@ -113,7 +112,7 @@ public partial class OptionsMenu : Control
 
 	private void OnCreditsButtonPressed()
     {
-        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/PlayTestScene/LevelTutorial.tscn");
+        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/GUI/CreditsScene.tscn");
     }
 
     private void OnTutorialLevelPressed()

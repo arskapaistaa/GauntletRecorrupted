@@ -33,7 +33,7 @@ public partial class GUI : Control
 		if (_currentLevel == null)
 		{
 			_currentLevel = Level.Current;
-			_currentLevel.OnZeroSpawnerLeft += OnZeroSpawnerLeft;
+			_currentLevel.ExitReady += OnExitReady;
 		}
 
 		if (_player != null && _healthLabel != null)
@@ -65,8 +65,6 @@ public partial class GUI : Control
 			_player.Reload += ReloadAnimation;
 		}
 	}
-
-
 
     public override void _ExitTree()
     {
@@ -221,9 +219,13 @@ public partial class GUI : Control
 		}
 	}
 
-	private void OnZeroSpawnerLeft()
+	private void OnExitReady()
     {
+<<<<<<< HEAD
 		if (_exitIndicatorBumped == null)
+=======
+       	if (_exitIndicator == null)
+>>>>>>> main
 		{
 			GD.PrintErr("GUI is missing Exit Indicator");
 		}

@@ -158,7 +158,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6417, -4192, 9448, -4182, 9453, 5842, -6458, 5808)])
 agent_radius = 40.0
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
 script = ExtResource("1_1q4i8")
 _maxTotalEnemyCount = 30
 _spawnerCount = 4
@@ -166,6 +166,7 @@ _presetEnemyCount = 9
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")
+DiggableTiles = NodePath("Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 _eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
@@ -283,7 +284,7 @@ RecoilForce = 1000.0
 DiggableTiles = NodePath("../Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 CustomCursor = NodePath("../Cursor")
 
-[node name="Camera2D" parent="Player" index="5" unique_id=292159288]
+[node name="Camera2D" parent="Player" index="6" unique_id=292159288]
 limit_left = -7819
 limit_top = -4847
 limit_right = 7748

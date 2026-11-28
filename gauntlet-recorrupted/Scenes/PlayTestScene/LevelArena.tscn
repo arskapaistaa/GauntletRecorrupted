@@ -245,15 +245,16 @@ noise = SubResource("FastNoiseLite_h2354")
 color_ramp = SubResource("Gradient_vopof")
 seamless = true
 
-[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "_eventCheckTimer")]
+[node name="TickTestScene" type="Node2D" unique_id=1074352428 node_paths=PackedStringArray("_navRegion", "Player", "DiggableTiles", "_eventCheckTimer")]
 script = ExtResource("1_byvwr")
+CurrentEndingCondition = 1
 _maxTotalEnemyCount = 20
 _spawnerCount = 1
 _presetEnemyCount = 1
-_isThereWurmInThisLevel = true
 _wurmPatrolStartChange = 0.5
 _navRegion = NodePath("Environment/NavigationRegionBasic")
 Player = NodePath("Player")
+DiggableTiles = NodePath("Environment/NavigationRegionBasic/TileMap/DiggableTiles")
 _eventCheckTimer = NodePath("EventTimer")
 
 [node name="Environment" type="Node2D" parent="." unique_id=1396569795]
@@ -268,12 +269,14 @@ position = Vector2(2039.9998, 4771)
 rotation = 3.3623564
 _spawningCooldown = 20.0
 _maxActiveEnemiesCount = 13
+_playerDistanceTreshold = 1000.0
 
 [node name="TickSpawner2" parent="Environment/NavigationRegionBasic" unique_id=751398769 instance=ExtResource("2_v5jak")]
 z_index = 4
 position = Vector2(9926.001, 4387)
 rotation = 2.036867
 _spawningCooldown = 20.0
+_playerDistanceTreshold = 1000.0
 
 [node name="TileMap" type="TileMap" parent="Environment/NavigationRegionBasic" unique_id=1968180934]
 position = Vector2(1514, 792)
@@ -312,11 +315,11 @@ navigation_layers = 2
 position = Vector2(2044, 2090)
 
 [node name="Rat" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1021385741 instance=ExtResource("9_uotxl")]
-position = Vector2(-1877, -841)
+position = Vector2(771.99976, 780.0001)
 rotation = 0.70118624
 
 [node name="Rat2" parent="Environment/NavigationRegionWurm/Cowards" unique_id=1765397949 instance=ExtResource("9_uotxl")]
-position = Vector2(-3031, 1017)
+position = Vector2(699, 3844)
 rotation = -0.10027236
 
 [node name="Rat3" parent="Environment/NavigationRegionWurm/Cowards" unique_id=67920608 instance=ExtResource("9_uotxl")]
@@ -329,6 +332,7 @@ position = Vector2(3120, 1873)
 [node name="Exit" parent="Environment" unique_id=930430844 node_paths=PackedStringArray("_currentLevel") instance=ExtResource("11_o3h13")]
 position = Vector2(4685, 466.99997)
 rotation = 3.139592
+NextLevelPath = "uid://cdymi726tw1ek"
 _currentLevel = NodePath("../..")
 
 [node name="Audios" type="Node2D" parent="Environment" unique_id=437073065]
