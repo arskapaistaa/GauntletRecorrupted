@@ -1244,12 +1244,12 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-    private void OnPlayerDied()
-    {
+	private void OnPlayerDied()
+	{
 		_isPlayerAlive = false;
-    }
+	}
 
-    private void OnIdleTimerTimedOut()
+	private void OnIdleTimerTimedOut()
 	{
 		_brain.IdleTimerTimedOut();
 	}
